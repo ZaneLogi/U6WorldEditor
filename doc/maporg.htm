@@ -1,0 +1,518 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0045)http://red5.graf.torun.pl/~rackne/maporg.html -->
+<HTML><HEAD><TITLE>Map organization</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META content="Bartholomew J. Melnicki" name=Author>
+<META content="MSHTML 6.00.2800.1170" name=GENERATOR></HEAD>
+<BODY text=#ffff00 vLink=#cc6600 aLink=#ff0000 link=#ff9900 
+bgColor=#000080><B><FONT face=Verdana><FONT size=+2>Some words about map drawing 
+engine in U6-like games</FONT></FONT></B> 
+<P><B><FONT face=Verdana><FONT size=+1>Table of contents:</FONT></FONT></B> 
+<P><B><FONT face=Verdana><A 
+href="http://red5.graf.torun.pl/~rackne/maporg.html#1. Introduction">1. 
+Introduction</A></FONT></B> <BR><B><FONT face=Verdana><A 
+href="http://red5.graf.torun.pl/~rackne/maporg.html#2. Huge map - what can be done with the final product">2. 
+Huge map - what can be done with the final product</A></FONT></B> 
+<BLOCKQUOTE><B><FONT face=Verdana><A 
+  href="http://red5.graf.torun.pl/~rackne/maporg.html#2.1 Best of all - whole map">2.1 
+  Best of all - whole map</A></FONT></B> <BR><B><FONT face=Verdana><A 
+  href="http://red5.graf.torun.pl/~rackne/maporg.html#2.2 Printing related notes.">2.2 
+  Printing related notes.</A></FONT></B> <BR><B><FONT face=Verdana><A 
+  href="http://red5.graf.torun.pl/~rackne/maporg.html#2.3 Other maps">2.3 Other 
+  maps</A></FONT></B></BLOCKQUOTE><B><FONT face=Verdana><A 
+href="http://red5.graf.torun.pl/~rackne/maporg.html#3. Info about game data organization.">3. 
+Info about game data organization.</A></FONT></B> 
+<BLOCKQUOTE><B><FONT face=Verdana><A 
+  href="http://red5.graf.torun.pl/~rackne/maporg.html#3.1 Map structure in general.">3.1 
+  Map structure in general.</A></FONT></B> <BR><B><FONT face=Verdana><A 
+  href="http://red5.graf.torun.pl/~rackne/maporg.html#3.2 Files">3.2 
+  Files</A></FONT></B> 
+  <BLOCKQUOTE><B><FONT face=Verdana><A 
+    href="http://red5.graf.torun.pl/~rackne/maporg.html#3.2.1 Tiles">3.2.1 
+    Tiles</A></FONT></B> <BR><B><FONT face=Verdana><A 
+    href="http://red5.graf.torun.pl/~rackne/maporg.html#3.2.2 Chunks">3.2.2 
+    Chunks</A></FONT></B> <BR><B><FONT face=Verdana><A 
+    href="http://red5.graf.torun.pl/~rackne/maporg.html#3.2.3 Map">3.2.3 
+    Animdata</A></FONT></B> <BR><B><FONT face=Verdana><A 
+    href="http://red5.graf.torun.pl/~rackne/maporg.html#3.2.4 Map">3.2.4 
+    Map</A></FONT></B> <BR><B><FONT face=Verdana><A 
+    href="http://red5.graf.torun.pl/~rackne/maporg.html#3.2.5 Objblk files">3.2.5 
+    Objblk files</A></FONT></B> <BR><B><FONT face=Verdana><A 
+    href="http://red5.graf.torun.pl/~rackne/maporg.html#3.2.6 Texts, books and object names">3.2.6 
+    Texts, books and object names</A></FONT></B> <BR><B><FONT face=Verdana><A 
+    href="http://red5.graf.torun.pl/~rackne/maporg.html#3.2.7 Other data">3.2.7 
+    Other data</A></FONT></B></BLOCKQUOTE></BLOCKQUOTE>
+<H1><A name="1. Introduction"></A><B><FONT face=Verdana><FONT size=+1>1. 
+Introduction</FONT></FONT></B></H1>
+<P><BR><FONT face=Verdana><FONT size=-1>&nbsp;&nbsp;&nbsp; The history begins at 
+holidays in 1990 (or 1991 - I don't quite remember). My two friends and I just 
+obtained Ultima VI - The false prophet and my friend's home with parents far 
+enough to not disturb our activity. It's no need to say much that we are lost to 
+rest of world for two next months. If you are Ultima series fan you know what 
+I'm saying. The next two months pasts with following schedule: U6, breakfast, 
+U6, dinner, U6, supper, U6, sleep, U6... "what day it is ?", "Thursday", "don't 
+give me a shit, yesterday was Monday !". We created piles of notes, and of 
+course map, first on standard paper, then on 1mm plotting paper, then on some 
+glued sheets of plotting paper..., and the world grows bigger, bigger and 
+bigger...</FONT></FONT> <BR><FONT face=Verdana><FONT size=-1>&nbsp;&nbsp;&nbsp; 
+One addiction: In these days there are no laws covering software products in 
+Poland. Our copy of U6 was in fact pirated but there was no other way to get 
+software (and no one feels doing something bad), price relations were to high to 
+make importing it affordable - even for bussiness companies. Every RPG or 
+adventure game we finished in this time came to us just as couple of files. 
+Without maps, manuals, introductional story. Exploring game world was absolutely 
+different experience than let's call it USING full product. Think about starting 
+U6 without knowing history plot of previous parts, just you appeared in 
+Britannia's castle in ambush with wingless gargyoles. Without any hint what's 
+going up. Finishing any game was REAL and HARD intellectual challenge. It must 
+to be said that I feel nostalgy for this way of playing CRPG. U6 gave us much 
+more fun than it can do when we would buy it. Some years after we bought U7 it 
+wasn't it. And U6 forever will be our favorite Ultima series game.</FONT></FONT> 
+<BR><FONT face=Verdana><FONT size=-1>&nbsp;&nbsp;&nbsp; OK, back to mapping. 
+After couple of efforts with extracting game to get faster overview of game 
+world I gave up. This game looks as it have biggest and most complicated world I 
+ever seen before. And in short time I understand that it was best obfuscated 
+file data files format. Only Sid Meier's PIRATES! had world size at similiar 
+scale but it was nothing in comparison with Ultima. The Ultima 6 map format 
+remains as mystery... for now.</FONT></FONT> <BR><FONT face=Verdana><FONT 
+size=-1>&nbsp;&nbsp;&nbsp; Nowadays I have some free time and when browsing on 
+Ultima related sites I found in one of abandonware sites Martian Dreams what I 
+know that it was but never can get. I start playing and finished in 4 days. O 
+course I drawn sketch of my own map but old feeling was back. Basing on 
+information shared by <B><A href="http://members.tripod.com/~JPMorris">JP 
+Morris</A></B> and his work at U6 development tools I wrote simple map decoder 
+for MD. But I didn't agree to get the same way about game tiles. Hacking map 
+files and generating tileset on screen then importing it via screenshot gives 
+not enough precision for me. BTW: It isn't odd that JP dropped research at this 
+field. He starts from U6 and there key files needed for understanding how tiles 
+are stored were compressed (or scrambled intentionally). Without experience with 
+MD it looks almost impossible to get orientation about tiles. Some tiles has 
+couple of different states, some are animated, it is hard to create correct view 
+when you haven't original data used by game engine. I tried to understand format 
+used to store tiles and I done it. Some time after I get another&nbsp; product 
+abandoned by Origin which bases on the same engine - Savage Empire, algorithms 
+used on MD works perfectly. I'have&nbsp; started writing universal decoder. I 
+have problems with U6 because compression used to make extracting harder 
+(reducing file sizes is only a side effect I think, I'll explain this thought 
+later) is not researched yet.</FONT></FONT> <BR><FONT face=Verdana><FONT 
+size=-1>&nbsp;&nbsp;&nbsp; I get back to old idea: to make 1:1 pixel huge map of 
+U6 and hang it on wall. These pages are dedicated to show progress of this 
+project.</FONT></FONT> 
+<P><FONT face=Verdana><FONT size=-1><A 
+href="mailto:rackne@red5.graf.torun.pl">Bartholomew J. 
+Melnicki</A></FONT></FONT> <BR><FONT face=Verdana><FONT size=-1>in <A 
+href="http://www.udic.org/">-=UDIC=-</A> known as Overhead Dragon</FONT></FONT> 
+<BR>&nbsp; 
+<P><A name="2. Huge map - what can be done with the final"></A><FONT 
+face=Verdana><FONT size=+1>2. Huge map - what can be done with the final 
+product.</FONT></FONT> 
+<P><A name="2.1 Best of all - whole"></A><B><FONT face=Verdana><FONT size=-1>2.1 
+Best of all - whole map.</FONT></FONT></B> <BR><FONT face=Verdana><FONT 
+size=-1>First problem is SIZE. Ultima 6 world in 1:1 pixel scale will be 
+16384x16384 pixel bitmap, in 24 bit uncompressed format it will be about 768 MB 
+file. If you print it at 300 dpi you get outstanding, ultra-precise 1.4 x 1.4 m, 
+or 2.8 x 2.8 m at 150 dpi if you have enough wall to cover.</FONT></FONT> 
+<P><A name="2.2 Printing related notes."></A><B><FONT face=Verdana><FONT 
+size=-1>2.2 Printing related notes.</FONT></FONT></B> <BR><FONT 
+face=Verdana><FONT size=-1>I thought about printing method. It can be done 
+by:</FONT></FONT> 
+<BLOCKQUOTE><FONT face=Verdana><FONT size=-1>The best of course is <B>offset 
+  printing </B>at single piece of thick paper. It's possible but require some 
+  organizational efforts to cover pre-printing process costs and share it to 
+  more than one man. It is questionable that if there will be enough Ultima fans 
+  who would want to buy such artefact, and more important what Origin thinks 
+  about it, when it would be look like a bussiness activity it is right that 
+  they can expect some kind of licence fee.</FONT></FONT> 
+  <P><FONT face=Verdana><FONT size=-1><B>Ink-jet printer </B>- of course, but 
+  ink printouts have tendention to degrade in short time. Acceptable relatively 
+  small paper formats works for us. Map must be splitted to smaller files which 
+  will be easier to handle. When we use A3 format it will be 5x7=35 sheets of 
+  paper about 40 MB bitmap on each. On A4 there will be 10x13=130 sheets and 
+  files will have only 10MB each. It is recommended to use printer with separate 
+  cartridges for each CMYK color like HP DeskJet 1600C becase costs of cartriges 
+  with one color depleted eats you in short time. There are models called 
+  "ink-jet printer plotters" - they can do it at one pass, as I remember some of 
+  it can handle paper up to A000.</FONT></FONT> 
+  <P><FONT face=Verdana><FONT size=-1><B>Color laser printer - </B>better 
+  parameters about degradation in time. You may experience problems with 
+  halftones on models which uses 3-pass toner placing and warming phases, no 
+  problem when it mixes toners directly on drum before warming. About paper - 
+  same as above. Maybe lower-cost solution.</FONT></FONT> 
+  <P><FONT face=Verdana><FONT size=-1><B>Sublimation printer</B> - great final 
+  effect but expensive. Cost level is at $10 per A3 page plus paper, it will be 
+  $350 for whole printout. Hmm..., maybe it isn't as expensive for THAT 
+  map.</FONT></FONT> 
+  <P><FONT face=Verdana><FONT size=-1><B>Thermotransfer printers, cromaline 
+  (color proof) </B>- forget, too expensive (except you have one at 
+  work...)</FONT></FONT></P></BLOCKQUOTE><A name="2.3 Other maps"></A><B><FONT 
+face=Verdana><FONT size=-1>2.3 Other maps</FONT></FONT></B> <BR><FONT 
+face=Verdana><FONT size=-1>Full map is much too big to distribute via WWW. When 
+it will be possible I'll put to my page decoder what can save map from your U6 
+game. For publishing I'll plan to make maps in different scales, I don't know 
+yet which choice will be best. For now you can download maps at 1 pixel:1 tile 
+scale (or in other words 1:16 pixels). They are in Maps section.</FONT></FONT> 
+<P><A name="3. Info about game data organization."></A><FONT face=Verdana><FONT 
+size=+1>3. Info about game data organization.</FONT></FONT> 
+<P><A name="3.1 Map structure in general."></A><B><FONT face=Verdana>3.1 Map 
+structure in general.</FONT></B> 
+<P><FONT face=Verdana><FONT size=-1>For not complicating life more than it is 
+I'll use therminology compatible with JP Morris's researchs.</FONT></FONT> 
+<P><FONT face=Verdana><FONT size=-1>In general map is build from <B>tiles</B> (a 
+16x16 pixel graphic images). There are two tilesets: first 512 stored in 
+<I>maptiles.vga</I> file (except U6 in almost plain format), they are used to 
+draw base map and you can't take any destructive action about it during 
+gameplay. The basic map was completed with <B>objects</B> stored in 
+<I>objtiles.vga </I>file in the same graphical format but most of them are 
+partially transparent. As data they are stored in more sophisticated 
+way.</FONT></FONT> 
+<P><FONT face=Verdana><FONT size=-1>Covering all world require 1024x1024 tiles 
+what require 2 MB array, to reduce table game authors used grouping mechanism. 
+World map is built from 8x8 groups of tiles called <B>chunks</B>, chunks are 
+stored in file <I>chunks</I>. Because basic map uses only first 256 tiles, in 
+<I>chunks</I> tilenumber was reduced to byte. Placement of chunks is stored in 
+file <I>map</I>. For some reasons <I>map</I> file is logically divided to 16x16 
+chunks structures called by JP Morris as <B>superchunks</B>. First part of 
+<I>map</I> file contains 8x8 superchunks which covers world map level 0 
+(surface). The next part contains</FONT></FONT> <BR><FONT face=Verdana><FONT 
+size=-1>dungeon levels (and in U6 Gargyole's World). It has simpler structure - 
+levels 1..5 are stored as 32x32 chunks arrays.</FONT></FONT> 
+<P><FONT face=Verdana><FONT size=-1>This is illustration of encoding map level 
+0:</FONT></FONT> 
+<P><IMG height=360 src="maporg.files/a_maporg.gif" width=770 NOSAVE> <BR><A 
+name="3.2 Files"></A><B><FONT face=Verdana>3.2 Files</FONT></B> 
+<P><FONT face=Verdana><FONT size=-1>&nbsp;&nbsp;&nbsp; Some files are compressed 
+by yet unknown method. I anybody can tell me how they can be decoded it will be 
+very helpful. Most of files has 8 byte header which contains filesize and (IMHO) 
+info if file is in compressed or plain format (game can read both - time or 
+space saving option in installer). There couple of areas not fully researched. 
+Game programmers had tendention to obfuscate file contents as much as it's 
+possible. It has a good side - you have less chances to spoil pleasure of 
+playing by peering into game files. Sometimes their ideas are near to 
+sadism.</FONT></FONT> 
+<P><B><FONT face=Verdana><FONT size=-1>Please contact me if you know something 
+what isn't explained here or marked as "unknown".</FONT></FONT></B> 
+<P><A name="3.2.1 Tiles"></A><B><FONT face=Verdana>3.2.1 Tiles</FONT></B> 
+<P><FONT face=Verdana><FONT size=-1>&nbsp;&nbsp;&nbsp; In general tile images 
+are stored in <I>maptiles.vga</I>, <I>objtiles.vga</I>, <I>masktype.vga</I>, 
+<I>tileindex.vga</I>. File extension varies when you choose another video 
+card.</FONT></FONT> 
+<P><FONT face=Verdana><FONT size=-1><B>maptiles.vga&nbsp; </B>contains tiles 
+0..$1ff</FONT></FONT> <BR><FONT face=Verdana><FONT 
+size=-1><B>objtiles.vga&nbsp;&nbsp; </B>contains tiles $200..$7ff, and should be 
+loaded into buffer at the end of previous file.</FONT></FONT> <BR><FONT 
+face=Verdana><FONT size=-1><B>tileindex.vga&nbsp; </B>is array of starting 
+offsets in buffer for each file. They are stored as words, to get offset 
+multiply it by 16.</FONT></FONT> 
+<P><FONT face=Verdana><FONT size=-1>Tiles may be stored in three ways 
+corresponding to table stored at first $800 bytes of <I>masktype.vga</I> 
+file:</FONT></FONT> 
+<P><FONT face=Verdana><FONT size=-1><B>$00</B> plain. No much to say, 16x16 
+bytes of colors from game palette (BTW: not surprisingly, palette is in <I>XXpal 
+</I>file)</FONT></FONT> <BR><FONT face=Verdana><FONT size=-1><B>$05</B> same as 
+above but color $FF is transparent.</FONT></FONT> <BR><FONT face=Verdana><FONT 
+size=-1><B>$0a</B> something I called "Twisted Engine".</FONT></FONT> 
+<P><B><FONT face=Verdana><FONT size=-1>Twisted Engine:</FONT></FONT></B> 
+<P><FONT face=Verdana><FONT size=-1>Let's look to image of object $001&nbsp;<IMG 
+height=34 src="maporg.files/001cap.gif" width=34 align=ABSCENTER NOSAVE> (I've 
+added frame and pixel markers - it will be useful later) from Martian 
+Dreams.</FONT></FONT> <BR><FONT face=Verdana><FONT size=-1>There are data for 
+it:</FONT></FONT> 
+<P><TT><FONT size=-1>08 C7 02 03 00 00 00 AA 00 0A 00 00 00 BC B9 BC</FONT></TT> 
+<BR><TT><FONT size=-1>00 00 00 00 A4 00 0D 00 00 BC BA BA BA BA BA 
+BA</FONT></TT> <BR><TT><FONT size=-1>BB BC BC 00 A2 00 0F 00 BC BB B9 B7 B8 B6 
+B6 B7</FONT></TT> <BR><TT><FONT size=-1>B8 B7 B8 BC BC 00 A1 00 0F 00 BC B9 B7 
+B9 B5 B5</FONT></TT> <BR><TT><FONT size=-1>B5 B5 BB B7 B7 B9 BC 00 A1 00 0F 00 
+BD BE BC BB</FONT></TT> <BR><TT><FONT size=-1>BA B9 B8 BB BB BB BE BE BD 00 A2 
+00 0D 00 BB B8</FONT></TT> <BR><TT><FONT size=-1>B7 B6 B5 B6 B7 B8 BB BB 00 00 
+A4 00 0B 00 00 00</FONT></TT> <BR><TT><FONT size=-1>00 00 00 00 00 00 00 00 00 
+00 00 ED ED ED ED ED</FONT></TT> 
+<P><FONT face=Verdana><FONT size=-1>Hmm..., there are couple of bytes which 
+starts at Ax and was followed by 00 - it look as start-of-something markers. 
+Let's group data with it.</FONT></FONT> 
+<P><TT><FONT size=-1>08</FONT></TT> <BR><TT><FONT size=-1>C7 02 03&nbsp;&nbsp; 
+00 00 00</FONT></TT> <BR><TT><FONT size=-1>AA 00 0A&nbsp;&nbsp; 00 00 00 BC B9 
+BC 00 00 00 00</FONT></TT> <BR><TT><FONT size=-1>A4 00 0D&nbsp;&nbsp; 00 00 BC 
+BA BA BA BA BA BA BB BC BC 00</FONT></TT> <BR><TT><FONT size=-1>A2 00 
+0F&nbsp;&nbsp; 00 BC BB B9 B7 B8 B6 B6 B7 B8 B7 B8 BC BC 00</FONT></TT> 
+<BR><TT><FONT size=-1>A1 00 0F&nbsp;&nbsp; 00 BC B9 B7 B9 B5 B5 B5 B5 BB B7 B7 
+B9 BC 00</FONT></TT> <BR><TT><FONT size=-1>A1 00 0F&nbsp;&nbsp; 00 BD BE BC BB 
+BA B9 B8 BB BB BB BE BE BD 00</FONT></TT> <BR><TT><FONT size=-1>A2 00 
+0D&nbsp;&nbsp; 00 BB B8 B7 B6 B5 B6 B7 B8 BB BB 00 00</FONT></TT> <BR><TT><FONT 
+size=-1>A4 00 0B&nbsp;&nbsp; 00 00 00 00 00 00 00 00 00 00 00</FONT></TT> 
+<BR><TT><FONT size=-1>00 00 00&nbsp;&nbsp; ED ED ED ED ED</FONT></TT> 
+<P><FONT face=Verdana><FONT size=-1>(I skipped some steps). As we see third byte 
+of each line is length of data portion. After some manipulation there are clear 
+that second nibble of first byte is number of pixels to skip before you start 
+draw buffer contents. Everything works on 16x16 matrix so when line ends you 
+must change line to next and continue. Let's look:</FONT></FONT> 
+<P><IMG height=144 src="maporg.files/capdecode.gif" width=436 NOSAVE> 
+<P><FONT face=Verdana><FONT size=-1>But we need info about vertical placement on 
+matrix. There are three suspected locations. Comparing different tiles shows 
+that it must be on first nibble of second byte (in this case $C, let's call it 
+"B") and second nibble of third byte of tiledata (in this case $2, let's call it 
+"A"). There are allowed combinations:</FONT></FONT> <BR>&nbsp; 
+<CENTER>
+<TABLE cellSpacing=0 cellPadding=3 width="22%" border=0>
+  <TBODY>
+  <TR align=middle>
+    <TD vAlign=center>
+      <CENTER><FONT face=Verdana><FONT 
+      size=-2>&nbsp;[A]&nbsp;</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT 
+    size=-2>[B]&nbsp;</FONT></FONT></CENTER></TD>
+    <TD noWrap width="20%">
+      <CENTER><FONT face=Verdana><FONT size=-2>[lines to 
+      skip]</FONT></FONT></CENTER></TD>
+    <TD noWrap>
+      <CENTER><FONT face=Verdana><FONT size=-2>[(16A+B) as 
+      byte]</FONT></FONT></CENTER></TD>
+    <TD vAlign=center noWrap align=middle>
+      <CENTER><FONT face=Verdana><FONT size=-2>[decimal value of 
+      byte]</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>0</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>0</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>0</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>00</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>00</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>0</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>b</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>1</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>0b</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>11</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>1</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>6</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>2</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>16</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>22</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>2</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>1</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>3</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>21</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>33</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>2</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>c</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>4</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>2c</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>44</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>3</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>7</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>5</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>37</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>55</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>4</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>2</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>6</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>42</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>66</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>4</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>d</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>7</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>4d</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>77</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>5</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>8</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>8</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>58</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>88</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>6</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>3</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>9</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>63</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>99</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>6</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>e</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>a</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>6e</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>121</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>7</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>9</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>b</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>79</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>132</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>8</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>4</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>c</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>84</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>143</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>8</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>f</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>d</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>8f</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>154</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>9</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>a</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>e</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>9a</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>165</FONT></FONT></CENTER></TD></TR>
+  <TR>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>a</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>5</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>f</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT size=-2>a5</FONT></FONT></CENTER></TD>
+    <TD>
+      <CENTER><FONT face=Verdana><FONT 
+  size=-2>176</FONT></FONT></CENTER></TD></TR></TBODY></TABLE></CENTER>
+<P><FONT face=Verdana><FONT size=-1>So you must combine these bytes and divide 
+produced value by 11 (remember what I said about sadism ?). There are some 
+options: when line contains animated pixels line start marker can be Bx not Ax. 
+Meaning of first byte is unknown (during writing this I've got a idea - maybe it 
+is tile height in lines for consistency check).</FONT></FONT> 
+<P><FONT face=Verdana><FONT size=-1>Ultima 6 has additional file 
+<I>animmask.vga</I> - I don't know what it is.</FONT></FONT> 
+<P><FONT face=Verdana><FONT size=-1>There you can view/download full tilesets 
+for <A href="http://red5.graf.torun.pl/~rackne/images/u6tiles.GIF">Ultima 
+VI</A>, <A href="http://red5.graf.torun.pl/~rackne/images/mdtiles.GIF">Martian 
+Dreams</A>, <A 
+href="http://red5.graf.torun.pl/~rackne/images/setiles.GIF">Savage 
+Empire</A>.</FONT></FONT> 
+<P><A name="3.2.2 Chunks"></A><B><FONT face=Verdana>3.2.2 Chunks</FONT></B> 
+<P><FONT face=Verdana><FONT size=-1>&nbsp;&nbsp;&nbsp; This is simpliest table, 
+just a array [0..1023,0..7,0..7] of Word. In words are of course tilenumbers. No 
+more, no less.</FONT></FONT> <BR>&nbsp; 
+<P><A name="3.2.3 Animdata"></A><B><FONT face=Verdana>3.2.3 Animdata</FONT></B> 
+<P><FONT face=Verdana><FONT size=-1>&nbsp;&nbsp;&nbsp; Some tiles has different 
+states, for example water in U6 or cisterns and canals in MD (filled or not). 
+Info about it is stored in <I>animdata</I> file.</FONT></FONT> <BR><FONT 
+face=Verdana><FONT size=-1>&nbsp;&nbsp;&nbsp; Generally this table isn't much 
+complicate. But there we can find another sign of authors perversion. Each 
+record of this file has following structure: 1st word, 2nd word, 1st byte, 2nd 
+byte. How they stored it to make life funnier ? Number of important records 
+(word), array [0..$1f] of 1st words, array [0..$1f] of 2nd words, array [0..$1f] 
+of 1st bytes, array [0..$1f] of 2nd bytes. Funny, isn't it?</FONT></FONT> 
+<BR><FONT face=Verdana><FONT size=-1>&nbsp;&nbsp;&nbsp; This is explanation how 
+this data is utilised:</FONT></FONT> 
+<CENTER>
+<P><IMG height=600 src="maporg.files/a_animdata.gif" width=600 NOSAVE></CENTER>
+<P><FONT face=Verdana><FONT size=-1>&nbsp;&nbsp;&nbsp; There are two purposes of 
+animations:</FONT></FONT> <BR><FONT face=Verdana><FONT size=-1>- to make changes 
+to base map when game plot requires it (as canals shown above)</FONT></FONT> 
+<BR><FONT face=Verdana><FONT size=-1>- to make tiles which animates permanently 
+(like water in u6 shown below)</FONT></FONT> 
+<CENTER>
+<P><IMG height=16 src="maporg.files/a_u6water.gif" width=48 NOSAVE></CENTER>
+<P><FONT face=Verdana><FONT size=-1>Note that coasts are animated by palette 
+flow. Their definitions may be stored in <I>animmask.vga</I>.</FONT></FONT> 
+<H3><A name="3.2.4 Map"></A><B><FONT face=Verdana><FONT size=+0>3.2.4 
+Map</FONT></FONT></B></H3><FONT face=Verdana><FONT size=-1>&nbsp;&nbsp;&nbsp; As 
+I said before map is build from chunks, their placement is stored in <I>map</I> 
+file. First part of map file is [0..7,0..7] array of superchunks, each 
+superchunk is [0..15,0..15] array of chunks. This was shown in "Map structure in 
+general" section. Now there will be one of better examples of obfuscation. There 
+are 1024 chunks, or to make clear view $400, it means that they can be stored in 
+three nibbles. They are, but by interesting way. Nibbles are shuffled as 
+follows:</FONT></FONT> 
+<CENTER><IMG height=43 src="maporg.files/a_nastymap.gif" width=60 align=center 
+NOSAVE></CENTER><FONT face=Verdana><FONT size=-1>So first 16 bytes of U6 map 
+file:</FONT></FONT> <BR><FONT face=Verdana><FONT size=-1>EB B1 1E EB B1 1E EB B1 
+1E EB B1 1E EB B1 1E EB ...</FONT></FONT> <BR><FONT face=Verdana><FONT 
+size=-1>should be decoded to following entries:</FONT></FONT> <BR><FONT 
+face=Verdana><FONT size=-1>1EB 1EB 1EB 1EB 1EB 1EB 1EB 1EB ...</FONT></FONT> 
+<P><FONT face=Verdana><FONT size=-1>Dungeons levels are stored in next part of 
+this file. Each of five dungeon levels is [0..31,0..31] array of chunks. There 
+are no mysteries in this file. There is another copy of this file in game 
+directory - <I>lzmap</I> - only difference is 8 byte header at start of 
+file.</FONT></FONT> <BR>&nbsp; 
+<P><A name="3.2.5 Objblk files"></A><B><FONT face=Verdana>3.2.5 Objblk 
+files</FONT></B> 
+<P><FONT face=Verdana><FONT size=-1>(I'll do it later)</FONT></FONT> 
+<P><A name="3.2.6 Texts, books and object names"></A><B><FONT face=Verdana>3.2.6 
+Texts, books and object names</FONT></B> 
+<P><FONT face=Verdana><FONT size=-1>(I'll do it later)</FONT></FONT> <BR>&nbsp; 
+<P><A name="3.2.7 Other data"></A><B><FONT face=Verdana>3.2.7 Other 
+data</FONT></B> <BR><FONT face=Verdana><FONT size=-1>(I'll do it 
+later)</FONT></FONT> <BR>&nbsp; </P></BODY></HTML>

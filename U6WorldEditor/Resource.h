@@ -6,6 +6,7 @@
 #define IDP_OLE_INIT_FAILED             100
 #define IDR_MAINFRAME                   128
 #define IDR_U6WorldEditorTYPE           130
+#define ID_INDICATOR_MAP_ORIGIN         131
 #define ID_GAME_U6                      1000
 #define ID_GAME_SAVAGE                  1001
 #define ID_GAME_MARTIAN                 1002

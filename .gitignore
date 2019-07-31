@@ -21,6 +21,7 @@ BuildLog.htm*
 *.bak
 *.aps
 *.VC.db
+*.VC.opendb
 
 # Ignore any debug/release folders
 Debug/

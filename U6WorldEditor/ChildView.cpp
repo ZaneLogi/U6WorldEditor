@@ -65,6 +65,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
     ON_WM_MOUSEMOVE()
     ON_WM_SIZE()
     ON_WM_ERASEBKGND()
+    ON_UPDATE_COMMAND_UI(ID_INDICATOR_MAP_ORIGIN, CChildView::OnUpdateMapOriginText)
     ON_COMMAND_RANGE(ID_GAME_U6, ID_GAME_MARTIAN, CChildView::OnGameType)
     ON_COMMAND_RANGE(ID_JUMPTO_BEGIN, ID_JUMPTO_END, CChildView::OnJumpTo)
 END_MESSAGE_MAP()
@@ -119,7 +120,7 @@ void CChildView::Update()
 
     gMapManager.update(gScreen);
 
-#if 1
+#if 0
     gMapManager.color_palette.draw(gScreen, 640 - 128, 0);
 
     const int START = 0;
@@ -147,7 +148,7 @@ void CChildView::Update()
 
 #endif
 
-#if 0
+#if 1
     int map_tile_xstart = m_map_ox / 16;
     int map_tile_ystart = m_map_oy / 16;
 
@@ -183,7 +184,7 @@ void CChildView::Update()
     }
 
     CString s;
-    s.Format(_T("%d, %d - %d, %d, %hs"), m_map_ox, m_map_oy, cur_tile_x, cur_tile_y, obj_desc.c_str() );
+    s.Format(_T("%d, %d, %hs"), cur_tile_x, cur_tile_y, obj_desc.c_str() );
     dc.SelectStockObject(SYSTEM_FIXED_FONT);
     dc.SelectStockObject(BLACK_PEN);
     CRect rc(0, 0, 640, 640);
@@ -233,8 +234,8 @@ void CChildView::OnSize(UINT nType, int cx, int cy)
     // Add your message handler code here
     if (cx != 0 && cy != 0)
     {
-        int width =  ((cx + 15) & (~0x0f)); // ((cx + 15) / 16) * 16
-        int height = ((cy + 15) & (~0x0f));
+        int width =  ((cx + 15) & (~0x0f)) + 16; // ((cx + 15) / 16) * 16 + 16
+        int height = ((cy + 15) & (~0x0f)) + 16;
         if (width < 640)
             width = 640;
         if (height < 640)
@@ -252,13 +253,11 @@ void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 
 }
 
-
 void CChildView::OnLButtonUp(UINT nFlags, CPoint point)
 {
     m_mouse_caputred = false;
     ReleaseCapture();
 }
-
 
 void CChildView::OnMouseMove(UINT nFlags, CPoint point)
 {
@@ -286,6 +285,13 @@ void CChildView::OnMouseMove(UINT nFlags, CPoint point)
     }
 
     m_mouse_last_point = point;
+}
+
+void CChildView::OnUpdateMapOriginText(CCmdUI* pCmdUI)
+{
+    CString s;
+    s.Format(_T("%d:%d:%d"), m_map_ox, m_map_oy, m_map_z);
+    pCmdUI->SetText(s);
 }
 
 void CChildView::OnGameType(UINT id)

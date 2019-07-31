@@ -40,6 +40,7 @@ public:
     afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
     afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
     afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+    afx_msg void OnUpdateMapOriginText(CCmdUI* pCmdUI);
     afx_msg void OnGameType(UINT id);
     afx_msg void OnJumpTo(UINT id);
 

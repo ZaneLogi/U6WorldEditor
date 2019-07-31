@@ -218,10 +218,10 @@ bool TileManager::load_look(Configuration& config)
 
     if (filesize == datasize)
     { // no compression
-      // skp 4 bytes
-        uint32_t unknown;
-        look_file.read((char*)&unknown, sizeof(unknown));
-        datasize -= 8;
+        struct { uint32_t offset : 24; uint32_t flag : 8; } data_offset;
+        look_file.read((char*)&data_offset, sizeof(data_offset));
+        assert(data_offset.offset == 8); // data_offset.flag = 0x02 (se), 0xe0 (md) => uncompressed data
+        datasize = filesize - data_offset.offset;
         m_look_data.resize(datasize);
         look_file.read((char*)m_look_data.data(), datasize);
         assert((uint32_t)look_file.tellg() - 8 == datasize && "The data is incompelete!");

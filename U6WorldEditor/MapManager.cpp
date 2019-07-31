@@ -8,6 +8,7 @@ bool MapManager::init(Configuration& config)
     tile_manager.init(config, &tile_image);
     basemap.init(config, &tile_manager);
     obj_manager.init(config, &tile_manager);
+    text.init(config);
     return true;
 }
 

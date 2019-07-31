@@ -92,10 +92,10 @@ bool TileImage::load_masktype(Configuration& config)
 
     if (filesize == datasize)
     { // no compression, SAVAGE
-      // skip unknown 4 bytes
-        uint32_t unkonwn;
-        masktype_file.read((char*)&unkonwn, sizeof(unkonwn));
-        datasize -= 8;
+        struct { uint32_t offset : 24; uint32_t flag : 8; } data_offset;
+        masktype_file.read((char*)&data_offset, sizeof(data_offset));
+        assert(data_offset.offset == 8); // data_offset.flag = 0x02 (se), 0xe0 (md) => uncompressed data
+        datasize = filesize - data_offset.offset;
         m_masktype.resize(datasize);
         masktype_file.read((char*)m_masktype.data(), datasize);
         assert((uint32_t)masktype_file.tellg() - 8 == datasize && "The data is incompelete!");
@@ -158,10 +158,10 @@ bool TileImage::load_maptiles(Configuration& config)
 
     if (filesize == datasize)
     { // no compression
-      // skip unknown 4 bytes
-        uint32_t unknown;
-        maptiles_file.read((char*)&unknown, sizeof(unknown));
-        datasize -= 8;
+        struct { uint32_t offset : 24; uint32_t flag : 8; } data_offset;
+        maptiles_file.read((char*)&data_offset, sizeof(data_offset));
+        assert(data_offset.offset == 8); // data_offset.flag = 0x02 (se), 0xe0 (md) => uncompressed data
+        datasize = filesize - data_offset.offset;
         m_maptiles.resize(datasize);
         maptiles_file.read((char*)m_maptiles.data(), datasize);
         assert((uint32_t)maptiles_file.tellg() - 8 == datasize && "The data is incompelete!");

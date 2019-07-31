@@ -119,7 +119,7 @@ void CChildView::Update()
 
     gMapManager.update(gScreen);
 
-#if 0
+#if 1
     gMapManager.color_palette.draw(gScreen, 640 - 128, 0);
 
     const int START = 0;
@@ -133,13 +133,21 @@ void CChildView::Update()
         //gMapManager.tile_manager.draw(gScreen, x, y, i);
     }
 
+    for (int i = 0; i < 256; i++)
+    {
+        int x = (i % 16) * 8 + 640 - 128;
+        int y = (i / 16) * 8 + 128;
+
+        gMapManager.text.draw_char(gScreen, i, x, y, 0x48);
+    }
+
     DrawDibDraw(gDD, dc.GetSafeHdc(), 0, 0, width, height,
         (BITMAPINFOHEADER*)&gScreen.bitmap_info()->bmiHeader,
         gScreen.bits(), 0, 0, width, height, NULL);
 
 #endif
 
-#if 1
+#if 0
     int map_tile_xstart = m_map_ox / 16;
     int map_tile_ystart = m_map_oy / 16;
 

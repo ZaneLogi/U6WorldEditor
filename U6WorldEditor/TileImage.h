@@ -20,8 +20,8 @@ private:
     void draw_pixelblock_tile(uint8_t* dst, int ypitch, uint8_t* src);
 
 private:
-    std::vector<uint8_t>        m_masktype;
-    std::vector<uint16_t>       m_tileindex;
-    std::vector<uint8_t>        m_maptiles;
-    std::vector<uint8_t>        m_objtiles;
+    std::vector<uint8_t>        m_masktype;     // the type of the tile image: transparent(5), plain(0), pixel block(10)
+    std::vector<uint16_t>       m_tileindex;    // the offsets of the tile data in the maptiles/objtiles buffers
+    std::vector<uint8_t>        m_maptiles;     // the map tiles, whose tile ids are from 0 to 511
+    std::vector<uint8_t>        m_objtiles;     // the object tiles, whose tile ids are from 512 to 2047
 };

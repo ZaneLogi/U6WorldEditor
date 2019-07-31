@@ -7,6 +7,7 @@
 #include "TileManager.h"
 #include "BaseMap.h"
 #include "ObjManager.h"
+#include "Text.h"
 
 class MapManager
 {
@@ -22,5 +23,5 @@ public:
     TileManager     tile_manager;
     BaseMap         basemap;
     ObjManager      obj_manager;
-
+    Text            text;
 };

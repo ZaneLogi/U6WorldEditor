@@ -37,23 +37,23 @@ public:
     TileInfo get_info(uint16_t obj_number, uint8_t obj_frame);
 
 private:
-    bool load_animdata(Configuration& config);
-    bool load_basetile(Configuration& config);
-    bool load_tileflag(Configuration& config);
-    bool load_look(Configuration& config);
+    bool load_animdata(Configuration& config);  // => m_animdata
+    bool load_basetile(Configuration& config);  // => m_obj_to_tile
+    bool load_tileflag(Configuration& config);  // => m_tile_flags1/2/3
+    bool load_look(Configuration& config);      // => m_look_data
 
 private:
     TileImage*  m_tile_image;
     uint32_t    m_anim_counter = 0;
     uint16_t    m_anim_tile_index[2048];
-    AnimData    m_animdata;
-    uint16_t    m_obj_to_tile[1024];
+    AnimData    m_animdata;                 // it is used for the tile animations.
+    uint16_t    m_obj_to_tile[1024];        // it is used for the mappings from the object index to the tile index
 
     uint8_t     m_tile_flags1[2048];
     uint8_t     m_tile_flags2[2048];
     uint8_t     m_tile_flags3[2048];
 
-    std::vector<uint8_t> m_look_data;
+    std::vector<uint8_t> m_look_data;       // it is used for the names of the objects
     uint8_t*    m_tile_look[2048];
 };
 

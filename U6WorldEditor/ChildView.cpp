@@ -234,8 +234,8 @@ void CChildView::OnSize(UINT nType, int cx, int cy)
     // Add your message handler code here
     if (cx != 0 && cy != 0)
     {
-        int width =  ((cx + 15) & (~0x0f)) + 16; // ((cx + 15) / 16) * 16 + 16
-        int height = ((cy + 15) & (~0x0f)) + 16;
+        int width =  ((cx + 15) & (~0x0f)) + 16 + 16; // ((cx + 15) / 16) * 16 + 16 (for screen buffer) + 16 (for double-width objects)
+        int height = ((cy + 15) & (~0x0f)) + 16 + 16;
         if (width < 640)
             width = 640;
         if (height < 640)

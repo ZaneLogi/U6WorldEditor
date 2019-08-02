@@ -42,35 +42,44 @@ public:
                                    quantity(info.quantity), quality(info.quality)
     {}
 
-    bool in_container() {
+    bool operator == (const Obj& obj) {
+        return this->x == obj.x && this->y == obj.y && this->z == obj.z &&
+            this->obj_number == obj.obj_number &&
+            this->quantity == obj.quantity && this->quality && obj.quality;
+    }
+
+    bool in_container() const {
         // bit 3: contained (as long as bit 4, in_npc, is clear)
         return ((status & OBJ_STATUS_READIED) == OBJ_STATUS_IN_CONTAINER);
     }
 
-    int container() {
+    int container() const {
         return (x | ((y & 0x3) << 10));
     }
 
-    bool in_inventory() {
+    bool in_inventory() const {
         // Note: includes readied items.
         return ((status & OBJ_STATUS_IN_INVENTORY) != 0);
     }
 
-    int owner() {
+    int owner() const {
         // x-coord stores NPC number (0-255).
         return x;
     }
 
-    bool is_readied() {
+    bool is_readied() const {
         // Container bit is overloaded for readied items.
         return ((status & OBJ_STATUS_READIED) == OBJ_STATUS_READIED);
     }
 
+    enum class Type : uint8_t { OBJ, ACTOR };
+    virtual Type type() const { return Type::OBJ; }
+
 public:
     uint8_t         status;
-    uint16_t        x;
-    uint16_t        y;
-    uint8_t         z;
+    uint16_t        x;  // tiles, surface: 0 - 1023, dungeon: 0 - 255
+    uint16_t        y;  // tiles, surface: 0 - 1023, dungeon: 0 - 255
+    uint8_t         z;  // levels, surface: 0, dungeon: 1 - 5
 
     uint16_t        obj_number;
     uint8_t         obj_frame;
@@ -84,14 +93,28 @@ public:
 class Actor : public Obj
 {
 public:
-    uint8_t     strength;
-    uint8_t     dexterity;
-    uint8_t     intelligence;
-    uint8_t     hp;
-    uint8_t     mp;
-    uint8_t     level;
-    uint16_t    exp;
-    uint8_t     flags;
+    uint8_t     id;
+    std::string name;
+
+    uint8_t*    strength;
+    uint8_t*    dexterity;
+    uint8_t*    intelligence;
+    uint8_t*    hp;
+    uint8_t*    mp;
+    uint8_t*    level;
+    uint16_t*   exp;
+    uint8_t*    flags;
+
+    virtual Type type() const { return Type::ACTOR; }
+    virtual int max_hp()
+    {
+        // savage empire
+        return(((*level * 4 + *strength * 2) < 255) ? (*level * 4 + *strength * 2) : 255);
+        // martian dream
+        //return(((*level * 24 + *strength * 2) < 255) ? (*level * 24 + *strength * 2) : 255);
+        // u6
+        //return (((*level * 30) <= 255) ? (*level * 30) : 255);
+    }
 };
 
 class ObjManager
@@ -103,6 +126,12 @@ public:
     Actor get_actor(int index) const { return m_actors[index]; }
     Obj*  get_obj(uint16_t xtile, uint16_t ytile, uint8_t z);
 
+    bool move_obj_to(const Obj& obj, uint16_t xtile, uint16_t ytile, uint8_t z);
+
+    bool save_objblks(const char* folder);
+    bool save_superchunk(const char* filename, int col, int row, int z);
+    bool save_actors(const char* filename);
+
 private:
     bool load_objblk(Configuration& config);
     void load_superchunk(std::istream& is, std::list<Obj>& objlist);
@@ -112,7 +141,9 @@ private:
 private:
     TileManager*    m_tile_manager;
 
-    std::list<Obj>  m_surface_objs[8][8];
-    std::list<Obj>  m_dungeon_objs[5];
-    Actor           m_actors[256];
+    std::list<Obj>          m_surface_objs[8][8];
+    std::list<Obj>          m_dungeon_objs[5];
+    std::vector<uint8_t>    m_objlist;
+    Actor                   m_actors[256];
+    int                     m_party_member_count;
 };

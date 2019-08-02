@@ -23,12 +23,24 @@
 #define new DEBUG_NEW
 #endif
 
+/*
+Operation:
+1. move the map around
+drag the map using the mouse left button
+
+2. move the object
+select the object: the ctrl key + the mouse left button
+move the object: the ctrl key + the mouse left button after an object is selected.
+
+*/
 
 
 HDRAWDIB gDD;
 Configuration   gConfig;
 DibSection      gScreen;
 MapManager      gMapManager;
+Obj*            gSelectedObj = nullptr;
+
 
 // CChildView
 
@@ -49,6 +61,17 @@ CChildView::CChildView()
     MoveToTile(actor.x, actor.y, actor.z);
 
     m_mouse_caputred = false;
+
+    // EXPERIMENT:
+    // save game data
+    //gMapManager.obj_manager.save_objblks("d:\\test\\test");
+    /*
+    *actor.strength = 99;
+    *actor.dexterity = 99;
+    *actor.intelligence = 99;
+    *actor.hp = 99;
+    gMapManager.obj_manager.save_actors("d:\\test\\test\\OBJLIST");
+    */
 }
 
 CChildView::~CChildView()
@@ -247,16 +270,44 @@ void CChildView::OnSize(UINT nType, int cx, int cy)
 
 void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 {
-    m_mouse_caputred = true;
-    m_mouse_last_point = point;
-    SetCapture();
+    if (GetKeyState(VK_CONTROL) & 0x8000)
+    {
+        int cur_tile_x = (point.x + m_map_ox) / 16;
+        int cur_tile_y = (point.y + m_map_oy) / 16;
+        if (m_map_z == 0)
+        {
+            cur_tile_x %= 1024;
+            cur_tile_y %= 1024;
+        }
+        else
+        {
+            cur_tile_x %= 256;
+            cur_tile_y %= 256;
+        }
 
+        if (!gSelectedObj)
+            gSelectedObj = gMapManager.obj_manager.get_obj(cur_tile_x, cur_tile_y, m_map_z);
+        else
+        {
+            gMapManager.obj_manager.move_obj_to(*gSelectedObj, cur_tile_x, cur_tile_y, m_map_z);
+            gSelectedObj = nullptr;
+        }
+    }
+    else
+    {
+        m_mouse_caputred = true;
+        m_mouse_last_point = point;
+        SetCapture();
+    }
 }
 
 void CChildView::OnLButtonUp(UINT nFlags, CPoint point)
 {
-    m_mouse_caputred = false;
-    ReleaseCapture();
+    if (m_mouse_caputred)
+    {
+        m_mouse_caputred = false;
+        ReleaseCapture();
+    }
 }
 
 void CChildView::OnMouseMove(UINT nFlags, CPoint point)

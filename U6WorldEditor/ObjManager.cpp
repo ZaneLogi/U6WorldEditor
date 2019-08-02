@@ -52,51 +52,68 @@ void ObjManager::draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile
                     || ystart >= bottom || yend < top)
                     continue; // out of range
 
-                auto obj_itr = m_surface_objs[row][col].end();
-                auto count = m_surface_objs[row][col].size();
-                while (count-- > 0)
+                auto obj_itr = m_surface_objs[row][col].begin();
+                auto obj_end = m_surface_objs[row][col].end();
+                while (obj_itr != obj_end)
                 {
-                    --obj_itr;
-
-                    const int WORLD_TILES = 1024;
-
-                    int xtile1 = obj_itr->x;
-                    int ytile1 = obj_itr->y;
-                    int xtile2 = xtile1 + WORLD_TILES;
-                    int ytile2 = ytile1 + WORLD_TILES;
-
-                    int xtile, ytile;
-
-                    if (xstart <= xtile1 && xtile1 < xend)
+                    // draw objects from left to right then top to bottom
+                    // if objects are at the same locations, draw them from the last one to the first one in the list
+                    auto first_obj_itr = obj_itr;
+                    int curx = obj_itr->x;
+                    int cury = obj_itr->y;
+                    ++obj_itr;
+                    int count = 1;
+                    for (; obj_itr != obj_end; ++obj_itr, ++count)
                     {
-                        xtile = xtile1 - world_tile_x;
-                    }
-                    else if (xstart <= xtile2 && xtile2 < xend)
-                    {
-                        xtile = xtile2 - world_tile_x; // rewind in the horizonal
-                    }
-                    else
-                    {
-                        xtile = -1;
+                        if (curx != obj_itr->x || cury != obj_itr->y)
+                            break;
                     }
 
-                    if (ystart <= ytile1 && ytile1 < yend)
+                    auto draw_obj_itr = obj_itr;
+                    while (count-- > 0)
                     {
-                        ytile = ytile1 - world_tile_y;
-                    }
-                    else if (ystart <= ytile2 && ytile2 < yend)
-                    {
-                        ytile = ytile2 - world_tile_y; // rewind in the vertical
-                    }
-                    else
-                    {
-                        ytile = -1;
-                    }
+                        --draw_obj_itr;
 
-                    if (xtile >= 0 && ytile >= 0)
-                    {
-                        m_tile_manager->draw(ds, xtile * 16, ytile * 16,
-                            obj_itr->obj_number, obj_itr->obj_frame, toptile);
+                        const int WORLD_TILES = 1024;
+
+                        int xtile1 = draw_obj_itr->x;
+                        int ytile1 = draw_obj_itr->y;
+                        int xtile2 = xtile1 + WORLD_TILES;
+                        int ytile2 = ytile1 + WORLD_TILES;
+
+                        int xtile, ytile;
+
+                        if (xstart <= xtile1 && xtile1 < xend)
+                        {
+                            xtile = xtile1 - world_tile_x;
+                        }
+                        else if (xstart <= xtile2 && xtile2 < xend)
+                        {
+                            xtile = xtile2 - world_tile_x; // rewind in the horizonal
+                        }
+                        else
+                        {
+                            xtile = -1;
+                        }
+
+                        if (ystart <= ytile1 && ytile1 < yend)
+                        {
+                            ytile = ytile1 - world_tile_y;
+                        }
+                        else if (ystart <= ytile2 && ytile2 < yend)
+                        {
+                            ytile = ytile2 - world_tile_y; // rewind in the vertical
+                        }
+                        else
+                        {
+                            ytile = -1;
+                        }
+
+                        if (xtile >= 0 && ytile >= 0)
+                        {
+                            m_tile_manager->draw(ds, xtile * 16, ytile * 16,
+                                draw_obj_itr->obj_number, draw_obj_itr->obj_frame, toptile);
+                        }
                     }
                 }
             }
@@ -105,52 +122,67 @@ void ObjManager::draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile
     else
     {
         z--;
-        auto obj_itr = m_dungeon_objs[z].end();
-        auto count = m_dungeon_objs[z].size();
-        while (count-- > 0)
+        auto obj_itr = m_dungeon_objs[z].begin();
+        auto obj_end = m_dungeon_objs[z].end();
+        while (obj_itr != obj_end)
         {
-            --obj_itr;
-
-            const int DUNGEON_TILES = 256;
-
-            int xtile1 = obj_itr->x;
-            int ytile1 = obj_itr->y;
-            int xtile2 = xtile1 + DUNGEON_TILES;
-            int ytile2 = ytile1 + DUNGEON_TILES;
-
-            int xtile, ytile;
-
-            // check if the object is inside the viewport
-            if (xstart <= xtile1 && xtile1 < xend)
+            auto first_obj_itr = obj_itr;
+            int curx = obj_itr->x;
+            int cury = obj_itr->y;
+            ++obj_itr;
+            int count = 1;
+            for (; obj_itr != obj_end; ++obj_itr, ++count)
             {
-                xtile = xtile1 - world_tile_x;
-            }
-            else if (xstart <= xtile2 && xtile2 < xend)
-            {
-                xtile = xtile2 - world_tile_x; // rewind in the horizonal
-            }
-            else
-            {
-                xtile = -1;
+                if (curx != obj_itr->x || cury != obj_itr->y)
+                    break;
             }
 
-            if (ystart <= ytile1 && ytile1 < yend)
+            auto draw_obj_itr = obj_itr;
+            while (count-- > 0)
             {
-                ytile = ytile1 - world_tile_y;
-            }
-            else if (ystart <= ytile2 && ytile2 < yend)
-            {
-                ytile = ytile2 - world_tile_y; // rewind in the vertical
-            }
-            else
-            {
-                ytile = -1;
-            }
+                --draw_obj_itr;
 
-            if (xtile >= 0 && ytile >= 0)
-            {
-                m_tile_manager->draw(ds, xtile * 16, ytile * 16,
-                    obj_itr->obj_number, obj_itr->obj_frame, toptile);
+                const int DUNGEON_TILES = 256;
+
+                int xtile1 = draw_obj_itr->x;
+                int ytile1 = draw_obj_itr->y;
+                int xtile2 = xtile1 + DUNGEON_TILES;
+                int ytile2 = ytile1 + DUNGEON_TILES;
+
+                int xtile, ytile;
+
+                // check if the object is inside the viewport
+                if (xstart <= xtile1 && xtile1 < xend)
+                {
+                    xtile = xtile1 - world_tile_x;
+                }
+                else if (xstart <= xtile2 && xtile2 < xend)
+                {
+                    xtile = xtile2 - world_tile_x; // rewind in the horizonal
+                }
+                else
+                {
+                    xtile = -1;
+                }
+
+                if (ystart <= ytile1 && ytile1 < yend)
+                {
+                    ytile = ytile1 - world_tile_y;
+                }
+                else if (ystart <= ytile2 && ytile2 < yend)
+                {
+                    ytile = ytile2 - world_tile_y; // rewind in the vertical
+                }
+                else
+                {
+                    ytile = -1;
+                }
+
+                if (xtile >= 0 && ytile >= 0)
+                {
+                    m_tile_manager->draw(ds, xtile * 16, ytile * 16,
+                        draw_obj_itr->obj_number, draw_obj_itr->obj_frame, toptile);
+                }
             }
         }
     }

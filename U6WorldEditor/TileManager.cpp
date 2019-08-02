@@ -62,10 +62,10 @@ void TileManager::draw(DibSection& ds, int x, int y, uint16_t obj_number, uint8_
     bool is_double_width = (flags & 0x80) != 0;
     bool is_double_height = (flags & 0x40) != 0;
 
-    if (is_top != toptile)
-        return;
-
-    m_tile_image->draw(ds, x, y, m_anim_tile_index[tile_index]);
+    if (is_top == toptile)
+    {
+        m_tile_image->draw(ds, x, y, m_anim_tile_index[tile_index]);
+    }
 
     int x1 = x - 16;
     int y1 = y - 16;
@@ -73,19 +73,34 @@ void TileManager::draw(DibSection& ds, int x, int y, uint16_t obj_number, uint8_
     if (is_double_width && x1 >= 0)
     {
         tile_index--;
-        m_tile_image->draw(ds, x1, y, m_anim_tile_index[tile_index]);
+        flags = m_tile_flags2[tile_index];
+        is_top = (flags & 0x10) != 0;
+        if (is_top == toptile)
+        {
+            m_tile_image->draw(ds, x1, y, m_anim_tile_index[tile_index]);
+        }
     }
 
     if (is_double_height && y1 >= 0)
     {
         tile_index--;
-        m_tile_image->draw(ds, x, y1, m_anim_tile_index[tile_index]);
+        flags = m_tile_flags2[tile_index];
+        is_top = (flags & 0x10) != 0;
+        if (is_top == toptile)
+        {
+            m_tile_image->draw(ds, x, y1, m_anim_tile_index[tile_index]);
+        }
     }
 
     if (is_double_width && is_double_height && x1 >= 0 && y1 >= 0)
     {
         tile_index--;
-        m_tile_image->draw(ds, x1, y1, m_anim_tile_index[tile_index]);
+        flags = m_tile_flags2[tile_index];
+        is_top = (flags & 0x10) != 0;
+        if (is_top == toptile)
+        {
+            m_tile_image->draw(ds, x1, y1, m_anim_tile_index[tile_index]);
+        }
     }
 }
 

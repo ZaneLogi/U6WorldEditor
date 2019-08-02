@@ -135,6 +135,8 @@ TileInfo TileManager::get_info(uint16_t obj_number, uint8_t obj_frame)
 {
     TileInfo ti;
     int tile_index = m_obj_to_tile[obj_number] + obj_frame;
+    ti.index = tile_index;
+
     auto flags = m_tile_flags2[tile_index];
     ti.top = (flags & 0x10) != 0;
     ti.double_width = (flags & 0x80) != 0;

@@ -17,9 +17,10 @@ struct AnimData
 
 struct TileInfo
 {
-    bool    top;
-    bool    double_width;
-    bool    double_height;
+    uint16_t    index;
+    bool        top;
+    bool        double_width;
+    bool        double_height;
 };
 
 class TileManager

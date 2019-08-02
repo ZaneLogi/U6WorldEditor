@@ -209,6 +209,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TileManager.h" />
+    <ClInclude Include="U6Objects.h" />
     <ClInclude Include="U6WorldEditor.h" />
   </ItemGroup>
   <ItemGroup>

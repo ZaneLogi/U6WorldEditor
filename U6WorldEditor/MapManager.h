@@ -8,6 +8,7 @@
 #include "BaseMap.h"
 #include "ObjManager.h"
 #include "Text.h"
+#include "Script.h"
 
 class MapManager
 {
@@ -24,4 +25,5 @@ public:
     BaseMap         basemap;
     ObjManager      obj_manager;
     Text            text;
+    Script          script;
 };

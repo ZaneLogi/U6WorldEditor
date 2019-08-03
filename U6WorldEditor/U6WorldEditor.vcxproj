@@ -199,6 +199,7 @@
     <ClInclude Include="DibUtils.h" />
     <ClInclude Include="Library.h" />
     <ClInclude Include="ObjManager.h" />
+    <ClInclude Include="Script.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="TileImage.h" />
     <ClInclude Include="LZW.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="DibUtils.cpp" />
     <ClCompile Include="Library.cpp" />
     <ClCompile Include="ObjManager.cpp" />
+    <ClCompile Include="Script.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="TileImage.cpp" />
     <ClCompile Include="LZW.cpp" />

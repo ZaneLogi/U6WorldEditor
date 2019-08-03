@@ -9,6 +9,7 @@ bool MapManager::init(Configuration& config)
     basemap.init(config, &tile_manager);
     obj_manager.init(config, &tile_manager);
     text.init(config);
+    script.init(config);
     return true;
 }
 

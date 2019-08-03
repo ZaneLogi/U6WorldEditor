@@ -84,6 +84,12 @@ CChildView::CChildView()
     *actor.hp = 99;
     gMapManager.obj_manager.save_actors("d:\\test\\test\\OBJLIST");
     */
+
+    for (int i = 0; i < 256; i++)
+    {
+        auto name = gMapManager.script.get_npc_name(i);
+        TRACE("%3d: %s\n", i, name.c_str());
+    }
 }
 
 CChildView::~CChildView()
@@ -229,6 +235,7 @@ void CChildView::Update()
 
     Obj* obj = gMapManager.obj_manager.get_obj(cur_tile_x, cur_tile_y, m_map_z);
     std::string obj_desc;
+    std::string actor_name;
     if (obj)
     {
         obj_desc = gMapManager.tile_manager.get_description(obj->obj_number, obj->obj_frame, obj->quantity);
@@ -244,10 +251,15 @@ void CChildView::Update()
             }
             obj_desc += ']';
         }
+
+        if (obj->type() == Obj::Type::ACTOR)
+        {
+            actor_name = gMapManager.script.get_npc_name(((Actor*)obj)->id);
+        }
     }
 
     CString s;
-    s.Format(_T("%d, %d, %hs"), cur_tile_x, cur_tile_y, obj_desc.c_str() );
+    s.Format(_T("%d, %d, %hs\n%hs"), cur_tile_x, cur_tile_y, obj_desc.c_str(), actor_name.c_str() );
     dc.SelectStockObject(SYSTEM_FIXED_FONT);
     dc.SelectStockObject(BLACK_PEN);
     CRect rc(0, 0, 640, 640);

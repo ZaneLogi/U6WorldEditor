@@ -54,6 +54,12 @@
 #define ID_JUMPTO_SAVAGE_PLATE_BARAKO   10058
 #define ID_MARTIAN_CITY                 10070
 #define ID_JUMPTO_END                   10100
+#define ID_VIEW_SURFACE                 10200
+#define ID_VIEW_DUNGEON1                10201
+#define ID_VIEW_DUNGEON2                10202
+#define ID_VIEW_DUNGEON3                10203
+#define ID_VIEW_DUNGEON4                10204
+#define ID_VIEW_DUNGEON5                10205
 
 // Next default values for new objects
 //

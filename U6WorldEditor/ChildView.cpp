@@ -98,12 +98,13 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
     ON_WM_LBUTTONDOWN()
     ON_WM_LBUTTONUP()
     ON_WM_MOUSEMOVE()
+    ON_WM_RBUTTONDOWN()
     ON_WM_SIZE()
     ON_WM_ERASEBKGND()
     ON_UPDATE_COMMAND_UI(ID_INDICATOR_MAP_ORIGIN, CChildView::OnUpdateMapOriginText)
     ON_COMMAND_RANGE(ID_GAME_U6, ID_GAME_MARTIAN, CChildView::OnGameType)
     ON_COMMAND_RANGE(ID_JUMPTO_BEGIN, ID_JUMPTO_END, CChildView::OnJumpTo)
-    ON_WM_RBUTTONDOWN()
+    ON_COMMAND_RANGE(ID_VIEW_SURFACE, ID_VIEW_DUNGEON5, CChildView::OnViewZ)
 END_MESSAGE_MAP()
 
 
@@ -644,6 +645,19 @@ void CChildView::OnJumpTo(UINT id)
             MoveToTile(jmp_to_tbl[i].x, jmp_to_tbl[i].y, jmp_to_tbl[i].z);
             return;
         }
+    }
+}
+
+void CChildView::OnViewZ(UINT id)
+{
+    int z = id - ID_VIEW_SURFACE;
+    if (z == 0)
+    {
+        MoveToTile(511, 511, 0);
+    }
+    else
+    {
+        MoveToTile(127, 127, z);
     }
 }
 

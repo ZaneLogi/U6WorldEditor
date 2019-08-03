@@ -169,6 +169,13 @@ BEGIN
                 MENUITEM "City",                        ID_MARTIAN_CITY
             END
         END
+        MENUITEM SEPARATOR
+        MENUITEM "Surface",                     ID_VIEW_SURFACE
+        MENUITEM "Dungeon 1",                   ID_VIEW_DUNGEON1
+        MENUITEM "Dungeon 2",                   ID_VIEW_DUNGEON2
+        MENUITEM "Dungeon 3",                   ID_VIEW_DUNGEON3
+        MENUITEM "Dungeon 4",                   ID_VIEW_DUNGEON4
+        MENUITEM "Dungeon 5",                   ID_VIEW_DUNGEON5
     END
 END
 

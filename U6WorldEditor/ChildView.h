@@ -44,6 +44,7 @@ public:
     afx_msg void OnUpdateMapOriginText(CCmdUI* pCmdUI);
     afx_msg void OnGameType(UINT id);
     afx_msg void OnJumpTo(UINT id);
+    afx_msg void OnViewZ(UINT id);
 
 private:
     void MoveToTile(int xtile, int ytile, int z);

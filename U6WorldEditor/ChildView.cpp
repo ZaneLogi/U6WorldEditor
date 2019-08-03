@@ -12,6 +12,7 @@
 #include "ChildView.h"
 #include "LZW.h"
 #include "DibSection.h"
+#include "DibUtils.h"
 #include "ColorPalette.h"
 #include "TileImage.h"
 #include "TileManager.h"
@@ -149,6 +150,9 @@ void CChildView::Update()
 {
     CClientDC dc(this);
 
+    CRect rcClient;
+    GetClientRect(&rcClient);
+
     auto bitmap_info = gScreen.bitmap_info();
     int width = bitmap_info->bmiHeader.biWidth;
     int height = bitmap_info->bmiHeader.biHeight;
@@ -191,6 +195,19 @@ void CChildView::Update()
 
     int xoffset = m_map_ox % 16;
     int yoffset = m_map_oy % 16;
+
+    if (gSelectedObj)
+    {
+        int screen_x = xoffset + rcClient.Width() - 32;
+        int screen_y = yoffset;
+        auto p = gScreen.bits(yoffset) + screen_x;
+        FillRect(p, 32, 32, 0, 1, gScreen.ypitch());
+        gMapManager.tile_manager.draw(gScreen, screen_x + 16, screen_y + 16, gSelectedObj->obj_number, gSelectedObj->obj_frame, false);
+        gMapManager.tile_manager.draw(gScreen, screen_x + 16, screen_y + 16, gSelectedObj->obj_number, gSelectedObj->obj_frame, true);
+    }
+
+
+
 
     DrawDibDraw(gDD, dc.GetSafeHdc(), -xoffset, -yoffset, width, height,
         (BITMAPINFOHEADER*)&gScreen.bitmap_info()->bmiHeader,
@@ -552,6 +569,8 @@ void CChildView::OnGameType(UINT id)
     m_map_ox = 128 * 16;
     m_map_oy = 128 * 16;
     m_map_z = 0;
+
+    gSelectedObj = nullptr;
 
     auto actor = gMapManager.obj_manager.get_actor(1);
     MoveToTile(actor.x, actor.y, actor.z);

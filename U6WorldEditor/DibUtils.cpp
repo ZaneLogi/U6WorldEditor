@@ -103,11 +103,19 @@ void FillRect(void* dst, int w, int h, uint32_t color, int xpitch, int ypitch)
 
     // first line
     char* p = (char*)dst;
-    for (int i = 0; i < w; i++)
+    if (xpitch == 1)
     {
-        memcpy(p, &color, xpitch);
-        p += xpitch;
+        memset(p, color, w);
     }
+    else
+    {
+        for (int i = 0; i < w; i++)
+        {
+            memcpy(p, &color, xpitch);
+            p += xpitch;
+        }
+    }
+
     --h;
     dst = (char*)dst + ypitch;
 

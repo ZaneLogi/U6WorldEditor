@@ -136,6 +136,8 @@ private:
     bool load_objblk(Configuration& config);
     void load_superchunk(std::istream& is, std::list<Obj>& objlist);
     bool load_objlist(Configuration& config);
+
+    void draw_superchunks(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z, int super_x, int super_y, const std::list<Obj>& objs, bool toptile);
     void draw_actors(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z, bool toptile);
 
 private:

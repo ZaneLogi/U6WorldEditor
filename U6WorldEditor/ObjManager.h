@@ -120,13 +120,16 @@ public:
 class ObjManager
 {
 public:
+    ObjManager();
+
     bool init(Configuration& config, TileManager* tile_manager);
-    void draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z, bool toptile);
+    void draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z);
 
     Actor get_actor(int index) const { return m_actors[index]; }
     Obj*  get_obj(uint16_t xtile, uint16_t ytile, uint8_t z);
 
     bool move_obj_to(const Obj& obj, uint16_t xtile, uint16_t ytile, uint8_t z);
+
 
     bool save_objblks(const char* folder);
     bool save_superchunk(const char* filename, int col, int row, int z);
@@ -148,4 +151,8 @@ private:
     std::vector<uint8_t>    m_objlist;
     Actor                   m_actors[256];
     int                     m_party_member_count;
+
+    struct cache_data { uint16_t xtile; uint16_t ytile; const Obj* obj; };
+    std::vector<cache_data> m_cache_objs;
+    int                     m_cache_count;
 };

@@ -213,9 +213,6 @@ void CChildView::Update()
         gMapManager.tile_manager.draw(gScreen, screen_x + 16, screen_y + 16, gSelectedObj->obj_number, gSelectedObj->obj_frame, true);
     }
 
-
-
-
     DrawDibDraw(gDD, dc.GetSafeHdc(), -xoffset, -yoffset, width, height,
         (BITMAPINFOHEADER*)&gScreen.bitmap_info()->bmiHeader,
         gScreen.bits(), 0, 0, width, height, NULL);

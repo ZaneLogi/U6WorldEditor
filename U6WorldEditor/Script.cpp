@@ -42,7 +42,7 @@ std::string Script::get_npc_name(uint32_t npc_index)
     auto context = get_context(index);
     if (!context.empty())
     {
-        assert(context[0] == -1 && context[1] == npc_index);
+        assert(context[0] == -1 && (uint8_t)context[1] == npc_index);
         auto p = &context[2];
         while (1)
         {

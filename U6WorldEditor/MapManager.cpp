@@ -22,6 +22,5 @@ void MapManager::update(DibSection& ds)
 void MapManager::draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z)
 {
     basemap.draw(ds, world_tile_x, world_tile_y, z);
-    obj_manager.draw(ds, world_tile_x, world_tile_y, z, false);
-    obj_manager.draw(ds, world_tile_x, world_tile_y, z, true);
+    obj_manager.draw(ds, world_tile_x, world_tile_y, z);
 }

@@ -17,6 +17,12 @@ inline uint32_t FILESIZE(std::ifstream& f)
     return (uint32_t)fsize;
 }
 
+ObjManager::ObjManager()
+{
+    m_cache_objs.resize(256);
+    m_cache_count = 0;
+}
+
 bool ObjManager::init(Configuration& config, TileManager* tile_manager)
 {
     m_tile_manager = tile_manager;
@@ -25,7 +31,7 @@ bool ObjManager::init(Configuration& config, TileManager* tile_manager)
     return true;
 }
 
-void ObjManager::draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z, bool toptile)
+void ObjManager::draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z)
 {
     assert(z <= 5 && "z is out of range!");
     assert((z == 0 ? world_tile_x < 1024 : world_tile_x < 256) && "world_tile_x is out of range!");
@@ -33,10 +39,7 @@ void ObjManager::draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile
     assert(ds.width() % 16 == 0 && "must be 16x!");
     assert(ds.height() % 16 == 0 && "must be 16x!");
 
-    int xstart = world_tile_x;
-    int ystart = world_tile_y;
-    int xend = xstart + ds.width() / 16;
-    int yend = ystart + ds.height() / 16;
+    m_cache_count = 0;
 
     if (z == 0)
     {
@@ -44,16 +47,25 @@ void ObjManager::draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile
         {
             for (int col = 0; col < 8; col++)
             {
-                draw_superchunks(ds, world_tile_x, world_tile_y, z, col, row, m_surface_objs[row][col], toptile);
+                draw_superchunks(ds, world_tile_x, world_tile_y, z, col, row, m_surface_objs[row][col], false);
             }
         }
     }
     else
     {
-        draw_superchunks(ds, world_tile_x, world_tile_y, z, 0, 0, m_dungeon_objs[z - 1], toptile);
+        draw_superchunks(ds, world_tile_x, world_tile_y, z, 0, 0, m_dungeon_objs[z - 1], false);
     }
 
-    draw_actors(ds, world_tile_x, world_tile_y, z, toptile);
+    draw_actors(ds, world_tile_x, world_tile_y, z, false);
+
+    // then draw top tiles
+    auto obj_itr = m_cache_objs.begin();
+    for (int i = 0; i < m_cache_count; i++, ++obj_itr)
+    {
+        auto& o = *obj_itr;
+        m_tile_manager->draw(ds, o.xtile * 16, o.ytile * 16,
+            o.obj->obj_number, o.obj->obj_frame, true);
+    }
 }
 
 Obj*  ObjManager::get_obj(uint16_t xtile, uint16_t ytile, uint8_t z)
@@ -70,7 +82,7 @@ Obj*  ObjManager::get_obj(uint16_t xtile, uint16_t ytile, uint8_t z)
 
     //
     // TODO: the pick is incorrect at Ultima6 (52,172,1)
-    // if it is not enough to only check (xtile, ytile),
+    // it is not enough to only check (xtile, ytile),
     // it should also check (xtile+1, ytile+1) for the double-size objects
     //
 
@@ -609,15 +621,15 @@ void ObjManager::draw_superchunks(
         bottom = top + 128;
         left = super_x * 128;
         right = left + 128;
-        world_tiles = 1024;
+        world_tiles = WORLD_TILES;
     }
     else
     {
         top = 0;
-        bottom = 256;
+        bottom = DUNGEON_TILES;
         left = 0;
-        right = 256;
-        world_tiles = 256;
+        right = DUNGEON_TILES;
+        world_tiles = DUNGEON_TILES;
     }
 
     if (xstart >= right || xend < left ||
@@ -645,8 +657,6 @@ void ObjManager::draw_superchunks(
         while (count-- > 0)
         {
             --draw_obj_itr;
-
-            const int WORLD_TILES = 1024;
 
             int xtile1 = draw_obj_itr->x;
             int ytile1 = draw_obj_itr->y;
@@ -685,6 +695,15 @@ void ObjManager::draw_superchunks(
             {
                 m_tile_manager->draw(ds, xtile * 16, ytile * 16,
                     draw_obj_itr->obj_number, draw_obj_itr->obj_frame, toptile);
+
+                auto& o = m_cache_objs[m_cache_count++];
+                o.xtile = xtile;
+                o.ytile = ytile;
+                o.obj = &(*draw_obj_itr);
+                if (m_cache_count == m_cache_objs.size())
+                {
+                    m_cache_objs.resize(m_cache_count + m_cache_count);
+                }
             }
         }
     }
@@ -751,6 +770,16 @@ void ObjManager::draw_actors(DibSection& ds, uint16_t world_tile_x, uint16_t wor
         {
             m_tile_manager->draw(ds, xtile * 16, ytile * 16,
                 actor.obj_number, actor.obj_frame, toptile);
+
+            auto& o = m_cache_objs[m_cache_count++];
+            o.xtile = xtile;
+            o.ytile = ytile;
+            o.obj = &actor;
+            if (m_cache_count == m_cache_objs.size())
+            {
+                m_cache_objs.resize(m_cache_count + m_cache_count);
+            }
         }
     }
 }
+

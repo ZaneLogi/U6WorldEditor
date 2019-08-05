@@ -48,7 +48,13 @@ private:
     bool load_tileflag(Configuration& config);  // => m_tile_flags1/2/3
     bool load_look(Configuration& config);      // => m_look_data
 
+    void update_u6();
+    void update_se();
+    void update_md();
+
 private:
+    void (TileManager::*m_update_fn)();
+
     TileImage*  m_tile_image;
     uint32_t    m_anim_counter = 0;
     uint16_t    m_anim_tile_index[2048];

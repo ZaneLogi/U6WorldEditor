@@ -176,10 +176,11 @@ void CChildView::Update()
     {
         int x = (i % 32) * 16;
         int y = (i / 32) * 16 - Y;
-        gMapManager.tile_image.draw(gScreen, x, y, i);
-        //gMapManager.tile_manager.draw(gScreen, x, y, i);
+        //gMapManager.tile_image.draw(gScreen, x, y, i); // no animation
+        gMapManager.tile_manager.draw(gScreen, x, y, i); // with animation
     }
 
+    // draw the character font
     for (int i = 0; i < 256; i++)
     {
         int x = (i % 16) * 8 + 640 - 128;

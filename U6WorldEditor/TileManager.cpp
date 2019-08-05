@@ -24,6 +24,11 @@ TileManager::~TileManager()
 
 bool TileManager::init(Configuration& config, TileImage* tile_image)
 {
+    auto game_type = config.get_property("game_type");
+    if (game_type == "u6") { m_update_fn = &TileManager::update_u6; }
+    else if (game_type == "se") { m_update_fn = &TileManager::update_se; }
+    else if (game_type == "md") { m_update_fn = &TileManager::update_md; }
+
     m_tile_image = tile_image;
 
     load_animdata(config);
@@ -46,6 +51,31 @@ void TileManager::update()
     {
         int current_anim_frame = ((m_anim_counter & m_animdata.and_masks[i]) >> m_animdata.shift_values[i]);
         m_anim_tile_index[m_animdata.tile_to_animate[i]] = m_animdata.first_anim_frame[i] + current_anim_frame;
+    }
+
+    (this->*m_update_fn)();
+}
+
+void TileManager::update_u6()
+{
+}
+
+void TileManager::update_se()
+{
+}
+
+void TileManager::update_md()
+{
+    // water in the canal
+    int full_water_in_canal = 1; // 0: empty, 1: full
+    for (int i = 0; i < 8; i++)
+    {
+        m_anim_tile_index[m_animdata.tile_to_animate[i]] = m_animdata.first_anim_frame[i] + full_water_in_canal;
+    }
+
+    for (int i = 27; i < 31; i++)
+    {
+        m_anim_tile_index[m_animdata.tile_to_animate[i]] = m_animdata.first_anim_frame[i] + full_water_in_canal;
     }
 }
 

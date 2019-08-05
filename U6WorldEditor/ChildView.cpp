@@ -233,6 +233,7 @@ void CChildView::Update()
     Obj* obj = gMapManager.obj_manager.get_obj(cur_tile_x, cur_tile_y, m_map_z);
     std::string obj_desc;
     std::string actor_name;
+    CString obj_flags;
     if (obj)
     {
         obj_desc = gMapManager.tile_manager.get_description(obj->obj_number, obj->obj_frame, obj->quantity);
@@ -253,10 +254,13 @@ void CChildView::Update()
         {
             actor_name = gMapManager.script.get_npc_name(((Actor*)obj)->id);
         }
+
+        auto& ti = obj->tile_info;
+        obj_flags.Format(_T("%d, %02x-%02x-%02x"), obj->obj_number, ti.flag1, ti.flag2, ti.flag3);
     }
 
     CString s;
-    s.Format(_T("%d, %d, %hs\n%hs"), cur_tile_x, cur_tile_y, obj_desc.c_str(), actor_name.c_str() );
+    s.Format(_T("%d, %d, %hs\n%hs\n%s"), cur_tile_x, cur_tile_y, obj_desc.c_str(), actor_name.c_str(), obj_flags );
     dc.SelectStockObject(SYSTEM_FIXED_FONT);
     dc.SelectStockObject(BLACK_PEN);
     CRect rc(0, 0, 640, 640);
@@ -458,7 +462,7 @@ void CChildView::OnRButtonDown(UINT nFlags, CPoint point)
     auto obj = gMapManager.obj_manager.get_obj(cur_tile_x, cur_tile_y, m_map_z);
     if (obj)
     {
-        auto tile_info = gMapManager.tile_manager.get_info(obj->obj_number, obj->obj_frame);
+        auto& tile_info = obj->tile_info;
         auto tile_index = tile_info.index;
 
         auto game_type = gConfig.get_property("game_type");

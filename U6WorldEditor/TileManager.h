@@ -18,9 +18,13 @@ struct AnimData
 struct TileInfo
 {
     uint16_t    index;
-    bool        top;
-    bool        double_width;
-    bool        double_height;
+    uint8_t     flag1;
+    uint8_t     flag2;
+    uint8_t     flag3;
+
+    inline bool top() const { return (flag2 & 0x10) != 0; }
+    inline bool double_width() const { return (flag2 & 0x80) != 0; }
+    inline bool double_height() const { return (flag2 & 0x40) != 0; }
 };
 
 class TileManager
@@ -36,6 +40,7 @@ public:
     std::string get_description(uint16_t tile_index);
     std::string get_description(uint16_t obj_number, uint8_t obj_frame, uint8_t quantity);
     TileInfo get_info(uint16_t obj_number, uint8_t obj_frame);
+    bool is_big_flat_object(uint16_t obj_number, uint8_t obj_frame, bool& double_width, bool& double_height);
 
 private:
     bool load_animdata(Configuration& config);  // => m_animdata

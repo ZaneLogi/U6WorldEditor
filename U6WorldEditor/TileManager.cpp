@@ -151,12 +151,51 @@ TileInfo TileManager::get_info(uint16_t obj_number, uint8_t obj_frame)
     TileInfo ti;
     int tile_index = m_obj_to_tile[obj_number] + obj_frame;
     ti.index = tile_index;
-
-    auto flags = m_tile_flags2[tile_index];
-    ti.top = (flags & 0x10) != 0;
-    ti.double_width = (flags & 0x80) != 0;
-    ti.double_height = (flags & 0x40) != 0;
+    ti.flag1 = m_tile_flags1[tile_index];
+    ti.flag2 = m_tile_flags2[tile_index];
+    ti.flag3 = m_tile_flags3[tile_index];
     return ti;
+}
+
+bool TileManager::is_big_flat_object(uint16_t obj_number, uint8_t obj_frame, bool& double_width, bool& double_height)
+{
+    int tile_index = m_obj_to_tile[obj_number] + obj_frame;
+    auto flags = m_tile_flags2[tile_index];
+    bool is_top = (flags & 0x10) != 0;
+    double_width = (flags & 0x80) != 0;
+    double_height = (flags & 0x40) != 0;
+
+    if (is_top || (!double_width && !double_height))
+        return false;
+
+    if (double_width)
+    {
+        tile_index--;
+        flags = m_tile_flags2[tile_index];
+        is_top = (flags & 0x10) != 0;
+        if (is_top)
+            return false;
+    }
+
+    if (double_height)
+    {
+        tile_index--;
+        flags = m_tile_flags2[tile_index];
+        is_top = (flags & 0x10) != 0;
+        if (is_top)
+            return false;
+    }
+
+    if (double_width && double_height)
+    {
+        tile_index--;
+        flags = m_tile_flags2[tile_index];
+        is_top = (flags & 0x10) != 0;
+        if (is_top)
+            return false;
+    }
+
+    return true;
 }
 
 bool TileManager::load_animdata(Configuration& config)

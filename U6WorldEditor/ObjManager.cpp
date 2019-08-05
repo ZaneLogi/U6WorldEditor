@@ -17,17 +17,14 @@ inline uint32_t FILESIZE(std::ifstream& f)
     return (uint32_t)fsize;
 }
 
-ObjManager::ObjManager()
-{
-    m_cache_objs.resize(256);
-    m_cache_count = 0;
-}
+
 
 bool ObjManager::init(Configuration& config, TileManager* tile_manager)
 {
     m_tile_manager = tile_manager;
     load_objblk(config);
     load_objlist(config);
+    init_z_order(config);
     return true;
 }
 
@@ -39,7 +36,7 @@ void ObjManager::draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile
     assert(ds.width() % 16 == 0 && "must be 16x!");
     assert(ds.height() % 16 == 0 && "must be 16x!");
 
-    m_cache_count = 0;
+    m_display_cache.reset();
 
     if (z == 0)
     {
@@ -47,24 +44,107 @@ void ObjManager::draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile
         {
             for (int col = 0; col < 8; col++)
             {
-                draw_superchunks(ds, world_tile_x, world_tile_y, z, col, row, m_surface_objs[row][col], false);
+                cache_objs_in_superchunks(ds, world_tile_x, world_tile_y, z, col, row, m_surface_objs[row][col], false);
             }
         }
     }
     else
     {
-        draw_superchunks(ds, world_tile_x, world_tile_y, z, 0, 0, m_dungeon_objs[z - 1], false);
+        cache_objs_in_superchunks(ds, world_tile_x, world_tile_y, z, 0, 0, m_dungeon_objs[z - 1], false);
     }
 
-    draw_actors(ds, world_tile_x, world_tile_y, z, false);
+    cache_actors(ds, world_tile_x, world_tile_y, z, false);
 
-    // then draw top tiles
-    auto obj_itr = m_cache_objs.begin();
-    for (int i = 0; i < m_cache_count; i++, ++obj_itr)
+    // draw bottom tiles first
+    int world_tiles = (z == 0) ? WORLD_TILES : DUNGEON_TILES;
+    int lines = ds.height() / 16;
+    for (int i = 0; i < lines; i++)
     {
-        auto& o = *obj_itr;
-        m_tile_manager->draw(ds, o.xtile * 16, o.ytile * 16,
-            o.obj->obj_number, o.obj->obj_frame, true);
+        int y = (world_tile_y + i) % world_tiles;
+        auto obj_itr = m_display_cache.m_display_objs[y].begin();
+        auto count = m_display_cache.m_display_count[y];
+        for (int j = 0; j < count; j++, ++obj_itr)
+        {
+            auto& o = *obj_itr;
+            m_tile_manager->draw(ds, o.xtile * 16, o.ytile * 16,
+                o.obj->obj_number, o.obj->obj_frame, false);
+
+            int obj_z_order = m_obj_z_order[o.obj->obj_number];
+
+            bool double_width, double_height;
+            bool big_flat_obj = m_tile_manager->is_big_flat_object(o.obj->obj_number, o.obj->obj_frame, double_width, double_height);
+            if (big_flat_obj)
+            {
+                int prev_y = y - 1;
+                if (prev_y < 0)
+                    prev_y += world_tiles;
+
+                if (double_width)
+                {
+                    // draw the objects again
+                    auto search_itr = m_display_cache.m_display_objs[y].begin();
+                    auto search_count = m_display_cache.m_display_count[y];
+                    int target_x = o.obj->x - 1;
+                    int target_y = o.obj->y;
+                    for (int s = 0; s < search_count; s++, ++search_itr)
+                    {
+                        if (search_itr->obj->x == target_x && m_obj_z_order[search_itr->obj->obj_number] > obj_z_order)
+                        {
+                            m_tile_manager->draw(ds, search_itr->xtile * 16, search_itr->ytile * 16,
+                                search_itr->obj->obj_number, search_itr->obj->obj_frame, false);
+                        }
+                    }
+                }
+
+                if (double_height)
+                {
+                    // draw the objects again
+                    auto search_itr = m_display_cache.m_display_objs[prev_y].begin();
+                    auto search_count = m_display_cache.m_display_count[prev_y];
+                    int target_x = o.obj->x;
+                    int target_y = o.obj->y - 1;
+                    for (int s = 0; s < search_count; s++, ++search_itr)
+                    {
+                        if (search_itr->obj->x == target_x && m_obj_z_order[search_itr->obj->obj_number] > obj_z_order)
+                        {
+                            m_tile_manager->draw(ds, search_itr->xtile * 16, search_itr->ytile * 16,
+                                search_itr->obj->obj_number, search_itr->obj->obj_frame, false);
+                        }
+                    }
+                }
+
+                if (double_width && double_height)
+                {
+                    // draw the objects again
+                    auto search_itr = m_display_cache.m_display_objs[prev_y].begin();
+                    auto search_count = m_display_cache.m_display_count[prev_y];
+                    int target_x = o.obj->x - 1;
+                    int target_y = o.obj->y - 1;
+                    for (int s = 0; s < search_count; s++, ++search_itr)
+                    {
+                        if (search_itr->obj->x == target_x && m_obj_z_order[search_itr->obj->obj_number] > obj_z_order)
+                        {
+                            m_tile_manager->draw(ds, search_itr->xtile * 16, search_itr->ytile * 16,
+                                search_itr->obj->obj_number, search_itr->obj->obj_frame, false);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // draw top tiles later
+    for (int i = 0; i < lines; i++)
+    {
+        int y = (world_tile_y + i) % world_tiles;
+        auto obj_itr = m_display_cache.m_display_objs[y].begin();
+        auto count = m_display_cache.m_display_count[y];
+        for (int j = 0; j < count; j++, ++obj_itr)
+        {
+            auto& o = *obj_itr;
+            m_tile_manager->draw(ds, o.xtile * 16, o.ytile * 16,
+                o.obj->obj_number, o.obj->obj_frame, true);
+        }
     }
 }
 
@@ -102,18 +182,18 @@ Obj*  ObjManager::get_obj(uint16_t xtile, uint16_t ytile, uint8_t z)
 
     for (; obj_itr != obj_end; ++obj_itr)
     {
-        TileInfo ti = m_tile_manager->get_info(obj_itr->obj_number, obj_itr->obj_frame);
+        auto& ti = obj_itr->tile_info;
 
         if (obj_itr->x == xtile && obj_itr->y == ytile)
             return &(*obj_itr);
 
-        if (ti.double_width && obj_itr->x - 1 == xtile && obj_itr->y == ytile)
+        if (ti.double_width() && obj_itr->x - 1 == xtile && obj_itr->y == ytile)
             return &(*obj_itr);
 
-        if (ti.double_height && obj_itr->x == xtile && obj_itr->y - 1 == ytile)
+        if (ti.double_height() && obj_itr->x == xtile && obj_itr->y - 1 == ytile)
             return &(*obj_itr);
 
-        if (ti.double_width && ti.double_height && obj_itr->x - 1 == xtile && obj_itr->y - 1 == ytile)
+        if (ti.double_width() && ti.double_height() && obj_itr->x - 1 == xtile && obj_itr->y - 1 == ytile)
             return &(*obj_itr);
     }
 
@@ -431,6 +511,7 @@ void ObjManager::load_superchunk(std::istream& is, std::list<Obj>& objlist)
         is.read((char*)&info, sizeof(info));
 
         Obj obj(info);
+        obj.tile_info = m_tile_manager->get_info(obj.obj_number, obj.obj_frame);
 
         if (obj.in_container())
         {
@@ -526,6 +607,8 @@ bool ObjManager::load_objlist(Configuration& config)
         m_actors[i].obj_number = (((b2 & 0x03) << 8) | b1); // 10bits = 0 - 1023
         m_actors[i].obj_frame = ((b2 & 0xfc) >> 2);         // 6bits = 0 - 63
         // the actor's direction = m_actors[i].obj_frame / 4
+
+        m_actors[i].tile_info = m_tile_manager->get_info(m_actors[i].obj_number, m_actors[i].obj_frame);
     }
 
     // Strength
@@ -598,14 +681,32 @@ bool ObjManager::load_objlist(Configuration& config)
     return true;
 }
 
-void ObjManager::draw_superchunks(
+void ObjManager::init_z_order(Configuration& config)
+{
+    memset(m_obj_z_order, 0, sizeof(m_obj_z_order));
+
+    auto game_type = config.get_property("game_type");
+    if (game_type == "u6")
+    {
+        m_obj_z_order[32] = -2;     // floor
+        m_obj_z_order[311] = -1;    // stone table
+    }
+    else if (game_type == "se")
+    {
+        m_obj_z_order[244] = -1;    // mat
+        m_obj_z_order[245] = -1;    // skin
+    }
+    else if (game_type == "md")
+    {
+
+    }
+
+}
+
+void ObjManager::cache_objs_in_superchunks(
     DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z,
     int super_x, int super_y, const std::list<Obj>& objs, bool toptile)
 {
-    //
-    // TODO: the drawing order is incorrect at Ultima6 (52,172,1)
-    //
-
     // set the valid range in the DibSectoin
     int xstart = world_tile_x;
     int ystart = world_tile_y;
@@ -693,23 +794,13 @@ void ObjManager::draw_superchunks(
 
             if (xtile >= 0 && ytile >= 0)
             {
-                m_tile_manager->draw(ds, xtile * 16, ytile * 16,
-                    draw_obj_itr->obj_number, draw_obj_itr->obj_frame, toptile);
-
-                auto& o = m_cache_objs[m_cache_count++];
-                o.xtile = xtile;
-                o.ytile = ytile;
-                o.obj = &(*draw_obj_itr);
-                if (m_cache_count == m_cache_objs.size())
-                {
-                    m_cache_objs.resize(m_cache_count + m_cache_count);
-                }
+                m_display_cache.append_obj(xtile, ytile, &(*draw_obj_itr));
             }
         }
     }
 }
 
-void ObjManager::draw_actors(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z, bool toptile)
+void ObjManager::cache_actors(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z, bool toptile)
 {
     int xstart = world_tile_x;
     int ystart = world_tile_y;
@@ -768,17 +859,7 @@ void ObjManager::draw_actors(DibSection& ds, uint16_t world_tile_x, uint16_t wor
 
         if (xtile >= 0 && ytile >= 0)
         {
-            m_tile_manager->draw(ds, xtile * 16, ytile * 16,
-                actor.obj_number, actor.obj_frame, toptile);
-
-            auto& o = m_cache_objs[m_cache_count++];
-            o.xtile = xtile;
-            o.ytile = ytile;
-            o.obj = &actor;
-            if (m_cache_count == m_cache_objs.size())
-            {
-                m_cache_objs.resize(m_cache_count + m_cache_count);
-            }
+            m_display_cache.append_obj(xtile, ytile, &actor);
         }
     }
 }

@@ -87,6 +87,8 @@ public:
     uint8_t         quantity;
     uint8_t         quality;
 
+    TileInfo        tile_info;
+
     std::list<Obj>  obj_list;
 };
 
@@ -120,7 +122,7 @@ public:
 class ObjManager
 {
 public:
-    ObjManager();
+    ObjManager() = default;
 
     bool init(Configuration& config, TileManager* tile_manager);
     void draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z);
@@ -139,9 +141,10 @@ private:
     bool load_objblk(Configuration& config);
     void load_superchunk(std::istream& is, std::list<Obj>& objlist);
     bool load_objlist(Configuration& config);
+    void init_z_order(Configuration& config);
 
-    void draw_superchunks(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z, int super_x, int super_y, const std::list<Obj>& objs, bool toptile);
-    void draw_actors(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z, bool toptile);
+    void cache_objs_in_superchunks(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z, int super_x, int super_y, const std::list<Obj>& objs, bool toptile);
+    void cache_actors(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z, bool toptile);
 
 private:
     TileManager*    m_tile_manager;
@@ -152,7 +155,36 @@ private:
     Actor                   m_actors[256];
     int                     m_party_member_count;
 
-    struct cache_data { uint16_t xtile; uint16_t ytile; const Obj* obj; };
-    std::vector<cache_data> m_cache_objs;
-    int                     m_cache_count;
+    int                     m_obj_z_order[1536]; // this is used for the big flat object drawing, especially at Ultima6 (52,172,1) and the mat in SE
+
+    class display_cache
+    {
+    public:
+        display_cache()
+        {
+            std::for_each(m_display_objs, m_display_objs + 1024, [](auto& i) {i.resize(16); });
+        }
+        void reset()
+        {
+            std::for_each(m_display_count, m_display_count + 1024, [](int& n) {n = 0; });
+        }
+        void append_obj(int xtile, int ytile, const Obj* obj)
+        {
+            auto& count = m_display_count[obj->y];
+            auto& objs = m_display_objs[obj->y];
+            auto& c = objs[count++];
+            c.xtile = xtile;
+            c.ytile = ytile;
+            c.obj = obj;
+            if (count >= objs.size())
+            {
+                objs.resize(count + count);
+            }
+        }
+    public:
+        struct cache_data { uint16_t xtile; uint16_t ytile; const Obj* obj; };
+
+        std::vector<cache_data> m_display_objs[1024];
+        int                     m_display_count[1024];
+    } m_display_cache;
 };

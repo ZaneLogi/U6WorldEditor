@@ -1,0 +1,537 @@
+0000:
+0xff (NPC INFO)
+    npc_id(2)
+    npc_name(Aiela)
+0007:
+0xf1 (NPC LOOK)
+    {a gorgeous, dark-haired woman wearing jaguar fur.
+*}
+003b:
+0xf2 (START DIALOGUE)
+003c:
+    if npc(1).flag(0)
+        jmp 0x0102
+    else
+        {"The strange warrior $P! Surely he has come to rescue Aiela from her cruel prison!"
+} 0xcb {
+She looks about fearfully. "Aiela cannot speak to $P now, or Darden's men may hear her and come!"}
+0100:
+        bye
+    endif
+0102:
+    if npc(eb).flag(5)
+        {"Yes, my love?"
+}
+        jmp 0x01ba
+    else
+        jmp 0x0125
+    endif
+0125:
+    if npc(0x33).flag(5)
+        {Her face darkens. "Oh. It is $P. $P the mate of Tristia. Tristia's mate $P. What does @Tristia's mate $P want?"
+}
+        jmp 0x01ba
+    else
+        {"Yes, mighty $P?"
+}
+        jmp 0x01ba
+    endif
+01ba:
+{
+}
+01bb:
+0xf7 (WAIT_INPUT)
+01bc:
+0xef (KEYWORD)
+    name
+01c1:
+0xf6 (ANSWER)
+    {"Aiela is my name. Aiela is daughter of @Aloron, the chief of the @Kuraks."
+}
+    jmp 0x01ba
+0213:
+0xef
+    aiel
+0218:
+0xf6
+    {"Yes?"
+}
+    jmp 0x01ba
+0225:
+0xef
+    job
+0229:
+0xf6
+    {"Aiela is Princess of the @Kurak tribe, and warrior. Aiela is friend to the jaguar, enemy of the @Myrmidex."
+}
+    jmp 0x01ba
+029c:
+0xef
+    chie,alor
+02a6:
+0xf6
+    {"Aiela's father is Aloron, chief of the @Kurak tribe."
+}
+    jmp 0x01ba
+02e3:
+0xef
+    aiel
+02e8:
+0xf6
+    {"Yes?"
+}
+    jmp 0x01ba
+02f5:
+0xef
+    love
+02fa:
+0xf6
+    if npc(eb).flag(5)
+        {"Aiela loves $P, too. Aiela never tires of hearing $P say this."
+}
+        jmp 0x01ba
+    else
+        {Her eyes widen. "Is $P saying that he loves Aiela?"
+}
+        jmp 0x1982
+    endif
+0383:
+0xef
+    kura
+0388:
+0xf6
+    {"Aiela belongs to the Kurak tribe. Her father @Aloron is chief of the Kuraks. Kuraks know the jungle and the jungle cats."
+}
+    if npc(eb).flag(5)
+        0xcb {
+"$P is Aiela's mate, and so $P is also a member of the Kurak tribe." She smiles. "Perhaps someday $P will be chief of Kuraks."
+}
+        jmp 0x01ba
+    else
+        jmp 0x01ba
+    endif
+0498:
+0xef
+    bone
+049d:
+    {"If $P wants bones, he should go to where the great lizards go to die."
+} 0xcb {
+"East of the stone city of the @Nahuatla is a great stand of iron bamboo, and north of that is the place where the great lizards go to die."
+Ë
+"Many bones are there."
+}
+    if npc(0x33).flag(5)
+        0xcb {
+"When $P has been @Tristia's mate for a while longer, doubtless he will also feel like lying down among those bones and dying there."
+} 0xcb {
+}
+        bye
+    else
+        jmp 0x1ba
+    endif
+0628:
+0xef
+    hide
+062d:
+0xf6
+    {"If $P wants a hide, he must kill a furred creature and then use a knife on its carcass. Lizard hide is too tough to be any use."
+}
+    if npc(0x33).flag(5)
+        0xcb {
+"A good thing for $P to do with a hide is to make a hide bag and cover the face of his mate @Tristia with it."
+}
+0xcb {
+}
+        bye
+    else
+        jmp 0x01ba
+    endif
+0732:
+0xef
+    bamb
+0737:
+0xf6
+    {"If $P wants iron bamboo, it is easy to find. He must go north of the @Nahuatla stone village, or south of the @Yolaru village, and near the eastern cliffs he will find a great stand of bamboo."
+}
+    jmp 0x01ba
+0800:
+0xef
+    myrm
+0xf6
+    {"The Myrmidex! They are evil. Ants of the jungle, but larger than men. No single tribe can stand against them. And yet the tribes will not @unite against them."
+}
+    if npc(0x33).flag(5)
+        0xcb {
+"$P has chosen @Tristia as his mate. He must have much in common with the Myrmidex. Perhaps he should go join them."
+}
+        bye
+    else
+        jmp 0x01ba
+    endif
+092d:
+0xef
+    sahr
+0xf6
+    {"Sahree is a warrior-woman of the @Yolaru. Sahree and Aiela are friends and allies."
+}
+    if npc(eb).flag(5)
+        0xcb {
+She adds, playfully: "Sahree is very beautiful, but $P must keep his eyes to Aiela, not Sahree."
+}
+        jmp 0x01ba
+    else
+        jmp 0x01ba
+    endif
+09fe:
+0xef
+    topu
+0xf6
+    {"Aiela has heard the name of Topuru. Topuru is a mad shaman, once of the @Urali. Topuru lives on an island, all alone, in the north somewhere."
+}
+    jmp 0x01ba
+0a99:
+0xef
+    ural
+0xf6
+    {"The Urali are a suspicious tribe. They hide away from the other tribes. Few ever tell their true names."
+}
+    if npc(0x35).flag(5)
+        0xcb {
+"Now that @Darden is dead, their chief is Wamap, who is also their shaman."
+}
+        jmp 0x01ba
+    else
+        0xcb {
+"@Darden is still chief among the Urali, though $P has rescued Aiela from him."
+}
+        jmp 0x01ba
+    endif
+0bbc:
+0xef
+    dard,gian,gem
+0xf6
+    {"Darden thought he could buy Aiela's love with a giant gem, stolen from the @Nahuatla. But Aiela could never love one so cruel as Darden." She pauses, and grins. "But Aiela did keep the gem. It is very pretty!"}
+    jmp 0x01ba
+0ca2:
+0xef
+    yola
+0xf6
+    {"The Yolaru are a strong, noble tribe east of the @Kuraks. Their chief is Apaton; their shaman is Mosagann; Mosagann has a daughter, @Sahree, who is Aiela's friend."
+}
+    jmp 0x01ba
+0d53:
+0xef
+    nahu
+0xf6
+    {"The Nahuatla build their village of stone."
+} 0xcb {
+}
+    if npc(0x28).flag(7)
+        {"Moctapotl is their chief."
+}
+        jmp 0x01ba
+    else
+        {"Huitlapacti is their chief now. Moctapotl was once their chief, but he hides in the jungle, an exile."
+}
+        jmp 0x01ba
+    endif
+0e1f:
+0xef
+    disq
+0xf6
+    {"The Disquiqui live west of the @Nahuatla. They do not do much work. They harvest fruits and ferment them into strong drink, and then consume it all."
+} 0xcb {
+"Their chief is named Chafblum. He has a daughter named Guoblum."
+}
+    if in_party(npc(4))
+        0xcb {
+}
+        show_portrait(npc(4))
+        {"You aren't kidding, doll! And keep Guoblum away from me!"
+} 0xcb {
+}
+        show_portrait(npc(eb))
+        jmp 0x01ba
+    else
+        jmp 0x01ba
+    endif
+0f58:
+0xef
+    tris
+0xf6
+    if npc(0x33).flag(5)
+        {"$P knows well who Tristia is! Tristia has spread word far and wide that she is $P's mate. She crows it to the wind and stars. Why would $P choose someone like Tristia?" She seems almost in tears.
+}
+        jmp 0x01ba
+    else
+        {"Tristia? She is Aiela's sister. Not truly: Tristia's father and mother died when their hut burned, so Aiela's father @Aloron raised her."
+} 0xcb {
+"But Tristia is cold as the snake. She shows no gratitude to Aloron. And she is greedy. Whatever Aiela has, Tristia must take away."
+}
+        jmp 0x01ba
+    endif
+1148:
+0xef
+    trib
+0xf6
+    {"There are many tribes in this valley. Aiela will tell $P of them."
+} 0xcb {
+"There are the @Kurak, Aiela's tribe, jungle-dwellers. Near the Kurak are the dark-skinned @Yolaru, the @Nahuatla, who build their village of stone, and the @Disquiqui, who make merry all their lives."
+} 0xcb {
+"There are many other, more distant tribes: The Pindiro and the Barako, the Jukari and the misshapen Haakur, the Barrab and the lizard-like Sakkhra, the ant-like @Myrmidex, and the @Urali, who had stolen Aiela away."
+} 0xcb {
+}
+    if npc(eb).flag(5)
+        {She kisses you. "But there is only one who may steal Aiela away, and that is $P."
+}
+    endif
+    jmp 0x01ba
+139a:
+0xef
+    unit,ally,alli
+0xf6
+    {"Aiela has often wished that the tribes would unite against the @Myrmidex. Aiela and her friend @Sahree have discussed this much."
+} 0xcb {
+"But the chiefs do not listen to their daughters in such matters." Then her eyes narrow as she looks at you.
+} 0xcb {
+}
+    if npc(eb).flag(5)
+        {"$P has already won Aiela's heart. Aiela is sure that $P could win friendship from the chiefs. Aiela's father @Aloron will already help you."
+} 0xcb {
+"Aiela thinks that $P could command respect of the chiefs and @unite all the tribes... if only he would try."
+}
+        jmp 0x01ba
+    else
+        {"Aiela thinks that $P could command respect of the chiefs and @unite all the tribes... if only he would try."
+}
+        jmp 0x01ba
+    endif
+161d:
+0xef
+    comp
+0xf6
+    if in_party(npc(2))
+        {"Aiela is already $P's war-companion."
+}
+        jmp 0x234c
+    else
+        {"$P can ask Aiela to @join him if he wishes."
+}
+        jmp 0x01ba
+    endif
+1689:
+0xef
+    leav
+0xf6
+    0xa6 (00 b2)
+    0xa8 leave(npc(eb)) // 2: not in party, 1: not on land, 0: success
+    if (00 b2) == 0x02
+        {"Aiela will not be ordered! Aiela will stay here if she pleases."
+}
+        jmp 0x01ba
+    endif
+    if (00 b2) == 0x01
+        {She looks at the surrounding water. "Aiela will not jump into the water."
+}
+        jmp 0x01ba
+    endif
+    jmp 0x20f0
+1742:
+0xef
+    wait
+0xf6
+    0xa6 (00 b2)
+    0xa8 leave(npc(eb))
+    if (00 b2) == 0x02
+        {"Aiela will not wait here for you. Aiela is not $P's @companion, in war or in anything."
+}
+        jmp 0x01ba
+    endif
+    if (00 b2) == 0x01
+        {She laughs at you. "Wait on the water? $P is funny."
+}
+        jmp 0x01ba
+    endif
+    jmp 0x20f0
+17fd:
+0xef
+    join
+0xf6
+    if in_party(npc(eb))
+        {"Aiela is already companion to $P. $P is sometimes forgetful." She grins.
+}
+        jmp 0x01ba
+    else
+        jmp 0x1f0e
+    endif
+185e:
+0xef
+    bye
+0xf6
+    if npc(0x33).flag(5)
+        {She snorts and turns away.
+}
+        bye
+    endif
+    if npc(eb).flag(5)
+        {She delicately traces her hand across your jaw. "Aiela loves talking to $P."
+}
+        bye
+    else
+        {"Aiela will always talk to $P."
+}
+        bye
+    endif
+18ff:
+0xef
+    *
+0xf6
+    {She sighs. "Aiela knows nothing of this."
+}
+    if npc(eb).flag(5)
+        {"But she is willing for $P to tell her of it," she adds hopefully.
+}
+        jmp 0x01ba
+    else
+        jmp 0x01ba
+    endif
+1982: // from answer of love
+    0xcb {
+}
+    if npc(0x33).flag(5)
+        {She glares at you. "But $P has said that he loves @Tristia. $P is cruel and fickle. A worthy mate for Aiela? Ha! He is better suited to the apes of the forest."
+} 0xcb {
+Her expression softens from 'furious' to merely 'hurt.' "But perhaps it is true. Does $P truly care for Aiela more than Tristia?"
+}
+        jmp 0x1abc
+    else
+        jmp 0x1cc1
+    endif
+1abc:
+    0xcb
+0xf8 (WAIT_INPUT_CHAR)
+    yn
+0xef
+    y
+0xf6
+    clear(npc(0x33).flag(5))
+    clear(npc(eb).flag(6))
+    set(npc(eb).flag(5))
+    {The hurt look disappears and is gradually replaced by a smile. "Aiela is glad. Aiela has long loved $P, since first she saw him. But when she heard that he preferred @Tristia..."
+} 0xcb {
+She steps up and embraces you. "Be true of heart with Aeila, and Aiela will stay true of heart with $P." And she kisses you, her lips sweet as the perfume of a jungle flower.
+}
+    jmp 0x01ba
+0xef
+    n
+0xf6
+    set(npc(eb).flag(6))
+    clear(npc(eb).flag(5))
+    {Her expression turns to one of fury. "$P plays with Aiela's heart! $P is cruel and evil. Leave Aiela alone!"
+}
+    bye
+0xee (END_ANSWER)
+1cc1:
+0xf8 (WAIT_INPUT_CHAR)
+    yn
+0xef
+    y
+0xf6
+    clear(npc(eb).flag(6))
+    set(npc(eb).flag(5))
+    {She throws herself into your arms. "Long has Aiela waited to hear $P say this! Aiela has loved $P since first she saw him."
+} 0xcb {
+And she kisses you, passionately losing herself in your embrace for one long moment.
+} 0xcb {
+Then she gives you an exasperated look. "$P must not wait so long next time before saying what he feels."
+}
+    jmp 0x01ba
+0xef
+    n
+0xf6
+    clear(npc(eb).flag(5))
+    {"Oh." She shrinks back a little, then becomes grim-faced and straightens up. "So it is. Aiela is just another warrior to $P."
+} 0xcb {
+"$P is just another warrior to Aiela, too." Her jaw trembles just a little, and she turns away from you.
+}
+    bye
+0xee (END_ANSWER)
+1f0e: // from the answer of join
+    if npc(0x33).flag(5)
+        {"Join $P? $P who loves she-cat @Tristia? Never!" She turns her back on you.
+}
+        bye
+    else
+        jmp 0x1f69
+    endif
+1f69:
+    if npc(eb).flag(6)
+        {Her eyes widen. "$P is both bold and cruel! $P has already sent Aiela away from him in disgrace. $P does not @love Aiela. Why should Aiela join $P now?"
+}
+        jmp 0x01ba
+    endif
+    decl(00, b2) = join(npc(eb)) // 3: ALREADY IN PARTY, 2: PARTY TOO LARGE, 1: NOT ON LAND (vehicle), 0: SUCCESS
+    if (00 b2) == 0x02
+        {"Aiela would love to join $P... when there are fewer people traveling with him."}
+    endif
+    if (00, b2) == 0x01
+        {"Aiela cannot join with $P now! Maybe later."
+}
+    endif
+    if (00, b2) == 0x00
+        {"Aiela would be proud to be war-companion of the mighty $P."
+}
+    endif
+    jmp 0x01ba
+20f0: // from the answer of leave and wait
+    if npc(eb).flag(5)
+        {Her jaw trembles a little. "$P has said he loves Aiela. Now he tells her to leave him. Aiela does not understand."
+}
+        jmp 0x2229
+    else
+        {She looks a little sad. "If $P wishes," she says heavily, "Aiela will leave his company. Aiela enjoyed being his companion." She starts to say something more, but decides against it.
+}
+        bye
+    endif
+2229:
+    0xcb {
+"Does $P mean that he no longer loves Aiela?"
+}
+
+0xf8 (WAIT_INPUT_CHAR)
+    yn
+0xef
+    y
+0xf6
+    {The light goes out of her eyes. "So. $P is cold and cruel as the lizard." She bursts into tears. "He is no fit mate for Aiela."
+}
+    clear(npc(eb).flag(5))
+    set(npc(eb).flag(6))
+    worktype(npc(eb)) = 0x11
+    bye
+0xef
+    n
+0xf6
+    {She breathes a sigh of relief, and smiles. "Aiela would wait for $P forever."
+}
+    jmp 0x01ba
+0xee (END_ANSWER)
+234c: from the answer of comp
+    if npc(eb).flag(5)
+        0xcb {
+She adds, softly: "And, most important, Aiela's mate."
+}
+        jmp 0x01ba
+    else
+        jmp 0x01ba
+    endif
+2398: (eof)
+
+
+
+
+
+
+
+
+

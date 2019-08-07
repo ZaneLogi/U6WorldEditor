@@ -21,6 +21,8 @@
 
 #pragma comment(lib,"vfw32.lib")
 
+#include "ConverseDlg.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -148,7 +150,14 @@ int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct)
         return -1;
 
     // TODO:  Add your specialized creation code here
+    // EXPERIMENT:
+    auto script = gMapManager.script.get_script(2);
+    //std::ofstream file("d:\\script.bin", std::ios_base::out | std::ios_base::binary);
+    //file.write(script.data(), script.length());
+    //file.close();
 
+    CConverseDlg dlg(script);
+    dlg.DoModal();
 
     return 0;
 }

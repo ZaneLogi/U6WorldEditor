@@ -195,6 +195,7 @@
     <ClInclude Include="ChildView.h" />
     <ClInclude Include="ColorPalette.h" />
     <ClInclude Include="Configuration.h" />
+    <ClInclude Include="ConverseDlg.h" />
     <ClInclude Include="DibSection.h" />
     <ClInclude Include="DibUtils.h" />
     <ClInclude Include="Library.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="BaseMap.cpp" />
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="ColorPalette.cpp" />
+    <ClCompile Include="ConverseDlg.cpp" />
     <ClCompile Include="DibSection.cpp" />
     <ClCompile Include="DibUtils.cpp" />
     <ClCompile Include="Library.cpp" />

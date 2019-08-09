@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <cassert>
 #include "Library.h"
 #include "LZW.h"
 

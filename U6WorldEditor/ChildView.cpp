@@ -22,6 +22,7 @@
 #pragma comment(lib,"vfw32.lib")
 
 #include "ConverseDlg.h"
+#include "TileManagerDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -113,6 +114,8 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
     ON_COMMAND_RANGE(ID_GAME_U6, ID_GAME_MARTIAN, CChildView::OnGameType)
     ON_COMMAND_RANGE(ID_JUMPTO_BEGIN, ID_JUMPTO_END, CChildView::OnJumpTo)
     ON_COMMAND_RANGE(ID_VIEW_SURFACE, ID_VIEW_DUNGEON5, CChildView::OnViewZ)
+    ON_COMMAND(ID_HACK_CONVERSE, &CChildView::OnHackConverse)
+    ON_COMMAND(ID_HACK_TILEMANAGER, &CChildView::OnHackTilemanager)
 END_MESSAGE_MAP()
 
 
@@ -150,14 +153,6 @@ int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct)
         return -1;
 
     // TODO:  Add your specialized creation code here
-    // EXPERIMENT:
-    auto script = gMapManager.script.get_script(2);
-    //std::ofstream file("d:\\script.bin", std::ios_base::out | std::ios_base::binary);
-    //file.write(script.data(), script.length());
-    //file.close();
-
-    CConverseDlg dlg(script);
-    dlg.DoModal();
 
     return 0;
 }
@@ -685,3 +680,23 @@ void CChildView::OnViewZ(UINT id)
 }
 
 
+
+
+void CChildView::OnHackConverse()
+{
+    // EXPERIMENT:
+    auto script = gMapManager.script.get_script(2);
+    //std::ofstream file("d:\\script.bin", std::ios_base::out | std::ios_base::binary);
+    //file.write(script.data(), script.length());
+    //file.close();
+
+    CConverseDlg dlg(script);
+    dlg.DoModal();
+
+}
+
+void CChildView::OnHackTilemanager()
+{
+    CTileManagerDlg dlg(&gMapManager);
+    dlg.DoModal();
+}

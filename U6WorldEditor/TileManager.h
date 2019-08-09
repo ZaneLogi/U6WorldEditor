@@ -39,6 +39,7 @@ public:
     void draw(DibSection& dc, int x, int y, uint16_t obj_number, uint8_t obj_frame, bool toptile);
     std::string get_description(uint16_t tile_index);
     std::string get_description(uint16_t obj_number, uint8_t obj_frame, uint8_t quantity);
+    TileInfo get_info(uint16_t tile_index);
     TileInfo get_info(uint16_t obj_number, uint8_t obj_frame);
     bool is_big_flat_object(uint16_t obj_number, uint8_t obj_frame, bool& double_width, bool& double_height);
 

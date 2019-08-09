@@ -45,6 +45,7 @@ public:
     afx_msg void OnGameType(UINT id);
     afx_msg void OnJumpTo(UINT id);
     afx_msg void OnViewZ(UINT id);
+    afx_msg void OnHackConverse();
 
 private:
     void MoveToTile(int xtile, int ytile, int z);
@@ -56,5 +57,8 @@ private:
     bool    m_mouse_caputred;
     CPoint  m_mouse_last_point;
 
+
+public:
+    afx_msg void OnHackTilemanager();
 };
 

@@ -176,15 +176,19 @@ std::string TileManager::get_description(uint16_t obj_number, uint8_t obj_frame,
     }
 }
 
-TileInfo TileManager::get_info(uint16_t obj_number, uint8_t obj_frame)
+TileInfo TileManager::get_info(uint16_t tile_index)
 {
     TileInfo ti;
-    int tile_index = m_obj_to_tile[obj_number] + obj_frame;
     ti.index = tile_index;
     ti.flag1 = m_tile_flags1[tile_index];
     ti.flag2 = m_tile_flags2[tile_index];
     ti.flag3 = m_tile_flags3[tile_index];
     return ti;
+}
+
+TileInfo TileManager::get_info(uint16_t obj_number, uint8_t obj_frame)
+{
+    return get_info(m_obj_to_tile[obj_number] + obj_frame);
 }
 
 bool TileManager::is_big_flat_object(uint16_t obj_number, uint8_t obj_frame, bool& double_width, bool& double_height)

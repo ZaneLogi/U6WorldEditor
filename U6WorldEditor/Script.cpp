@@ -26,13 +26,24 @@ bool Script::init(Configuration& config)
     return true;
 }
 
-std::string Script::get_context(uint32_t index)
+std::vector<uint8_t> Script::get_context(uint32_t index)
 {
     if (index < m_scripts.size())
     {
         return m_scripts[index];
     }
-    return std::string();
+    return std::vector<uint8_t>();
+}
+
+std::vector<uint8_t> Script::get_script(uint32_t npc_index)
+{
+    int index = npc_index;
+    if (m_game_type == "se")
+    {
+        index -= 2;
+    }
+
+    return get_context(index);
 }
 
 std::string Script::get_npc_name(uint32_t npc_index)
@@ -46,28 +57,17 @@ std::string Script::get_npc_name(uint32_t npc_index)
     auto context = get_context(index);
     if (!context.empty())
     {
-        assert(context[0] == -1 && (uint8_t)context[1] == npc_index);
+        assert(context[0] == 0xff && (uint8_t)context[1] == npc_index);
         auto p = &context[2];
         while (1)
         {
-            if (*p == -15)
+            if (*p == 0xf1)
                 break;
             p++;
         }
-        return std::string(&context[2], (size_t)(p - &context[2]));
+        return std::string((char*)&context[2], (size_t)(p - &context[2]));
     }
     return std::string();
-}
-
-std::string Script::get_script(uint32_t npc_index)
-{
-    int index = npc_index;
-    if (m_game_type == "se")
-    {
-        index -= 2;
-    }
-
-    return get_context(index);
 }
 
 bool Script::load_u6_script(Configuration& config)
@@ -88,7 +88,7 @@ bool Script::load_u6_script(Configuration& config)
             if (is == nullptr)
             {
                 // no script
-                m_scripts.push_back(std::string());
+                m_scripts.push_back(std::vector<uint8_t>());
                 continue;
             }
 
@@ -97,7 +97,7 @@ bool Script::load_u6_script(Configuration& config)
 
             if (size == 0)
             {
-                std::string tmp;
+                std::vector<uint8_t> tmp;
                 tmp.resize(item_size);
                 is->read((char*)tmp.data(), item_size);
                 m_scripts.push_back(tmp);
@@ -107,7 +107,9 @@ bool Script::load_u6_script(Configuration& config)
                 // decode data
                 std::stringstream decoded_stream;
                 LZW().decode(*is, decoded_stream, 8);
-                m_scripts.push_back(decoded_stream.str());
+                auto script_size = decoded_stream.tellp();
+                m_scripts.emplace_back(script_size);
+                decoded_stream.read((char*)m_scripts.back().data(), script_size);
             }
         }
         lib.close();
@@ -135,7 +137,7 @@ bool Script::load_wou_script(Configuration& config)
         if (is == nullptr)
         {
             // no script
-            m_scripts.push_back(std::string());
+            m_scripts.push_back(std::vector<uint8_t>());
             continue;
         }
 
@@ -147,7 +149,9 @@ bool Script::load_wou_script(Configuration& config)
         // decode data
         std::stringstream decoded_stream;
         LZW().decode(*is, decoded_stream, 8);
-        m_scripts.push_back(decoded_stream.str());
+        auto script_size = decoded_stream.tellp();
+        m_scripts.emplace_back(script_size);
+        decoded_stream.read((char*)m_scripts.back().data(), script_size);
     }
 
     lib.close();
@@ -155,63 +159,7 @@ bool Script::load_wou_script(Configuration& config)
 }
 
 
-
-#define U6OP_GT         0x81
-#define U6OP_GE         0x82
-#define U6OP_LT         0x83
-#define U6OP_LE         0x84
-#define U6OP_NE         0x85
-#define U6OP_EQ         0x86
-
-#define U6OP_ADD        0x90
-#define U6OP_SUB        0x91
-#define U6OP_MUL        0x92
-#define U6OP_DIV        0x93
-#define U6OP_LOR        0x94
-#define U6OP_LAND       0x95
-
-#define U6OP_IF         0xa1
-#define U6OP_ENDIF      0xa2
-#define U6OP_ELSE       0xa3
-#define U6OP_SETF       0xa4
-#define U6OP_CLEARF     0xa5
-#define U6OP_DECL       0xa6
-#define U6OP_EVAL       0xa7
-#define U6OP_ASSIGN     0xa8
-
-#define U6OP_FLAG       0xab
-
-#define U6OP_JUMP       0xb0
-
-#define U6OP_BYE        0xb6
-
-#define U6OP_PORTRAIT   0xbf
-
-#define U6OP_INPARTY    0xc6
-
-#define U6OP_JOIN       0xca
-#define U6OP_WAIT       0xcb
-#define U6OP_LEAVE      0xcc
-#define U6OP_WORKTYPE   0xcd
-
-#define U6OP_NUM32      0xd2
-#define U6OP_NUM8       0xd3
-#define U6OP_NUM16      0xd4
-
-#define U6OP_ENDANSWER  0xee
-#define U6OP_KEYWORDS   0xef
-
-#define U6OP_LOOK       0xf1
-#define U6OP_CONVERSE   0xf2
-
-#define U6OP_ANSWER     0xf6
-#define U6OP_ASK        0xf7
-#define U6OP_ASKC       0xf8
-
-#define U6OP_INPUT      0xfb
-#define U6OP_INPUTNUM   0xfc
-
-#define U6OP_ID         0xff
+#include "u6_opcode.h"
 
 
 
@@ -219,43 +167,64 @@ bool Script::load_wou_script(Configuration& config)
 
 
 
-ScriptInterpreter::ScriptInterpreter(const std::string& script) : m_script(script)
+
+
+
+
+
+ScriptInterpreter::ScriptInterpreter()
 {
-    m_current = m_script.data();
-    m_script_end = m_current + m_script.length();
+    m_current = m_script_end = nullptr;
 
     // test settings
     m_npc_flags[0x01] = 0x01;        // bit 0: rescue aiela
     m_npc_flags[0x02] = (0x01 << 5); // Aiela, bit 5: mate of avatar
     m_npc_flags[0x33] = (0x00 << 5); // Tristia, bit 5: mate of avatar
+    m_npc_flags[0x04] = (0x01 << 4); // Jimmy, bit 4: rescued
 }
 
-inline std::string get_string(const char* &p, const char* end)
+void ScriptInterpreter::load(const std::vector<uint8_t>& script)
+{
+    m_script = script;
+    m_current = m_script.data();
+    m_script_end = m_current + m_script.size();
+}
+
+std::string ScriptInterpreter::format_script()
+{
+    std::string result;
+    const uint8_t* p = m_script.data();
+    auto end = p + m_script.size();
+    collect_format(result, p, p, end, 0);
+    return result;
+}
+
+inline std::string get_string(const uint8_t* &p, const uint8_t* end)
 {
     auto start = p;
-    while (p < end && (uint8_t)*p < 0x80)
+    while (p < end && *p < 0x80)
     {
         p++;
     }
-    return std::string(start, p - start);
+    return std::string((char*)start, p - start);
 }
 
-inline void get_keywords(const char* &p, const char* end, std::vector<std::string>& out)
+inline void get_keywords(const uint8_t* &p, const uint8_t* end, std::vector<std::string>& out)
 {
     out.clear();
 
     auto start = p;
-    while (p < end && (uint8_t)*p < 0x80)
+    while (p < end && *p < 0x80)
     {
         if (*p == ',')
         {
-            out.emplace_back(start, p - start);
+            out.emplace_back((char*)start, p - start);
             TRACE("%s, ", out.back().c_str());
             start = p + 1;
         }
         p++;
     }
-    out.emplace_back(start, p - start);
+    out.emplace_back((char*)start, p - start);
     TRACE("%s, \n", out.back().c_str());
 }
 
@@ -333,18 +302,20 @@ ScriptInterpreter::status ScriptInterpreter::run(const std::string& input, std::
                 return status::INPUT;;
             case U6OP_KEYWORDS:
                 get_keywords(m_current, m_script_end, keywords);
-                break;
-            case U6OP_ANSWER:
+                assert((uint8_t)*m_current == U6OP_ANSWER);
+                m_current++;
                 if (!match_keybword(keywords, input))
                 {
-                    skip_answer_block(m_current, m_script_end);
+                    skip_code_block(m_current, m_script_end, U6OP_ANSWER);
+                    assert(*m_current == U6OP_KEYWORDS);
                 }
                 break;
             case U6OP_IF:
                 result = evaluate();
                 if (!result)
                 {
-                    skip_if_block(m_current, m_script_end, true);
+                    skip_code_block(m_current, m_script_end, U6OP_IF);
+                    assert(*(m_current - 1) == U6OP_ELSE || *(m_current - 1) == U6OP_ENDIF);
                 }
                 break;
             case U6OP_ELSE:
@@ -387,13 +358,35 @@ ScriptInterpreter::status ScriptInterpreter::run(const std::string& input, std::
             case U6OP_BYE: // bye
                 m_current = m_script.data();
                 return status::END;
+            case U6OP_NEW: // 0xb9
+                // TODO
+                {
+                int npc = evaluate();
+                int obj = evaluate();
+                int qual = evaluate();
+                int quant = evaluate();
+                npc = (npc != 0xeb ? npc : m_npc_id);
+                // create item for npc
+                }
+                break;
+            case U6OP_DELETE: // 0xba
+                // TODO
+                {
+                int npc = evaluate();
+                int obj = evaluate();
+                int qual = evaluate();
+                int quant = evaluate();
+                npc = (npc != 0xeb ? npc : m_npc_id);
+                // remove item from npc
+                }
+                break;
             case U6OP_PORTRAIT:
                 // TODO
                 {
                 int portrait_num = evaluate();
                 }
                 break;
-            case U6OP_WAIT: // wait
+            case U6OP_PAUSE: // wait
                 output += "(cont.)";
                 return status::WAIT;
             case U6OP_WORKTYPE:
@@ -421,6 +414,8 @@ int32_t ScriptInterpreter::evaluate()
 
     while (m_current < m_script_end)
     {
+        auto script_offset = m_current - m_script.data();
+
         auto value = (uint8_t)*m_current++;
         switch (value) {
         case U6OP_NUM8: // 8 bit value
@@ -435,83 +430,106 @@ int32_t ScriptInterpreter::evaluate()
             rstk.push(*(int16_t*)m_current);
             m_current += 2;
             break;
+
+        case U6OP_VAR:
+            arg1 = rstk.top(); rstk.pop();
+            rstk.push(0); // TODO
+            break;
+        case U6OP_SVAR:
+            arg1 = rstk.top(); rstk.pop();
+            rstk.push(0); // TODO
+            break;
+        case U6OP_DATA:
+            arg1 = rstk.top(); rstk.pop();
+            rstk.push(0); // TODO
+            break;
+
         case 0xa7: // result
+            assert(rstk.size() == 1);
             return rstk.top();
-        case 0x81: // >
+
+        case U6OP_GT: // 0x81
             arg2 = rstk.top(); rstk.pop();
             arg1 = rstk.top(); rstk.pop();
             rstk.push(arg1 > arg2 ? 1 : 0);
             break;
-        case 0x82: // >=
+        case U6OP_GE: // 0x82
             arg2 = rstk.top(); rstk.pop();
             arg1 = rstk.top(); rstk.pop();
             rstk.push(arg1 >= arg2 ? 1 : 0);
             break;
-        case 0x83: // <
+        case U6OP_LT: // 0x83
             arg2 = rstk.top(); rstk.pop();
             arg1 = rstk.top(); rstk.pop();
             rstk.push(arg1 < arg2 ? 1 : 0);
             break;
-        case 0x84: // <=
+        case U6OP_LE: // 0x84
             arg2 = rstk.top(); rstk.pop();
             arg1 = rstk.top(); rstk.pop();
             rstk.push(arg1 <= arg2 ? 1 : 0);
             break;
-        case 0x85: // !=
+        case U6OP_NE: // 0x85
             arg2 = rstk.top(); rstk.pop();
             arg1 = rstk.top(); rstk.pop();
             rstk.push(arg1 != arg2 ? 1 : 0);
             break;
-        case 0x86: // ==
+        case U6OP_EQ: // 0x86
             arg2 = rstk.top(); rstk.pop();
             arg1 = rstk.top(); rstk.pop();
             rstk.push(arg1 == arg2 ? 1 : 0);
             break;
-        case 0x90: // +
+        case U6OP_ADD: // 0x90
             arg2 = rstk.top(); rstk.pop();
             arg1 = rstk.top(); rstk.pop();
             rstk.push(arg1 + arg2);
             break;
-        case 0x91: // -
+        case U6OP_SUB: // 0x91
             arg2 = rstk.top(); rstk.pop();
             arg1 = rstk.top(); rstk.pop();
             rstk.push(arg1 - arg2);
             break;
-        case 0x92: // *
+        case U6OP_MUL: // 0x92
             arg2 = rstk.top(); rstk.pop();
             arg1 = rstk.top(); rstk.pop();
             rstk.push(arg1 * arg2);
             break;
-        case 0x93: // /
+        case U6OP_DIV: // 0x93
             arg2 = rstk.top(); rstk.pop();
             arg1 = rstk.top(); rstk.pop();
             rstk.push(arg1 / arg2);
             break;
-        case 0x94: // ||
+        case U6OP_LOR: // 0x94
             arg2 = rstk.top(); rstk.pop();
             arg1 = rstk.top(); rstk.pop();
-            rstk.push(arg1 || arg2 ? 1 : 0);
+            rstk.push(arg1 | arg2 ? 1 : 0);
             break;
-        case 0x95: // &&
+        case U6OP_LAND: // 0x95
             arg2 = rstk.top(); rstk.pop();
             arg1 = rstk.top(); rstk.pop();
-            rstk.push(arg1 && arg2 ? 1 : 0);
+            rstk.push(arg1 & arg2 ? 1 : 0);
             break;
-
-        case 0xab: // flag
+        case U6OP_FLAG: // 0xab
             arg2 = rstk.top(); rstk.pop(); // flag index
             arg1 = (rstk.top() & 0xff); rstk.pop(); // npc id
             arg1 = (arg1 != 0xeb ? arg1 : m_npc_id);
             rstk.push((m_npc_flags[arg1] & (1 << arg2)) ? 1 : 0);
             break;
 
-        case U6OP_INPARTY:
+        case U6OP_INPARTY: // 0xc6
             arg1 = rstk.top(); rstk.pop(); // npc id
             arg1 = (arg1 != 0xeb ? arg1 : m_npc_id);
             rstk.push(0);
             // fake: not in the party
             break;
-        case U6OP_JOIN:
+
+        case U6OP_OBJINPARTY: // 0xc7
+            arg2 = rstk.top(); rstk.pop(); // qual
+            arg1 = rstk.top(); rstk.pop(); // obj
+            rstk.push(0); // should push npc id who has this specific object.
+            // fake: not in the party
+            break;
+
+        case U6OP_JOIN: // 0xca
             arg1 = rstk.top(); rstk.pop(); // npc id
             arg1 = (arg1 != 0xeb ? arg1 : m_npc_id);
             rstk.push(0);
@@ -530,20 +548,8 @@ int32_t ScriptInterpreter::evaluate()
             break;
 
         default:
-            // check if it is a declared variable
-            // check 'value' first if assert
-            value;
-            switch ((uint8_t)*m_current) {
-            case 0xb2:
-            case 0xb3:
-            case 0xb4:
-                rstk.push(0); // TODO: fake
-                m_current++;
-                break;
-            default:
-                assert(false);
-                break;
-            }
+            assert(value < 0x80);
+            rstk.push(value);
             break;
         }
     }
@@ -552,26 +558,29 @@ int32_t ScriptInterpreter::evaluate()
     return 0;
 }
 
-void ScriptInterpreter::skip_text(const char* &p, const char* end)
+void ScriptInterpreter::skip_text(const uint8_t* &p, const uint8_t* end)
 {
     auto start = p;
-    while (p < end && ((uint8_t)*p < 0x80 || (uint8_t)*p == U6OP_WAIT))
+    while (p < end && *p < 0x80)
     {
         p++;
     }
 }
 
-void ScriptInterpreter::skip_eval_block(const char* &p, const char* end)
+void ScriptInterpreter::skip_eval_block(const uint8_t* &p, const uint8_t* end)
 {
-    auto script_offset = p - m_script.data(); // for debug
-
     while (p < end)
     {
-        auto value = (uint8_t)*p++;
+        auto script_offset = p - m_script.data(); // for debug
+
+        auto value = *p++;
         switch (value) {
         case U6OP_NUM8:         p++; break;
         case U6OP_NUM32:        p += 4; break;
         case U6OP_NUM16:        p += 2; break;
+        case U6OP_VAR:          break;
+        case U6OP_SVAR:         break;
+        case U6OP_DATA:         break;
         case U6OP_EVAL:         return;
         case U6OP_GT:           break;
         case U6OP_GE:           break;
@@ -587,38 +596,26 @@ void ScriptInterpreter::skip_eval_block(const char* &p, const char* end)
         case U6OP_LAND:         break;
         case U6OP_FLAG:         break;
         case U6OP_INPARTY:      break;
+        case U6OP_OBJINPARTY:   break;
         case U6OP_JOIN:         break;
         case U6OP_LEAVE:        break;
         default:
-            value; // for debug
-            switch ((uint8_t)*p) {
-            case 0xb2:
-            case 0xb3:
-            case 0xb4:
-                p++;
-                break;
-            default:
-                assert(false && "unknow op code!");
-                break;
-            }
+            assert(value < 0x80);
             break;
         }
     }
     assert(false && "should not be here!");
 }
 
-void ScriptInterpreter::skip_if_block(const char* &p, const char* end, bool stop_on_else)
+void ScriptInterpreter::skip_code_block(const uint8_t* &p, const uint8_t* end, int block_type)
 {
-    auto script_offset = p - m_script.data(); // for debug
-
-    // if stop_on_else == false, it means all if block should be skipped including the evaluation,
-    // otherwise, only the content of the if statement should be skipped.
-    if (!stop_on_else)
-        skip_eval_block(p, end);
-
     while (p < end)
     {
-        int code = (uint8_t)*p;
+        auto script_offset = p - m_script.data(); // for debug
+        const uint8_t* addr1;
+        const uint8_t* addr2;
+
+        int code = *p;
         if (code < 0x80)
         {
             skip_text(p, end);
@@ -627,54 +624,58 @@ void ScriptInterpreter::skip_if_block(const char* &p, const char* end, bool stop
         {
             p++;
             switch (code) {
-            case U6OP_ELSE:     if (stop_on_else) return; else break; // exit the function if stop_on_else
-            case U6OP_ENDIF:    return; // exit the function
-            case U6OP_SETF:
-            case U6OP_CLEARF:
-            case U6OP_WORKTYPE:
-                skip_eval_block(p, end);
-                skip_eval_block(p, end);
+            case U6OP_ASK:      break; // does it need to do as U6OP_ASKC?
+            case U6OP_ASKC:
+                skip_text(p, end); // skip possible answers
+                while (p < end)
+                {
+                    assert(*p == U6OP_KEYWORDS);
+                    p++;
+                    skip_text(p, end); // skip keywords
+                    assert(*p == U6OP_ANSWER);
+                    p++;
+                    skip_code_block(p, end, U6OP_ANSWER);
+                    if (*p == U6OP_ENDANSWER)
+                        break;
+                }
+                assert(*p == U6OP_ENDANSWER);
+                p++;
                 break;
-            case U6OP_DECL:     p += 2; break;
-            case U6OP_ASSIGN:
-                skip_eval_block(p, end);
-                break;
-            case U6OP_JUMP:     p += 4; break;
-            case U6OP_BYE:      break;
-            case U6OP_PORTRAIT:
-                skip_eval_block(p, end);
-                break;
-            case U6OP_WAIT:     break;
-            default:
-                assert(false);
-                break;
-            }
-        }
-    }
-}
-
-void ScriptInterpreter::skip_answer_block(const char* &p, const char* end)
-{
-    auto script_offset = p - m_script.data(); // for debug
-
-    while (p < end)
-    {
-        int code = (uint8_t)*p;
-        if (code < 0x80)
-        {
-            skip_text(p, end);
-        }
-        else if (code == U6OP_KEYWORDS)
-        {
-            return;
-        }
-        else
-        {
-            p++;
-            switch (code) {
+            case U6OP_KEYWORDS:
+            case U6OP_ENDANSWER:
+                p--;
+                assert(block_type == U6OP_ANSWER);
+                return;
             case U6OP_IF:
-                skip_if_block(p, end);
+                addr1 = addr2 = nullptr;
+                skip_eval_block(p, end);                // skip the conditional expression
+                skip_code_block(p, end, U6OP_IF);       // skip the if-true block
+                if (*(p - 6) == U6OP_JUMP)
+                {
+                    addr1 = p - 5;
+                }
+                if (*(p - 1) == U6OP_ELSE)
+                {
+                    skip_code_block(p, end, U6OP_ELSE); // skip the if-false block
+                    if (*(p - 6) == U6OP_JUMP)
+                    {
+                        addr2 = p - 5;
+                    }
+                }
+                assert(*(p - 1) == U6OP_ENDIF);         // should be end with U6OP_ENDIF
+                if (addr1 && addr2 && *(uint32_t*)addr1 == *(uint32_t*)addr2 && block_type == U6OP_ANSWER)
+                {
+                    // this is the case that there is no U6OP_ENDANSWER after the last answer '*' in aiela's script
+                    // if the handling of if-true and if-false jumps to the same address, treat it as the end of the answer
+                    return;
+                }
                 break;
+            case U6OP_ELSE:
+                assert(block_type == U6OP_IF);          // should be from U6OP_IF block, then hit U6OP_ELSE
+                return;
+            case U6OP_ENDIF:                            // should be from U6OP_IF or U6OP_ELSE, then hit U6OP_ENDIF
+                assert(block_type == U6OP_IF || block_type == U6OP_ELSE);
+                return;
             case U6OP_SETF:
             case U6OP_CLEARF:
             case U6OP_WORKTYPE:
@@ -687,16 +688,317 @@ void ScriptInterpreter::skip_answer_block(const char* &p, const char* end)
                 break;
             case U6OP_JUMP:     p += 4; break; // exit the function
             case U6OP_BYE:      break;
+            case U6OP_NEW:
+            case U6OP_DELETE:
+                skip_eval_block(p, end); // npc number
+                skip_eval_block(p, end); // obj
+                skip_eval_block(p, end); // quality
+                skip_eval_block(p, end); // quantity
+                break;
             case U6OP_PORTRAIT:
                 skip_eval_block(p, end);
                 break;
-            case U6OP_WAIT:     break;
+            case U6OP_PAUSE:     break;
             default:
                 assert(false);
                 break;
             }
         }
     }
+
 }
 
 
+
+void ScriptInterpreter::collect_eval(std::string& result, const uint8_t* &p, const uint8_t* script_start, const uint8_t* script_end)
+{
+    result += "[";
+    while (p < script_end)
+    {
+        auto script_offset = p - script_start; // for debug
+
+        auto value = *p++;
+        switch (value) {
+        case U6OP_NUM8:         result += format_string("N8(0x%02x) ", *p); p++; break;
+        case U6OP_NUM32:        result += format_string("N32(0x%08x) ", *(uint32_t*)p); p += 4; break;
+        case U6OP_NUM16:        result += format_string("N16(0x%04x) ", *(uint16_t*)p); p += 2; break;
+        case U6OP_VAR:          result += "B2 "; break;
+        case U6OP_SVAR:         result += "B3 "; break;
+        case U6OP_DATA:         result += "B4 "; break;
+        case U6OP_EVAL:         result += "]"; return;
+        case U6OP_GT:           result += "> "; break;
+        case U6OP_GE:           result += ">= "; break;
+        case U6OP_LT:           result += "< "; break;
+        case U6OP_LE:           result += "<= "; break;
+        case U6OP_NE:           result += "!= "; break;
+        case U6OP_EQ:           result += "== "; break;
+        case U6OP_ADD:          result += "+ "; break;
+        case U6OP_SUB:          result += "- "; break;
+        case U6OP_MUL:          result += "* "; break;
+        case U6OP_DIV:          result += "/ "; break;
+        case U6OP_LOR:          result += "| "; break;
+        case U6OP_LAND:         result += "& "; break;
+        case U6OP_FLAG:         result += "FLAG "; break;
+        case U6OP_INPARTY:      result += "INPARTY "; break;
+        case U6OP_OBJINPARTY:   result += "OBJINPARTY "; break;
+        case U6OP_JOIN:         result += "JOIN "; break;
+        case U6OP_LEAVE:        result += "LEAVE "; break;
+        default:
+            assert(value < 0x80);
+            result += format_string("0x%02x ", value);
+            break;
+        }
+    }
+    assert(false && "should not be here!");
+}
+
+void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, const uint8_t* script_start, const uint8_t* script_end, int block_type)
+{
+    while (p < script_end)
+    {
+        auto script_offset = p - script_start;
+        result += format_string(":%04X\r\n", script_offset);
+
+        int code = (uint8_t)*p;
+        if (code < 0x80)
+        { // printable
+            auto anchor = p;
+            skip_text(p, script_end);
+            result += format_string("    {%s}\r\n", std::string((char*)anchor, p - anchor).c_str());
+        }
+        else
+        { // control code
+            ++p;
+
+            switch (code) {
+            case U6OP_ID: // npc id and name
+            {
+                auto npc_id = *p++;
+                auto anchor = p;
+                skip_text(p, script_end);
+                result += format_string("    NPC_ID: npc id: %d, npc name: %s\r\n",
+                    npc_id, std::string((char*)anchor, p - anchor).c_str());
+                break;
+            }
+            case U6OP_LOOK:
+            {
+                auto anchor = p;
+                skip_text(p, script_end);
+                result += format_string("    NPC_LOOK: %s\r\n", std::string((char*)anchor, p - anchor).c_str());
+                break;
+            }
+            case U6OP_CONVERSE:
+            {
+                result += "    START CONVERSION\r\n";
+                break;
+            }
+            case U6OP_ASK:
+            {
+                result += "    ASK\r\n";
+                bool force_to_end_the_answer = false;
+                while (p < script_end)
+                {
+                    script_offset = p - script_start;
+
+                    assert(*p == U6OP_KEYWORDS);
+                    p++;
+                    auto anchor = p;
+                    skip_text(p, script_end);
+                    result += format_string("    KEYWORDS %s\r\n", std::string((char*)anchor, p - anchor).c_str());
+                    assert(*p == U6OP_ANSWER);
+                    p++;
+                    result += "    ANSWER\r\n";
+                    collect_format(result, p, script_start, script_end, U6OP_ANSWER);
+                    if (*p == U6OP_ENDANSWER || force_to_end_the_answer)
+                        break;
+
+                    // force_to_end_the_answer is used to solve the last answer has no the code U6OP_ENDANSWER
+                    // but it would be not perfect because it is a guess where is the end of the answer.
+                    // check how U6OP_IF and U6OP_JUMP handle this situation.
+
+                    if (*(p + 1) == '*')
+                        force_to_end_the_answer = true;
+                }
+                assert(*p == U6OP_ENDANSWER || force_to_end_the_answer);
+                if (*p == U6OP_ENDANSWER)
+                    p++;
+                result += "    END_ANSWER\r\n";
+                break;
+            }
+            case U6OP_KEYWORDS:
+            case U6OP_ENDANSWER:
+                p--;
+                assert(block_type == U6OP_ANSWER);
+                return;
+            case U6OP_ASKC:
+            {
+                auto anchor = p;
+                skip_text(p, script_end);
+                result += format_string("    ASKC [%s]\r\n", std::string((char*)anchor, p - anchor).c_str());
+                while (p < script_end)
+                {
+                    assert(*p == U6OP_KEYWORDS);
+                    p++;
+                    auto anchor = p;
+                    skip_text(p, script_end);
+                    result += format_string("    KEYWORDS %s\r\n", std::string((char*)anchor, p - anchor).c_str());
+                    assert(*p == U6OP_ANSWER);
+                    p++;
+                    result += "    ANSWER\r\n";
+                    collect_format(result, p, script_start, script_end, U6OP_ANSWER);
+                    if (*p == U6OP_ENDANSWER)
+                        break;
+                }
+                assert(*p == U6OP_ENDANSWER);
+                p++;
+                result += "    END_ANSWER\r\n";
+                break;
+            }
+            case U6OP_IF:
+            {
+                const uint8_t* addr1 = nullptr;
+                const uint8_t* addr2 = nullptr;
+                auto anchor = p;
+                result += "    IF ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+                collect_format(result, p, script_start, script_end, U6OP_IF);
+                if (*(p - 6) == U6OP_JUMP)
+                {
+                    addr1 = p - 5;
+                }
+                if (*(p - 1) == U6OP_ELSE)
+                {
+                    auto anchor_else = p;
+                    result += "    ELSE\r\n";
+                    collect_format(result, p, script_start, script_end, U6OP_ELSE);
+                    if (*(p - 6) == U6OP_JUMP)
+                    {
+                        addr2 = p - 5;
+                    }
+                }
+                assert(*(p - 1) == U6OP_ENDIF);         // should be end with U6OP_ENDIF
+                result += "    ENDIF\r\n";
+                if (addr1 && addr2 &&
+                    *(uint32_t*)addr1 == *(uint32_t*)addr2 &&
+                    *(uint32_t*)addr1 < (anchor - script_start) && // it should be the jump to the address close to the beginning
+                    block_type == U6OP_ANSWER)
+                {
+                    // this is the case that there is no U6OP_ENDANSWER after the last answer '*' in aiela's script
+                    // if the handling of if-true and if-false jumps to the same address, treat it as the end of the answer
+                    return;
+                }
+                break;
+            }
+            case U6OP_ELSE:
+                assert(block_type == U6OP_IF);          // should be from U6OP_IF block, then hit U6OP_ELSE
+                return;
+            case U6OP_ENDIF:                            // should be from U6OP_IF or U6OP_ELSE, then hit U6OP_ENDIF
+                assert(block_type == U6OP_IF || block_type == U6OP_ELSE);
+                return;
+            case U6OP_SETF:
+            {
+                result += "    SET_FLAG ";
+                collect_eval(result, p, script_start, script_end);
+                result += ", ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
+            case U6OP_CLEARF:
+            {
+                result += "    CLEAR_FLAG ";
+                collect_eval(result, p, script_start, script_end);
+                result += ", ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
+            break;
+            case U6OP_DECL:
+            {
+                auto index = *p++;
+                auto type = *p++;
+                result += format_string("    DECLARE [0x%02x, 0x%02x] ", index, type);
+                assert(*p == U6OP_ASSIGN);
+                p++;
+                result += "= ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+            }
+            break;
+            case U6OP_JUMP: // jump to
+            {
+                auto address = *(int32_t*)p;
+                p += 4;
+                result += format_string("    JUMP 0x%04x\r\n", address);
+
+                if (block_type == U6OP_ANSWER)
+                {
+                    // this is the case that there is no U6OP_ENDANSWER after the last answer '*' in jimmy's and rafkin's script
+                    // if the handling of the jump to an address, treat it as the end of the answer
+                    return;
+                }
+
+                break;
+            }
+            case U6OP_BYE: // bye
+            {
+                result += "    BYE\r\n";
+                break;
+            }
+            case U6OP_NEW: // 0xb9
+            {
+                result += "    NEW ";
+                collect_eval(result, p, script_start, script_end);
+                result += ", ";
+                collect_eval(result, p, script_start, script_end);
+                result += ", ";
+                collect_eval(result, p, script_start, script_end);
+                result += ", ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
+            case U6OP_DELETE: // 0xba
+            {
+                result += "    DELETE ";
+                collect_eval(result, p, script_start, script_end);
+                result += ", ";
+                collect_eval(result, p, script_start, script_end);
+                result += ", ";
+                collect_eval(result, p, script_start, script_end);
+                result += ", ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
+            break;
+            case U6OP_PORTRAIT:
+            {
+                result += "    PORTRAIT ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
+            case U6OP_PAUSE: // wait
+            {
+                result += "    PAUSE\r\n";
+                break;
+            }
+            case U6OP_WORKTYPE:
+            {
+                result += "    WORKTYPE ";
+                collect_eval(result, p, script_start, script_end);
+                result += ", ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
+            default:
+                assert(false && "unknown op code!");
+                break;
+            }
+        }
+    }
+}

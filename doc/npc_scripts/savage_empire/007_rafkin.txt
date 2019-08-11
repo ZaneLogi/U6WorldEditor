@@ -1,0 +1,211 @@
+0000:
+	0xff id(0x07) {Rafkin}
+	0xf1 {a stooped, fiftyish man who looks like a professor.
+} {*}
+	0xf2 START_CONVERSION
+	if flag(0xeb, 0x04)
+		jmp 0x039c
+	endif
+	{"$P! It's good to see you again! I had heard you were still alive, but I didn't know where you were."
+} 0xcb {
+}
+	if inparty(0x04)==0x00 && flag(0x10, 0x07) == 0x00
+		{"I see you haven't managed to find @Jimmy or @Aiela yet... that really should be one of our first priorities, you know."
+}
+		jmp 0x01b3
+	endif
+	if inparty(0x04) && flag(0x10, 0x07) == 0x00 
+		{"I see you have found Mr. Malone already. That's good. We should try to find @Aiela next."
+}
+	endif
+...
+
+
+
+01b3: 
+	
+
+
+
+
+
+
+the start code to answer user's question.
+0403:
+	{
+}
+	0xf7
+	0xef [name]
+		0xf6
+		{"Eh? Eh? MY name? You've known my name for years. Professor Elliot Archimedes Rafkin, Ph.D., etc."
+}
+		jmp 0x0403
+	0xef [prof,rafk,elli]
+		0xf6
+		{"Yes, $P, what is it?"
+}
+		jmp 0x0403
+	0xef[job]
+		0xf6
+		{"Principally, I'm the curator of the local museum of natural history."
+} 0xcb {
+"Most recently, I've been the chief doctor and man of science in the village of the @Yolaru. I have spent much of my time studying the @tribes of this @valley."
+}
+		jmp 0x0403
+	0xef [lab]
+		...
+
+
+
+
+
+		
+
+the start code that rafkin checks if the proper parts are available to make rifles.
+1fbc:
+	0xcb {
+}
+	if (23 b2) (d3 00) EQ			// (23 b2):z, (21 b2):x, (22 b2): y
+	   (21 b2) (d4 0x01d8) GT LAND		// 0x01d8 = 472
+	   (21 b2) (d4 0x01e7) LT LAND		// 0x01d7 = 487
+	   (22 b2) (d4 0x0188) GT LAND		// 0x0188 = 392
+	   (22 b2) (d4 0x018f) LT LAND		// 0x018f = 399
+		{"To make a rifle, I'll need a length of iron-hard bamboo. Did you bring me some?"
+}
+		askc [yn]
+		0xef [y]
+			0xf6 {"Good. Now we're cooking."
+}
+			jmp 0x2139
+		0xef [n]
+			0xf6 {"Oh, too bad. I suppose I shall have to make it out of thin air. $P, go find some bamboo."
+}
+			jmp 0x0403
+		0xee
+20bd:
+
+
+
+start to make a rifle
+2139:
+	decl (00 b2) assign (d3 0x80) (d3 00) obj_inparty
+2143:
+	if (00 b2) (d4 0x8001) (00 b2) LOR EQ (d3 0x10) GT
+		0xcb {
+He sighs, exasperated. "$P, let me try to make you understand. Please don't make me use small words."
+} 0xcb {
+"None of us has a bamboo pole. Are you with me so far? Without a @BAMBOO POLE, I cannot make even a primitive rifle."
+} 0xcb {
+"Get me some bamboo, and I will construct you something that can arguably be called a rifle."
+}
+		jmp 0x0403
+2296:
+	else
+		decl (00 b2) assign (d3 00)
+		jmp 0x22a4
+	endif
+22a4:
+	decl (01 b2) assign (d3 0x80) (d3 0x00) obj_inparty
+	if (01 b2) (d4 0x8001) EQ
+		jmp 0x22e6
+	else
+		delete (01 b2) (d3 0x80) (d3 0x00) (d3 0x01)
+		new (01 b2) (d3 0x32) (d3 0x00) (d3 0x01)
+		decl (02 b2) assign (02 b2) (d3 0x01) ADD
+		jmp 0x22a4
+	endif
+22e6:
+	if flag(0xeb, 0x05)
+		jmp 0x2641
+	else
+		set flag(0xeb, 0x05)
+		{Using his tools, carefully and methodically, he drills a series of holes in the bamboo near one end.
+} 0xcb {
+With bits of string, loose finishing nails, and other interesting goods from his pockets and around the lab, he mounts a small piece of rock on the pole near one hole.
+} 0xcb {
+He mounts a small bit of metal on a short wooden rod, and attaches the middle of that rod to the bamboo pole so that the metal can swing into contact with the rock. } 0xcb {
+"What we end up with here," he explains, "is a sort of primitive, single-shot flintlock. To use it, pull this 'trigger', so that the other end strikes the flint."
+} 0xcb {
+"A spark will ensue. The spark will enter the pole through this hole here, and ignite the gunpowder which you will have packed into the tube. The gunpowder will propel your 'bullets', and voila, you have a functioning rifle."
+} 0xcb {
+}
+		jmp 0x26b8
+	endif
+2641:
+	{As he has done for you in the past, Rafkin works on the bamboo pole, transforming it into a crude bamboo rifle.
+} 0xcb {
+}
+	jmp 0x26b8
+26b8:
+	{"There." He looks up from his task. "Your bamboo pole is transformed into a lethal instrument of destruction." He hands back the transformed bamboo.
+} 0xcb {
+}
+	if (02 b2) (d3 0x02) GT
+		{Then, he repeats the process with the other bamboo poles.
+} 0xcb {
+}
+	endif
+	if (02 b2) (d3 0x02) EQ
+		{Then, he repeats the process with the other bamboo pole.
+} 0xcb {
+}
+	endif
+	{"I do not manufacture fully-loaded rifles, of course. I assume you know how to make @ammunition and load firearms."
+}
+	jmp 0x0403
+284e:
+	askc [yn]
+	0xef [y]
+		0xf6
+		{"Oh, how unfortunate. Yes, I'm the gentle, sweet old Professor Rafkin. I teach young men archaeology and how to make bombs."
+}
+		jmp 0x2929
+	0xef [n]
+		0xf6
+		{"Good! Imagine me, a man of education, having to manufacture munitions!"\}
+		jmp 0x0403
+	0xee
+2929:
+	0xcb {
+"To make some sort of crude grenade, you'll need the following ingredients:"
+} 0xcb {
+"A strip of cloth impregnated with @tar, to act as a fuse; five units of gunpowder; and a @hard clay pot."
+} 0xcb {
+"When you have these together, simply use the @strip of tarred cloth on the pot to seal the pot and act as a fuse.
+What you end up with is a crude, but serviceable, bomb."
+} 0xcb {
+"The @gunpowder you're likely to be able to make may be very unstable stuff, so throwing the grenade at something could set it off."
+} 0xcb {
+"Alternatively, you can light the fuse and leave the thing behind. Then run like the dickens."
+} 0xcb {
+He sighs. "Professor Rafkin, Terrorist Teacher. That's me."
+}
+	jmp 0x0403
+2bbe:
+	askc [yn]
+	0xef [y]
+		0xf6
+		{"Well... it's simple enough. You'll need a quantity of @charcoal, a quantity of @potassium nitrate, and a quantity of @sulphur."
+} 0xcb {
+"Put all these things in a @mortar or @grinding stone and grind them into powder. Gunpowder, that is."
+}
+		jmp 0x2cda
+2cb3:
+	0xef [n]
+		0xf6
+		{"Then why did you ask? Hmph!"
+}
+		jmp 0x0403
+	0xee
+2cda:
+	if (00 b2) (d3 0x01) EQ
+		0xcb {
+"Since I've managed a rather clever variant on the classic muzzle-loader," he says proudly, "all you need to do is put the gunpowder into your bamboo rifle barrel, and you'll have a fully-loaded firearm."
+}
+		jmp 0x0403
+	else
+		jmp 0x0403
+	endif
+
+
+

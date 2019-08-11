@@ -93,6 +93,17 @@ CChildView::CChildView()
         auto name = gMapManager.script.get_npc_name(i);
         TRACE("%3d: %s\n", i, name.c_str());
     }
+
+    // EXPERIMENT:
+    // save npc's formatted script
+    /*
+    ScriptInterpreter i;
+    i.load(gMapManager.script.get_script(7));
+    auto formatted = i.format_script();
+    std::ofstream f("d:\\script.txt", std::ios_base::out | std::ios_base::binary);
+    f.write(formatted.c_str(), formatted.length());
+    f.close();
+    */
 }
 
 CChildView::~CChildView()
@@ -690,7 +701,7 @@ void CChildView::OnHackConverse()
     //file.write(script.data(), script.length());
     //file.close();
 
-    CConverseDlg dlg(script);
+    CConverseDlg dlg(&gMapManager);
     dlg.DoModal();
 
 }

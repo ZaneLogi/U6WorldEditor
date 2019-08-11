@@ -1,0 +1,842 @@
+:0000
+    NPC_ID: npc id: 7, npc name: Rafkin
+:0008
+    NPC_LOOK: a stooped, fiftyish man who looks like a professor.
+*
+:003E
+    START CONVERSION
+:003F
+    IF [N8(0xeb) N8(0x04) FLAG ]
+:0046
+    JUMP 0x039c
+:004B
+    ENDIF
+:004C
+    {"$P! It's good to see you again! I had heard you were still alive, but I didn't know where you were."
+}
+:00B2
+    PAUSE
+:00B3
+    {
+}
+:00B4
+    IF [N8(0x04) INPARTY N8(0x00) == N8(0x10) N8(0x07) FLAG N8(0x00) == & ]
+:00C5
+    {"I see you haven't managed to find @Jimmy or @Aiela yet... that really should be one of our first priorities, you know."
+}
+:013E
+    JUMP 0x01b3
+:0143
+    ENDIF
+:0144
+    IF [N8(0x04) INPARTY N8(0x10) N8(0x07) FLAG N8(0x00) == & ]
+:0152
+    {"I see you have found Mr. Malone already. That's good. We should try to find @Aiela next."
+}
+:01AD
+    ENDIF
+:01AE
+    JUMP 0x01b3
+:01B3
+    PAUSE
+:01B4
+    {
+"Now that you're here, it might be helpful to find the lab. There are several things there which will be very useful to us. It must be fairly close to the Kurak village."
+}
+:0260
+    PAUSE
+:0261
+    {
+"While I've been waiting for you to show up, I haven't been wasting my time here. In addition to my researches on these primitive cultures, I have also been thinking about ways to make some primitive weapons."
+}
+:0334
+    PAUSE
+:0335
+    {
+"I do hope it won't prove necesary, but if it should, ask me about @bombs and @rifles sometime."
+}
+:0397
+    JUMP 0x0403
+:039C
+    {"Yes, who?" He adjusts his spectacles, looks at you absent-mindedly. "Oh, it's my old friend $P."
+}
+:03FE
+    JUMP 0x0403
+:0403
+    {
+}
+:0404
+    ASK
+    KEYWORDS name
+    ANSWER
+:040B
+    {"Eh? Eh? MY name? You've known my name for years. Professor Elliot Archimedes Rafkin, Ph.D., etc."
+}
+:046E
+    JUMP 0x0403
+    KEYWORDS prof,rafk,elli
+    ANSWER
+:0483
+    {"Yes, $P, what is it?"
+}
+:049A
+    JUMP 0x0403
+    KEYWORDS job
+    ANSWER
+:04A4
+    {"Principally, I'm the curator of the local museum of natural history."
+}
+:04EB
+    PAUSE
+:04EC
+    {
+"Most recently, I've been the chief doctor and man of science in the village of the @Yolaru. I have spent much of my time studying the @tribes of this @valley."
+}
+:058E
+    JUMP 0x0403
+    KEYWORDS lab
+    ANSWER
+:0598
+    IF [0x23 B2 N8(0x00) == 0x21 B2 N16(0x01d8) > & 0x21 B2 N16(0x01e7) < & 0x22 B2 N16(0x0188) > & 0x22 B2 N16(0x018f) < & ]
+:05BB
+    {Professor Rafkin nods. "Yes, this is my laboratory. }
+:05EF
+    JUMP 0x0403
+:05F4
+    ELSE
+:05F5
+    {"Yes, there are many useful things there. I'm sure that it is somewhere south or southeast of the Kurak village."
+}
+:0667
+    JUMP 0x0403
+:066C
+    ENDIF
+    KEYWORDS aiel
+    ANSWER
+:0673
+    IF [N8(0x10) N8(0x07) FLAG ]
+:067A
+    {"She had been captured by that ponderous fellow from the @Urali tribe.  Fortunately you managed to free her."
+}
+:06E8
+    ELSE
+:06E9
+    {"I understand she was captured by the @Urali tribe. She seemed like a tough individual, but I hope she is all right. I hope we go and search for her soon."
+}
+:0785
+    ENDIF
+:0786
+    JUMP 0x0403
+    KEYWORDS ural
+    ANSWER
+:0791
+    IF [N8(0x10) N8(0x07) FLAG ]
+:0798
+    {"You know nearly as much about the Urali as I do, $P.  After all, you rescued Aiela from them. I never did get much chance to study their culture."
+}
+:082C
+    ELSE
+:082D
+    {"From what I can make out, the Urali were thought to have disappeared for many years. They have only recently started raiding other villages, which leads me to suspect their village must be well-hidden."
+}
+:08F9
+    PAUSE
+:08FA
+    {
+"Local hunters have confirmed this supposition, saying that they have been trying to find them for some time. The raids seem to come from southeast of the Yolaru village, usually."
+}
+:09B0
+    ENDIF
+:09B1
+    JUMP 0x0403
+    KEYWORDS vall,eodo
+    ANSWER
+:09C1
+    {"This whole area in which we find ourselves is called the Valley of Eodon."
+}
+:0A0D
+    JUMP 0x0403
+    KEYWORDS jim,jimm,malo
+    ANSWER
+:0A21
+    IF [N8(0x04) INPARTY ]
+:0A26
+    {Prof. Rafkin points at Jimmy distractedly. "He's over there, $P."
+}
+:0A68
+    JUMP 0x0403
+:0A6D
+    ELSE
+:0A6E
+    {"I have heard that he may be somewhere to the west of the Nahuatla, with a tribe called the @Disquiqui."
+}
+:0AD7
+    JUMP 0x0403
+:0ADC
+    ENDIF
+    KEYWORDS trib
+    ANSWER
+:0AE3
+    {"There are many tribes here, my boy. Let us see, in alphabetical order: Barako, Barrab, @Disquiqui, @Haakur, Jukari, @Kurak, @Nahuatla, Pindiro, @Sakkhra, @Urali, and @Yolaru."
+}
+:0B94
+    PAUSE
+:0B95
+    {
+"From my studies of the tribesmen I've met, I believe that they were brought here from all over the world in ancient times."
+}
+:0C13
+    PAUSE
+:0C14
+    {
+"Their individual languages have obviously melded into one tongue, that which they all speak today."
+}
+:0C7A
+    JUMP 0x0403
+    KEYWORDS bara,barr,juka,ural,pind
+    ANSWER
+:0C99
+    {"I haven't had time to do much research on that tribe yet."
+}
+:0CD5
+    JUMP 0x0403
+    KEYWORDS disq
+    ANSWER
+:0CE0
+    {"The Disquiqui are an interesting tribe. They seem to have broken away from the conflict-oriented tradition of many of the other groups."
+}
+:0D6A
+    PAUSE
+:0D6B
+    {
+"Their village lies west of the Nahuatla city."
+}
+:0D9C
+    JUMP 0x0403
+    KEYWORDS nahu
+    ANSWER
+:0DA7
+    {"The Nahuatla men in this valley seem to be descended from the same race which developed into the Aztecs of central America."
+}
+:0E25
+    PAUSE
+:0E26
+    {
+"Their city, Tichticatl, is due south of the Yolaru village."
+}
+:0E65
+    JUMP 0x0403
+    KEYWORDS haak
+    ANSWER
+:0E70
+    {"The Haakur! Living examples of Neanderthal man, my boy! How I wish I could take one back with me to the museum."
+}
+:0EE2
+    JUMP 0x0403
+    KEYWORDS kura
+    ANSWER
+:0EED
+    {"I suspect that the Kurak are descended from the first early pioneers who crossed the land bridge from Asia to North America... but it would take years of study to bear out this theory."
+}
+:0FA8
+    JUMP 0x0403
+    KEYWORDS sakk
+    ANSWER
+:0FB3
+    {His eyes light up. "The Sakkhra! I have seen them. A race that exists nowhere in the fossil record, my boy! A bipedal reptilian race with an intelligence on a par with that of the human race!"
+}
+:1074
+    JUMP 0x0403
+    KEYWORDS yola
+    ANSWER
+:107F
+    {"A delightful tribe! Very civilized. I have lived among them since we came to the valley. Culturally, they have certain similarities to the ancient Kushites."
+}
+:111E
+    JUMP 0x0403
+    KEYWORDS rifl
+    ANSWER
+:1129
+    {"Ah. Are you saying you want me to manufacture you a rifle? Just like that?"
+}
+:1176
+    JUMP 0x1f43
+    KEYWORDS gren,bomb
+    ANSWER
+:1186
+    {"$P, are you asking me to build you a grenade?"
+}
+:11B6
+    JUMP 0x284f
+    KEYWORDS gunp
+    ANSWER
+:11C1
+    {He makes a series of 'tsk,tsk' noises. "You want instructions on making gunpowder?"
+}
+:1215
+    DECLARE [0x00, 0xb2] = [N8(0x00) ]
+:121C
+    JUMP 0x2bbe
+    KEYWORDS ammu,ammo
+    ANSWER
+:122C
+    {He makes a series of 'tsk,tsk' noises. "You want instructions on making gunpowder?"
+}
+:1280
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:1287
+    JUMP 0x2bbe
+    KEYWORDS torch
+    ANSWER
+:1293
+    {"Using tarred cloth strips on a branch would make an excellent torch."
+}
+:12DA
+    JUMP 0x0403
+    KEYWORDS char
+    ANSWER
+:12E5
+    {"The best way to get charcoal would be to burn a @branch with a campfire or firepit."
+}
+:133B
+    JUMP 0x0403
+    KEYWORDS bran
+    ANSWER
+:1346
+    {"I'm sure you can pull branches from almost any tree."
+}
+:137D
+    JUMP 0x0403
+    KEYWORDS pota,nitr,saltp
+    ANSWER
+:1393
+    {"Potassium nitrate. Also called saltpeter. There was a bottle of it back at my @laboratory."
+}
+:13F0
+    PAUSE
+:13F1
+    {
+"Chances are good that most caves will have crystalline deposits, as well."
+}
+:143E
+    JUMP 0x0403
+    KEYWORDS hard,soft,clay,pot
+    ANSWER
+:1457
+    {"You will need a hard clay pot to make grenades. That's simple to accomplish."
+}
+:14A6
+    PAUSE
+:14A7
+    {
+"If you can't find a hard clay pot, find a soft one and place it in a @kiln for a while."
+}
+:1502
+    JUMP 0x0403
+    KEYWORDS kiln
+    ANSWER
+:150D
+    {"A large oven used for baking soft clay pots."
+}
+:153C
+    JUMP 0x0403
+    KEYWORDS sulp,sulf
+    ANSWER
+:154C
+    {"You'll probably find sulphur pits in the vicinity of volcanoes.  You'll need a wire @screen of some kind to extract usable sulpher."
+}
+:15D2
+    JUMP 0x0403
+    KEYWORDS wire,scree
+    ANSWER
+:15E3
+    {"It would have to be fairly tough wire screen. I think there was some back at the @lab that would work."
+}
+:164C
+    JUMP 0x0403
+    KEYWORDS mort
+    ANSWER
+:1657
+    {"A mortar. You know, a bowl used for grinding raw materials down into powder. NOT something for lobbing shells at the enemy."
+}
+:16D5
+    PAUSE
+:16D6
+    {
+"I had one back at the @lab."
+}
+:16F5
+    JUMP 0x0403
+    KEYWORDS grin
+    ANSWER
+:1700
+    {"A grinding stone, or grindstone. You can find them by the dozens in native villages."
+}
+:1757
+    JUMP 0x0403
+    KEYWORDS leav
+    ANSWER
+:1762
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:176A
+    IF [0x00 B2 N8(0x02) == ]
+:1771
+    {He scowls. "I most certainly will NOT leave. I was here first. Who do you think you are, ordering me about? Hmph."
+}
+:17E4
+    JUMP 0x0403
+:17E9
+    ENDIF
+:17EA
+    IF [0x00 B2 N8(0x01) == ]
+:17F1
+    {"Um... my boy..." He looks timidly over the edge, into the water. "I hate to admit it... but I never learned to swim. For the time being, you're stuck with me."
+}
+:1892
+    JUMP 0x0403
+:1897
+    ENDIF
+:1898
+    {"Ah, of course. The young learn all they think they can from the old, and then abandon them."
+}
+:18F6
+    BYE
+:18F7
+    KEYWORDS stri
+    ANSWER
+:18FD
+    {"Yes, a strip of cloth. You'll probably need a knife or scissors to cut one from a sheet of cloth."
+}
+:1961
+    JUMP 0x0403
+    KEYWORDS tar
+    ANSWER
+:196B
+    {"Any tar found in this land will undoubtedly be extremely hot. I would reccomend collecting it in a metal container of some kind. A bucket, perhaps."
+}
+:1A01
+    JUMP 0x0403
+    KEYWORDS bamb,pole,iron
+    ANSWER
+:1A16
+    {"Ask the Nahuatla tribesman where to find some."
+}
+:1A47
+    JUMP 0x0403
+    KEYWORDS than
+    ANSWER
+:1A52
+    {"You're welcome."
+}
+:1A64
+    JUMP 0x0403
+    KEYWORDS wait
+    ANSWER
+:1A6F
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:1A77
+    IF [0x00 B2 N8(0x02) == ]
+:1A7E
+    {"I most certainly will NOT wait here. I'm a busy man. Things to do. Wait, indeed."
+}
+:1AD1
+    JUMP 0x0403
+:1AD6
+    ENDIF
+:1AD7
+    IF [0x00 B2 N8(0x01) == ]
+:1ADE
+    {"Ummm... perhaps when we're on dry land."
+}
+:1B08
+    JUMP 0x0403
+:1B0D
+    ENDIF
+:1B0E
+    {"Oh, very well. Come back for me whenever you think I've languished here long enough." He scowls.
+}
+:1B70
+    SET_FLAG [N8(0xeb) ], [0x08 N8(0x07) + ]
+:1B79
+    BYE
+:1B7A
+    KEYWORDS join
+    ANSWER
+:1B80
+    SET_FLAG [N8(0xeb) ], [N8(0x04) ]
+:1B87
+    IF [N8(0xeb) INPARTY ]
+:1B8C
+    {"Join what? Is something in need of repair?" He blinks owlishly. "Oh, you mean join YOU. I'm already with you."
+}
+:1BFC
+    JUMP 0x0403
+:1C01
+    ENDIF
+:1C02
+    DECLARE [0x00, 0xb2] = [N8(0xeb) JOIN ]
+:1C0A
+    IF [0x00 B2 N8(0x02) == ]
+:1C11
+    {"Sorry, $P, there's just too many people with you already."
+}
+:1C4D
+    ENDIF
+:1C4E
+    IF [0x00 B2 N8(0x01) == ]
+:1C55
+    {"I'll join with you when you're on solid ground, $P."
+}
+:1C8B
+    ENDIF
+:1C8C
+    IF [0x00 B2 N8(0x00) == ]
+:1C93
+    {"Oh, are we going somewhere?" He looks delighted. "Well, certainly. I've been HERE long enough."
+}
+:1CF4
+    DECLARE [0x09, 0xb2] = [N8(0xeb) JOIN ]
+:1CFC
+    ENDIF
+:1CFD
+    JUMP 0x0403
+    KEYWORDS schw
+    ANSWER
+:1D08
+    {Rafkin looks sheepish. "Er, yes. That's what the Yolaru call me. They offered to make me their shaman. I said that I'd be their Schweitzer instead."
+}
+:1D9D
+    PAUSE
+:1D9E
+    {
+"I was referring to Albert Schweitzer. He was a missionary in Africa. Doctor, writer, musician. A remarkable man."
+}
+:1E12
+    PAUSE
+:1E13
+    {
+"But the Yolaru took it as my title. 'Schweitzer: A special sort of shaman.' I didn't correct their misapprehension."
+}
+:1E8A
+    PAUSE
+:1E8B
+    {
+He smiles crookedly. "Oops."
+}
+:1EA9
+    JUMP 0x0403
+    KEYWORDS bye
+    ANSWER
+:1EB3
+    {"That's right, plumb my brains and then }
+:1EDB
+    IF [N8(0x07) INPARTY ]
+:1EE0
+    {ignore me. }
+:1EEB
+    ELSE
+:1EEC
+    {abandon me for more interesting pursuits. }
+:1F16
+    ENDIF
+:1F17
+    {Humpf."
+}
+:1F1F
+    BYE
+:1F20
+    KEYWORDS *
+    ANSWER
+:1F23
+    {"Ask me about that later."
+}
+:1F3E
+    JUMP 0x0403
+    END_ANSWER
+:1F43
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:1F49
+    {"Oh, very well. Let's see if you've brought me the proper parts."
+}
+:1F8B
+    JUMP 0x1fbc
+    KEYWORDS n
+    ANSWER
+:1F93
+    {"Well, good. I was busy thinking."
+}
+:1FB6
+    JUMP 0x0403
+    END_ANSWER
+:1FBC
+    PAUSE
+:1FBD
+    {
+}
+:1FBE
+    IF [0x23 B2 N8(0x00) == 0x21 B2 N16(0x01d8) > & 0x21 B2 N16(0x01e7) < & 0x22 B2 N16(0x0188) > & 0x22 B2 N16(0x018f) < & ]
+:1FE1
+    {"To make a rifle, I'll need a length of iron-hard bamboo. Did you bring me some?"
+}
+:2033
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:2039
+    {"Good. Now we're cooking."
+}
+:2054
+    JUMP 0x2139
+    KEYWORDS n
+    ANSWER
+:205C
+    {"Oh, too bad. I suppose I shall have to make it out of thin air. $P, go find some bamboo."
+}
+:20B7
+    JUMP 0x0403
+    END_ANSWER
+:20BD
+    ELSE
+:20BE
+    {"To make a rifle, I'll need a length of iron-hard @bamboo, and I need to be in my @lab. We have to go there, first."
+}
+:2133
+    JUMP 0x0403
+:2138
+    ENDIF
+:2139
+    DECLARE [0x00, 0xb2] = [N8(0x80) N8(0x00) OBJINPARTY ]
+:2143
+    IF [0x00 B2 N16(0x8001) 0x00 B2 | == N8(0x10) > ]
+:2151
+    PAUSE
+:2152
+    {
+He sighs, exasperated. "$P, let me try to make you understand. Please don't make me use small words."
+}
+:21B9
+    PAUSE
+:21BA
+    {
+"None of us has a bamboo pole. Are you with me so far? Without a @BAMBOO POLE, I cannot make even a primitive rifle."
+}
+:2231
+    PAUSE
+:2232
+    {
+"Get me some bamboo, and I will construct you something that can arguably be called a rifle."
+}
+:2291
+    JUMP 0x0403
+:2296
+    ELSE
+:2297
+    DECLARE [0x02, 0xb2] = [N8(0x00) ]
+:229E
+    JUMP 0x22a4
+:22A3
+    ENDIF
+:22A4
+    DECLARE [0x01, 0xb2] = [N8(0x80) N8(0x00) OBJINPARTY ]
+:22AE
+    IF [0x01 B2 N16(0x8001) == ]
+:22B6
+    JUMP 0x22e6
+:22BB
+    ELSE
+:22BC
+    DELETE [0x01 B2 ], [N8(0x80) ], [N8(0x00) ], [N8(0x01) ]
+:22C9
+    NEW [0x01 B2 ], [N8(0x32) ], [N8(0x00) ], [N8(0x01) ]
+:22D6
+    DECLARE [0x02, 0xb2] = [0x02 B2 N8(0x01) + ]
+:22E0
+    JUMP 0x22a4
+:22E5
+    ENDIF
+:22E6
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:22ED
+    JUMP 0x2641
+:22F2
+    ELSE
+:22F3
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:22FA
+    {Using his tools, carefully and methodically, he drills a series of holes in the bamboo near one end.
+}
+:235F
+    PAUSE
+:2360
+    {
+With bits of string, loose finishing nails, and other interesting goods from his pockets and around the lab, he mounts a small piece of rock on the pole near one hole.
+}
+:2409
+    PAUSE
+:240A
+    {
+He mounts a small bit of metal on a short wooden rod, and attaches the middle of that rod to the bamboo pole so that the metal can swing into contact with the rock. }
+:24B0
+    PAUSE
+:24B1
+    {
+"What we end up with here," he explains, "is a sort of primitive, single-shot flintlock. To use it, pull this 'trigger', so that the other end strikes the flint."
+}
+:2555
+    PAUSE
+:2556
+    {
+"A spark will ensue. The spark will enter the pole through this hole here, and ignite the gunpowder which you will have packed into the tube. The gunpowder will propel your 'bullets', and voila, you have a functioning rifle."
+}
+:2639
+    PAUSE
+:263A
+    {
+}
+:263B
+    JUMP 0x26b8
+:2640
+    ENDIF
+:2641
+    {As he has done for you in the past, Rafkin works on the bamboo pole, transforming it into a crude bamboo rifle.
+}
+:26B1
+    PAUSE
+:26B2
+    {
+}
+:26B3
+    JUMP 0x26b8
+:26B8
+    {"There." He looks up from his task. "Your bamboo pole is transformed into a lethal instrument of destruction." He hands back the transformed bamboo.
+}
+:274D
+    PAUSE
+:274E
+    {
+}
+:274F
+    IF [0x02 B2 N8(0x02) > ]
+:2756
+    {Then, he repeats the process with the other bamboo poles.
+}
+:2790
+    PAUSE
+:2791
+    {
+}
+:2792
+    ENDIF
+:2793
+    IF [0x02 B2 N8(0x02) == ]
+:279A
+    {Then, he repeats the process with the other bamboo pole.
+}
+:27D3
+    PAUSE
+:27D4
+    {
+}
+:27D5
+    ENDIF
+:27D6
+    {"I do not manufacture fully-loaded rifles, of course. I assume you know how to make @ammunition and load firearms."
+}
+:284A
+    JUMP 0x0403
+:284F
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:2855
+    {"Oh, how unfortunate. Yes, I'm the gentle, sweet old Professor Rafkin. I teach young men archaeology and how to make bombs."
+}
+:28D2
+    JUMP 0x2929
+    KEYWORDS n
+    ANSWER
+:28DA
+    {"Good! Imagine me, a man of education, having to manufacture munitions!"\}
+:2923
+    JUMP 0x0403
+    END_ANSWER
+:2929
+    PAUSE
+:292A
+    {
+"To make some sort of crude grenade, you'll need the following ingredients:"
+}
+:2978
+    PAUSE
+:2979
+    {
+"A strip of cloth impregnated with @tar, to act as a fuse; five units of gunpowder; and a @hard clay pot."
+}
+:29E5
+    PAUSE
+:29E6
+    {
+"When you have these together, simply use the @strip of tarred cloth on the pot to seal the pot and act as a fuse.
+What you end up with is a crude, but serviceable, bomb."
+}
+:2A93
+    PAUSE
+:2A94
+    {
+"The @gunpowder you're likely to be able to make may be very unstable stuff, so throwing the grenade at something could set it off."
+}
+:2B1A
+    PAUSE
+:2B1B
+    {
+"Alternatively, you can light the fuse and leave the thing behind. Then run like the dickens."
+}
+:2B7B
+    PAUSE
+:2B7C
+    {
+He sighs. "Professor Rafkin, Terrorist Teacher. That's me."
+}
+:2BB9
+    JUMP 0x0403
+:2BBE
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:2BC4
+    {"Well... it's simple enough. You'll need a quantity of @charcoal, a quantity of @potassium nitrate, and a quantity of @sulphur."
+}
+:2C45
+    PAUSE
+:2C46
+    {
+"Put all these things in a @mortar or @grinding stone and grind them into powder. Gunpowder, that is."
+}
+:2CAE
+    JUMP 0x2cda
+    KEYWORDS n
+    ANSWER
+:2CB6
+    {"Then why did you ask? Hmph!"
+}
+:2CD4
+    JUMP 0x0403
+    END_ANSWER
+:2CDA
+    IF [0x00 B2 N8(0x01) == ]
+:2CE1
+    PAUSE
+:2CE2
+    {
+"Since I've managed a rather clever variant on the classic muzzle-loader," he says proudly, "all you need to do is put the gunpowder into your bamboo rifle barrel, and you'll have a fully-loaded firearm."
+}
+:2DB0
+    JUMP 0x0403
+:2DB5
+    ELSE
+:2DB6
+    JUMP 0x0403
+:2DBB
+    ENDIF

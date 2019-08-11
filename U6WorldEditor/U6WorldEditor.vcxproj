@@ -216,6 +216,7 @@
     <ClInclude Include="TileManagerDlg.h" />
     <ClInclude Include="U6Objects.h" />
     <ClInclude Include="U6WorldEditor.h" />
+    <ClInclude Include="u6_opcode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseMap.cpp" />

@@ -15,6 +15,7 @@
 #define IDC_EDIT2                       1001
 #define ID_GAME_MARTIAN                 1002
 #define IDC_LIST1                       1002
+#define IDC_NPC                         1003
 #define ID_JUMPTO_BEGIN                 10000
 #define ID_JUMPTO_CASTLE_OF_LORD_BRITISH 10000
 #define ID_JUMPTO_BRITAIN               10001
@@ -74,7 +75,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        314
 #define _APS_NEXT_COMMAND_VALUE         32816
-#define _APS_NEXT_CONTROL_VALUE         1003
+#define _APS_NEXT_CONTROL_VALUE         1004
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

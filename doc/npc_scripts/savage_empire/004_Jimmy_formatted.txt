@@ -1,0 +1,774 @@
+:0000
+    NPC_ID: npc id: 4, npc name: Jimmy
+:0007
+    NPC_LOOK: a lanky, sharp-eyed man in his mid-20s.
+*
+:0031
+    START CONVERSION
+:0032
+    IF [N8(0xeb) N8(0x04) FLAG ]
+:0039
+    JUMP 0x00d9
+:003E
+    ENDIF
+:003F
+    IF [N8(0xeb) INPARTY ]
+:0044
+    SET_FLAG [N8(0xeb) ], [N8(0x04) ]
+:004B
+    {"Hey there, $P... about time you got around to showing up!"
+}
+:0087
+    ELSE
+:0088
+    {"Hey! $P! Go around inside and unlock this door, and let me out of here!"
+}
+:00D2
+    BYE
+:00D3
+    ENDIF
+:00D4
+    JUMP 0x015d
+:00D9
+    IF [N8(0x10) N8(0x07) FLAG ]
+:00E0
+    {"Hey, it's your nickel. Talk to me."
+}
+:0105
+    ELSE
+:0106
+    {"You know, if you've given up on @Aiela, I'd sure like to go after her, myself."
+}
+:0157
+    ENDIF
+:0158
+    JUMP 0x015d
+:015D
+    {
+}
+:015E
+    ASK
+    KEYWORDS name
+    ANSWER
+:0165
+    {"Too much action muddle your brains, Mr. Adventurer? Jimmy Malone." He scribbles something in his @notebook.
+}
+:01D2
+    JUMP 0x015d
+    KEYWORDS jimm,malo
+    ANSWER
+:01E2
+    {He snaps his fingers impatiently. "That's my name, alright.  Don't wear it out."
+}
+:0233
+    JUMP 0x015d
+    KEYWORDS job
+    ANSWER
+:023D
+    {"I'm a reporter, see. For the local paper, and I also do pieces for ULTIMATE ADVENTURES @Magazine."
+}
+:02A1
+    PAUSE
+:02A2
+    {
+"One of my first will be a 'Modern Man Among the Natives' piece about the @Disquiqui."
+}
+:02FA
+    JUMP 0x015d
+    KEYWORDS came
+    ANSWER
+:0305
+    {"Yeah, it's a nice camera, isn't it? Got a great deal, and it even came with a flash."
+}
+:035C
+    PAUSE
+:035D
+    {
+He spends a short time showing you how to use it.
+}
+:0390
+    JUMP 0x015d
+    KEYWORDS chaf
+    ANSWER
+:039B
+    {"Chafblum. King of the @Disquiqui tribe. One grumpy, evil-tempered son of a gun. Has a face like a washboard somebody's taken a hammer to."
+}
+:0427
+    JUMP 0x015d
+    KEYWORDS disq
+    ANSWER
+:0432
+    {"Oh, those Disquiqui natives. Feed you fermented coconut milk all the time." He shudders. "@Chafblum's the chief. @Guoblum's his daughter."
+}
+:04BE
+    JUMP 0x015d
+    KEYWORDS guob
+    ANSWER
+:04C9
+    {"She's the Disquiqui princess. Chafblum's daughter. Looks like a statue of Buddha. They want to marry me to her." He shivers.
+}
+:0547
+    JUMP 0x015d
+    KEYWORDS myrm
+    ANSWER
+:0552
+    {"Myrmidex. Ant-creatures, big ones. The Disquiqui are scared to death of 'em. They're bad news."
+}
+:05B3
+    JUMP 0x015d
+    KEYWORDS dard
+    ANSWER
+:05BE
+    {"Yeah, Darden... that big guy with the huge lizard. He's the one who snagged @Aiela when we first got here."
+}
+:062B
+    PAUSE
+:062C
+    {
+}
+:062D
+    IF [N8(0x02) INPARTY ]
+:0632
+    {"Glad we managed to get her back with us again!"
+}
+:0663
+    JUMP 0x015d
+:0668
+    ENDIF
+:0669
+    IF [N8(0x10) N8(0x07) FLAG N8(0x01) == ]
+:0673
+    {"Good thing we managed to get her back to her dad."
+}
+:06A7
+    ELSE
+:06A8
+    {"We really should try and find her again, ace."
+}
+:06D8
+    ENDIF
+:06D9
+    JUMP 0x015d
+    KEYWORDS aiel
+    ANSWER
+:06E4
+    {"What a good-lookin' babe.  Can't blame @Darden for making a move on her."
+}
+:072F
+    JUMP 0x015d
+    KEYWORDS ulti,adve,maga
+    ANSWER
+:0744
+    {"ULTIMATE ADVENTURES Magazine. A true-adventure rag I do occasional articles for. I'll have to do a piece on this place. And on you, too. You'll have to tell me your life story sometime."
+}
+:0800
+    JUMP 0x015d
+    KEYWORDS bye
+    ANSWER
+:080A
+    {"Yeah, thrilling to talk to you, too."
+}
+:0831
+    BYE
+:0832
+    KEYWORDS leav
+    ANSWER
+:0838
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:0840
+    IF [0x00 B2 N8(0x02) == ]
+:0847
+    {"Leave? Hey, I was here first... YOU leave!"
+}
+:0874
+    JUMP 0x015d
+:0879
+    ENDIF
+:087A
+    IF [0x00 B2 N8(0x01) == ]
+:0881
+    {Jimmy looks around and grimaces. "Let's discuss this on dry land."
+}
+:08C4
+    JUMP 0x015d
+:08C9
+    ENDIF
+:08CA
+    {"Uhhh... if I just leave you, I'm sure that Chafblum's warriors will capture me. Can't I just @wait here?"
+}
+:0935
+    JUMP 0x0ffb
+    KEYWORDS wait
+    ANSWER
+:0940
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:0948
+    IF [0x00 B2 N8(0x02) == ]
+:094F
+    {"What does it look like I'm doing already? Sheesh."
+}
+:0983
+    JUMP 0x015d
+:0988
+    ENDIF
+:0989
+    IF [0x00 B2 N8(0x01) == ]
+:0990
+    {"I'd much rather wait on dry land... maybe later, $P-old-pal."
+}
+:09CF
+    JUMP 0x015d
+:09D4
+    ENDIF
+:09D5
+    {"Sure thing, $P-old-pal. It'll give me a chance to catch up on my writing." He whips out his notebook and begins scribbling furiously.
+}
+:0A5C
+    SET_FLAG [N8(0xeb) ], [0x08 N8(0x07) + ]
+:0A65
+    BYE
+:0A66
+    KEYWORDS join
+    ANSWER
+:0A6C
+    IF [N8(0xeb) INPARTY ]
+:0A71
+    {"Hey, I'm already with you."
+}
+:0A8E
+    JUMP 0x015d
+:0A93
+    ELSE
+:0A94
+    JUMP 0x0e09
+:0A99
+    ENDIF
+:0A9A
+    KEYWORDS note,book,task,ques,unit
+    ANSWER
+:0AB4
+    IF [N8(0xeb) N8(0x06) FLAG N8(0x00) == ]
+:0ABE
+    {"My notebook? Nothing in it but some notes on this place. I'm going to write up a doozy of an article for ULTIMATE ADVENTURES Magazine when... IF... we get back."
+}
+:0B61
+    JUMP 0x015d
+:0B66
+    ENDIF
+:0B67
+    IF [N8(0xeb) N8(0x03) FLAG ]
+:0B6E
+    {Jimmy whips out his notebook and flips it to the correct page.
+}
+:0BAD
+    PAUSE
+:0BAE
+    {
+"Oky-doky. Ever since you started talking about uniting the tribes and talking to their chiefs, I've been taking notes. Here's what I've got..."
+}
+:0C40
+    JUMP 0x10c8
+:0C45
+    ELSE
+:0C46
+    SET_FLAG [N8(0xeb) ], [N8(0x03) ]
+:0C4D
+    {"Hmmm... sounds like you've heard some interesting stuff out there. Fill me in!"
+}
+:0C9E
+    PAUSE
+:0C9F
+    {
+Jimmy scribbles furiously in his notebook as you spend several minutes telling him what you've learned about uniting the tribes.
+}
+:0D21
+    PAUSE
+:0D22
+    {
+"Thanks, boss... this'll make great reading back home! Let me run this back to you, to make sure I've got it."
+}
+:0D92
+    PAUSE
+:0D93
+    {
+}
+:0D94
+    JUMP 0x10c8
+:0D99
+    ENDIF
+:0D9A
+    JUMP 0x015d
+    KEYWORDS *
+    ANSWER
+:0DA2
+    {"Hey, pal, I know a lot, but I can't help you with that. Ask Prof. Rafkin. He knows everything."
+}
+:0E03
+    JUMP 0x015d
+    END_ANSWER
+:0E08
+    BYE
+:0E09
+    IF [N8(0xeb) N8(0x04) FLAG N8(0x00) == ]
+:0E13
+    {"Hey, I'd be THRILLED to join you. Get me out of this place and ask me again."
+}
+:0E62
+    JUMP 0x015d
+:0E67
+    ENDIF
+:0E68
+    DECLARE [0x00, 0xb2] = [N8(0xeb) JOIN ]
+:0E70
+    IF [0x00 B2 N8(0x02) == ]
+:0E77
+    {"Sorry, $P... you've got too many people wandering around with you already.  Maybe later."
+}
+:0ED2
+    JUMP 0x015d
+:0ED7
+    ENDIF
+:0ED8
+    IF [0x00 B2 N8(0x01) == ]
+:0EDF
+    {"Sorry, pal... not when you're on that rickety thing."
+}
+:0F16
+    JUMP 0x015d
+:0F1B
+    ENDIF
+:0F1C
+    {"Sure thing, $P-old-pal. To hear is to obey."
+}
+:0F4A
+    IF [N8(0x02) INPARTY N8(0x00) == N8(0x10) N8(0x07) FLAG N8(0x00) == & ]
+:0F5B
+    PAUSE
+:0F5C
+    {
+"Are we gonna go find that good lookin' babe Aiela now? I thought I heard one of these Disquiqui guys say something about @Darden having captured her."
+}
+:0FF5
+    ENDIF
+:0FF6
+    JUMP 0x015d
+:0FFB
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:1001
+    {"Thanks a lot. I'll be right here."
+}
+:1025
+    SET_FLAG [N8(0xeb) ], [0x08 N8(0x07) + ]
+:102E
+    BYE
+:102F
+    KEYWORDS n
+    ANSWER
+:1032
+    {"Okay," he says dejectedly. "If you want me, you know where to find me. At Guoblum's wedding service." He looks like he's been hit by a truck.
+}
+:10C1
+    BYE
+:10C2
+    END_ANSWER
+:10C3
+    JUMP 0x015d
+:10C8
+    IF [N8(0x34) N8(0x06) FLAG N8(0x01) == N8(0x34) N8(0x07) FLAG N8(0x01) == & ]
+:10DB
+    PAUSE
+:10DC
+    {
+"We've already gotten Tuomaxx to rebuild the Great Drum the legends talk about, so that's out of the way."
+}
+:1148
+    ENDIF
+:1149
+    IF [N8(0x34) N8(0x06) FLAG N8(0x01) == N8(0x34) N8(0x07) FLAG N8(0x00) == & ]
+:115C
+    PAUSE
+:115D
+    {
+"We have to build the natives' Great Drum of Legend. We've talked to that butterball Tuomaxx about doing it, but we haven't gotten him all the raw materials he needs to build it."
+}
+:1212
+    ENDIF
+:1213
+    IF [N8(0x34) N8(0x06) FLAG N8(0x00) == N8(0x34) N8(0x07) FLAG N8(0x00) == & N8(0xeb) N8(0x05) FLAG & ]
+:122C
+    PAUSE
+:122D
+    {
+"We need to build a drum. In lieu of TV, the natives need for some special drum to be built. When all the chiefs' quests are accomplished, we're supposed to beat on it to tell 'em what's up."
+}
+:12EE
+    ENDIF
+:12EF
+    IF [N8(0x10) N8(0x06) FLAG N8(0x01) == N8(0x10) N8(0x07) FLAG N8(0x01) == & ]
+:1302
+    PAUSE
+:1303
+    {
+"You've already rescued Aiela, what a dish, from Darden the Huge. So her poppa Aloron of the Kurak tribe is in your pocket."
+}
+:1381
+    ENDIF
+:1382
+    IF [N8(0x10) N8(0x06) FLAG N8(0x01) == N8(0x10) N8(0x07) FLAG N8(0x00) == & ]
+:1395
+    PAUSE
+:1396
+    {
+"Aloron of the Kuraks wants you to rescue his daughter Aiela from Darden the Huge. And don't pretend that you don't have some more PERSONAL motivation for that mission, $P-old-pal."
+}
+:144D
+    ENDIF
+:144E
+    IF [N8(0x10) N8(0x06) FLAG N8(0x00) == N8(0x10) N8(0x07) FLAG N8(0x00) == & ]
+:1461
+    PAUSE
+:1462
+    {
+"You haven't yet talked to Aloron, chief of the Kuraks, about what he wants."
+}
+:14B1
+    ENDIF
+:14B2
+    IF [N8(0x11) N8(0x06) FLAG N8(0x01) == N8(0x11) N8(0x07) FLAG N8(0x01) == & ]
+:14C5
+    PAUSE
+:14C6
+    {
+"You've already come up with a squad's worth of swords for the Yolaru, so their chief Apaton is 'in.'"
+}
+:152E
+    ENDIF
+:152F
+    IF [N8(0x11) N8(0x06) FLAG N8(0x01) == N8(0x11) N8(0x07) FLAG N8(0x00) == & ]
+:1542
+    PAUSE
+:1543
+    {
+"Apaton, who's the chief of the Yolaru, says that he's tired of the dinosaurs chewing on his people, so he wants ten Nahuatla-made swords for his warriors. Should be a cinch."
+}
+:15F4
+    ENDIF
+:15F5
+    IF [N8(0x11) N8(0x06) FLAG N8(0x00) == N8(0x11) N8(0x07) FLAG N8(0x00) == & N8(0x11) 0x00 FLAG & ]
+:160D
+    PAUSE
+:160E
+    {
+"You need to talk to the Yolaru chief Apaton."
+}
+:163E
+    ENDIF
+:163F
+    IF [N8(0x13) N8(0x06) FLAG N8(0x01) == N8(0x13) N8(0x07) FLAG N8(0x01) == & ]
+:1652
+    PAUSE
+:1653
+    {
+"You've already gotten the medicine to fix up Nakai, who's the son of Balakai, chief of the Barrabs. So you're in like Flynn with the Barrabs."
+}
+:16E4
+    ENDIF
+:16E5
+    IF [N8(0x13) N8(0x06) FLAG N8(0x01) == N8(0x13) N8(0x07) FLAG N8(0x00) == & ]
+:16F8
+    PAUSE
+:16F9
+    {
+"Nakai, who's the son of Balakai, the Barrab chief, is one sick puppy. Needs some medicine real bad, as I recall, the root of a rare flower on top of the Great Mesa."
+}
+:17A1
+    PAUSE
+:17A2
+    {
+"Doesn't sound too dangerous. But Balakai won't give you the time of day until Nakai is healed."
+}
+:1804
+    ENDIF
+:1805
+    IF [N8(0x13) N8(0x06) FLAG N8(0x00) == N8(0x13) N8(0x07) FLAG N8(0x00) == & N8(0x13) 0x00 FLAG & ]
+:181D
+    PAUSE
+:181E
+    {
+"Balakai's the chief of the Barrab; you haven't talked to him about what he wants."
+}
+:1873
+    ENDIF
+:1874
+    IF [N8(0x14) N8(0x06) FLAG N8(0x01) == N8(0x14) N8(0x07) FLAG N8(0x01) == & ]
+:1887
+    PAUSE
+:1888
+    {
+"We've already belled the cat -- er, the T-Rex, for the Disquiqui. So their chief Chafblum is now your dear friend. And I'm STILL single." He draws a hand across his brow, wiping away imaginary nervous sweat.
+}
+:195A
+    ENDIF
+:195B
+    IF [N8(0x14) N8(0x06) FLAG N8(0x01) == N8(0x14) N8(0x07) FLAG N8(0x00) == & ]
+:196E
+    PAUSE
+:196F
+    {
+"Chafblum, who's the drunkard chief of the Disquiquis, wants me to marry his daughter Guoblum, which ISN'T going to happen!"
+}
+:19ED
+    PAUSE
+:19EE
+    {
+"But he'll be your friend if you just hang a bell around the neck of the T-rex which tends to gobble up his tribesmen."
+}
+:1A67
+    ENDIF
+:1A68
+    IF [N8(0x14) N8(0x06) FLAG N8(0x00) == N8(0x14) N8(0x07) FLAG N8(0x00) == & ]
+:1A7B
+    PAUSE
+:1A7C
+    {
+"You don't know what Chafblum wants; he's the chief of the Disquiqui. If he wants me to marry his daughter Guoblum, then this mission is doomed already."
+}
+:1B17
+    ENDIF
+:1B18
+    IF [N8(0x1b) N8(0x06) FLAG N8(0x01) == N8(0x1b) N8(0x07) FLAG N8(0x01) == & ]
+:1B2B
+    PAUSE
+:1B2C
+    {
+"You've already cleaned out the spider's nest in Haakur territory, so Grugorr, a distant relative at best of Homo Sapiens, is your staunch ally. Hey, I like that phrase. 'Staunch Ally.' Hmmmm..."
+}
+:1BF1
+    ENDIF
+:1BF2
+    IF [N8(0x1b) N8(0x06) FLAG N8(0x01) == N8(0x1b) N8(0x07) FLAG N8(0x00) == & ]
+:1C05
+    PAUSE
+:1C06
+    {
+"Grugorr, who's the chief of the Haakur -- I think that's a local word for 'missing link' -- wants you to clean out a nest of spiders."
+}
+:1C8F
+    PAUSE
+:1C90
+    {
+"You also have to burn out their webs, and bring back some leather shield in the spiders' cave."
+}
+:1CF2
+    ENDIF
+:1CF3
+    IF [N8(0x1b) N8(0x06) FLAG N8(0x00) == N8(0x1b) N8(0x07) FLAG N8(0x00) == & N8(0x1b) 0x00 FLAG & ]
+:1D0B
+    PAUSE
+:1D0C
+    {
+"Grugorr's the name of the Haakur chief. We don't yet know what he'd want."
+}
+:1D59
+    ENDIF
+:1D5A
+    IF [N8(0x1d) N8(0x06) FLAG N8(0x01) == N8(0x1d) N8(0x07) FLAG N8(0x01) == & ]
+:1D6D
+    PAUSE
+:1D6E
+    {
+"You rescued Halisa, the princess of the Barako, so her mother Halawa's in on whatever expedition you want to lead."
+}
+:1DE4
+    ENDIF
+:1DE5
+    IF [N8(0x1d) N8(0x06) FLAG N8(0x01) == N8(0x1d) N8(0x07) FLAG N8(0x00) == & ]
+:1DF8
+    PAUSE
+:1DF9
+    {
+"Halawa, who's the queen of the Barako -- must remind myself to do an 'equal rights in the valley of Eodon' sidebar  -- wants you to rescue her daughter from the big gorilla who's got her. That's one we should do for free."
+}
+:1EDA
+    ENDIF
+:1EDB
+    IF [N8(0x1d) N8(0x06) FLAG N8(0x00) == N8(0x1d) N8(0x07) FLAG N8(0x00) == & N8(0x1d) 0x00 FLAG & ]
+:1EF3
+    PAUSE
+:1EF4
+    {
+"I think that the Barako queen is named Halawa. We don't yet know what she'd want to hook up with your mission."
+}
+:1F66
+    ENDIF
+:1F67
+    IF [N8(0x20) N8(0x06) FLAG N8(0x01) == N8(0x20) N8(0x07) FLAG N8(0x01) == & ]
+:1F7A
+    PAUSE
+:1F7B
+    {
+"Ever since we told queen Inara of the Pindiro tribe about your plan to unite the tribes, she's been in our camp."
+}
+:1FEF
+    ENDIF
+:1FF0
+    IF [N8(0x20) N8(0x06) FLAG N8(0x01) == N8(0x20) N8(0x07) FLAG N8(0x00) == & ]
+:2003
+    PAUSE
+:2004
+    {
+"@this @should @STILL @never @be @seen" 
+}
+:202E
+    ENDIF
+:202F
+    IF [N8(0x20) N8(0x06) FLAG N8(0x00) == N8(0x20) N8(0x07) FLAG N8(0x00) == & N8(0x20) 0x00 FLAG & ]
+:2047
+    PAUSE
+:2048
+    {
+"We don't yet know what the Pindiro queen Inara wants."
+}
+:2081
+    ENDIF
+:2082
+    IF [N8(0x22) N8(0x06) FLAG N8(0x01) == N8(0x22) N8(0x07) FLAG N8(0x01) == & ]
+:2095
+    PAUSE
+:2096
+    {
+"We managed to cross the lava flow in Jukari territory, and return the sacred hide to their chief, so Jumu is our friend for life."
+}
+:211B
+    PAUSE
+:211C
+    {
+"Speaking of which, I'll have to get some of those diamonds to take back to the real world... and I'll be SET for life."
+}
+:2196
+    ENDIF
+:2197
+    IF [N8(0x22) N8(0x06) FLAG N8(0x01) == N8(0x22) N8(0x07) FLAG N8(0x00) == & ]
+:21AA
+    PAUSE
+:21AB
+    {
+"Jumu, the chief of the Jukari, wants us to figure out a way to get to his spirit-cave and return with some kind of sacred hide."}
+:222D
+    PAUSE
+:222E
+    {
+"Knowing you, you'd just walk across the lava that's blocking the path, but you need to come up with some way across for 'lesser mortals' like us."
+}
+:22C3
+    ENDIF
+:22C4
+    IF [N8(0x22) N8(0x06) FLAG N8(0x00) == N8(0x22) N8(0x07) FLAG N8(0x00) == & N8(0x22) 0x00 FLAG & ]
+:22DC
+    PAUSE
+:22DD
+    {
+"You haven't yet talked to Jumu, the Jukari chief, about what it takes to get him to join your little crusade."
+}
+:234E
+    ENDIF
+:234F
+    IF [N8(0x28) N8(0x06) FLAG N8(0x01) == N8(0x28) N8(0x07) FLAG N8(0x01) == & ]
+:2362
+    PAUSE
+:2363
+    {
+"Huitlapacti's dead, so Moctapotl and his Nahuatla will help you against the Myrmidex. Moctapotl's a gloomy Gus, but he sounds like he'll keep his word."
+}
+:23FE
+    ENDIF
+:23FF
+    IF [N8(0x28) N8(0x06) FLAG N8(0x01) == N8(0x28) N8(0x07) FLAG N8(0x00) == & ]
+:2412
+    PAUSE
+:2413
+    {
+"Moctapotl, who's the deposed king of the Nahuatla, wants to be king again. Which means running Huitlapacti out of town, at the very least. Moctapotl thinks that Huitlapacti won't go without a big, bloody fight. Wish I had a tank or something."
+}
+:2509
+    ENDIF
+:250A
+    IF [N8(0x28) N8(0x06) FLAG N8(0x00) == N8(0x28) N8(0x07) FLAG N8(0x00) == & N8(0x28) 0x00 FLAG & ]
+:2522
+    PAUSE
+:2523
+    {
+"You don't yet know what it takes to get the Nahuatla king, what's-his-name, into your camp."
+}
+:2582
+    ENDIF
+:2583
+    IF [N8(0x30) N8(0x06) FLAG N8(0x01) == N8(0x30) N8(0x07) FLAG N8(0x01) == & ]
+:2596
+    PAUSE
+:2597
+    {
+"The Tyrannosaurus Rex which was chewing on his little cousins, the Sakkhra, is dead of a terminal migraine. So the Sakkhra king Sysskarr will help on your mission... assuming you can understand anything he says."
+}
+:266E
+    ENDIF
+:266F
+    IF [N8(0x30) N8(0x06) FLAG N8(0x01) == N8(0x30) N8(0x07) FLAG N8(0x00) == & ]
+:2682
+    PAUSE
+:2683
+    {
+"Sysskarr, who seems to be Top Lizard over there among the Sakkhra, wants you to kill the Thunderer, just an average Tyrannosaurus Rex who's driving down property values in lizard country."
+}
+:2742
+    ENDIF
+:2743
+    IF [N8(0x30) N8(0x06) FLAG N8(0x00) == N8(0x30) N8(0x07) FLAG N8(0x00) == & N8(0x30) 0x00 FLAG & ]
+:275B
+    PAUSE
+:275C
+    {
+"The leader of those Sakkhra lizard guys is named Sister. No, it was Sysskarr. We don't know yet what it is he'd want to help you out."
+}
+:27E5
+    ENDIF
+:27E6
+    IF [N8(0x35) N8(0x06) FLAG N8(0x01) == N8(0x35) N8(0x07) FLAG N8(0x01) == & ]
+:27F9
+    PAUSE
+:27FA
+    {
+"We've already rescued the Urali statue, the Great Fabozz, from the cave where Darden the Huge stuck him."
+}
+:2866
+    ENDIF
+:2867
+    IF [N8(0x35) N8(0x06) FLAG N8(0x01) == N8(0x35) N8(0x07) FLAG N8(0x00) == & ]
+:287A
+    PAUSE
+:287B
+    {
+"Your dear, dear friend Wamap of the Uralis wants you to rescue some blamed statue called the Great Fabozz from a cave. Big threat there, huh?"
+}
+:290C
+    ENDIF
+:290D
+    IF [N8(0x35) N8(0x06) FLAG N8(0x00) == N8(0x35) N8(0x07) FLAG N8(0x00) == & N8(0x35) 0x00 FLAG & ]
+:2925
+    PAUSE
+:2926
+    {
+"The last tribe on my list is the Urali. We don't know what their chief would want."
+}
+:297C
+    ENDIF
+:297D
+    PAUSE
+:297E
+    {
+"That's the list, boss." Jimmy flips his notebook shut.
+}
+:29B7
+    JUMP 0x015d

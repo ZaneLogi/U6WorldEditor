@@ -93,6 +93,9 @@
     <ClInclude Include="DynObj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="u6_opcode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="U6WorldEditor.cpp">

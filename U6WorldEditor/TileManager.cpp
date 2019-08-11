@@ -262,6 +262,10 @@ bool TileManager::load_basetile(Configuration& config)
     basetile_file.read((char*)m_obj_to_tile, sizeof(m_obj_to_tile));
     basetile_file.close();
 
+    for (int i = 0; i < 2048; i++)
+    {
+        TRACE("obj %d => tile %d\n", i, m_obj_to_tile[i]);
+    }
     return true;
 }
 

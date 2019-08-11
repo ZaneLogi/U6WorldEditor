@@ -1,0 +1,795 @@
+:0000
+    NPC_ID: npc id: 2, npc name: Aiela
+:0007
+    NPC_LOOK: a gorgeous, dark-haired woman wearing jaguar fur.
+*
+:003B
+    START CONVERSION
+:003C
+    IF [N8(0x01) N8(0x00) FLAG ]
+:0043
+    JUMP 0x0102
+:0048
+    ELSE
+:0049
+    {"The strange warrior $P! Surely he has come to rescue Aiela from her cruel prison!"
+}
+:009D
+    PAUSE
+:009E
+    {
+She looks about fearfully. "Aiela cannot speak to $P now, or Darden's men may hear her and come!"}
+:0100
+    BYE
+:0101
+    ENDIF
+:0102
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:0109
+    {"Yes, my love?"
+}
+:0119
+    JUMP 0x01ba
+:011E
+    ELSE
+:011F
+    JUMP 0x0125
+:0124
+    ENDIF
+:0125
+    IF [N8(0x33) N8(0x05) FLAG ]
+:012C
+    {Her face darkens. "Oh. It is $P. $P the mate of Tristia. Tristia's mate $P. What does @Tristia's mate $P want?"
+}
+:019C
+    JUMP 0x01ba
+:01A1
+    ELSE
+:01A2
+    {"Yes, mighty $P?"
+}
+:01B4
+    JUMP 0x01ba
+:01B9
+    ENDIF
+:01BA
+    {
+}
+:01BB
+    ASK
+    KEYWORDS name
+    ANSWER
+:01C2
+    {"Aiela is my name. Aiela is daughter of @Aloron, the chief of the @Kuraks."
+}
+:020E
+    JUMP 0x01ba
+    KEYWORDS aiel
+    ANSWER
+:0219
+    {"Yes?"
+}
+:0220
+    JUMP 0x01ba
+    KEYWORDS job
+    ANSWER
+:022A
+    {"Aiela is Princess of the @Kurak tribe, and warrior. Aiela is friend to the jaguar, enemy of the @Myrmidex."
+}
+:0297
+    JUMP 0x01ba
+    KEYWORDS chie,alor
+    ANSWER
+:02A7
+    {"Aiela's father is Aloron, chief of the @Kurak tribe."
+}
+:02DE
+    JUMP 0x01ba
+    KEYWORDS aiel
+    ANSWER
+:02E9
+    {"Yes?"
+}
+:02F0
+    JUMP 0x01ba
+    KEYWORDS love
+    ANSWER
+:02FB
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:0302
+    {"Aiela loves $P, too. Aiela never tires of hearing $P say this."
+}
+:0343
+    JUMP 0x01ba
+:0348
+    ELSE
+:0349
+    {Her eyes widen. "Is $P saying that he loves Aiela?"
+}
+:037D
+    JUMP 0x1982
+:0382
+    ENDIF
+:0383
+    KEYWORDS kura
+    ANSWER
+:0389
+    {"Aiela belongs to the Kurak tribe. Her father @Aloron is chief of the Kuraks. Kuraks know the jungle and the jungle cats."
+}
+:0404
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:040B
+    PAUSE
+:040C
+    {
+"$P is Aiela's mate, and so $P is also a member of the Kurak tribe." She smiles. "Perhaps someday $P will be chief of Kuraks."
+}
+:048C
+    JUMP 0x01ba
+:0491
+    ELSE
+:0492
+    JUMP 0x01ba
+:0497
+    ENDIF
+    KEYWORDS bone
+    ANSWER
+:049E
+    {"If $P wants bones, he should go to where the great lizards go to die."
+}
+:04E6
+    PAUSE
+:04E7
+    {
+"East of the stone city of the @Nahuatla is a great stand of iron bamboo, and north of that is the place where the great lizards go to die."
+}
+:0575
+    PAUSE
+:0576
+    {
+"Many bones are there."
+}
+:058F
+    IF [N8(0x33) N8(0x05) FLAG ]
+:0596
+    PAUSE
+:0597
+    {
+"When $P has been @Tristia's mate for a while longer, doubtless he will also feel like lying down among those bones and dying there."
+}
+:061E
+    PAUSE
+:061F
+    {
+}
+:0620
+    BYE
+:0621
+    ELSE
+:0622
+    JUMP 0x01ba
+:0627
+    ENDIF
+:0628
+    KEYWORDS hide
+    ANSWER
+:062E
+    {"If $P wants a hide, he must kill a furred creature and then use a knife on its carcass. Lizard hide is too tough to be any use."
+}
+:06B0
+    IF [N8(0x33) N8(0x05) FLAG ]
+:06B7
+    PAUSE
+:06B8
+    {
+"A good thing for $P to do with a hide is to make a hide bag and cover the face of his mate @Tristia with it."
+}
+:0728
+    PAUSE
+:0729
+    {
+}
+:072A
+    BYE
+:072B
+    ELSE
+:072C
+    JUMP 0x01ba
+:0731
+    ENDIF
+:0732
+    KEYWORDS bamb
+    ANSWER
+:0738
+    {"If $P wants iron bamboo, it is easy to find. He must go north of the @Nahuatla stone village, or south of the @Yolaru village, and near the eastern cliffs he will find a great stand of bamboo."
+}
+:07FB
+    JUMP 0x01ba
+    KEYWORDS myrm
+    ANSWER
+:0806
+    {"The Myrmidex! They are evil. Ants of the jungle, but larger than men. No single tribe can stand against them. And yet the tribes will not @unite against them."
+}
+:08A7
+    IF [N8(0x33) N8(0x05) FLAG ]
+:08AE
+    PAUSE
+:08AF
+    {
+"$P has chosen @Tristia as his mate. He must have much in common with the Myrmidex. Perhaps he should go join them."
+}
+:0925
+    BYE
+:0926
+    ELSE
+:0927
+    JUMP 0x01ba
+:092C
+    ENDIF
+:092D
+    KEYWORDS sahr
+    ANSWER
+:0933
+    {"Sahree is a warrior-woman of the @Yolaru. Sahree and Aiela are friends and allies."
+}
+:0988
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:098F
+    PAUSE
+:0990
+    {
+She adds, playfully: "Sahree is very beautiful, but $P must keep his eyes to Aiela, not Sahree."
+}
+:09F2
+    JUMP 0x01ba
+:09F7
+    ELSE
+:09F8
+    JUMP 0x01ba
+:09FD
+    ENDIF
+    KEYWORDS topu
+    ANSWER
+:0A04
+    {"Aiela has heard the name of Topuru. Topuru is a mad shaman, once of the @Urali. Topuru lives on an island, all alone, in the north somewhere."
+}
+:0A94
+    JUMP 0x01ba
+    KEYWORDS ural
+    ANSWER
+:0A9F
+    {"The Urali are a suspicious tribe. They hide away from the other tribes. Few ever tell their true names."
+}
+:0B09
+    IF [N8(0x35) N8(0x05) FLAG ]
+:0B10
+    PAUSE
+:0B11
+    {
+"Now that @Darden is dead, their chief is Wamap, who is also their shaman."
+}
+:0B5E
+    JUMP 0x01ba
+:0B63
+    ELSE
+:0B64
+    PAUSE
+:0B65
+    {
+"@Darden is still chief among the Urali, though $P has rescued Aiela from him."
+}
+:0BB6
+    JUMP 0x01ba
+:0BBB
+    ENDIF
+    KEYWORDS dard,gian,gem
+    ANSWER
+:0BCB
+    {"Darden thought he could buy Aiela's love with a giant gem, stolen from the @Nahuatla. But Aiela could never love one so cruel as Darden." She pauses, and grins. "But Aiela did keep the gem. It is very pretty!"}
+:0C9D
+    JUMP 0x01ba
+    KEYWORDS yola
+    ANSWER
+:0CA8
+    {"The Yolaru are a strong, noble tribe east of the @Kuraks. Their chief is Apaton; their shaman is Mosagann; Mosagann has a daughter, @Sahree, who is Aiela's friend."
+}
+:0D4E
+    JUMP 0x01ba
+    KEYWORDS nahu
+    ANSWER
+:0D59
+    {"The Nahuatla build their village of stone."
+}
+:0D86
+    PAUSE
+:0D87
+    {
+}
+:0D88
+    IF [N8(0x28) N8(0x07) FLAG ]
+:0D8F
+    {"Moctapotl is their chief."
+}
+:0DAB
+    JUMP 0x01ba
+:0DB0
+    ELSE
+:0DB1
+    {"Huitlapacti is their chief now. Moctapotl was once their chief, but he hides in the jungle, an exile."
+}
+:0E19
+    JUMP 0x01ba
+:0E1E
+    ENDIF
+    KEYWORDS disq
+    ANSWER
+:0E25
+    {"The Disquiqui live west of the @Nahuatla. They do not do much work. They harvest fruits and ferment them into strong drink, and then consume it all."
+}
+:0EBC
+    PAUSE
+:0EBD
+    {
+"Their chief is named Chafblum. He has a daughter named Guoblum."
+}
+:0F00
+    IF [N8(0x04) INPARTY ]
+:0F05
+    PAUSE
+:0F06
+    {
+}
+:0F07
+    PORTRAIT [N8(0x04) ]
+:0F0B
+    {"You aren't kidding, doll! And keep Guoblum away from me!"
+}
+:0F46
+    PAUSE
+:0F47
+    {
+}
+:0F48
+    PORTRAIT [N8(0xeb) ]
+:0F4C
+    JUMP 0x01ba
+:0F51
+    ELSE
+:0F52
+    JUMP 0x01ba
+:0F57
+    ENDIF
+    KEYWORDS tris
+    ANSWER
+:0F5E
+    IF [N8(0x33) N8(0x05) FLAG ]
+:0F65
+    {"$P knows well who Tristia is! Tristia has spread word far and wide that she is $P's mate. She crows it to the wind and stars. Why would $P choose someone like Tristia?" She seems almost in tears.
+}
+:102A
+    JUMP 0x01ba
+:102F
+    ELSE
+:1030
+    {"Tristia? She is Aiela's sister. Not truly: Tristia's father and mother died when their hut burned, so Aiela's father @Aloron raised her."
+}
+:10BB
+    PAUSE
+:10BC
+    {
+"But Tristia is cold as the snake. She shows no gratitude to Aloron. And she is greedy. Whatever Aiela has, Tristia must take away."
+}
+:1142
+    JUMP 0x01ba
+:1147
+    ENDIF
+    KEYWORDS trib
+    ANSWER
+:114E
+    {"There are many tribes in this valley. Aiela will tell $P of them."
+}
+:1192
+    PAUSE
+:1193
+    {
+"There are the @Kurak, Aiela's tribe, jungle-dwellers. Near the Kurak are the dark-skinned @Yolaru, the @Nahuatla, who build their village of stone, and the @Disquiqui, who make merry all their lives."
+}
+:125E
+    PAUSE
+:125F
+    {
+"There are many other, more distant tribes: The Pindiro and the Barako, the Jukari and the misshapen Haakur, the Barrab and the lizard-like Sakkhra, the ant-like @Myrmidex, and the @Urali, who had stolen Aiela away."
+}
+:1339
+    PAUSE
+:133A
+    {
+}
+:133B
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:1342
+    {She kisses you. "But there is only one who may steal Aiela away, and that is $P."
+}
+:1394
+    ENDIF
+:1395
+    JUMP 0x01ba
+    KEYWORDS unit,ally,alli
+    ANSWER
+:13AA
+    {"Aiela has often wished that the tribes would unite against the @Myrmidex. Aiela and her friend @Sahree have discussed this much."
+}
+:142D
+    PAUSE
+:142E
+    {
+"But the chiefs do not listen to their daughters in such matters." Then her eyes narrow as she looks at you.
+}
+:149C
+    PAUSE
+:149D
+    {
+}
+:149E
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:14A5
+    {"$P has already won Aiela's heart. Aiela is sure that $P could win friendship from the chiefs. Aiela's father @Aloron will already help you."
+}
+:1533
+    PAUSE
+:1534
+    {
+"Aiela thinks that $P could command respect of the chiefs and @unite all the tribes... if only he would try."
+}
+:15A3
+    JUMP 0x01ba
+:15A8
+    ELSE
+:15A9
+    {"Aiela thinks that $P could command respect of the chiefs and @unite all the tribes... if only he would try."
+}
+:1617
+    JUMP 0x01ba
+:161C
+    ENDIF
+    KEYWORDS comp
+    ANSWER
+:1623
+    IF [N8(0x02) INPARTY ]
+:1628
+    {"Aiela is already $P's war-companion."
+}
+:164F
+    JUMP 0x234c
+:1654
+    ELSE
+:1655
+    {"$P can ask Aiela to @join him if he wishes."
+}
+:1683
+    JUMP 0x01ba
+:1688
+    ENDIF
+:1689
+    KEYWORDS leav
+    ANSWER
+:168F
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:1697
+    IF [0x00 B2 N8(0x02) == ]
+:169E
+    {"Aiela will not be ordered! Aiela will stay here if she pleases."
+}
+:16E0
+    JUMP 0x01ba
+:16E5
+    ENDIF
+:16E6
+    IF [0x00 B2 N8(0x01) == ]
+:16ED
+    {She looks at the surrounding water. "Aiela will not jump into the water."
+}
+:1737
+    JUMP 0x01ba
+:173C
+    ENDIF
+:173D
+    JUMP 0x20f0
+    KEYWORDS wait
+    ANSWER
+:1748
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:1750
+    IF [0x00 B2 N8(0x02) == ]
+:1757
+    {"Aiela will not wait here for you. Aiela is not $P's @companion, in war or in anything."
+}
+:17B0
+    JUMP 0x01ba
+:17B5
+    ENDIF
+:17B6
+    IF [0x00 B2 N8(0x01) == ]
+:17BD
+    {She laughs at you. "Wait on the water? $P is funny."
+}
+:17F2
+    JUMP 0x01ba
+:17F7
+    ENDIF
+:17F8
+    JUMP 0x20f0
+    KEYWORDS join
+    ANSWER
+:1803
+    IF [N8(0xeb) INPARTY ]
+:1808
+    {"Aiela is already companion to $P. $P is sometimes forgetful." She grins.
+}
+:1852
+    JUMP 0x01ba
+:1857
+    ELSE
+:1858
+    JUMP 0x1f0e
+:185D
+    ENDIF
+:185E
+    KEYWORDS bye
+    ANSWER
+:1863
+    IF [N8(0x33) N8(0x05) FLAG ]
+:186A
+    {She snorts and turns away.
+}
+:1885
+    BYE
+:1886
+    ENDIF
+:1887
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:188E
+    {She delicately traces her hand across your jaw. "Aiela loves talking to $P."
+}
+:18DB
+    BYE
+:18DC
+    ELSE
+:18DD
+    {"Aiela will always talk to $P."
+}
+:18FD
+    BYE
+:18FE
+    ENDIF
+:18FF
+    KEYWORDS *
+    ANSWER
+:1902
+    {She sighs. "Aiela knows nothing of this."
+}
+:192C
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:1933
+    {"But she is willing for $P to tell her of it," she adds hopefully.
+}
+:1976
+    JUMP 0x01ba
+:197B
+    ELSE
+:197C
+    JUMP 0x01ba
+:1981
+    ENDIF
+    END_ANSWER
+:1982
+    PAUSE
+:1983
+    {
+}
+:1984
+    IF [N8(0x33) N8(0x05) FLAG ]
+:198B
+    {She glares at you. "But $P has said that he loves @Tristia. $P is cruel and fickle. A worthy mate for Aiela? Ha! He is better suited to the apes of the forest."
+}
+:1A2C
+    PAUSE
+:1A2D
+    {
+Her expression softens from 'furious' to merely 'hurt.' "But perhaps it is true. Does $P truly care for Aiela more than Tristia?"
+}
+:1AB0
+    JUMP 0x1abc
+:1AB5
+    ELSE
+:1AB6
+    JUMP 0x1cc1
+:1ABB
+    ENDIF
+:1ABC
+    PAUSE
+:1ABD
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:1AC3
+    CLEAR_FLAG [N8(0x33) ], [N8(0x05) ]
+:1ACA
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1AD1
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:1AD8
+    {The hurt look disappears and is gradually replaced by a smile. "Aiela is glad. Aiela has long loved $P, since first she saw him. But when she heard that he preferred @Tristia..."
+}
+:1B8B
+    PAUSE
+:1B8C
+    {
+She steps up and embraces you. "Be true of heart with Aeila, and Aiela will stay true of heart with $P." And she kisses you, her lips sweet as the perfume of a jungle flower.
+}
+:1C3C
+    JUMP 0x01ba
+    KEYWORDS n
+    ANSWER
+:1C44
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1C4B
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x05) ]
+:1C52
+    {Her expression turns to one of fury. "$P plays with Aiela's heart! $P is cruel and evil. Leave Aiela alone!"
+}
+:1CBF
+    BYE
+:1CC0
+    END_ANSWER
+:1CC1
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:1CC7
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1CCE
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:1CD5
+    {She throws herself into your arms. "Long has Aiela waited to hear $P say this! Aiela has loved $P since first she saw him."
+}
+:1D51
+    PAUSE
+:1D52
+    {
+And she kisses you, passionately losing herself in your embrace for one long moment.
+}
+:1DA8
+    PAUSE
+:1DA9
+    {
+Then she gives you an exasperated look. "$P must not wait so long next time before saying what he feels."
+}
+:1E14
+    JUMP 0x01ba
+    KEYWORDS n
+    ANSWER
+:1E1C
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x05) ]
+:1E23
+    {"Oh." She shrinks back a little, then becomes grim-faced and straightens up. "So it is. Aiela is just another warrior to $P."
+}
+:1EA1
+    PAUSE
+:1EA2
+    {
+"$P is just another warrior to Aiela, too." Her jaw trembles just a little, and she turns away from you.
+}
+:1F0C
+    BYE
+:1F0D
+    END_ANSWER
+:1F0E
+    IF [N8(0x33) N8(0x05) FLAG ]
+:1F15
+    {"Join $P? $P who loves she-cat @Tristia? Never!" She turns her back on you.
+}
+:1F61
+    BYE
+:1F62
+    ELSE
+:1F63
+    JUMP 0x1f69
+:1F68
+    ENDIF
+:1F69
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:1F70
+    {Her eyes widen. "$P is both bold and cruel! $P has already sent Aiela away from him in disgrace. $P does not @love Aiela. Why should Aiela join $P now?"
+}
+:2009
+    JUMP 0x01ba
+:200E
+    ENDIF
+:200F
+    DECLARE [0x00, 0xb2] = [N8(0xeb) JOIN ]
+:2017
+    IF [0x00 B2 N8(0x02) == ]
+:201E
+    {"Aiela would love to join $P... when there are fewer people traveling with him."
+}
+:206F
+    ENDIF
+:2070
+    IF [0x00 B2 N8(0x01) == ]
+:2077
+    {"Aiela cannot join with $P now! Maybe later."
+}
+:20A5
+    ENDIF
+:20A6
+    IF [0x00 B2 N8(0x00) == ]
+:20AD
+    {"Aiela would be proud to be war-companion of the mighty $P."
+}
+:20EA
+    ENDIF
+:20EB
+    JUMP 0x01ba
+:20F0
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:20F7
+    {Her jaw trembles a little. "$P has said he loves Aiela. Now he tells her to leave him. Aiela does not understand."
+}
+:216A
+    JUMP 0x2229
+:216F
+    ELSE
+:2170
+    {She looks a little sad. "If $P wishes," she says heavily, "Aiela will leave his company. Aiela enjoyed being his companion." She starts to say something more, but decides against it.
+}
+:2227
+    BYE
+:2228
+    ENDIF
+:2229
+    PAUSE
+:222A
+    {
+"Does $P mean that he no longer loves Aiela?"
+}
+:2259
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:225F
+    {The light goes out of her eyes. "So. $P is cold and cruel as the lizard." She bursts into tears. "He is no fit mate for Aiela."
+}
+:22DF
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x05) ]
+:22E6
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:22ED
+    WORKTYPE [N8(0xeb) ], [N8(0x11) ]
+:22F4
+    BYE
+:22F5
+    KEYWORDS n
+    ANSWER
+:22F8
+    {She breathes a sigh of relief, and smiles. "Aiela would wait for $P forever."
+}
+:2346
+    JUMP 0x01ba
+    END_ANSWER
+:234C
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:2353
+    PAUSE
+:2354
+    {
+She adds, softly: "And, most important, Aiela's mate."
+}
+:238C
+    JUMP 0x01ba
+:2391
+    ELSE
+:2392
+    JUMP 0x01ba
+:2397
+    ENDIF

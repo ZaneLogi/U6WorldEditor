@@ -50,3 +50,8 @@
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #endif
 #endif
+
+#include <string>
+
+std::string format_string(const std::string fmt, ...);
+std::string format_hex_string(const uint8_t* p_src, const uint8_t* p_end);

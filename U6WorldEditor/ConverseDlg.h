@@ -3,6 +3,8 @@
 #include <string>
 #include "Script.h"
 
+#include "MapManager.h"
+
 // CConverseDlg dialog
 
 class CConverseDlg : public CDialogEx
@@ -10,7 +12,7 @@ class CConverseDlg : public CDialogEx
 	DECLARE_DYNAMIC(CConverseDlg)
 
 public:
-	CConverseDlg(const std::string& script, CWnd* pParent = NULL);   // standard constructor
+	CConverseDlg(MapManager* mm, CWnd* pParent = NULL);   // standard constructor
 	virtual ~CConverseDlg();
 
 // Dialog Data
@@ -29,6 +31,9 @@ public:
     CEdit m_input;
     CEdit m_output;
 
+    MapManager& m_map_manager;
     ScriptInterpreter m_interpreter;
     std::string m_text;
+    CListBox m_lbNPCs;
+    afx_msg void OnSelchangeNpc();
 };

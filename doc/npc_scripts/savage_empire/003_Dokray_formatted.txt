@@ -1,0 +1,383 @@
+:0000
+    NPC_ID: npc id: 3, npc name: Dokray
+:0008
+    NPC_LOOK: a ruggedly handsome warrior.
+*
+:0027
+    START CONVERSION
+:0028
+    {"Yes, $P?"
+}
+:0033
+    JUMP 0x0038
+:0038
+    {
+}
+:0039
+    ASK
+    KEYWORDS name
+    ANSWER
+:0040
+    {"It is Dokray." (He pronounces it dough-CRAY.)
+}
+:006F
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0075
+    PORTRAIT [N8(0xeb) ]
+:0079
+    JUMP 0x0038
+    KEYWORDS dupr
+    ANSWER
+:0084
+    {You see a glimmer of recognition in his eyes. "You speak of a name which is somehow familiar."
+}
+:00E3
+    JUMP 0x0038
+    KEYWORDS dokr
+    ANSWER
+:00EE
+    {"Yes, name is Dokray."
+}
+:0105
+    JUMP 0x0038
+    KEYWORDS job
+    ANSWER
+:010F
+    {"Dokray quests across all the Valley of @Eodon, fighting bad things like the @Myrmidex."
+}
+:0168
+    JUMP 0x0038
+    KEYWORDS trib
+    ANSWER
+:0173
+    {"Dokray's home is with the @Pindiro, but Dokray visits many other tribes."
+}
+:01BE
+    JUMP 0x0038
+    KEYWORDS vall,eodo
+    ANSWER
+:01CE
+    {He waves his hands as if to encompass all the world. "This land is all the Valley of Eodon. Dokray thought that Eodon was all the world until $P came from outside. So @Intanya says."
+}
+:0285
+    JUMP 0x0038
+    KEYWORDS myrm
+    ANSWER
+:0290
+    {He snarls as he speaks. "Myrmidex are ant-like but are the height of men. They are fierce warriors."
+}
+:02F5
+    PAUSE
+:02F6
+    {
+"It is not because they have any skill; they do not. But they are without fear and without pain."
+}
+:0359
+    PAUSE
+:035A
+    {
+"They come into the human villages and kill the people, especially the weak and the young. Dokray hates the Myrmidex. But Dokray cannot make the tribes @unite against them."
+}
+:0409
+    JUMP 0x0038
+    KEYWORDS unit
+    ANSWER
+:0414
+    {"The tribes fight one another, even as the Myrmidex move among them and kill them. The tribes MUST unite to fight the Myrmidex. But Dokray cannot persuade them to unite. The @chiefs will not listen to Dokray."
+}
+:04E6
+    JUMP 0x0038
+    KEYWORDS pind
+    ANSWER
+:04F1
+    {"Dokray belongs to Pindiro tribe of the north. But..." He frowns. "Dokray was not born a Pindiro."
+}
+:0554
+    PAUSE
+:0555
+    {
+"Dokray wandered out of the mountains many moons ago, with no memory of his past. The Pindiro adopted Dokray."
+}
+:05C5
+    JUMP 0x0038
+    KEYWORDS chie
+    ANSWER
+:05D0
+    {"The tribes cannot unite until the chiefs so decree. But when Dokray talks to the chiefs about it, they do not listen. Dokray is a great warrior... but cannot convince with words." He shrugs.
+}
+:0690
+    JUMP 0x0038
+    KEYWORDS raf
+    ANSWER
+:069A
+    {"A man has a name like that. Raf-Kin lives among the @Yolaru."
+}
+:06D9
+    JUMP 0x0038
+    KEYWORDS yola
+    ANSWER
+:06E4
+    {"The Yolaru are a good tribe. They live east of the Kurak village."
+}
+:0728
+    JUMP 0x0038
+    KEYWORDS topu
+    ANSWER
+:0733
+    {"Dokray knows of a man named Topuru. Topuru is mad. Topuru lives on a little island somewhere in the north, not far from Barako village."
+}
+:07BD
+    JUMP 0x0038
+    KEYWORDS bara
+    ANSWER
+:07C8
+    {"There are two tribes in the far north: The Pindiro of the plains, Dokray's tribe; and the Barako of the mountains."
+}
+:083D
+    JUMP 0x0038
+    KEYWORDS inta
+    ANSWER
+:0848
+    {"Intanya is shaman of the Kurak tribe. But Intanya is far more."
+}
+:0889
+    PAUSE
+:088A
+    {
+"Intanya keeps his ear to the ground for all the valley, tries to keep wars between the tribes from becoming too fierce, tries to keep the @Myrmidex at bay."
+}
+:0929
+    JUMP 0x0038
+    KEYWORDS trio
+    ANSWER
+:0934
+    {"Triolo is helper-shaman of Intanya. Triolo sings to himself all the time."
+}
+:0980
+    IF [N8(0x09) INPARTY ]
+:0985
+    PAUSE
+:0986
+    {
+He gives a sly look over to Triolo. "Badly," he adds.
+}
+:09BD
+    PAUSE
+:09BE
+    {
+}
+:09BF
+    PORTRAIT [N8(0x09) ]
+:09C3
+    {"Triolo heard that!"
+}
+:09D8
+    PAUSE
+:09D9
+    {
+}
+:09DA
+    PORTRAIT [N8(0xeb) ]
+:09DE
+    {Dokray grins.
+}
+:09EC
+    ENDIF
+:09ED
+    JUMP 0x0038
+    KEYWORDS shama
+    ANSWER
+:09F9
+    {"Dokray knows of three shamans. Did $P mean the Pindiro shaman @Kunawo, @Intanya or @Triolo?"
+}
+:0A57
+    JUMP 0x0038
+    KEYWORDS shamu
+    ANSWER
+:0A63
+    {"Shamuru is a warrior of the Barako tribe. Very quiet. Good tracker, good hunter. Dokray is better warrior."
+}
+:0AD0
+    JUMP 0x0038
+    KEYWORDS sham
+    ANSWER
+:0ADB
+    {He shakes his head. "Dokray did not hear $P very well. Did $P say 'Shaman'?"
+}
+:0B28
+    JUMP 0x0e7e
+    KEYWORDS bye
+    ANSWER
+:0B32
+    {"Yes, let us stop talking. Dokray and $P should go find something to smash!"
+}
+:0B7F
+    BYE
+:0B80
+    KEYWORDS leav
+    ANSWER
+:0B86
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:0B8E
+    IF [0x00 B2 N8(0x02) == ]
+:0B95
+    {"If $P wants Dokray to leave, $P has only to ask."
+}
+:0BC8
+    WORKTYPE [N8(0xeb) ], [N8(0x11) ]
+:0BCF
+    BYE
+:0BD0
+    ENDIF
+:0BD1
+    IF [0x00 B2 N8(0x01) == ]
+:0BD8
+    {He looks dubiously down at the water. "There are biting fish there. Dokray will wait."
+}
+:0C2F
+    JUMP 0x0038
+:0C34
+    ENDIF
+:0C35
+    {"As $P wishes." Stoically, he waves farewell and goes trudging off.
+}
+:0C79
+    WORKTYPE [N8(0xeb) ], [N8(0x11) ]
+:0C80
+    BYE
+:0C81
+    KEYWORDS wait
+    ANSWER
+:0C87
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:0C8F
+    IF [0x00 B2 N8(0x02) == ]
+:0C96
+    {"No, Dokray has things to do. Dokray will not wait here."
+}
+:0CD0
+    JUMP 0x0038
+:0CD5
+    ENDIF
+:0CD6
+    IF [0x00 B2 N8(0x01) == ]
+:0CDD
+    {He looks at the water. "There are biting fish here. Dokray would not make it to shore alive. $P is joking, of course."
+}
+:0D54
+    JUMP 0x0038
+:0D59
+    ENDIF
+:0D5A
+    {He nods. "$P must come back for Dokray when $P again needs Dokray's prowess." He waves goodbye.
+}
+:0DBA
+    SET_FLAG [N8(0xeb) ], [0x08 N8(0x07) + ]
+:0DC3
+    BYE
+:0DC4
+    KEYWORDS join
+    ANSWER
+:0DCA
+    IF [N8(0xeb) INPARTY ]
+:0DCF
+    {He gives you a strange look. "Is this a foreign thing? Dokray is already with $P."
+}
+:0E22
+    JUMP 0x0038
+:0E27
+    ELSE
+:0E28
+    JUMP 0x0fc8
+:0E2D
+    ENDIF
+:0E2E
+    KEYWORDS *
+    ANSWER
+:0E31
+    IF [N8(0x09) INPARTY ]
+:0E36
+    {"Ask Triolo about that."
+}
+:0E4F
+    JUMP 0x0038
+:0E54
+    ELSE
+:0E55
+    {"$P must ask another about that."
+}
+:0E77
+    JUMP 0x0038
+:0E7C
+    ENDIF
+    END_ANSWER
+:0E7D
+    BYE
+:0E7E
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0E84
+    {"Ah. Did $P mean @Intanya or @Triolo?"
+}
+:0EAB
+    JUMP 0x0038
+    KEYWORDS n
+    ANSWER
+:0EB3
+    {"Ah. Then did $P say 'Shamuru'?"
+}
+:0ED4
+    JUMP 0x0eda
+    END_ANSWER
+:0EDA
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0EE0
+    {"Shamuru is a warrior of the Barako tribe. Very quiet. Good tracker, good hunter. Dokray is better warrior."
+}
+:0F4D
+    JUMP 0x0038
+    KEYWORDS n
+    ANSWER
+:0F55
+    {He throws up his hands in puzzlement. "Then Dokray does not understand what $P said. Ask Triolo about that."
+}
+:0FC2
+    JUMP 0x0038
+    END_ANSWER
+:0FC8
+    IF [N8(0x0a) INPARTY ]
+:0FCD
+    {He shakes his head, glaring at Ugyuk. "Dokray will not join $P while Ugyuk travels with him."
+}
+:102B
+    JUMP 0x0038
+:1030
+    ENDIF
+:1031
+    DECLARE [0x00, 0xb2] = [N8(0xeb) JOIN ]
+:1039
+    IF [0x00 B2 N8(0x02) == ]
+:1040
+    {"Dokray cannot join with $P. $P has too many people with him already."
+}
+:1087
+    ENDIF
+:1088
+    IF [0x00 B2 N8(0x01) == ]
+:108F
+    {"Dokray will join with $P when $P is on firm ground."
+}
+:10C5
+    ENDIF
+:10C6
+    IF [0x00 B2 N8(0x00) == ]
+:10CD
+    {He considers it briefly, then nods. "Dokray would like hunting with $P. Dokray will join."
+}
+:1128
+    ENDIF
+:1129
+    JUMP 0x0038

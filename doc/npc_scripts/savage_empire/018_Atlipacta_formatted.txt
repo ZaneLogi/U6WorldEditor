@@ -1,0 +1,526 @@
+:0000
+    NPC_ID: npc id: 18, npc name: Atlipacta
+:000B
+    NPC_LOOK: a sharp-faced but beautiful woman in Aztec dress.
+*
+:003F
+    START CONVERSION
+:0040
+    IF [N8(0xeb) 0x00 FLAG ]
+:0046
+    JUMP 0x0075
+:004B
+    ELSE
+:004C
+    {"Blessings of the spirits on you!"
+}
+:006F
+    JUMP 0x00c9
+:0074
+    ENDIF
+:0075
+    {"You have returned. Perhaps you will choose to @trade for some of my weapons."
+}
+:00C4
+    JUMP 0x00c9
+:00C9
+    {
+}
+:00CA
+    ASK
+    KEYWORDS name,atli
+    ANSWER
+:00D6
+    {"I am Atlipacta."
+}
+:00E8
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:00EE
+    PORTRAIT [N8(0xeb) ]
+:00F2
+    JUMP 0x00c9
+    KEYWORDS job
+    ANSWER
+:00FC
+    {"I am a crafter of weapons and armor."
+}
+:0123
+    PAUSE
+:0124
+    {
+"Perhaps you would care to @trade for some of my crafts."}
+:015E
+    JUMP 0x00c9
+    KEYWORDS trib,tich,nahu
+    ANSWER
+:0173
+    {"This is Tichticatl, the city of the Nahuatla."
+}
+:01A3
+    JUMP 0x00c9
+    KEYWORDS trad,buy
+    ANSWER
+:01B2
+    JUMP 0x07e6
+    KEYWORDS weap
+    ANSWER
+:01BD
+    {"Yes, I have many fine weapons to @trade."
+}
+:01E8
+    JUMP 0x00c9
+    KEYWORDS armo,shie,leat
+    ANSWER
+:01FD
+    {"I @trade both leather shields and armor."
+}
+:0228
+    JUMP 0x00c9
+    KEYWORDS emer
+    ANSWER
+:0233
+    {"Emeralds are valuable to me. I will trade both weapons and shields for them."
+}
+:0282
+    JUMP 0x00c9
+    KEYWORDS blue,ston
+    ANSWER
+:0292
+    {"Yes, I used to @trade for blue stones from the southwest.  Now I only need @emeralds."
+}
+:02EA
+    JUMP 0x00c9
+    KEYWORDS bone,bamb,sex,hide,diam
+    ANSWER
+:0308
+    {"I do not trade for $Z."
+}
+:0321
+    JUMP 0x00c9
+    KEYWORDS drum,tuom
+    ANSWER
+:0331
+    {"I have heard of a drum-maker named Tuomaxx. He lives on a hill north of Tichticatl somewhere."
+}
+:0391
+    JUMP 0x00c9
+    KEYWORDS moct
+    ANSWER
+:039C
+    IF [N8(0x28) N8(0x07) FLAG ]
+:03A3
+    {"Our king is Moctapotl. He was until recently in exile, but his usurper, Huitlapacti, has been cast down. Nor will I miss Huitlapacti."
+}
+:042B
+    JUMP 0x00c9
+:0430
+    ELSE
+:0431
+    {She starts, and looks nervous. "I do not know that name. NO ONE knows that name in Tichticatl now. Perhaps you should leave."
+}
+:04AF
+    BYE
+:04B0
+    ENDIF
+:04B1
+    KEYWORDS myrm
+    ANSWER
+:04B7
+    {"I have never seen the Myrmidex. I know they are fierce. I know I would wish to be wearing my own armor when facing them."
+}
+:0532
+    JUMP 0x00c9
+    KEYWORDS huit
+    ANSWER
+:053D
+    IF [N8(0x28) N8(0x07) FLAG ]
+:0544
+    {Her voice is sharp: "Don't speak his name to me! That vile madman had my own @brother killed."
+}
+:05A3
+    JUMP 0x00c9
+:05A8
+    ELSE
+:05A9
+    {Her expression and voice become carefully neutral. "All hail the king," she says dully.
+}
+:0601
+    JUMP 0x00c9
+:0606
+    ENDIF
+    KEYWORDS brot
+    ANSWER
+:060D
+    IF [N8(0x28) N8(0x07) FLAG ]
+:0614
+    {"Yes, my brother was one of Huitlapacti's guards. One day, Huitlapacti hadn't had his fill of killing, and had no more victims..."
+}
+:0697
+    PAUSE
+:0698
+    {
+"So he had his guards draw lots to see who would die next. It was my brother."
+}
+:06E8
+    JUMP 0x00c9
+:06ED
+    ELSE
+:06EE
+    {"I do not know what you are saying."
+}
+:0713
+    JUMP 0x00c9
+:0718
+    ENDIF
+    KEYWORDS bow,arr,kni,swor,armo,shie
+    ANSWER
+:0735
+    {"Yes, I @trade in that."
+}
+:074E
+    JUMP 0x00c9
+    KEYWORDS bye
+    ANSWER
+:0758
+    {"May the spirits guide you on your path. Do return when you are in need of a well-made weapon!"
+}
+:07B8
+    BYE
+:07B9
+    KEYWORDS *
+    ANSWER
+:07BC
+    {"I do not know what you are saying."
+}
+:07E1
+    JUMP 0x00c9
+    END_ANSWER
+:07E6
+    {"I have @bows, @arrows, @knives, @swords, @armor and @shields for trade.
+Which would you like?"
+
+}
+:0847
+    ASK
+    KEYWORDS bo
+    ANSWER
+:084C
+    {"I'll take
+two emeralds for
+a bow.
+How many would you like?"
+}
+:0889
+    JUMP 0x0aa9
+    KEYWORDS arr
+    ANSWER
+:0893
+    {"I'll trade you
+a dozen arrows for
+one emerald.
+How many dozens would you like?"
+}
+:08E4
+    JUMP 0x0b6d
+    KEYWORDS kn
+    ANSWER
+:08ED
+    {"I'll give you
+one knife for
+one emerald.
+How many would you like?"
+}
+:0931
+    JUMP 0x0c76
+    KEYWORDS sw
+    ANSWER
+:093A
+    {"I'll trade you
+one sword for
+three emeralds.
+How many would you like?"
+}
+:0982
+    JUMP 0x0d49
+    KEYWORDS arm
+    ANSWER
+:098C
+    {"I'll take
+three emeralds for
+one set of leather armor.
+How many would you like?"
+}
+:09DE
+    JUMP 0x0e12
+    KEYWORDS sh
+    ANSWER
+:09E7
+    {"I'll take
+one emerald for
+a shield.
+How many would you like?"
+}
+:0A26
+    JUMP 0x0eec
+    KEYWORDS *
+    ANSWER
+:0A2E
+    {"Nothing of interest? Perhaps you will need fine weapons later."
+}
+:0A6F
+    JUMP 0x00c9
+    END_ANSWER
+:0A74
+    {Would you like something else?"
+}
+:0A94
+    ASKC [yn
+]
+    KEYWORDS y
+    ANSWER
+:0A9B
+    JUMP 0x07e6
+    KEYWORDS n
+    ANSWER
+:0AA3
+    JUMP 0x00c9
+    END_ANSWER
+:0AA9
+    INPUT (17, 00) 
+:0AAC
+    IF [0x00 B2 N8(0x01) < ]
+:0AB3
+    {
+"}
+:0AB5
+    JUMP 0x0a74
+:0ABA
+    ENDIF
+:0ABB
+    DECLARE [0x01, 0xb2] = [N8(0x02) 0x00 B2 * ]
+:0AC5
+    IF [N8(0x01) N8(0x49) OBJCOUNT 0x01 B2 < ]
+:0ACF
+    {"You can't afford #0 bow\s. }
+:0AEB
+    JUMP 0x0a74
+:0AF0
+    ENDIF
+:0AF1
+    NEW [N8(0x01) ], [N8(0x1f) ], [N8(0x00) ], [0x00 B2 ]
+:0AFE
+    IF [0x1d B2 ]
+:0B02
+    DELETE [N8(0x01) ], [N8(0x49) ], [N8(0x00) ], [0x01 B2 ]
+:0B0F
+    {She takes #1 emerald\s from you and gives you #0 bow\s.
+"}
+:0B48
+    ELSE
+:0B49
+    {"You couldn't carry #0 bow\s. }
+:0B67
+    ENDIF
+:0B68
+    JUMP 0x0a74
+:0B6D
+    INPUT (17, 00) 
+:0B70
+    IF [0x00 B2 N8(0x01) < ]
+:0B77
+    {
+"}
+:0B79
+    JUMP 0x0a74
+:0B7E
+    ENDIF
+:0B7F
+    IF [0x00 B2 N8(0x0a) > ]
+:0B86
+    {"I do not have that many arrows!"
+}
+:0BA8
+    JUMP 0x0a74
+:0BAD
+    ENDIF
+:0BAE
+    DECLARE [0x01, 0xb2] = [N8(0x01) 0x00 B2 * ]
+:0BB8
+    DECLARE [0x00, 0xb2] = [N8(0x0c) 0x00 B2 * ]
+:0BC2
+    IF [N8(0x01) N8(0x49) OBJCOUNT 0x01 B2 < ]
+:0BCC
+    {"You can't afford #0 arrow\s. }
+:0BEA
+    JUMP 0x0a74
+:0BEF
+    ENDIF
+:0BF0
+    NEW [N8(0x01) ], [N8(0x2d) ], [N8(0x00) ], [0x00 B2 ]
+:0BFD
+    IF [0x1d B2 ]
+:0C01
+    DELETE [N8(0x01) ], [N8(0x49) ], [N8(0x00) ], [0x01 B2 ]
+:0C0E
+    {She takes #1 emerald\s from you and gives you #0 arrow\s.
+"}
+:0C49
+    ELSE
+:0C4A
+    {"You couldn't carry that many arrows. }
+:0C70
+    ENDIF
+:0C71
+    JUMP 0x0a74
+:0C76
+    INPUT (17, 00) 
+:0C79
+    IF [0x00 B2 N8(0x01) < ]
+:0C80
+    {
+"}
+:0C82
+    JUMP 0x0a74
+:0C87
+    ENDIF
+:0C88
+    DECLARE [0x01, 0xb2] = [0x00 B2 N8(0x01) * ]
+:0C92
+    IF [N8(0x01) N8(0x49) OBJCOUNT 0x01 B2 < ]
+:0C9C
+    {"You can't afford #0 kni/fe\ves. }
+:0CBD
+    JUMP 0x0a74
+:0CC2
+    ENDIF
+:0CC3
+    NEW [N8(0x01) ], [N8(0x19) ], [N8(0x00) ], [0x00 B2 ]
+:0CD0
+    IF [0x1d B2 ]
+:0CD4
+    DELETE [N8(0x01) ], [N8(0x49) ], [N8(0x00) ], [0x01 B2 ]
+:0CE1
+    {She takes #1 emerald\s from you and gives you #0 kni/fe\ves.
+"}
+:0D1F
+    ELSE
+:0D20
+    {"You couldn't carry #0 kni/fe\ves. }
+:0D43
+    ENDIF
+:0D44
+    JUMP 0x0a74
+:0D49
+    INPUT (17, 00) 
+:0D4C
+    IF [0x00 B2 N8(0x01) < ]
+:0D53
+    {
+"}
+:0D55
+    JUMP 0x0a74
+:0D5A
+    ENDIF
+:0D5B
+    DECLARE [0x01, 0xb2] = [0x00 B2 N8(0x03) * ]
+:0D65
+    IF [N8(0x01) N8(0x49) OBJCOUNT 0x01 B2 < ]
+:0D6F
+    {"You can't afford #0 sword\s. }
+:0D8D
+    JUMP 0x0a74
+:0D92
+    ENDIF
+:0D93
+    NEW [N8(0x01) ], [N8(0x21) ], [N8(0x00) ], [0x00 B2 ]
+:0DA0
+    IF [0x1d B2 ]
+:0DA4
+    DELETE [N8(0x01) ], [N8(0x49) ], [N8(0x00) ], [0x01 B2 ]
+:0DB1
+    {She takes #1 emeralds from you and gives you #0 sword\s.
+"}
+:0DEB
+    ELSE
+:0DEC
+    {"You couldn't carry #0 sword\s. }
+:0E0C
+    ENDIF
+:0E0D
+    JUMP 0x0a74
+:0E12
+    INPUT (17, 00) 
+:0E15
+    IF [0x00 B2 N8(0x01) < ]
+:0E1C
+    {
+"}
+:0E1E
+    JUMP 0x0a74
+:0E23
+    ENDIF
+:0E24
+    DECLARE [0x01, 0xb2] = [0x00 B2 N8(0x03) * ]
+:0E2E
+    IF [N8(0x01) N8(0x49) OBJCOUNT 0x01 B2 < ]
+:0E38
+    {"You can't afford that much armor. }
+:0E5B
+    JUMP 0x0a74
+:0E60
+    ENDIF
+:0E61
+    NEW [N8(0x01) ], [N8(0x08) ], [N8(0x00) ], [0x00 B2 ]
+:0E6E
+    IF [0x1d B2 ]
+:0E72
+    DELETE [N8(0x01) ], [N8(0x49) ], [N8(0x00) ], [0x01 B2 ]
+:0E7F
+    {She takes #1 emeralds from you and gives you #0 set\s of armor.
+"}
+:0EC0
+    ELSE
+:0EC1
+    {"You couldn't carry that much armor! }
+:0EE6
+    ENDIF
+:0EE7
+    JUMP 0x0a74
+:0EEC
+    INPUT (17, 00) 
+:0EEF
+    IF [0x00 B2 N8(0x01) < ]
+:0EF6
+    {
+"}
+:0EF8
+    JUMP 0x0a74
+:0EFD
+    ENDIF
+:0EFE
+    DECLARE [0x01, 0xb2] = [0x00 B2 N8(0x01) * ]
+:0F08
+    IF [N8(0x01) N8(0x49) OBJCOUNT 0x01 B2 < ]
+:0F12
+    {"You can't afford #0 shield\s. }
+:0F31
+    JUMP 0x0a74
+:0F36
+    ENDIF
+:0F37
+    NEW [N8(0x01) ], [N8(0x0e) ], [N8(0x00) ], [0x00 B2 ]
+:0F44
+    IF [0x1d B2 ]
+:0F48
+    DELETE [N8(0x01) ], [N8(0x49) ], [N8(0x00) ], [0x01 B2 ]
+:0F55
+    {She takes #1 emerald\s from you and gives you #0 shield\s.
+"}
+:0F91
+    ELSE
+:0F92
+    {"Sorry, you can't carry that much. }
+:0FB5
+    ENDIF
+:0FB6
+    JUMP 0x0a74

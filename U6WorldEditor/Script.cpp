@@ -709,6 +709,16 @@ void ScriptInterpreter::skip_code_block(const uint8_t* &p, const uint8_t* end, i
 }
 
 
+void ScriptInterpreter::collect_text(std::string& result, const uint8_t* &p, const uint8_t* script_start, const uint8_t* script_end)
+{
+    auto script_offset = p - script_start; // for debug
+    auto start = p;
+    while (p < script_end && *p < 0x80)
+    {
+        p++;
+    }
+    result += std::string((const char*)start, p - start);
+}
 
 void ScriptInterpreter::collect_eval(std::string& result, const uint8_t* &p, const uint8_t* script_start, const uint8_t* script_end)
 {
@@ -738,7 +748,10 @@ void ScriptInterpreter::collect_eval(std::string& result, const uint8_t* &p, con
         case U6OP_DIV:          result += "/ "; break;
         case U6OP_LOR:          result += "| "; break;
         case U6OP_LAND:         result += "& "; break;
+        case U6OP_CANCARRY:     result += "CANCARRY "; break;
+        case U6OP_WEIGHT:       result += "WEIGHT "; break;
         case U6OP_FLAG:         result += "FLAG "; break;
+        case U6OP_OBJCOUNT:     result += "OBJCOUNT "; break;
         case U6OP_INPARTY:      result += "INPARTY "; break;
         case U6OP_OBJINPARTY:   result += "OBJINPARTY "; break;
         case U6OP_JOIN:         result += "JOIN "; break;
@@ -759,12 +772,14 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
         auto script_offset = p - script_start;
         result += format_string(":%04X\r\n", script_offset);
 
+        collect_strange(result, p, script_start, script_end);
+
         int code = (uint8_t)*p;
         if (code < 0x80)
         { // printable
-            auto anchor = p;
-            skip_text(p, script_end);
-            result += format_string("    {%s}\r\n", std::string((char*)anchor, p - anchor).c_str());
+            result += "    {";
+            collect_text(result, p, script_start, script_end);
+            result += "}\r\n";
         }
         else
         { // control code
@@ -773,18 +788,18 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
             switch (code) {
             case U6OP_ID: // npc id and name
             {
-                auto npc_id = *p++;
-                auto anchor = p;
-                skip_text(p, script_end);
+                m_npc_id = *p++;
+                m_npc_name.clear();
+                collect_text(m_npc_name, p, script_start, script_end);
                 result += format_string("    NPC_ID: npc id: %d, npc name: %s\r\n",
-                    npc_id, std::string((char*)anchor, p - anchor).c_str());
+                    m_npc_id, m_npc_name.c_str());
                 break;
             }
             case U6OP_LOOK:
             {
-                auto anchor = p;
-                skip_text(p, script_end);
-                result += format_string("    NPC_LOOK: %s\r\n", std::string((char*)anchor, p - anchor).c_str());
+                result += "    NPC_LOOK: ";
+                collect_text(result, p, script_start, script_end);
+                result += "\r\n";
                 break;
             }
             case U6OP_CONVERSE:
@@ -799,12 +814,13 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                 while (p < script_end)
                 {
                     script_offset = p - script_start;
-
                     assert(*p == U6OP_KEYWORDS);
                     p++;
-                    auto anchor = p;
-                    skip_text(p, script_end);
-                    result += format_string("    KEYWORDS %s\r\n", std::string((char*)anchor, p - anchor).c_str());
+                    result += "    KEYWORDS ";
+                    collect_text(result, p, script_start, script_end);
+                    result += "\r\n";
+
+                    script_offset = p - script_start;
                     assert(*p == U6OP_ANSWER);
                     p++;
                     result += "    ANSWER\r\n";
@@ -837,19 +853,27 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                 result += format_string("    ASKC [%s]\r\n", std::string((char*)anchor, p - anchor).c_str());
                 while (p < script_end)
                 {
+                    script_offset = p - script_start;
                     assert(*p == U6OP_KEYWORDS);
                     p++;
                     auto anchor = p;
                     skip_text(p, script_end);
                     result += format_string("    KEYWORDS %s\r\n", std::string((char*)anchor, p - anchor).c_str());
+
+                    script_offset = p - script_start;
                     assert(*p == U6OP_ANSWER);
                     p++;
                     result += "    ANSWER\r\n";
                     collect_format(result, p, script_start, script_end, U6OP_ANSWER);
                     if (*p == U6OP_ENDANSWER)
                         break;
+
+                    // Atlipacta (SE) script offset 0x0aa8 does not have U6OP_ENDANSWER but U6OP_BYE
+                    if (*p == U6OP_BYE)
+                        break;
                 }
-                assert(*p == U6OP_ENDANSWER);
+                script_offset = p - script_start;
+                assert(*p == U6OP_ENDANSWER || *p == U6OP_BYE);
                 p++;
                 result += "    END_ANSWER\r\n";
                 break;
@@ -877,6 +901,7 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                         addr2 = p - 5;
                     }
                 }
+                script_offset = p - script_start;
                 assert(*(p - 1) == U6OP_ENDIF);         // should be end with U6OP_ENDIF
                 result += "    ENDIF\r\n";
                 if (addr1 && addr2 &&
@@ -891,11 +916,31 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                 break;
             }
             case U6OP_ELSE:
+                script_offset = p - script_start;
                 assert(block_type == U6OP_IF);          // should be from U6OP_IF block, then hit U6OP_ELSE
                 return;
             case U6OP_ENDIF:                            // should be from U6OP_IF or U6OP_ELSE, then hit U6OP_ENDIF
+                script_offset = p - script_start;
                 assert(block_type == U6OP_IF || block_type == U6OP_ELSE);
                 return;
+            case U6OP_INPUT:
+            {
+                auto var_index = *p++;
+                auto var_type = *p++;
+                result += format_string("    INPUT (%02x, %02x) ");
+                collect_text(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
+            case U6OP_INPUTNUM:
+            {
+                auto var_index = *p++;
+                auto var_type = *p++;
+                result += format_string("    INPUT (%02x, %02x) ");
+                collect_text(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
             case U6OP_SETF:
             {
                 result += "    SET_FLAG ";
@@ -996,9 +1041,72 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                 break;
             }
             default:
-                assert(false && "unknown op code!");
+            {
+                if (!collect_unknown(result, p, script_start, script_end, code))
+                {
+                    code;
+                    script_offset = p - script_start;
+                    assert(false && "unknown op code!");
+                }
                 break;
             }
+            }
         }
+    }
+}
+
+bool ScriptInterpreter::collect_unknown(std::string& result, const uint8_t* &p, const uint8_t* script_start, const uint8_t* script_end, int unknown_code)
+{
+    switch (unknown_code) {
+    case 0xd1:
+    {
+        // unknown op code for Yunapotli (SE)
+        // should be used for opeing the door of the city
+        assert(m_npc_name == "Yunapotli" && *(uint32_t*)p == 0xa700ded4);
+        result += "Unknown code [d1 ";
+        result += format_hex_string(p, p + 4);
+        result += "]\r\n";
+        p += 4;
+        return true;
+    }
+    case 0xd8:
+    {
+        // unknown op code for Yunapotli (SE)
+        // should be used for putting the crystal brain into its head
+        assert(m_npc_name == "Yunapotli" && *(uint32_t*)p == 0x54a7b200);
+        result += "Unknown code [d8 ";
+        result += format_hex_string(p, p + 3);
+        result += "]\r\n";
+        p += 3;
+        return true;
+    }
+
+    }
+
+    return false;
+}
+
+void ScriptInterpreter::collect_strange(std::string& result, const uint8_t* &p, const uint8_t* script_start, const uint8_t* script_end)
+{
+    auto offset = p - script_start;
+    switch (offset) {
+        // maybe a bug on Yunapotli (SE) script offset 0x12d7
+        // also on Aloron (SE) script offset 0x12ec
+        // after BYE, the code A2 is following which is meaningless
+    case 0x12d7:
+        if (*p == 0xa2 && m_npc_name == "Yunapotli")
+        {
+            p++;
+            result += "    // NOTE: a strange A2 is here\r\n";
+        }
+        break;
+
+    case 0x12ec:
+        if (*p == 0xa2 && m_npc_name == "Aloron")
+        {
+            p++;
+            result += "    // NOTE: a strange A2 is here\r\n";
+        }
+        break;
     }
 }

@@ -1,0 +1,5 @@
+FLAG(self, 0x04) bit4 indicates he has joined in the party.
+FLAG(0x10, 0x07) bit7 indicates Aiela has been rescued recorded by Aloron, Aiela's father.
+in the answer of 'wait', SET_FLAG(self, 0x0f)
+FLAG(self, 0x06) bit6 indicates doing something for his notebook ever.
+FLAG(self, 0x03) bit3 indicates 'uniting' is taled to the chiefs of tribes.

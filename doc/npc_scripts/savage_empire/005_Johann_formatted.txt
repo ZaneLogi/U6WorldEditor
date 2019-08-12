@@ -1,0 +1,240 @@
+:0000
+    NPC_ID: npc id: 5, npc name: Johann
+:0008
+    NPC_LOOK: a lean, dark-bearded man with kindly eyes.
+*
+:0035
+    START CONVERSION
+:0036
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:003C
+    IF [N8(0x05) N8(0x02) FLAG ]
+:0043
+    {"Yes, $P?"
+}
+:004E
+    JUMP 0x00a4
+:0053
+    ELSE
+:0054
+    {"$P, I really need to talk to you about certain @problems we are facing.&
+}
+:009E
+    JUMP 0x00a4
+:00A3
+    ENDIF
+:00A4
+    {
+}
+:00A5
+    ASK
+    KEYWORDS name
+    ANSWER
+:00AC
+    {"I am Dr. Johann Spector, of course. Though my sanity has returned, my name remains the same.&
+}
+:010B
+    JUMP 0x00a4
+    KEYWORDS zipa,spec,doct,dr
+    ANSWER
+:0123
+    {"No, please, just call me Johann.&
+}
+:0146
+    JUMP 0x00a4
+    KEYWORDS job
+    ANSWER
+:0150
+    {He sighs. "I have no job. I WAS an archaeologist. I seem to have botched that. And I've certainly abandoned my former role as Zipactriotl, self-serving shaman of the Nahuatla.&
+}
+:0201
+    JUMP 0x00a4
+    KEYWORDS trib,nahu
+    ANSWER
+:0211
+    {"I no longer have any association with any tribe here. I somehow doubt the Nahuatla would want me back.&
+}
+:027A
+    JUMP 0x00a4
+    KEYWORDS prob
+    ANSWER
+:0285
+    SET_FLAG [N8(0x05) ], [N8(0x02) ]
+:028C
+    {"Now that my mind is clear, I see that there are many problems which face us with the Myrmidex.&
+}
+:02ED
+    PAUSE
+:02EE
+    {
+"These creatures are too great in number for any single band of men to defeat. I think we'll need to unite all the tribes in this land if we're to defeat the Myrmidex.&
+}
+:0398
+    PAUSE
+:0399
+    {
+"But just defeating them isn't enough. We must destroy their queen... else she will simply spawn a new generation of warriors to kill us.&
+}
+:0425
+    PAUSE
+:0426
+    {
+"And just destroying HER isn't enough. Somewhere in the Myrmidex caverns, there is an enormous black stone, like the small stones which transported us here.&
+}
+:04C5
+    PAUSE
+:04C6
+    {
+"This stone is throwing off bizarre, incredible energies which warp the flow of time in this valley. It could very well be that we are all trapped here until it is destroyed.&
+}
+:0577
+    PAUSE
+:0578
+    {
+"Even if we are not, and we find a way out, there's no telling what its presence could do. The Myrmidex might some day figure out how to tap its incredible power... which would be death to all humans here, and perhaps throughout the world.&
+}
+:066A
+    PAUSE
+:066B
+    {
+"The @stone in the @Myrmidex caves MUST be destroyed.&
+}
+:06A3
+    JUMP 0x00a4
+    KEYWORDS blac,ston
+    ANSWER
+:06B3
+    {"The Myrmidex caves house an enormous black stone possessing strange energies. It was these energies that drove me mad. The stone is dangerous and must be destroyed.&
+}
+:075A
+    PAUSE
+:075B
+    {
+"I think that the stone was originally set up in the Underground City of the Kotl. When the Kotl servants, the @Myrmidex, rebelled, they took the stone with them.&
+}
+:0800
+    PAUSE
+:0801
+    {
+"But the @Kotl generators managed to continue drawing power from the stone.&
+}
+:084F
+    JUMP 0x00a4
+    KEYWORDS myrm
+    ANSWER
+:085A
+    {"According to all I was able to grasp in the Underground City of the @Kotl, the Kotl deliberately bred the Myrmidex as a race of super-servants.&
+}
+:08EC
+    PAUSE
+:08ED
+    {
+"But the Myrmidex were too savage and escaped, carrying the black @stone with them.&
+}
+:0943
+    JUMP 0x00a4
+    KEYWORDS kotl,unde,city
+    ANSWER
+:0958
+    {"The Kotl, who built the underground city, were a bipedal reptilian race descended from small, two-legged carnosaurs.&
+}
+:09CF
+    PAUSE
+:09D0
+    {
+"They had great mystical knowledge and were able to draw mystic power from the giant black @stone. They ran their city with this power.&
+}
+:0A5A
+    PAUSE
+:0A5B
+    {
+"They also used this power to breed themselves a race of servants, the Myrmidex. However, the Myrmidex became too savage to control, and escaped with the stone.&
+}
+:0AFE
+    PAUSE
+:0AFF
+    {
+"Fortunately for the Kotl, the mystic generators continued drawing power from the stones, even over this great distance.&
+}
+:0B7A
+    PAUSE
+:0B7B
+    {
+"It appears that the Kotl tried again, going out into the outer world and capturing representative human tribes from all over the world. Those tribesmen were the ancestors of the tribes living here today.&
+}
+:0C4A
+    PAUSE
+:0C4B
+    {
+"But men are just as aggressive as ants, and they, too, escaped to freedom.&
+}
+:0C99
+    PAUSE
+:0C9A
+    {
+"It would seem that the Myrmidex returned to destroy their former masters, and drove the Kotl out of the Underground City, which sealed behind them.&
+}
+:0D31
+    PAUSE
+:0D32
+    {
+"It remained sealed until I, with my understanding of the ways of the power from the black stones, was able to open the doors. I didn't leave them open, as you found out. But you got in anyway.&
+}
+:0DF6
+    PAUSE
+:0DF7
+    {
+"The escaping Kotl appear to be the ancestors of today's Sakkhra.&
+}
+:0E3B
+    JUMP 0x00a4
+    KEYWORDS unit,ally,alli
+    ANSWER
+:0E50
+    {"Yes, we must unite the tribes. The tribes here follow the word of their chiefs, so we must go to each chief and persuade him to join this union.&
+}
+:0EE3
+    JUMP 0x00a4
+    KEYWORDS leav,wait
+    ANSWER
+:0EF3
+    {He shakes his head. "$P, I can never make up for what I've done if I drift around this valley. I want to accompany you and participate in fixing these problems. So I'm not going to leave you.&
+}
+:0FB4
+    JUMP 0x00a4
+    KEYWORDS join
+    ANSWER
+:0FBF
+    {"I'm already with you, $P.&
+}
+:0FDB
+    JUMP 0x00a4
+    KEYWORDS bye
+    ANSWER
+:0FE5
+    IF [N8(0xeb) N8(0x02) FLAG ]
+:0FEC
+    {"Yes, yes. We'll talk later.&
+}
+:100A
+    BYE
+:100B
+    ELSE
+:100C
+    {"We'll talk later. But we MUST talk about certain @problems we face.&
+}
+:1052
+    BYE
+:1053
+    ENDIF
+:1054
+    KEYWORDS *
+    ANSWER
+:1057
+    {"I don't grasp what you mean.&
+}
+:1076
+    JUMP 0x00a4
+    END_ANSWER
+:107B
+    BYE

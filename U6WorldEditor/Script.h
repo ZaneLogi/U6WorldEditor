@@ -40,8 +40,11 @@ private:
     void skip_eval_block(const uint8_t* &p, const uint8_t* end);
     void skip_code_block(const uint8_t* &p, const uint8_t* end, int block_type);
 
+    void collect_text(std::string& result, const uint8_t* &p, const uint8_t* script_start, const uint8_t* script_end);
     void collect_eval(std::string& result, const uint8_t* &p, const uint8_t* script_start, const uint8_t* script_end);
     void collect_format(std::string& result, const uint8_t* &p, const uint8_t* script_start, const uint8_t* script_end, int block_type);
+    bool collect_unknown(std::string& result, const uint8_t* &p, const uint8_t* script_start, const uint8_t* script_end, int unknown_code);
+    void collect_strange(std::string& result, const uint8_t* &p, const uint8_t* script_start, const uint8_t* script_end);
 
 private:
     std::vector<uint8_t> m_script;

@@ -1,0 +1,453 @@
+:0000
+    NPC_ID: npc id: 10, npc name: Ugyuk
+:0007
+    NPC_LOOK: a powerfully-built, especially brutish Neanderthal.
+*
+:003D
+    START CONVERSION
+:003E
+    IF [N8(0xeb) 0x00 FLAG ]
+:0044
+    JUMP 0x0282
+:0049
+    ELSE
+:004A
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0050
+    JUMP 0x0056
+:0055
+    ENDIF
+:0056
+    IF [N8(0x03) INPARTY ]
+:005B
+    PAUSE
+:005C
+    {
+}
+:005D
+    PORTRAIT [N8(0x03) ]
+:0061
+    {Dokray leans over and whispers into your ear: "Ugyuk is strongest and dumbest of all Haakur. Dokray and Ugyuk have fought many times. Dokray always wins, of course."
+}
+:0107
+    PAUSE
+:0108
+    {
+}
+:0109
+    PORTRAIT [N8(0xeb) ]
+:010D
+    JUMP 0x0119
+:0112
+    ELSE
+:0113
+    JUMP 0x0119
+:0118
+    ENDIF
+:0119
+    {The Neanderthal sniffs the air.
+}
+:0139
+    IF [N8(0x03) INPARTY ]
+:013E
+    {The Neanderthal speaks in a deep, growling voice. "Smell new smell. Smell Dokray. Dokray bad. Dokray go away." The Neanderthal waves Dokray away, glowering at him, but does not go for his weapons.
+}
+:0203
+    JUMP 0x030d
+:0208
+    ELSE
+:0209
+    {The Neanderthal speaks in a grunting, gravelly voice: "Not know smell. New. Not like others. What want new smell?"
+}
+:027C
+    JUMP 0x030d
+:0281
+    ENDIF
+:0282
+    {"Ugyuk smell $P."}
+:0293
+    PAUSE
+:0294
+    {
+}
+:0295
+    IF [N8(0x03) INPARTY ]
+:029A
+    {"Bad Dokray is with $P. Does Ugyuk talk or smash?" His brow furrows. "Hurt to think. Ugyuk will talk."
+}
+:0301
+    JUMP 0x030d
+:0306
+    ELSE
+:0307
+    JUMP 0x030d
+:030C
+    ENDIF
+:030D
+    {
+}
+:030E
+    ASK
+    KEYWORDS name,ugyu
+    ANSWER
+:031A
+    {"Ugyuk is name. Name is Ugyuk." He seems rather proud of the concept.
+}
+:0360
+    JUMP 0x030d
+    KEYWORDS ugly,uggy,ugh
+    ANSWER
+:0374
+    {"Ugyuk. UG-YUK."
+}
+:0385
+    JUMP 0x030d
+    KEYWORDS job
+    ANSWER
+:038F
+    {"Ugyuk strong. Smash skulls of lizards, enemies like @Dokray. Eat hearts. Become strongest." He demonstrates, pretending to smash his club into the skull of an imaginary beast. He pounds...
+}
+:044D
+    PAUSE
+:044E
+    {
+... and pounds ...
+}
+:0462
+    PAUSE
+:0463
+    {
+... and pounds.
+}
+:0474
+    JUMP 0x030d
+    KEYWORDS trib,haak
+    ANSWER
+:0484
+    {"Ugyuk of Haakur tribe. Not know other tribes. Too many words. Too many names. New smell -- " he points at you -- "not from other tribes. Not from @Jukari. Jukari enemies."
+}
+:0531
+    PAUSE
+:0532
+    {
+"Haakur live where hills spit fire." He spits on your foot to demonstrate, and points at it. "But fire."
+}
+:059C
+    PAUSE
+:059D
+    {
+"Haakur chief @Grugorr. Grugorr."
+}
+:05C0
+    JUMP 0x030d
+    KEYWORDS dokr
+    ANSWER
+:05CB
+    {"Dokray bad. Small, stupid. Always attack Ugyuk. Ugyuk always smash Dokray's brains." He waves his hands to mime his club coming down and someone's brains flying in all directions.
+}
+:0680
+    PAUSE
+:0681
+    {
+}
+:0682
+    IF [N8(0x03) INPARTY ]
+:0687
+    PORTRAIT [N8(0x03) ]
+:068B
+    {Dokray speaks up: "Ugyuk lies! Dokray always smashes Ugyuk. $P, let Dokray smash Ugyuk NOW."
+}
+:06E8
+    JUMP 0x0ef7
+:06ED
+    ELSE
+:06EE
+    JUMP 0x030d
+:06F3
+    ENDIF
+:06F4
+    KEYWORDS unit,ally,alli
+    ANSWER
+:0704
+    {"Ugyuk not know. Words like what chief say. Chief @Grugorr."
+}
+:0741
+    JUMP 0x030d
+    KEYWORDS grug,chie
+    ANSWER
+:0751
+    {"Grugorr chief Haakur."
+}
+:0769
+    JUMP 0x030d
+    KEYWORDS myrm
+    ANSWER
+:0774
+    {"Bug bug bug!}
+:0781
+    IF [N8(0x07) INPARTY ]
+:0786
+    {"
+}
+:0788
+    PAUSE
+:0789
+    {
+}
+:078A
+    PORTRAIT [N8(0x07) ]
+:078E
+    {"No my dear boy, those aren't bugs. They are simply another feature of this valley, which I'm documenting thoroughly."
+}
+:0805
+    PAUSE
+:0806
+    {
+}
+:0807
+    PORTRAIT [N8(0x0a) ]
+:080B
+    {Ugyuk stares blankly at the professor for a moment, then resumes "Big bug-things. Bad. More bad than @Dokray."
+}
+:087A
+    ELSE
+:087B
+    { Big bug-things. Bad. More bad than @Dokray."
+}
+:08A9
+    ENDIF
+:08AA
+    JUMP 0x030d
+    KEYWORDS leav
+    ANSWER
+:08B5
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:08BD
+    IF [0x00 B2 N8(0x02) == ]
+:08C4
+    {"No, Ugyuk stay. This is place of Ugyuk."
+}
+:08EE
+    JUMP 0x030d
+:08F3
+    ENDIF
+:08F4
+    IF [0x00 B2 N8(0x01) == ]
+:08FB
+    {He looks nervously at the water. "Later. Leave later. No go in water. Water make clean. Make Ugyuk weak to be clean."
+}
+:0971
+    JUMP 0x030d
+:0976
+    ENDIF
+:0977
+    {"Good. Ugyuk tired of people." He turns away to leave.
+}
+:09AE
+    BYE
+:09AF
+    KEYWORDS wait
+    ANSWER
+:09B5
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:09BD
+    IF [0x00 B2 N8(0x02) == ]
+:09C4
+    {"Ugyuk wait here. Or go other place."
+}
+:09EA
+    JUMP 0x030d
+:09EF
+    ENDIF
+:09F0
+    IF [0x00 B2 N8(0x01) == ]
+:09F7
+    {He looks nervously at the water. "Later. Wait later. No go in water. Water make clean. Make Ugyuk weak to be clean."
+}
+:0A6C
+    JUMP 0x030d
+:0A71
+    ENDIF
+:0A72
+    {He thinks about it for a while. (A long while.)
+}
+:0AA2
+    PAUSE
+:0AA3
+    {
+His brow furrows.
+}
+:0AB6
+    PAUSE
+:0AB7
+    {
+His head begins to shiver.
+}
+:0AD3
+    PAUSE
+:0AD4
+    {
+A thought finally intrudes where none had been before. His eyes open wide. "Yes! Wait here. Ugyuk wait here. Come back for Ugyuk later."
+}
+:0B5E
+    SET_FLAG [N8(0xeb) ], [0x08 N8(0x07) + ]
+:0B67
+    JUMP 0x030d
+    KEYWORDS join
+    ANSWER
+:0B72
+    IF [N8(0x0a) INPARTY ]
+:0B77
+    {He has to think about that for a while.
+}
+:0B9F
+    PAUSE
+:0BA0
+    {
+He thinks about it for a while longer.
+}
+:0BC8
+    PAUSE
+:0BC9
+    {
+Finally: "Ugyuk did that already."
+}
+:0BED
+    JUMP 0x030d
+:0BF2
+    ELSE
+:0BF3
+    JUMP 0x0db9
+:0BF8
+    ENDIF
+:0BF9
+    KEYWORDS juka
+    ANSWER
+:0BFF
+    {"Jukari! Men. Live near Haakur. Have many @sparklies."
+}
+:0C36
+    JUMP 0x030d
+    KEYWORDS diam,spar
+    ANSWER
+:0C46
+    {"Sparklies. Sparklies!" He gestures, pretending to hold something small up to his ears, nose, neck... "Sparkly rocks."
+}
+:0CBD
+    PAUSE
+:0CBE
+    {
+}
+:0CBF
+    IF [N8(0x07) INPARTY ]
+:0CC4
+    PORTRAIT [N8(0x07) ]
+:0CC8
+    {Prof. Rafkin speaks up: "I think, my boy, that he's referring to diamonds. Diamond jewelry."
+}
+:0D25
+    PAUSE
+:0D26
+    {
+}
+:0D27
+    PORTRAIT [N8(0xeb) ]
+:0D2B
+    {Ugyuk nods vehemently. "Yes. What he say."
+}
+:0D56
+    JUMP 0x030d
+:0D5B
+    ELSE
+:0D5C
+    JUMP 0x030d
+:0D61
+    ENDIF
+    KEYWORDS bye
+    ANSWER
+:0D67
+    {The Neanderthal shrugs and turns away.
+}
+:0D8E
+    BYE
+:0D8F
+    KEYWORDS *
+    ANSWER
+:0D92
+    {"Ugyuk not know. Is good to eat?"
+}
+:0DB4
+    JUMP 0x030d
+    END_ANSWER
+:0DB9
+    IF [N8(0x03) INPARTY ]
+:0DBE
+    {Ugyuk points at Dokray. "Not join. Bad Dokray with. Not help Bad Dokray. Make Dokray go, Ugyuk will join."
+}
+:0E29
+    JUMP 0x030d
+:0E2E
+    ENDIF
+:0E2F
+    DECLARE [0x00, 0xb2] = [N8(0xeb) JOIN ]
+:0E37
+    IF [0x00 B2 N8(0x02) == ]
+:0E3E
+    {"No. Ugyuk will not join. Too many people with $P now."
+}
+:0E76
+    ENDIF
+:0E77
+    IF [0x00 B2 N8(0x01) == ]
+:0E7E
+    {"Ugyuk cannot join $P now! Too wet!"
+}
+:0EA3
+    ENDIF
+:0EA4
+    IF [0x00 B2 N8(0x00) == ]
+:0EAB
+    {"Go with? Will go with. Ugyuk join, protect. Smash heads of enemies."
+}
+:0EF1
+    ENDIF
+:0EF2
+    JUMP 0x030d
+:0EF7
+    PAUSE
+:0EF8
+    {
+Ugyuk bristles and prepares himself for combat. "Well?" persists Dokray. "Let Dokray smash Ugyuk!"
+}
+:0F5C
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0F62
+    PORTRAIT [N8(0xeb) ]
+:0F66
+    {"Bad Dokray! Bad Dokray! Ugyuk will smash all!"
+}
+:0F96
+    WORKTYPE [N8(0xeb) ], [N8(0x06) ]
+:0F9D
+    BYE
+:0F9E
+    KEYWORDS n
+    ANSWER
+:0FA1
+    {Dokray's face falls. He turns back to Ugyuk. "Later," he suggests, "when new friends are not here, Dokray will smash Ugyuk's face into new shape."
+}
+:1034
+    PAUSE
+:1035
+    {
+}
+:1036
+    PORTRAIT [N8(0xeb) ]
+:103A
+    {Ugyuk snarls. "Bring whole tribe," he suggests, then turns back to you.
+}
+:1082
+    JUMP 0x030d
+    END_ANSWER

@@ -1,0 +1,591 @@
+:0000
+    NPC_ID: npc id: 17, npc name: Apaton
+:0008
+    NPC_LOOK: a lean, sharp-eyed, dignified black warrior.
+*
+:0037
+    START CONVERSION
+:0038
+    IF [N8(0xeb) 0x00 FLAG ]
+:003E
+    JUMP 0x009c
+:0043
+    ELSE
+:0044
+    {He says nothing, but looks at you expectantly, waiting for you to begin speaking.
+}
+:0096
+    JUMP 0x01db
+:009B
+    ENDIF
+:009C
+    IF [N8(0x11) N8(0x07) FLAG ]
+:00A3
+    {His face breaks into a smile. "Ah. $P addresses the chief of the Yolaru. $P is most welcome. Come, speak to Apaton.&
+}
+:0118
+    JUMP 0x01db
+:011D
+    ENDIF
+:011E
+    IF [N8(0xeb) N8(0x02) FLAG ]
+:0125
+    {He looks at you coldly for a moment. "It is $P, who tries to cheat Apaton by offering too few weapons. What does $P want now?&
+}
+:01A4
+    JUMP 0x01db
+:01A9
+    ENDIF
+:01AA
+    {He nods at you, a cool greeting, and waits.
+}
+:01D6
+    JUMP 0x01db
+:01DB
+    {
+}
+:01DC
+    ASK
+    KEYWORDS name,apat
+    ANSWER
+:01E8
+    {"Apaton.& He indicates himself.}
+:0207
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:020D
+    PORTRAIT [N8(0xeb) ]
+:0211
+    JUMP 0x01db
+    KEYWORDS job
+    ANSWER
+:021B
+    {"Chief of @Yolaru tribe.&
+}
+:0235
+    IF [N8(0x07) INPARTY ]
+:023A
+    PAUSE
+:023B
+    {
+"As @schweitzer knows.& He points at Prof. Rafkin.
+}
+:026F
+    PAUSE
+:0270
+    {
+}
+:0271
+    PORTRAIT [N8(0x07) ]
+:0275
+    {"Good day, great Apaton. Be nice to my friend $P, for he's a very good man, even if he's sloppy, forgetful, thoughtless, and a poor student.&
+}
+:0303
+    PAUSE
+:0304
+    {
+}
+:0305
+    PORTRAIT [N8(0xeb) ]
+:0309
+    {The chieftain blinks impassively and turns back to you.
+}
+:0341
+    JUMP 0x01db
+:0346
+    ELSE
+:0347
+    JUMP 0x01db
+:034C
+    ENDIF
+    KEYWORDS yola
+    ANSWER
+:0353
+    {"Yolaru tribe. We say little, do much. We fight the @Myrmidex and the @Kuraks.&
+}
+:03A3
+    JUMP 0x01db
+    KEYWORDS kura
+    ANSWER
+:03AE
+    {"Kurak tribe. Live west of Yolaru. Good fighters. Kuraks have better weapons than Yolaru. Yolaru are better fighters.&
+}
+:0425
+    JUMP 0x01db
+    KEYWORDS bamb
+    ANSWER
+:0430
+    {"South of village, past @bones.&
+}
+:0451
+    JUMP 0x01db
+    KEYWORDS blue,ston
+    ANSWER
+:0461
+    {"@Barrab tribe has blue stone.&
+}
+:0481
+    JUMP 0x01db
+    KEYWORDS barr
+    ANSWER
+:048C
+    {"Far southwest, land of mesas.&
+}
+:04AC
+    JUMP 0x01db
+    KEYWORDS bone
+    ANSWER
+:04B7
+    {"South of village, near cliffs.&
+}
+:04D8
+    JUMP 0x01db
+    KEYWORDS hide
+    ANSWER
+:04E3
+    {"Kill beast, use knife on carcass.&
+}
+:0507
+    JUMP 0x01db
+    KEYWORDS moct
+    ANSWER
+:0512
+    IF [N8(0x28) N8(0x07) FLAG ]
+:0519
+    {"King of Nahuatla.&
+}
+:052D
+    JUMP 0x01db
+:0532
+    ELSE
+:0533
+    {"Former chief of Nahuatla. Exile hiding in jungle.&
+}
+:0567
+    JUMP 0x01db
+:056C
+    ENDIF
+    KEYWORDS myrm
+    ANSWER
+:0573
+    {"Fierce ants grown huge. Enemy of all.&
+}
+:059B
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:05A2
+    PAUSE
+:05A3
+    {
+"Apaton has promised to help destroy Myrmidex. $P brought weapons for Yolaru.&
+}
+:05F3
+    JUMP 0x01db
+:05F8
+    ENDIF
+:05F9
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:0600
+    PAUSE
+:0601
+    {
+"Apaton already promised to help destroy Myrmidex -- if $P will bring ten Nahuatla swords to Yolaru.&
+}
+:0668
+    JUMP 0x01db
+:066D
+    ENDIF
+:066E
+    PAUSE
+:066F
+    {
+"They destroy Yolaru and others. Cannot be stopped.&
+}
+:06A5
+    JUMP 0x01db
+    KEYWORDS schw,rafk,raff
+    ANSWER
+:06BA
+    IF [N8(0x07) INPARTY ]
+:06BF
+    PORTRAIT [N8(0x07) ]
+:06C3
+    {Prof. Rafkin nudges you. "The chief well knows who I am, my boy.& He turns to the chief. "By the way, your greatness, I will be travelling with $P for awhile.&
+}
+:0763
+    PAUSE
+:0764
+    {
+}
+:0765
+    PORTRAIT [N8(0xeb) ]
+:0769
+    {"No. Schweitzer must stay in village.&
+}
+:0790
+    PAUSE
+:0791
+    {
+}
+:0792
+    PORTRAIT [N8(0x07) ]
+:0796
+    {"Perhaps you would prefer it if I turned you and all your warriors into tree-toads?&
+}
+:07EB
+    PAUSE
+:07EC
+    {
+}
+:07ED
+    PORTRAIT [N8(0xeb) ]
+:07F1
+    {"Schweitzer is ordered to travel with $P.&
+}
+:081C
+    JUMP 0x01db
+:0821
+    ELSE
+:0822
+    {"Schweitzer is like shaman, wiser in other ways. True name is hard to say: Raffa-Kin. Is probably in village.&
+}
+:0891
+    JUMP 0x01db
+:0896
+    ENDIF
+    KEYWORDS topu
+    ANSWER
+:089D
+    {"Mad @Urali. No friend of Urali tribe, or any other. Lives in far north somewhere, on island.&
+}
+:08FC
+    JUMP 0x01db
+    KEYWORDS ural
+    ANSWER
+:0907
+    {"Raiders. Come from southeast. Apaton does not know where.&
+}
+:0943
+    PAUSE
+:0944
+    {
+He thinks a moment. "@Topuru would know where Urali live.&
+}
+:0980
+    JUMP 0x01db
+    KEYWORDS dard
+    ANSWER
+:098B
+    {"@Urali did not raid other tribes until Darden the Huge became their chief.&
+}
+:09D8
+    JUMP 0x01db
+    KEYWORDS trib
+    ANSWER
+:09E3
+    {He gestures around him. "@Yolaru tribe.&
+}
+:0A0C
+    JUMP 0x01db
+    KEYWORDS unit,ally,alli
+    ANSWER
+:0A21
+    {"Speak of uniting tribes? Making allies of enemies?&
+}
+:0A56
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0A5D
+    PAUSE
+:0A5E
+    {
+"$P has already made allies of Yolaru. $P must go to other tribes to make allies of them.&
+}
+:0ABA
+    JUMP 0x01db
+:0ABF
+    ENDIF
+:0AC0
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:0AC7
+    PAUSE
+:0AC8
+    {
+}
+:0AC9
+    JUMP 0x0b9d
+:0ACE
+    ENDIF
+:0ACF
+    JUMP 0x10f1
+    KEYWORDS bye
+    ANSWER
+:0AD9
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0ADF
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0AE6
+    {"$P may return whenever $P wishes.&
+}
+:0B0A
+    ELSE
+:0B0B
+    {He turns away from you.
+}
+:0B23
+    ENDIF
+:0B24
+    BYE
+:0B25
+    KEYWORDS *
+    ANSWER
+:0B28
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0B2F
+    {"Apaton does not understand.&
+}
+:0B4D
+    JUMP 0x01db
+:0B52
+    ELSE
+:0B53
+    {He just waits there, looking as though you'd said something stupid.
+}
+:0B97
+    JUMP 0x01db
+:0B9C
+    ENDIF
+    END_ANSWER
+:0B9D
+    {"Has $P brought weapons for Yolaru?&
+}
+:0BC2
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0BC8
+    JUMP 0x0c87
+    KEYWORDS n
+    ANSWER
+:0BD0
+    {"Do not speak of making allies of Yolaru until ten Nahuatla swords are brought to Yolaru. Apaton has spoken of this already: Yolaru need weapons to fight lizards and Myrmidex.&
+}
+:0C81
+    JUMP 0x01db
+    END_ANSWER
+:0C87
+    IF [N8(0x21) N8(0x00) OBJINPARTY N16(0x8001) == ]
+:0C92
+    {He looks over your possesions...
+}
+:0CB3
+    PAUSE
+:0CB4
+    {
+Finding no swords, he glares at you angrily. "$P has no Nahuatla swords! Do not play games with Apaton. Return again, when you carry ten Nahuatla swords.&
+}
+:0D50
+    PAUSE
+:0D51
+    BYE
+:0D52
+    ENDIF
+:0D53
+    {He looks over the collection of weapons you've brought, counting them; as he counts them, he hands them out to Yolaru warriors as they walk past him.
+}
+:0DE9
+    PAUSE
+:0DEA
+    {
+}
+:0DEB
+    DECLARE [0x00, 0xb2] = [N8(0x00) ]
+:0DF2
+    DECLARE [0x01, 0xb2] = [N8(0x00) ]
+:0DF9
+    JUMP 0x0dfe
+:0DFE
+    DECLARE [0x01, 0xb2] = [N8(0x21) N8(0x00) OBJINPARTY ]
+:0E08
+    IF [0x01 B2 N16(0x8001) == ]
+:0E10
+    JUMP 0x0e40
+:0E15
+    ENDIF
+:0E16
+    DELETE [0x01 B2 ], [N8(0x21) ], [N8(0x00) ], [N8(0x01) ]
+:0E23
+    DECLARE [0x00, 0xb2] = [0x00 B2 N8(0x01) + ]
+:0E2D
+    IF [0x00 B2 N8(0x0a) < ]
+:0E34
+    JUMP 0x0dfe
+:0E39
+    ELSE
+:0E3A
+    JUMP 0x102e
+:0E3F
+    ENDIF
+:0E40
+    DECLARE [0x02, 0xb2] = [N8(0x0a) 0x00 B2 - ]
+:0E4A
+    {As he finishes counting out the swords to his warriors, a look of anger suffuses his face.
+}
+:0EA5
+    PAUSE
+:0EA6
+    {
+"$P has only brought #0 Nahuatla sword\s to Apaton! $P is either slow to count or thinks to fool Apaton.&
+}
+:0F11
+    PAUSE
+:0F12
+    {
+"Apaton is no fool. $P has insulted him. $P must pay. Apaton will keep the #0 sword\s, and $P must still go forth and bring him 10 Nahuatla swords. Not #2: Another 10. Else Apaton will never join $P's union of tribes.&
+}
+:0FEE
+    PAUSE
+:0FEF
+    {
+"Go! And do not return without the promised weapons!&
+}
+:1026
+    SET_FLAG [N8(0xeb) ], [N8(0x02) ]
+:102D
+    BYE
+:102E
+    SET_FLAG [N8(0xeb) ], [N8(0x07) ]
+:1035
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x02) ]
+:103C
+    {He draws back, an expression of satisfaction crossing his face. "It is done. The weapons are in the hands of the Yolaru. And the Yolaru will join in $P's union of the tribes.&
+}
+:10EC
+    JUMP 0x01db
+:10F1
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:10F7
+    JUMP 0x110b
+    KEYWORDS n
+    ANSWER
+:10FF
+    {"Ah.&
+}
+:1105
+    JUMP 0x01db
+    END_ANSWER
+:110B
+    {"Why?&
+}
+:1112
+    ASK
+    KEYWORDS myrm,save
+    ANSWER
+:111E
+    {He thinks about it. "Good enough reason to stop noble wars?& He shrugs. "Apaton might consider this... but only to benefit whole tribe.&
+}
+:11A7
+    JUMP 0x12a7
+    KEYWORDS beca
+    ANSWER
+:11B2
+    {He frowns. "'Because' is reason for children, and to give to children. Apaton asks again: Why?&
+}
+:1212
+    JUMP 0x1112
+    KEYWORDS *
+    ANSWER
+:121A
+    {"Apaton does not understand reason. But Apaton might still do this, become allied with enemies -- if he can help whole tribe to do so.&
+}
+:12A2
+    JUMP 0x12a7
+    END_ANSWER
+:12A7
+    PAUSE
+:12A8
+    {
+"Yolaru once had master weapon-maker in tribe. But weapon-maker died in Myrmidex raid. Now, we make fewer, poorer weapons.&
+}
+:1325
+    PAUSE
+:1326
+    {
+"To defend against Myrmidex, against giant lizards, Yolaru need weapons. He who brings weapons to Yolaru will earn friendship of Yolaru.&
+}
+:13B1
+    PAUSE
+:13B2
+    {
+"Go to Nahuatla, who make fine weapons. Bring us ten Nahuatla swords.&
+}
+:13FA
+    PAUSE
+:13FB
+    {
+"Come to Apaton with these weapons and speak again of uniting tribes. Then Yolaru will help against Myrmidex. Not before.&
+}
+:1477
+    JUMP 0x147c
+:147C
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1483
+    IF [N8(0x04) INPARTY ]
+:1488
+    JUMP 0x149b
+:148D
+    ELSE
+:148E
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:1495
+    JUMP 0x01db
+:149A
+    ENDIF
+:149B
+    PAUSE
+:149C
+    {
+}
+:149D
+    IF [N8(0x04) N8(0x06) FLAG ]
+:14A4
+    PORTRAIT [N8(0x04) ]
+:14A8
+    {Jimmy whips out his notebook. "Weapons. Got it. Now you've got me gun-running, $P-old-pal. Thanks a bunch.& He notes down Apaton's demand in his @notebook.
+}
+:1544
+    PAUSE
+:1545
+    {
+}
+:1546
+    PORTRAIT [N8(0xeb) ]
+:154A
+    JUMP 0x01db
+:154F
+    ELSE
+:1550
+    PORTRAIT [N8(0x04) ]
+:1554
+    {Jimmy speaks up. "Tell you what, boss. It could be that we're going to have a lot of these little chores ahead of us. I'll note down what each chief wants.&
+}
+:15F1
+    PAUSE
+:15F2
+    {
+"Any time you want to check out what we've got in store for us, ask me about my @notebook. It never forgets.&
+}
+:1661
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:1668
+    SET_FLAG [N8(0x04) ], [N8(0x03) ]
+:166F
+    PAUSE
+:1670
+    {
+}
+:1671
+    PORTRAIT [N8(0xeb) ]
+:1675
+    JUMP 0x01db
+:167A
+    ENDIF

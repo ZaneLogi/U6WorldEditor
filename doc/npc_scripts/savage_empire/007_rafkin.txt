@@ -1,3 +1,11 @@
+FLAG(0x10, 0x07) Aloron bit7 judge if Aiela is rescued.
+SET_FLAG(self, 0x0F) at the end of 'wait'
+
+FLAG(self, 0x04) bit4 indicates he is in the party.
+FLAG(self, 0x05) bit5 indicates he ever has made a rifle for the avatar.
+
+
+
 0000:
 	0xff id(0x07) {Rafkin}
 	0xf1 {a stooped, fiftyish man who looks like a professor.

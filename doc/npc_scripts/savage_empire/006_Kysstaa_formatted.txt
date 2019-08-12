@@ -1,0 +1,184 @@
+:0000
+    NPC_ID: npc id: 6, npc name: Kysstaa
+:0009
+    NPC_LOOK: a handsome but fearsome-looking reptile man.
+*
+:0038
+    START CONVERSION
+:0039
+    IF [N8(0xeb) 0x00 FLAG ]
+:003F
+    JUMP 0x0074
+:0044
+    ELSE
+:0045
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:004B
+    {"Sssss. What doesss huuman waant?&
+}
+:006E
+    JUMP 0x00a2
+:0073
+    ENDIF
+:0074
+    {"Sssss. It isss $P. What does $P waant?&
+}
+:009D
+    JUMP 0x00a2
+:00A2
+    {
+}
+:00A3
+    ASK
+    KEYWORDS name,kyss
+    ANSWER
+:00AF
+    {"Sssss. I am Kysstaa the Great.&
+}
+:00D0
+    JUMP 0x00a2
+    KEYWORDS job
+    ANSWER
+:00DA
+    {"Sssss. Kysstaa is warrior. Questor. Enemy of @Myrmidex.&}
+:0113
+    JUMP 0x00a2
+    KEYWORDS trib,sakk
+    ANSWER
+:0123
+    {"Sssss. Kysstaa is of Sakkhra. Hide liike ssstone, teeth liike knives, ssso are the Sakkhra.&
+}
+:0181
+    JUMP 0x00a2
+    KEYWORDS myrm
+    ANSWER
+:018C
+    {"Sssss. Ant-thiings. Eeevil. Kysstaa bites them uuntil they ssstop moving. Myrmidex aare death to huumans and Sakkhra. Kysstaa is death to Myrmidex.&
+}
+:0222
+    PAUSE
+:0223
+    {
+"If $P wantsss to go bite Myrmidex, Kysstaa will @join him and help.&
+}
+:026A
+    JUMP 0x00a2
+    KEYWORDS blue,ston
+    ANSWER
+:027A
+    {"Sssss. Iss blue ssstone in cavess of Sakkhra.&
+}
+:02AA
+    JUMP 0x00a2
+    KEYWORDS leav
+    ANSWER
+:02B5
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:02BD
+    IF [0x00 B2 N8(0x02) == ]
+:02C4
+    {"Sssss. Do not oorder Kysstaa. Kysstaa ssstays or leavess as he pleasses.&
+}
+:030F
+    JUMP 0x00a2
+:0314
+    ENDIF
+:0315
+    IF [0x00 B2 N8(0x01) == ]
+:031C
+    {"Sssss. Kysstaa ssswims. Tooth-fishes ssswim better. Kysstaa wiill leave laater.&
+}
+:036E
+    JUMP 0x00a2
+:0373
+    ENDIF
+:0374
+    {"Sssss. $P doess not need Kysstaa aany more. Find Kysstaa when need Kysstaa again.& He turns to leave.
+}
+:03DB
+    WORKTYPE [N8(0xeb) ], [N8(0x11) ]
+:03E2
+    BYE
+:03E3
+    KEYWORDS wait
+    ANSWER
+:03E9
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:03F1
+    IF [0x00 B2 N8(0x02) == ]
+:03F8
+    {"Sssss. Do not oorder Kysstaa. Kysstaa ssstays or leavess as he pleasses.&
+}
+:0443
+    JUMP 0x00a2
+:0448
+    ENDIF
+:0449
+    IF [0x00 B2 N8(0x01) == ]
+:0450
+    {"Sssss. Kysstaa ssswims. Tooth-fishes ssswim better. Kysstaa wiill leave laater.&
+}
+:04A2
+    JUMP 0x00a2
+:04A7
+    ENDIF
+:04A8
+    {"Sssss. Kysstaa wiill ssstay heere.&
+}
+:04CD
+    SET_FLAG [N8(0xeb) ], [0x08 N8(0x07) + ]
+:04D6
+    BYE
+:04D7
+    KEYWORDS join
+    ANSWER
+:04DD
+    IF [N8(0xeb) INPARTY ]
+:04E2
+    {"Sssss. Kysstaa is aalready wiith $P. Brotherss-in-fangs, one huuman, one Sakkhra.&
+}
+:0536
+    JUMP 0x00a2
+:053B
+    ENDIF
+:053C
+    DECLARE [0x00, 0xb2] = [N8(0xeb) JOIN ]
+:0544
+    IF [0x00 B2 N8(0x02) == ]
+:054B
+    {Kysstaa looks around at your party. "Hssss. Will join later. Too many people, now.&
+}
+:059F
+    ENDIF
+:05A0
+    IF [0x00 B2 N8(0x01) == ]
+:05A7
+    {"Sssss. Kysssstaa will join laater, away from water.&
+}
+:05DD
+    ENDIF
+:05DE
+    IF [0x00 B2 N8(0x00) == ]
+:05E5
+    {"Sssss. Kysstaa thinksss huuman is good ally. Kysstaa wiill join with.&
+}
+:062D
+    ENDIF
+:062E
+    JUMP 0x00a2
+    KEYWORDS bye
+    ANSWER
+:0638
+    {"Sssss.& He turns his mind to other things.
+}
+:0664
+    BYE
+:0665
+    KEYWORDS *
+    ANSWER
+:0668
+    {"Sssss. Not taalk of thisss.&
+}
+:0686
+    JUMP 0x00a2
+    END_ANSWER

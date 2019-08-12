@@ -1,0 +1,512 @@
+:0000
+    NPC_ID: npc id: 9, npc name: Triolo
+:0008
+    NPC_LOOK: a sprightly grey-bearded man with an alert eye.
+*
+:003A
+    START CONVERSION
+:003B
+    IF [N8(0xeb) N8(0x03) FLAG N8(0x00) == ]
+:0045
+    {He looks at you intently for several moments before speaking, as if trying to place your face.
+}
+:00A4
+    PAUSE
+:00A5
+    {
+"Triolo has heard of $P. $P's face is very familiar, somehow."
+}
+:00E5
+    SET_FLAG [N8(0xeb) ], [N8(0x03) ]
+:00EC
+    ENDIF
+:00ED
+    JUMP 0x00f2
+:00F2
+    {"Does $P need help with something?"
+}
+:0116
+    JUMP 0x011b
+:011B
+    {
+}
+:011C
+    ASK
+    KEYWORDS name,trio
+    ANSWER
+:0128
+    {"Triolo is the name given me by the @Kuraks."
+}
+:0156
+    JUMP 0x011b
+    KEYWORDS job
+    ANSWER
+:0160
+    {"Triolo is a shaman-in-training. The great shaman @Intanya is Triolo's teacher."
+}
+:01B1
+    PAUSE
+:01B2
+    {
+"Triolo's newest task is to follow $P around... and convey to him the will of the @spirits."
+}
+:0210
+    JUMP 0x011b
+    KEYWORDS trib,kura
+    ANSWER
+:0220
+    {"Triolo belongs to the Kurak tribe. Triolo was not born a Kurak: Triolo came stumbling from the jungle, bereft of name and memory, many moons ago. Since then, @Intanya has taught Triolo the ways of the shaman."
+}
+:02F3
+    JUMP 0x011b
+    KEYWORDS spir,magi,spel
+    ANSWER
+:0308
+    {"Triolo has learned only a small part of what Intanya knows. Small magics, but useful."
+}
+:0360
+    JUMP 0x011b
+    KEYWORDS inta,shama
+    ANSWER
+:0371
+    {"Intanya, a great man, is shaman of the Kuraks. Triolo learns the spirit-magic of the shamans from him."
+}
+:03DA
+    JUMP 0x011b
+    KEYWORDS shamu
+    ANSWER
+:03E6
+    IF [N8(0x08) INPARTY ]
+:03EB
+    {Triolo gestures towards Shamuru. "Shamuru is there."
+}
+:0420
+    ELSE
+:0421
+    {"Shamuru is a hunter and tracker, of the @Barako tribe."
+}
+:045A
+    ENDIF
+:045B
+    JUMP 0x011b
+    KEYWORDS sham
+    ANSWER
+:0466
+    {He looks puzzled. "Did $P mean shaman or shamuru?"
+}
+:0499
+    JUMP 0x011b
+    KEYWORDS yopo
+    ANSWER
+:04A4
+    {"Yopo is a mostly green plant used in many incantations."
+}
+:04DE
+    JUMP 0x011b
+    KEYWORDS pind
+    ANSWER
+:04E9
+    {"Pinde makes strong magics."
+}
+:0506
+    JUMP 0x011b
+    KEYWORDS choc
+    ANSWER
+:0511
+    {"Brown beans, very strong taste. Use it in spells."
+}
+:0545
+    JUMP 0x011b
+    KEYWORDS tote
+    ANSWER
+:0550
+    {"Used to invoke the spirits."
+}
+:056E
+    JUMP 0x011b
+    KEYWORDS apha
+    ANSWER
+:0579
+    {"That is the spirit of emotions, and strength."
+}
+:05A9
+    JUMP 0x011b
+    KEYWORDS mota
+    ANSWER
+:05B4
+    {"Motazz is the spirit of battle."
+}
+:05D6
+    JUMP 0x011b
+    KEYWORDS helu
+    ANSWER
+:05E1
+    {"That is the spirit of knowledge and visions."
+}
+:0610
+    JUMP 0x011b
+    KEYWORDS aiel
+    ANSWER
+:061B
+    IF [N8(0x02) INPARTY ]
+:0620
+    {Triolo gestures towards Aiela. "She is Aiela."
+}
+:064F
+    JUMP 0x011b
+:0654
+    ENDIF
+:0655
+    IF [N8(0x01) N8(0x00) FLAG ]
+:065C
+    {"Aiela has left our party. Triolo does not know where she has gone."
+}
+:06A1
+    ELSE
+:06A2
+    {"Ah, the beauteous Aiela. Triolo has written songs about her."
+}
+:06E1
+    PAUSE
+:06E2
+    {
+"The evil Darden captured her, and holds her captive still. I am sure that were we to find where the Urali hide, we could free her."
+}
+:0768
+    ENDIF
+:0769
+    JUMP 0x011b
+    KEYWORDS bara
+    ANSWER
+:0774
+    {"Barako village is close to the Kurak, but across the deep canyon of waters."
+}
+:07C2
+    JUMP 0x011b
+    KEYWORDS bard,sing
+    ANSWER
+:07D2
+    {"Yes, Triolo sings. How did $P know that?"
+}
+:07FD
+    JUMP 0x011b
+    KEYWORDS iolo,brit
+    ANSWER
+:080D
+    {He frowns. "$P's names call up images to Triolo's mind. Distant lands, faces with forgotten names. Perhaps $P is invoking a spirit of memory."
+}
+:089C
+    JUMP 0x011b
+    KEYWORDS unit,alli,ally
+    ANSWER
+:08B1
+    {"The tribes war on one another while a terrible enemy, the @Myrmidex, kill them one by one. Intanya does all he can, but he cannot persuade the chiefs to unite."
+}
+:0953
+    JUMP 0x011b
+    KEYWORDS myrm
+    ANSWER
+:095E
+    {"Myrmidex are like ants... but are the size of men. They are fierce meat-eaters."
+}
+:09B0
+    JUMP 0x011b
+    KEYWORDS leav
+    ANSWER
+:09BB
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:09C3
+    IF [0x00 B2 N8(0x02) == ]
+:09CA
+    {"Leave? No, Triolo thinks he will stay here, and perhaps compose a tune."
+}
+:0A14
+    JUMP 0x011b
+:0A19
+    ENDIF
+:0A1A
+    IF [0x00 B2 N8(0x01) == ]
+:0A21
+    {He mimes as if he were going to dive off into the water, then laughs. "Perhaps Triolo will leave later, when meat-eating river fish do not surround him."
+}
+:0ABB
+    JUMP 0x011b
+:0AC0
+    ENDIF
+:0AC1
+    {"As $P wishes. Triolo will return to Intanya and resume his studies until $P needs him again."
+}
+:0B20
+    BYE
+:0B21
+    KEYWORDS wait
+    ANSWER
+:0B27
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:0B2F
+    IF [0x00 B2 N8(0x02) == ]
+:0B36
+    {"Triolo waits for no man! Perhaps if a woman were to ask... A she-cat with a dimple in her smile... Triolo would wait for that."
+}
+:0BB7
+    JUMP 0x011b
+:0BBC
+    ENDIF
+:0BBD
+    IF [0x00 B2 N8(0x01) == ]
+:0BC4
+    {He mimes as if he were going to dive off into the water, then laughs. "Perhaps Triolo will leave later, when meat-eating river fish do not surround him."
+}
+:0C5E
+    JUMP 0x011b
+:0C63
+    ENDIF
+:0C64
+    {He sighs. "As $P wishes. Deny Triolo all the fun. Triolo will wait right here. Perhaps he'll compose a little song about $P. 'Breath like Sharptooth, nose like Longneck...'"
+}
+:0D12
+    SET_FLAG [N8(0xeb) ], [0x08 N8(0x07) + ]
+:0D1B
+    BYE
+:0D1C
+    KEYWORDS join
+    ANSWER
+:0D22
+    IF [N8(0xeb) INPARTY ]
+:0D27
+    {His eyes twinkle. He looks at you, behind you, behind him, under his arm. Finally, he looks down at himself and yelps. "$P! Triolo is already here."
+}
+:0DBC
+    JUMP 0x011b
+:0DC1
+    ENDIF
+:0DC2
+    DECLARE [0x00, 0xb2] = [N8(0xeb) JOIN ]
+:0DCA
+    IF [0x00 B2 N8(0x02) == ]
+:0DD1
+    {"Triolo will join with $P later, when he has fewer people traveling with him."
+}
+:0E20
+    ENDIF
+:0E21
+    IF [0x00 B2 N8(0x01) == ]
+:0E28
+    {"What? How can Triolo join with $P now? Maybe later."
+}
+:0E5E
+    ENDIF
+:0E5F
+    IF [0x00 B2 N8(0x00) == ]
+:0E66
+    {"What? And give up Triolo's career?" He looks around him and grimaces. "Never mind, Triolo is with $P."
+}
+:0ECE
+    ENDIF
+:0ECF
+    JUMP 0x011b
+    KEYWORDS cheat
+    ANSWER
+:0EDB
+    IF [N8(0x01) N8(0x06) FLAG ]
+:0EE2
+    JUMP 0x0f8a
+:0EE7
+    ELSE
+:0EE8
+    {"$P should ask another about that."
+}
+:0F0C
+    JUMP 0x011b
+:0F11
+    ENDIF
+:0F12
+    KEYWORDS bye
+    ANSWER
+:0F17
+    {"Very well, speak to Triolo later."
+}
+:0F3B
+    BYE
+:0F3C
+    KEYWORDS *
+    ANSWER
+:0F3F
+    IF [N8(0x08) INPARTY ]
+:0F44
+    {"Ask Shamuru about that."
+}
+:0F5E
+    ELSE
+:0F5F
+    {"$P should ask another about that."
+}
+:0F83
+    ENDIF
+:0F84
+    JUMP 0x011b
+    END_ANSWER
+:0F89
+    BYE
+:0F8A
+    {"Be more specific.
+@Orchid, @Stone, @Hammer, @Bait, or @Other? "
+}
+:0FCB
+    ASK
+    KEYWORDS orch,root,naka,bar
+    ANSWER
+:0FE0
+    {"You need an orchid root for Nakai. Here."
+}
+:100B
+    NEW [N8(0x01) ], [N8(0x4e) ], [N8(0x00) ], [N8(0x01) ]
+:1018
+    JUMP 0x011b
+    KEYWORDS blue,ston
+    ANSWER
+:1028
+    {"You need a small blue stone for Topuru. Here."
+}
+:1058
+    NEW [N8(0x01) ], [N8(0x3a) ], [N8(0x00) ], [N8(0x01) ]
+:1065
+    JUMP 0x011b
+    KEYWORDS hamm
+    ANSWER
+:1070
+    {"You need a hammer to get the small blue stone. Here."
+}
+:10A7
+    NEW [N8(0x01) ], [N8(0x1d) ], [N8(0x00) ], [N8(0x01) ]
+:10B4
+    JUMP 0x011b
+    KEYWORDS turt,bait
+    ANSWER
+:10C4
+    {"You need turtle bait to cross the Urali swamp. Here."
+}
+:10FB
+    NEW [N8(0x01) ], [N8(0x2f) ], [N8(0x00) ], [0x18 B2 N8(0x01) + ]
+:110B
+    JUMP 0x011b
+    KEYWORDS othe
+    ANSWER
+:1116
+    JUMP 0x1143
+    KEYWORDS *
+    ANSWER
+:111E
+    {"I don't know how to help you."
+}
+:113E
+    JUMP 0x011b
+    END_ANSWER
+:1143
+    {Secret Cheaters Menu!
+1. Get items
+2. Set flags
+}
+:1173
+    INPUT (17, 00) 
+
+:1177
+    IF [0x00 B2 N8(0x01) == ]
+:117E
+    JUMP 0x11a3
+:1183
+    ENDIF
+:1184
+    IF [0x00 B2 N8(0x02) == ]
+:118B
+    JUMP 0x123b
+:1190
+    ENDIF
+:1191
+    {Have a nice day!
+}
+:11A2
+    BYE
+:11A3
+    {Object number?
+}
+:11B2
+    INPUT (17, 00) Quality? 
+:11BE
+    INPUT (17, 00) Quantity? 
+:11CB
+    INPUT (17, 00) 
+:11CE
+    IF [0x02 B2 N8(0x00) == ]
+:11D5
+    DECLARE [0x02, 0xb2] = [N8(0x01) ]
+:11DC
+    ENDIF
+:11DD
+    IF [N8(0x01) CANCARRY 0x00 B2 0x02 B2 WEIGHT < ]
+:11E8
+    {"That's too heavy for you... But I'll let you have it anyway!"
+*}
+:1228
+    ENDIF
+:1229
+    NEW [N8(0x01) ], [0x00 B2 ], [0x01 B2 ], [0x02 B2 ]
+:1236
+    JUMP 0x1143
+:123B
+    {
+Npc number? }
+:1248
+    INPUT (17, 00) 
+:124B
+    IF [0x00 B2 N8(0x00) == ]
+:1252
+    JUMP 0x1143
+:1257
+    ENDIF
+:1258
+    {
+
+M H 2 3 4 5 6 7
+}
+:126A
+    DECLARE [0x01, 0xb2] = [N8(0x00) ]
+:1271
+    DECLARE [0x02, 0xb2] = [0x00 B2 0x01 B2 FLAG ]
+:127B
+    {#2 }
+:127E
+    DECLARE [0x01, 0xb2] = [0x01 B2 N8(0x01) + ]
+:1288
+    IF [0x01 B2 N8(0x08) < ]
+:128F
+    JUMP 0x1271
+:1294
+    ENDIF
+:1295
+    {
+
+0-7 to toggle, 8 or 9 exits: }
+:12B4
+    INPUT (17, 00) 
+:12B7
+    IF [0x03 B2 N8(0x07) > ]
+:12BE
+    {
+}
+:12BF
+    JUMP 0x123b
+:12C4
+    ENDIF
+:12C5
+    IF [0x00 B2 0x03 B2 FLAG ]
+:12CC
+    CLEAR_FLAG [0x00 B2 ], [0x03 B2 ]
+:12D3
+    ELSE
+:12D4
+    SET_FLAG [0x00 B2 ], [0x03 B2 ]
+:12DB
+    ENDIF
+:12DC
+    JUMP 0x1258

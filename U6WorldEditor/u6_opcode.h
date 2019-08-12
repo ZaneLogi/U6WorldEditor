@@ -22,6 +22,8 @@
 #define U6OP_DECL       0xa6        // declare variable
 #define U6OP_EVAL       0xa7        // evaluate
 #define U6OP_ASSIGN     0xa8        // assign value to the declared variable
+#define U6OP_CANCARRY   0x9a
+#define U6OP_WEIGHT     0x9b
 
 #define U6OP_FLAG       0xab        // get npc flags
 
@@ -35,6 +37,7 @@
 
 #define U6OP_NEW        0xb9        // create a new object for npc
 #define U6OP_DELETE     0xba        // delete an object from npc
+#define U6OP_OBJCOUNT   0xbb
 
 #define U6OP_PORTRAIT   0xbf
 

@@ -1,0 +1,222 @@
+:0000
+    NPC_ID: npc id: 8, npc name: Shamuru
+:0009
+    NPC_LOOK: a quiet man, almost more a jungle spirit than a man.
+*
+:0040
+    START CONVERSION
+:0041
+    IF [N8(0xeb) N8(0x03) FLAG ]
+:0048
+    {"Yes, friend $P?"
+}
+:005A
+    ELSE
+:005B
+    SET_FLAG [N8(0xeb) ], [N8(0x03) ]
+:0062
+    {"It is $P! It has been long since Shamuru has seen you awake... long since the night that Darden the Huge trampled through our camp."
+}
+:00E8
+    ENDIF
+:00E9
+    JUMP 0x00ee
+:00EE
+    {
+}
+:00EF
+    ASK
+    KEYWORDS name,sham
+    ANSWER
+:00FB
+    {"Shamuru is the name the Barako @gave me."
+}
+:0126
+    JUMP 0x00ee
+    KEYWORDS job
+    ANSWER
+:0130
+    {"Shamuru is a tracker, a hunter, the best in all the valley."
+}
+:016E
+    PAUSE
+:016F
+    {
+}
+:0170
+    IF [N8(0xeb) INPARTY ]
+:0175
+    {"Shamuru enjoys traveling Eodon with $P."
+}
+:019F
+    ELSE
+:01A0
+    {"Shamuru also enjoys going to new places and exploring new things. If $P would like for Shamuru to @join with him, he has but to ask."
+}
+:0227
+    ENDIF
+:0228
+    JUMP 0x00ee
+    KEYWORDS trib,bara
+    ANSWER
+:0238
+    {"Shamuru is an @adopted warrior of the Barako tribe. The Barakos live on the ledges to the north."
+}
+:029B
+    JUMP 0x00ee
+    KEYWORDS gave,adop
+    ANSWER
+:02AB
+    {"Yes. Shamuru was not born to the Barakos. Indeed, Shamuru is more at home in the jungle than in the mountains where the Barakos live."
+}
+:0333
+    PAUSE
+:0334
+    {
+"Shamuru was found many moons ago wandering, naked and unarmed, his mind as clean as a baby's, in the high mountains above the Barako village."
+}
+:03C5
+    PAUSE
+:03C6
+    {
+"The Barakos took Shamuru in and made him a brother warrior. Shamuru does not remember his life before that time."
+}
+:043A
+    JUMP 0x00ee
+    KEYWORDS ankyl
+    ANSWER
+:0446
+    {"I've never seen an Ankylosaur, I never hope to see one But this I will say anyhow - I'd rather see than be one."
+}
+:04B8
+    JUMP 0x00ee
+    KEYWORDS shami,brit
+    ANSWER
+:04C9
+    {"Your words..." He frowns. "Shamuru seems to see far-away things, places, people. Shamuru does not understand."
+}
+:0539
+    JUMP 0x00ee
+    KEYWORDS leav
+    ANSWER
+:0544
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:054C
+    IF [0x00 B2 N8(0x02) == ]
+:0553
+    {"You presume much, telling Shamuru to leave."
+}
+:0581
+    JUMP 0x00ee
+:0586
+    ENDIF
+:0587
+    IF [0x00 B2 N8(0x01) == ]
+:058E
+    {He shakes his head, smiling, and points at the water. "Shamuru will leave on land."
+}
+:05E2
+    JUMP 0x00ee
+:05E7
+    ENDIF
+:05E8
+    {"If $P wishes. He can find Shamuru north of the Yolaru village... some of the time."
+}
+:063D
+    BYE
+:063E
+    KEYWORDS wait
+    ANSWER
+:0644
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:064C
+    IF [0x00 B2 N8(0x02) == ]
+:0653
+    {"You presume much, telling Shamuru to wait."
+}
+:0680
+    JUMP 0x00ee
+:0685
+    ENDIF
+:0686
+    IF [0x00 B2 N8(0x01) == ]
+:068D
+    {He shakes his head, smiling, and points at the water. "Shamuru would find it hard to wait on the water. Shamuru will wait to wait."
+}
+:0711
+    JUMP 0x00ee
+:0716
+    ENDIF
+:0717
+    {He nods briefly. "Shamuru will wait here. Do not forget him."
+}
+:0755
+    SET_FLAG [N8(0xeb) ], [0x08 N8(0x07) + ]
+:075E
+    BYE
+:075F
+    KEYWORDS join
+    ANSWER
+:0765
+    IF [N8(0xeb) INPARTY ]
+:076A
+    {He gives you a slight smile. "Shamuru is with $P already."
+}
+:07A5
+    JUMP 0x00ee
+:07AA
+    ENDIF
+:07AB
+    DECLARE [0x00, 0xb2] = [N8(0xeb) JOIN ]
+:07B3
+    IF [0x00 B2 N8(0x02) == ]
+:07BA
+    {"Shamuru will join with $P later, when he has fewer people traveling with him."
+}
+:080A
+    ENDIF
+:080B
+    IF [0x00 B2 N8(0x01) == ]
+:0812
+    {"Shamuru cannot join with $P now. Maybe later."
+}
+:0842
+    ENDIF
+:0843
+    IF [0x00 B2 N8(0x00) == ]
+:084A
+    {He considers briefly and nods. "Shamuru thinks it would be a good thing to travel with $P."
+}
+:08A6
+    ENDIF
+:08A7
+    JUMP 0x00ee
+    KEYWORDS bye
+    ANSWER
+:08B1
+    {"A pleasure."
+}
+:08BF
+    BYE
+:08C0
+    KEYWORDS *
+    ANSWER
+:08C3
+    IF [N8(0x03) INPARTY ]
+:08C8
+    {"Ask Dokray about that."
+}
+:08E1
+    JUMP 0x00ee
+:08E6
+    ELSE
+:08E7
+    {"Shamuru does not understand you."
+}
+:090A
+    JUMP 0x00ee
+:090F
+    ENDIF
+    END_ANSWER
+:0910
+    BYE

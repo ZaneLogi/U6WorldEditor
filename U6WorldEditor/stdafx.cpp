@@ -37,7 +37,7 @@ std::string format_hex_string(const uint8_t* p_src, const uint8_t* p_end)
         sprintf_s(p_dst, 4, "%02x ", *p_src++);
         p_dst += 3;
     }
-    *p_dst = '\0';
+    result.resize(p_dst - result.data());
     return result;
 }
 

@@ -127,20 +127,26 @@ void CConverseDlg::OnSelchangeNpc()
     {
         m_interpreter.load(npc_script);
 
-        auto formatted = m_interpreter.format_script();
+#define SAVE_RAW 0
+#define FORMAT_SCRIPT 1
+#define SAVE_FORMATTED 1
 
-#if 1
-        auto filename = format_string("d:\\%03d_%s_formatted.txt", nSel, npc_name.c_str());
-        std::ofstream f_formatted(filename.c_str(), std::ios_base::out | std::ios_base::binary);
-        f_formatted.write(formatted.c_str(), formatted.length());
-        f_formatted.close();
-#endif
-
-#if 0
-        auto filename = format_string("d:\\%03d_%s.bin", nSel, npc_name.c_str());
-        std::ofstream f(filename.c_str(), std::ios_base::out | std::ios_base::binary);
+#if SAVE_RAW
+        auto bin_filename = format_string("d:\\%03d_%s.bin", nSel, npc_name.c_str());
+        std::ofstream f(bin_filename.c_str(), std::ios_base::out | std::ios_base::binary);
         f.write((char*)npc_script.data(), npc_script.size());
         f.close();
+#endif
+
+#if FORMAT_SCRIPT
+        auto formatted = m_interpreter.format_script();
+#endif
+
+#if FORMAT_SCRIPT && SAVE_FORMATTED
+        auto formatted_filename = format_string("d:\\%03d_%s_formatted.txt", nSel, npc_name.c_str());
+        std::ofstream f_formatted(formatted_filename.c_str(), std::ios_base::out | std::ios_base::binary);
+        f_formatted.write(formatted.c_str(), formatted.length());
+        f_formatted.close();
 #endif
 
         m_interpreter.run(std::string(), m_text);

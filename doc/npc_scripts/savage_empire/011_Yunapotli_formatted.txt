@@ -1,0 +1,423 @@
+:0000
+    NPC_ID: npc id: 11, npc name: Yunapotli
+:000B
+    NPC_LOOK: a golden statue made in the shape of a human.
+*
+:003B
+    START CONVERSION
+:003C
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:0043
+    JUMP 0x0091
+:0048
+    ELSE
+:0049
+    {The statue says nothing. (Neither would you, with your head missing!)
+}
+:008F
+    BYE
+:0090
+    ENDIF
+:0091
+    IF [N8(0xeb) 0x00 FLAG ]
+:0097
+    JUMP 0x02a5
+:009C
+    ENDIF
+:009D
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:00A3
+    {"Greet-ings. Wel-come to the @Ci-ty of the Kot-l."
+}
+:00D6
+    PAUSE
+:00D7
+    {
+"The ci-ty is ac-tive. I see the @gen-er-a-tors are func-tion-ing."
+}
+:011C
+    PAUSE
+:011D
+    {
+The automoton looks at the silver figure seated next to him. "How-ev-er, I see that some of the guar-di-an ser-vants have bro-ken down."
+}
+:01A7
+    PAUSE
+:01A8
+    {
+}
+:01A9
+    IF [N8(0x04) INPARTY ]
+:01AE
+    PORTRAIT [N8(0x04) ]
+:01B2
+    {Jimmy breaks in: "So that's a guard? Sorta like an Argent Sergeant, eh?"
+}
+:01FB
+    PAUSE
+:01FC
+    {
+}
+:01FD
+    PORTRAIT [N8(0x0b) ]
+:0201
+    ENDIF
+:0202
+    {"I see you are a hu-man. In the ab-sence of con-tra-dic-to-ry or-ders from my mas-ters, I will join your par-ty and serve you. How may I ac-com-mo-date you?"
+}
+:02A0
+    JUMP 0x02c1
+:02A5
+    {"How may I serve you?"
+}
+:02BC
+    JUMP 0x02c1
+:02C1
+    {
+}
+:02C2
+    ASK
+    KEYWORDS name,yuna
+    ANSWER
+:02CE
+    {"I am Yu-na-pot-li. I know it is my name for I re-mem-ber it."
+}
+:030D
+    IF [N8(0xeb) N8(0x07) FLAG N8(0x00) == ]
+:0317
+    PAUSE
+:0318
+    {
+The automaton pauses for a moment, as if thinking. "I would re-mem-ber much more, if I had my @brain."
+}
+:0380
+    ENDIF
+:0381
+    JUMP 0x02c1
+    KEYWORDS job
+    ANSWER
+:038B
+    {"My oc-cu-pa-tion is that of ser-vant. E-ver since the hu-mans left, I and @o-thers like me have served the @Kot-l."
+}
+:0400
+    PAUSE
+:0401
+    {
+"E-ver since the Kot-l @left, I have been the guar-di-an of the doors to the ci-ty. It is my job to @swing the doors o-pen and closed."
+}
+:048A
+    JUMP 0x02c1
+    KEYWORDS crys,brai
+    ANSWER
+:049A
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:04A1
+    {"Ma-ny of my me-mo-ries were im-bued in the crys-tal brain which you re-turned to me."
+}
+:04F8
+    JUMP 0x02c1
+:04FD
+    ENDIF
+:04FE
+    DECLARE [0x00, 0xb2] = [N8(0x03) N8(0x00) OBJINPARTY ]
+:0508
+    IF [0x00 B2 N16(0x8001) == ]
+:0510
+    {"Yes, ma-ny of my me-mo-ries are not with-in me. They are im-bued in a crys-tal brain. I be-lieve the brain is some-where with-in the Ci-ty of the Kot-l."
+}
+:05AB
+    PAUSE
+:05AC
+    {
+"If you find my brain and give it to me, I will know more things than I do now."
+}
+:05FE
+    JUMP 0x02c1
+:0603
+    ELSE
+:0604
+    JUMP 0x143e
+:0609
+    ENDIF
+:060A
+    KEYWORDS kot
+    ANSWER
+:060F
+    {"It was the Kot-l who cre-a-ted me. They were wise be-ings. They were not hu-mans. They were rep-tiles."
+}
+:0678
+    PAUSE
+:0679
+    {
+"They once had hu-mans as ser-vants. That is why I am shaped as a hu-man, for I am a ser-vant. But the Kot-l are gone now; they @left."
+}
+:0702
+    PAUSE
+:0703
+    {
+"@Kat-al-kot-l knows ma-ny things about the Kot-l. You should speak with him."
+}
+:0753
+    JUMP 0x02c1
+    KEYWORDS o
+    ANSWER
+:075B
+    {"There are o-ther au-to-ma-tons like my-self with-in the Ci-ty of the Kot-l. They are not so in-tel-li-gent as I. I have no i-dea what they have been do-ing since the Kot-l left and I fell a-sleep."
+}
+:0822
+    JUMP 0x02c1
+    KEYWORDS swin,door
+    ANSWER
+:0832
+    IF [N8(0x23) N8(0x05) FLAG ]
+:0839
+    {"The doors to the city are al-rea-dy o-pen!"
+}
+:0866
+    JUMP 0x02c1
+:086B
+    ELSE
+:086C
+    {"Do you wish me to o-pen the doors to the ci-ty?"
+}
+:089E
+    JUMP 0x131e
+:08A3
+    ENDIF
+:08A4
+    KEYWORDS left,asle
+    ANSWER
+:08AF
+    {"Yes, the Kot-l left a long long time a-go. The @Myr-mi-dex at-tacked them. I do not re-mem-ber why. Per-haps you should ask @Kat-al-kot-l."
+}
+:093C
+    PAUSE
+:093D
+    {
+"When they left, they placed me at the doors. I was to ad-mit a-ny Kot-l or a-ny-one with peace-ful in-tent. They left the @gen-er-a-tors run-ning so that the ci-ty would be pleas-ant."
+}
+:09F8
+    PAUSE
+:09F9
+    {
+"But much la-ter some men came and took my head so I could not think. It has ob-vi-ous-ly been re-att-ached."
+}
+:0A68
+    PAUSE
+:0A69
+    {
+"The last thing I re-mem-ber is one of the hu-mans reach-ing for my head."
+}
+:0AB5
+    JUMP 0x02c1
+    KEYWORDS myr
+    ANSWER
+:0ABF
+    {"The Myr-mi-dex are gi-ant in-sects. They are sa-vage and re-pel-lant. I do not re-mem-ber much a-bout them. Per-haps you should ask @Kat-al-kot-l."
+}
+:0B54
+    JUMP 0x02c1
+    KEYWORDS cit
+    ANSWER
+:0B5E
+    IF [0x23 B2 N8(0x03) == ]
+:0B65
+    {"This is the Ci-ty of the Kot-l, built long long a-go be-fore hu-mans came or Myr-mi-dex came. Now I think no one lives here."
+}
+:0BE4
+    ELSE
+:0BE5
+    {"The Ci-ty of the Kot-l was built long a-go be-fore hu-mans came or Myr-mi-dex came. Now I think no one lives there."
+}
+:0C5B
+    ENDIF
+:0C5C
+    JUMP 0x02c1
+    KEYWORDS kat
+    ANSWER
+:0C66
+    {"Kat-al-kot-l is ve-ry wise. He stands in the cen-ter of the Great Pla-za of the Ci-ty. He an-swers many quest-ions."
+}
+:0CDC
+    PAUSE
+:0CDD
+    {
+"But he can-not move and can-not touch a-ny-thing."
+}
+:0D12
+    JUMP 0x02c1
+    KEYWORDS hu
+    ANSWER
+:0D1B
+    {"Hu-mans. Hu-mans were once the ser-vants of the Kot-l, I think. You should ask @Kat-al-kot-l."
+}
+:0D7B
+    JUMP 0x02c1
+    KEYWORDS gen,pow,ener,en-e
+    ANSWER
+:0D93
+    {"The ci-ty is pow-wered by migh-ty gen-er-a-tors."
+}
+:0DC6
+    IF [N8(0x23) N8(0x05) FLAG ]
+:0DCD
+    {"You should ask @Kat-al-kot-l a-bout them. He would know more than I."
+}
+:0E14
+    ELSE
+:0E15
+    {"But you can-not see them now for the doors to the ci-ty are closed."
+}
+:0E5B
+    ENDIF
+:0E5C
+    JUMP 0x02c1
+    KEYWORDS de
+    ANSWER
+:0E65
+    {"The Kot-l cre-at-ed man-y in-ter-est-ing de-vices. When the @Myr-mi-dex at-tacked, they al-so cre-at-ed @weap-ons and @arm-or to help de-fend the ci-ty."
+}
+:0F00
+    PAUSE
+:0F01
+    {
+"One you may find in-ter-est-ing is a de-vice to help @lo-cate the black stone the Myrm-i-dex took."
+}
+:0F67
+    PAUSE
+:0F68
+    {
+"Most de-vic-es should still func-tion. You may use an-y you find."
+}
+:0FAD
+    JUMP 0x02c1
+    KEYWORDS lo
+    ANSWER
+:0FB6
+    {"It is a round ob-ject with a light which in-di-cates a path towards the black stone."
+}
+:100D
+    JUMP 0x02c1
+    KEYWORDS weap
+    ANSWER
+:1018
+    {"You may find a long black staff. It caus-es great dam-age a-gainst the Myr-mi-dex."
+}
+:106D
+    PAUSE
+:106E
+    {
+"They also found a gas that was ve-ry eff-ect-ive a-gainst the Myr-mi-dex. It is found in large green can-is-ters."
+}
+:10E3
+    JUMP 0x02c1
+    KEYWORDS armo
+    ANSWER
+:10EE
+    {"Kot-l ar-mor would not fit you. But they cre-at-ed a ve-ry good shi-eld that you could use."
+}
+:114C
+    JUMP 0x02c1
+    KEYWORDS heal
+    ANSWER
+:1157
+    {"I know the Kot-l cre-at-ed heal-ing crys-tals that could al-so heal hu-mans."
+}
+:11A6
+    JUMP 0x02c1
+    KEYWORDS leav,wait
+    ANSWER
+:11B6
+    {"But I can-not. }
+:11C6
+    IF [N8(0x23) N8(0x05) FLAG ]
+:11CD
+    {I have o-pened the doors to the ci-ty. Now it is my du-ty to be your guide."
+}
+:121A
+    ELSE
+:121B
+    {It is my du-ty to stay with you and open the @doors to the ci-ty."
+}
+:125E
+    ENDIF
+:125F
+    JUMP 0x02c1
+    KEYWORDS join
+    ANSWER
+:126A
+    {"I am al-rea-dy with you, sir."
+}
+:128A
+    JUMP 0x02c1
+    KEYWORDS bye
+    ANSWER
+:1294
+    {"De-light-ed to speak with you. I hope we will talk a-gain soon."
+}
+:12D6
+    BYE
+:12D7
+    // NOTE: a strange A2 is here
+    KEYWORDS *
+    ANSWER
+:12DB
+    {"I am sor-ry. My mem-o-ries do not ex-tend to that sub-ject."
+}
+:1319
+    JUMP 0x02c1
+    END_ANSWER
+:131E
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:1324
+    JUMP 0x134d
+    KEYWORDS n
+    ANSWER
+:132C
+    {"Ve-ry well, I shall not."
+}
+:1347
+    JUMP 0x02c1
+    END_ANSWER
+:134D
+    {"Ve-ry well, I shall o-pen them for you."
+}
+:1377
+    PAUSE
+:1378
+    {
+The automaton closes its eyes with a 'clack' and appears to concentrate. There is a grinding noise from the direction of the doors...
+}
+:13FF
+    PAUSE
+:1400
+    {
+}
+:1401
+    SET_FLAG [N8(0x23) ], [N8(0x05) ]
+:1408
+Unknown code [d1 d4 de 00 a7 ]
+:140D
+    {His eyes 'clack' open. "There! It is done."
+}
+:1439
+    JUMP 0x02c1
+:143E
+    DELETE [0x00 B2 ], [N8(0x03) ], [N8(0x00) ], [N8(0x01) ]
+:144B
+    SET_FLAG [N8(0xeb) ], [N8(0x07) ]
+:1452
+Unknown code [d8 00 b2 a7 ]
+:1456
+    {The automaton takes the crystal brain from $Y. A door opens in the side of the golden head, and Yunapotli places the brain inside its skull.
+}
+:14E3
+    PAUSE
+:14E4
+    {
+"Thank you. I am now much smart-er. I now know a-bout man-y @de-vic-es that the Kot-l dev-el-oped to com-bat the @Myr-me-dex."
+}
+:1564
+    JUMP 0x02c1

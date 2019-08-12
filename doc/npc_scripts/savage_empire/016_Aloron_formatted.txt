@@ -1,0 +1,634 @@
+:0000
+    NPC_ID: npc id: 16, npc name: Aloron
+:0008
+    NPC_LOOK: an aging but still-mighty warrior with wise eyes.
+*
+:003C
+    START CONVERSION
+:003D
+    IF [N8(0xeb) 0x00 FLAG ]
+:0043
+    JUMP 0x01b4
+:0048
+    ELSE
+:0049
+    {"So. It is $P. Long he lay in the village of the Kuraks, smashed when @Darden took @Aiela away.&
+}
+:00AA
+    JUMP 0x00b0
+:00AF
+    ENDIF
+:00B0
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:00B7
+    PAUSE
+:00B8
+    {
+"Now he comes before the chief of the Kuraks, and has rescued Aiela, daughter of the chief. The chief is pleased to welcome his friend $P.&
+}
+:0145
+    JUMP 0x02b9
+:014A
+    ELSE
+:014B
+    PAUSE
+:014C
+    {
+"Now he has regained his strength, and comes before the chief of the Kuraks. What does he want?&
+}
+:01AE
+    JUMP 0x02b9
+:01B3
+    ENDIF
+:01B4
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:01BB
+    {"Ah, it is $P, rescuer of Aiela! You are a welcome guest here. What may Aloron help $P with?&
+}
+:0219
+    JUMP 0x02b9
+:021E
+    ENDIF
+:021F
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:0226
+    {"Why does $P come before Aloron again when he has not rescued Aiela? What does he want?&
+}
+:027F
+    JUMP 0x02b9
+:0284
+    ELSE
+:0285
+    {"$P is welcome in the village of the Kuraks.&
+}
+:02B3
+    JUMP 0x02b9
+:02B8
+    ENDIF
+:02B9
+    {
+}
+:02BA
+    ASK
+    KEYWORDS name,alor
+    ANSWER
+:02C6
+    {"$P speaks to Aloron, father of @Aiela.&
+}
+:02EF
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:02F5
+    PORTRAIT [N8(0xeb) ]
+:02F9
+    IF [N8(0x02) INPARTY ]
+:02FE
+    PAUSE
+:02FF
+    {
+}
+:0300
+    PORTRAIT [N8(0x02) ]
+:0304
+    {Aiela runs over to embrace her father briefly. "$P has come home with me to visit my father.&
+}
+:0362
+    PAUSE
+:0363
+    {
+}
+:0364
+    PORTRAIT [N8(0xeb) ]
+:0368
+    ENDIF
+:0369
+    JUMP 0x02b9
+    KEYWORDS job
+    ANSWER
+:0373
+    {"This warrior is chief of the Kurak tribe. He leads the Kurak warriors against the @Myrmidex and the @Yolaru.&
+}
+:03E2
+    IF [N8(0x07) INPARTY ]
+:03E7
+    PAUSE
+:03E8
+    {
+}
+:03E9
+    PORTRAIT [N8(0x07) ]
+:03ED
+    {Prof. Rafkin whispers in your ear: "Among the @Yolaru, with whom I lived, Aloron was well-known and respected. He's supposed to be an honest and forthright chieftain.&
+}
+:0495
+    PAUSE
+:0496
+    {
+}
+:0497
+    PORTRAIT [N8(0xeb) ]
+:049B
+    ENDIF
+:049C
+    JUMP 0x02b9
+    KEYWORDS trib
+    ANSWER
+:04A7
+    {"There are many tribes in this valley. We are the Kuraks. There are also the @Yolaru, the Disquiqu, and the Nahuatla in their stone village.&
+}
+:0535
+    PAUSE
+:0536
+    {
+"Further away, there are Pindiro and Barako in the far north, Jukari and ugly Haakur in the southeast, Barrab and lizard-Sakkhra in southwest.&
+}
+:05C7
+    PAUSE
+:05C8
+    {
+"Hidden away somewhere southeast are the @Urali.&
+}
+:05FB
+    JUMP 0x02b9
+    KEYWORDS aiel,daug
+    ANSWER
+:060B
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0612
+    {The chieftain smiles. "Aloron is grateful to $P for rescuing his daughter Aiela.&
+}
+:0664
+    JUMP 0x02b9
+:0669
+    ELSE
+:066A
+    {The chieftain sighs unhappily. "Aloron's daughter Aiela, flower of his life, has been taken away. Aiela is held by @Darden the Huge, the chieftain of the @Urali.&
+}
+:070D
+    PAUSE
+:070E
+    {
+"Many Kurak warriors search the land for the hidden Urali, to bring Aiela back. Aloron hopes that you join in the search.&
+}
+:078A
+    PAUSE
+:078B
+    {
+"If $P were to find Aiela, Aloron would be most grateful.&
+}
+:07C7
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:07CE
+    JUMP 0x02b9
+:07D3
+    ENDIF
+    KEYWORDS bone
+    ANSWER
+:07DA
+    {"If $P wants bones, he should go east of the Kurak village until he reaches the @Yolaru village. From there, he must go south, keeping the cliff ever to his left.&
+}
+:087E
+    PAUSE
+:087F
+    {
+"Soon, he will find the place where the big lizards go to die.&
+}
+:08C0
+    JUMP 0x02b9
+    KEYWORDS bamb
+    ANSWER
+:08CB
+    {"If $P wants bamboo, he must travel south of the place of many @bones.  There he will find a stand of bamboo.&
+}
+:093A
+    JUMP 0x02b9
+    KEYWORDS yola
+    ANSWER
+:0945
+    {"The Yolaru are a tribe to the east of the Kuraks. Their chief is Apaton.&
+}
+:0990
+    IF [N8(0x02) INPARTY ]
+:0995
+    PAUSE
+:0996
+    {
+Aloron scowls at his daughter. "Aiela is friends with them, with the shaman's daughter Sahree. Aiela is a disobedient child sometimes.&
+}
+:0A1F
+    PAUSE
+:0A20
+    {
+}
+:0A21
+    PORTRAIT [N8(0x02) ]
+:0A25
+    {Aiela speaks up, indignant: "Aiela sometimes knows better than her father what is good for the Kuraks.&
+}
+:0A8D
+    PAUSE
+:0A8E
+    {
+"While Kuraks war with Yolaru, while all tribes war with all others, the @Myrmidex will always be able to defeat all the tribes.&
+}
+:0B11
+    PAUSE
+:0B12
+    {
+"Aiela and her friend Sahree know that the tribes must @unite against the Myrmidex... even if their fathers do not know this yet.&
+}
+:0B96
+    PAUSE
+:0B97
+    {
+}
+:0B98
+    PORTRAIT [N8(0xeb) ]
+:0B9C
+    {The chief merely snorts.
+}
+:0BB5
+    JUMP 0x02b9
+:0BBA
+    ELSE
+:0BBB
+    JUMP 0x02b9
+:0BC0
+    ENDIF
+    KEYWORDS myrm
+    ANSWER
+:0BC7
+    {"Myrmidex. Giant warrior-insects. They live very close, to the west of the Kurak village. They raid here all the time, killing and eating.&
+}
+:0C53
+    PAUSE
+:0C54
+    {
+"The Kurak are the greatest warriors in all the valley. But the Myrmidex are... other than human.&
+}
+:0CB8
+    PAUSE
+:0CB9
+    {
+"Mighty beyond belief, in their numbers and ferocity. The Kuraks fall before them.&
+}
+:0D0E
+    IF [N8(0x02) INPARTY ]
+:0D13
+    PAUSE
+:0D14
+    {
+}
+:0D15
+    PORTRAIT [N8(0x02) ]
+:0D19
+    {Aiela breaks in: "My father, Aiela is certain that the Kuraks would defeat the Myrmidex if only we would @unite with the @Yolaru and other tribes...&
+}
+:0DAF
+    PAUSE
+:0DB0
+    {
+}
+:0DB1
+    PORTRAIT [N8(0xeb) ]
+:0DB5
+    {The chief frowns. "The @Yolaru are enemies of the Kurak. Enemies, always. Not worth befriending.&
+}
+:0E17
+    JUMP 0x13eb
+:0E1C
+    ELSE
+:0E1D
+    JUMP 0x02b9
+:0E22
+    ENDIF
+:0E23
+    KEYWORDS topu
+    ANSWER
+:0E29
+    {"Topuru was the shaman of the @Urali long ago. Topuru went mad; Aloron does not know why. Somewhere in the far, far north, Topuru lives on a little island.&
+}
+:0EC6
+    JUMP 0x02b9
+    KEYWORDS ural
+    ANSWER
+:0ED1
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0ED8
+    {"Aloron no longer needs to visit vengeance upon the Urali. Aloron has his daughter back.&
+}
+:0F32
+    JUMP 0x02b9
+:0F37
+    ELSE
+:0F38
+    {"The Urali often raid Kurak territory. They come from the southeast somewhere, but we can not find their village.&
+}
+:0FAB
+    PAUSE
+:0FAC
+    {
+"Aloron has heard of one who might know. A mad warrior named @Topuru.
+}
+:0FF3
+    JUMP 0x02b9
+:0FF8
+    ENDIF
+    KEYWORDS dard
+    ANSWER
+:0FFF
+    {"The @Urali were a peaceful tribe until Darden the Huge became chief. Only then did they begin to raid others.&
+}
+:106F
+    JUMP 0x02b9
+    KEYWORDS unit,ally,alli
+    ANSWER
+:1084
+    {"Does $P speak of uniting all the tribes of the valley?&
+}
+:10BD
+    JUMP 0x153e
+    KEYWORDS wher
+    ANSWER
+:10C8
+    {"$P is in the village of the Kurak tribe.&
+}
+:10F3
+    JUMP 0x02b9
+    KEYWORDS drum
+    ANSWER
+:10FE
+    {"$P speaks of the Great Drum of legend. In ancient past, the warrior Oloro-of-No-Tribe built a great drum on a hill near the stone village of the Nahuatla.&
+}
+:119B
+    IF [N8(0x04) N8(0x06) FLAG ]
+:11A2
+    PAUSE
+:11A3
+    {
+"If $P wants to @unite the tribes, he should build new Great Drum there.&
+}
+:11EE
+    JUMP 0x02b9
+:11F3
+    ELSE
+:11F4
+    JUMP 0x02b9
+:11F9
+    ENDIF
+    KEYWORDS bye
+    ANSWER
+:11FF
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:1205
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:120C
+    {"$P may always speak to Aloron. $P rescued Aiela from savage Urali men.&
+}
+:1255
+    JUMP 0x1326
+:125A
+    ENDIF
+:125B
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:1262
+    {"Fare well, $P. Go, join the warriors searching for @Aiela. Try to find @Aiela.&
+}
+:12B3
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:12BA
+    BYE
+:12BB
+    ENDIF
+:12BC
+    {"Hmph.& Disinterested, he turns away from you.
+}
+:12EB
+    BYE
+:12EC
+    // NOTE: a strange A2 is here
+    KEYWORDS *
+    ANSWER
+:12F0
+    {"Aloron does not understand $P's foreign words.&
+}
+:1321
+    JUMP 0x02b9
+    END_ANSWER
+:1326
+    IF [N8(0x02) N8(0x05) FLAG ]
+:132D
+    PAUSE
+:132E
+    {
+"$P has brought smiles to Aiela's eyes. He may count himself Aloron's friend in all things.&
+}
+:138C
+    BYE
+:138D
+    ENDIF
+:138E
+    IF [N8(0x02) N8(0x06) FLAG ]
+:1395
+    PAUSE
+:1396
+    {
+"But $P must not count himself friend of Aloron. He has cruelly treated Aiela.&
+}
+:13E7
+    BYE
+:13E8
+    ELSE
+:13E9
+    BYE
+:13EA
+    ENDIF
+:13EB
+    IF [N8(0x07) INPARTY ]
+:13F0
+    PAUSE
+:13F1
+    {
+}
+:13F2
+    PORTRAIT [N8(0x07) ]
+:13F6
+    {Prof. Rafkin breaks in, indignantly: "Now, now, my fur-covered fellow, I must protest. I lived among the @Yolaru for some time and found them to be a most delightful people.&
+}
+:14A5
+    PAUSE
+:14A6
+    {
+"Were you to befriend them, you might find them as gallant a race as your own Kuraks.&
+}
+:14FE
+    PAUSE
+:14FF
+    {
+}
+:1500
+    PORTRAIT [N8(0xeb) ]
+:1504
+    {The chief merely grimaces and waves him away.
+}
+:1532
+    JUMP 0x02b9
+:1537
+    ELSE
+:1538
+    JUMP 0x02b9
+:153D
+    ENDIF
+:153E
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:1544
+    JUMP 0x1581
+    KEYWORDS n
+    ANSWER
+:154C
+    {"Then Aloron does not know of what $P speaks.&
+}
+:157B
+    JUMP 0x02b9
+    END_ANSWER
+:1581
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:1588
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:158F
+    {"Aloron has already told $P how to enlist the aid of the Kuraks: Rescue Aiela. If he wishes to enlist the aid of other chiefs, he must get each to promise his aid, and must build the Great @Drum.&
+}
+:1654
+    JUMP 0x02b9
+:1659
+    ELSE
+:165A
+    JUMP 0x1660
+:165F
+    ENDIF
+:1660
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1667
+    {He thinks about this for a long time.
+}
+:168D
+    PAUSE
+:168E
+    {
+Finally: "Aloron thinks $P is mad with the sun. The tribes of the valley like making war on one another. It is the way they have lived since before memory.&
+}
+:172C
+    PAUSE
+:172D
+    {
+"But once before it was done: There is the story of Oloro-of-No-Tribe, a mighty warrior. When the mighty lizards grew too many in number, Oloro went from chief to chief, taking from each a promise to help, to stop making war.&
+}
+:1811
+    SET_FLAG [N8(0x04) ], [N8(0x05) ]
+:1818
+    PAUSE
+:1819
+    {
+"When all chiefs had made their promise, Oloro built a Great Drum on the small hill north of the Nahuatla city. From there, he summoned the chiefs and the warriors to march on the lizards.&
+}
+:18D8
+    PAUSE
+:18D9
+    {
+}
+:18DA
+    JUMP 0x18df
+:18DF
+    IF [N8(0x10) N8(0x07) FLAG ]
+:18E6
+    {"If $P wishes to unite the tribes of the valley, he will find it a mighty task.&
+}
+:1937
+    PAUSE
+:1938
+    {
+"But Aloron will help. $P has rescued Aloron's daughter Aiela. $P can count on the aid of the Kuraks.&
+}
+:19A0
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:19A7
+    JUMP 0x02b9
+:19AC
+    ELSE
+:19AD
+    {"Does $P want to enlist the aid of the Kuraks in this way? He must rescue Aiela to do so. Aiela is held by the @Urali of @Darden the Huge.&
+}
+:1A39
+    PAUSE
+:1A3A
+    {
+"If $P can rescue her, Aloron will join $P's alliance of tribes.&
+}
+:1A7D
+    JUMP 0x1a83
+:1A82
+    ENDIF
+:1A83
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1A8A
+    IF [N8(0x04) INPARTY ]
+:1A8F
+    JUMP 0x1aa2
+:1A94
+    ELSE
+:1A95
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:1A9C
+    JUMP 0x02b9
+:1AA1
+    ENDIF
+:1AA2
+    PAUSE
+:1AA3
+    {
+}
+:1AA4
+    IF [N8(0x04) N8(0x06) FLAG ]
+:1AAB
+    PORTRAIT [N8(0x04) ]
+:1AAF
+    {Jimmy whips out his notebook. "I've got the gist of all that in my @notebook here, Mr. Adventure. Jimmy Malone never forgets.&
+}
+:1B2E
+    PAUSE
+:1B2F
+    {
+}
+:1B30
+    PORTRAIT [N8(0xeb) ]
+:1B34
+    JUMP 0x02b9
+:1B39
+    ELSE
+:1B3A
+    PORTRAIT [N8(0x04) ]
+:1B3E
+    {Jimmy speaks up. "Tell you what, boss. It could be that we're going to have a lot of these little chores ahead of us. I'll note down what each chief wants.&
+}
+:1BDB
+    PAUSE
+:1BDC
+    {
+"Any time you want to check out what we've got in store for us, ask me about my @notebook. It never forgets.&
+}
+:1C4B
+    SET_FLAG [N8(0x04) ], [N8(0x03) ]
+:1C52
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:1C59
+    PAUSE
+:1C5A
+    {
+}
+:1C5B
+    PORTRAIT [N8(0xeb) ]
+:1C5F
+    JUMP 0x02b9
+:1C64
+    ENDIF

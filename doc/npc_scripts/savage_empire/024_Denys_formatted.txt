@@ -1,0 +1,315 @@
+:0000
+    NPC_ID: npc id: 24, npc name: Denys
+:0007
+    NPC_LOOK: a lean, thoughtful-looking, pale-skinned native man.
+*
+:003E
+    START CONVERSION
+:003F
+    IF [N8(0xeb) 0x00 FLAG ]
+:0045
+    DECLARE [0x0a, 0xb3] = [0x19 B3 ]
+:004C
+    JUMP 0x01c6
+:0051
+    ENDIF
+:0052
+    {"It seems there is a visitor. Visitor or invader? We will find out. What does the stranger want?"
+}
+:00B4
+    PAUSE
+:00B5
+    {
+From his belt-pouch, he pulls a piece of charcoal and a scrap of hide from which all hair has been scraped.
+}
+:0122
+    PAUSE
+:0123
+    {
+He frowns slightly, looking at }
+:0143
+    IF [N8(0x02) INPARTY ]
+:0148
+    {Aiela, and begins sketching her, }
+:0169
+    ELSE
+:016A
+    {you, and begins sketching you, }
+:0189
+    ENDIF
+:018A
+    {his hand moving in bold, deft strokes of the charcoal.
+}
+:01C1
+    JUMP 0x01fe
+:01C6
+    {"Once again Denys sees his most colorful visitor."
+}
+:01F9
+    JUMP 0x01fe
+:01FE
+    {
+}
+:01FF
+    ASK
+    KEYWORDS name,deny
+    ANSWER
+:020B
+    {"Denys. Some say, 'Denys the Enlightened'; others," he looks disappointed, "say 'Denys the Weak.'"
+}
+:026E
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0274
+    PORTRAIT [N8(0xeb) ]
+:0278
+    PAUSE
+:0279
+    {
+"And how does Denys's visitor call himself?"
+}
+:02A7
+    JUMP 0x094f
+    KEYWORDS job
+    ANSWER
+:02B1
+    {"Denys is a painter. Denys sees pictures in his mind and puts them on the walls of caves, on pieces of hide, on leaves, on whatever is at hand."
+}
+:0342
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0348
+    PORTRAIT [N8(0xeb) ]
+:034C
+    IF [N8(0xeb) N8(0x05) FLAG N8(0x00) == ]
+:0356
+    PAUSE
+:0357
+    {
+He continues sketching as he talks to you.
+}
+:0383
+    ENDIF
+:0384
+    JUMP 0x01fe
+    KEYWORDS trib,ural
+    ANSWER
+:0394
+    {"Denys is a member of the @hidden Urali tribe... though he is an @outcast now."
+}
+:03E4
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:03EA
+    PORTRAIT [N8(0xeb) ]
+:03EE
+    IF [N8(0x02) INPARTY ]
+:03F3
+    PAUSE
+:03F4
+    {
+"Denys knows that the beauteous Aiela has had unwanted attentions from Darden of the Urali tribe. This is no doing of Denys's."
+}
+:0475
+    PAUSE
+:0476
+    {
+}
+:0477
+    PORTRAIT [N8(0x02) ]
+:047B
+    {"Aiela bears no ill-will toward Denys, then."
+}
+:04A9
+    PAUSE
+:04AA
+    {
+}
+:04AB
+    PORTRAIT [N8(0xeb) ]
+:04AF
+    JUMP 0x01fe
+:04B4
+    ELSE
+:04B5
+    JUMP 0x01fe
+:04BA
+    ENDIF
+    KEYWORDS outc
+    ANSWER
+:04C1
+    {"Not long ago, when Darden came to power, Darden took and hid the statue of the Great Fabozz, a spirit sacred to the Urali."
+}
+:053E
+    PAUSE
+:053F
+    {
+"Darden told Denys to draw upon the cliff a mighty painting, one which would show @Fabozz going with Darden of his own will."
+}
+:05BE
+    PAUSE
+:05BF
+    {
+"Denys refused, and then Denys had to run for Denys's life, for Darden was not happy."
+}
+:0617
+    JUMP 0x01fe
+    KEYWORDS hidd
+    ANSWER
+:0622
+    {"The Urali stay hidden from all the other tribes of the Valley of @Eodon. Is Denys's visitor asking because he wishes to learn where the Urali live?"
+}
+:06B8
+    JUMP 0x0a86
+    KEYWORDS fabo,grea
+    ANSWER
+:06C8
+    {"The Great Fabozz is a mighty spirit of this land."
+}
+:06FC
+    JUMP 0x01fe
+    KEYWORDS vall,eodo
+    ANSWER
+:070C
+    {"This whole land, all the world, is called the Valley of Eodon."
+}
+:074D
+    JUMP 0x01fe
+    KEYWORDS bye
+    ANSWER
+:0757
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:075E
+    {"Fare well, colorful visitor."
+}
+:077D
+    BYE
+:077E
+    ELSE
+:077F
+    JUMP 0x07af
+:0784
+    ENDIF
+:0785
+    KEYWORDS *
+    ANSWER
+:0788
+    {"Denys does not know about that."
+}
+:07AA
+    JUMP 0x01fe
+    END_ANSWER
+:07AF
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:07B6
+    {He finishes his sketching, compares his result to the model, and shows it to you. Though the technique is crude, it is a recognizable drawing of }
+:0847
+    IF [N8(0x02) INPARTY ]
+:084C
+    JUMP 0x0858
+:0851
+    ELSE
+:0852
+    JUMP 0x08d5
+:0857
+    ENDIF
+:0858
+    {the lovely Aiela.
+}
+:086A
+    NEW [N8(0x01) ], [N8(0x05) ], [N8(0x00) ], [N8(0x01) ]
+:0877
+    IF [0x1d B2 ]
+:087B
+    PAUSE
+:087C
+    {
+He hands the piece of hide to you. "A gift for Denys's visitor. Remember Denys well."
+}
+:08D3
+    ENDIF
+:08D4
+    BYE
+:08D5
+    {your features.
+}
+:08E4
+    NEW [N8(0x01) ], [N8(0x04) ], [N8(0x00) ], [N8(0x01) ]
+:08F1
+    IF [0x1d B2 ]
+:08F5
+    PAUSE
+:08F6
+    {
+He hands the piece of hide to you. "A gift for Denys's visitor. Remember Denys well."
+}
+:094D
+    ENDIF
+:094E
+    BYE
+:094F
+    ASK
+:0950
+    DECLARE [0x0a, 0xb3] = [0x23 B3 ]
+:0957
+    KEYWORDS *
+    ANSWER
+:095A
+    {"$A. An odd name. As strange and distant-seeming as he who carries it."
+}
+:09A2
+    PAUSE
+:09A3
+    {
+}
+:09A4
+    IF [N8(0x02) INPARTY ]
+:09A9
+    {"Denys sees that $A has among his friends the beauteous Aiela, bright flower of the Kurak tribe."
+}
+:0A0B
+    PAUSE
+:0A0C
+    {
+}
+:0A0D
+    PORTRAIT [N8(0x02) ]
+:0A11
+    {Aiela gives him a sardonic little nod. "Denys is well-spoken... for a member of the @Urali tribe."
+}
+:0A74
+    PAUSE
+:0A75
+    {
+}
+:0A76
+    PORTRAIT [N8(0xeb) ]
+:0A7A
+    JUMP 0x01fe
+:0A7F
+    ELSE
+:0A80
+    JUMP 0x01fe
+:0A85
+    ENDIF
+    END_ANSWER
+:0A86
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0A8C
+    PAUSE
+:0A8D
+    {
+Denys's face becomes a little more guarded. "Denys is sorry, but even outcast, he is still of the Urali. Denys will not say where the Urali live."
+}
+:0B21
+    JUMP 0x01fe
+    KEYWORDS n
+    ANSWER
+:0B29
+    PAUSE
+:0B2A
+    {
+"Denys's heart is made happy to hear it."
+}
+:0B55
+    JUMP 0x01fe
+    END_ANSWER

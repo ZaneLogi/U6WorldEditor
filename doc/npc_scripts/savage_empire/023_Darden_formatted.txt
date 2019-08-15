@@ -1,0 +1,44 @@
+:0000
+    NPC_ID: npc id: 23, npc name: Darden
+:0008
+    NPC_LOOK: a muscular, enormous, muscular, unkempt, muscular man.
+*
+:0041
+    START CONVERSION
+:0042
+    IF [N8(0xeb) 0x00 FLAG ]
+:0048
+    JUMP 0x00c1
+:004D
+    ELSE
+:004E
+    {"You! Darden trampled you into the earth once before. Now Darden will be sure you will stay there!"
+}
+:00B2
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:00B8
+    WORKTYPE [N8(0xeb) ], [N8(0x06) ]
+:00BF
+    BYE
+:00C0
+    ENDIF
+:00C1
+    IF [N8(0x35) N8(0x07) FLAG ]
+:00C8
+    {"It is the $P! You have cost Darden much. Darden is not chief of Urali. You did this! You must die!"
+}
+:012D
+    WORKTYPE [N8(0xeb) ], [N8(0x06) ]
+:0134
+    BYE
+:0135
+    ELSE
+:0136
+    {"It is the $P again! Has Darden not chased you before him? Why do you return? Only to die!"
+}
+:0192
+    WORKTYPE [N8(0xeb) ], [N8(0x06) ]
+:0199
+    BYE
+:019A
+    ENDIF

@@ -1,0 +1,340 @@
+:0000
+    NPC_ID: npc id: 22, npc name: Cleese
+:0008
+    NPC_LOOK: a large, raucous, especially colorful parrot.
+*
+:0038
+    START CONVERSION
+:0039
+    IF [N8(0xeb) 0x00 FLAG ]
+:003F
+    JUMP 0x0076
+:0044
+    ELSE
+:0045
+    {"Ja, ja, ve haff vays of making you talk."
+}
+:0070
+    JUMP 0x00a9
+:0075
+    ENDIF
+:0076
+    {"Who's the pretty boy?
+Who's the pretty boy?"
+}
+:00A4
+    JUMP 0x00a9
+:00A9
+    {
+}
+:00AA
+    ASK
+    KEYWORDS name
+    ANSWER
+:00B1
+    {"Cleese, do shut up! You're driving me @mad! SQUAWK! Driving me @mad!"
+}
+:00F8
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:00FE
+    PORTRAIT [N8(0xeb) ]
+:0102
+    JUMP 0x00a9
+    KEYWORDS job
+    ANSWER
+:010C
+    {"Eat the @cracker, Cleese! Eat the cracker, Cleese! SQUAWK!"
+}
+:0149
+    PAUSE
+:014A
+    {
+"It seems the only job you're capable of doing, @Fritz, is feeding your damned parrot."
+}
+:01A3
+    JUMP 0x00a9
+    KEYWORDS squa
+    ANSWER
+:01AE
+    {"@SQUIRK!"
+}
+:01B9
+    JUMP 0x00a9
+    KEYWORDS squi
+    ANSWER
+:01C4
+    {"@Chirrup!"
+}
+:01D0
+    JUMP 0x00a9
+    KEYWORDS chir
+    ANSWER
+:01DB
+    {"@SKREE!"
+}
+:01E5
+    JUMP 0x00a9
+    KEYWORDS skre
+    ANSWER
+:01F0
+    {"SQUAWK! @Chiurrrr SQUAWK!"
+}
+:020C
+    JUMP 0x00a9
+    KEYWORDS chiu
+    ANSWER
+:0217
+    {"@AWK!"
+}
+:021F
+    JUMP 0x00a9
+    KEYWORDS awk
+    ANSWER
+:0229
+    {"@SQUAWK!"
+}
+:0234
+    JUMP 0x00a9
+    KEYWORDS frit,von,hund
+    ANSWER
+:0248
+    {"Ja, herr doktor. Ze Underground City of ze @Kotl sounds most impressive. SQUAWK!"
+}
+:029B
+    PAUSE
+:029C
+    {
+"But your plans: Zey are... not entirely rational. Zey sound almost... @insane. SQUAWK!"
+}
+:02F6
+    JUMP 0x00a9
+    KEYWORDS crac,clee
+    ANSWER
+:0306
+    {"Eat the cracker, Cleese!"
+}
+:0321
+    JUMP 0x00a9
+    KEYWORDS zipa,spec
+    ANSWER
+:0331
+    {The parrot speaks in a different voice: "We cannot easily say zuh-peck-tor. It is alien to our tongues. SQUAWK!"
+}
+:03A2
+    PAUSE
+:03A3
+    {
+"While you remain among the Nahuatla, you will be known as Zipactriotl. SQUAWK! Who's the pretty boy?"
+}
+:040B
+    JUMP 0x00a9
+    KEYWORDS kotl,city
+    ANSWER
+:041B
+    {"I tell you, Fritz, the lost civilization of these Kotl may have been the most magnificent ever known!"
+}
+:0483
+    PAUSE
+:0484
+    {
+"Where's the cracker? Cleese, shut up!"
+}
+:04AD
+    PAUSE
+:04AE
+    {
+"Their city is AWK! amazing. What calamity could have destroyed them?"
+}
+:04F6
+    JUMP 0x00a9
+    KEYWORDS insa,mad
+    ANSWER
+:0505
+    {"Mad he calls me, mad!"
+}
+:051D
+    PAUSE
+:051E
+    {
+"Fritz, there's no room in my @plans, in my world of the future, for a doubter such as yourself!"
+}
+:0581
+    PAUSE
+:0582
+    {
+"SQUAWK! I'll never allow you to see my @city! Get out! Let the dinosaurs chew your bones!"
+}
+:05DF
+    IF [N8(0x07) INPARTY ]
+:05E4
+    PAUSE
+:05E5
+    {
+}
+:05E6
+    PORTRAIT [N8(0x07) ]
+:05EA
+    {"Good Lord, $P! That's Johann @Spector's voice!"
+}
+:061B
+    PAUSE
+:061C
+    {
+}
+:061D
+    PORTRAIT [N8(0xeb) ]
+:0621
+    ENDIF
+:0622
+    JUMP 0x00a9
+    KEYWORDS plan
+    ANSWER
+:062D
+    {"Conquer the Earth, Conquer the Earth!"
+}
+:0655
+    PAUSE
+:0656
+    {
+"Cleese, stop repeating SQUAWK! everything I say or it'll be parrot soup for lunch!"
+}
+:06AC
+    JUMP 0x00a9
+    KEYWORDS spam
+    ANSWER
+:06B7
+    {The parrot stares at you expectantly.
+}
+:06DD
+    JUMP 0x00a9
+    KEYWORDS gryp,grif
+    ANSWER
+:06ED
+    {The parrot looks at you disbelievingly. "With a @jaguar?"
+}
+:0727
+    JUMP 0x00a9
+    KEYWORDS jagu
+    ANSWER
+:0732
+    {"Well, they are kind of nice..."
+}
+:0753
+    JUMP 0x00a9
+    KEYWORDS ulti,chea
+    ANSWER
+:0763
+    {"Spam spam spam. SQUAWK! Humbug."}
+:0784
+    JUMP 0x00a9
+    KEYWORDS pizz
+    ANSWER
+:078F
+    {"Hold the anchovies!"
+}
+:07A5
+    JUMP 0x00a9
+    KEYWORDS plop
+    ANSWER
+:07B0
+    {"@Fizz!"
+}
+:07B9
+    JUMP 0x00a9
+    KEYWORDS fizz
+    ANSWER
+:07C4
+    {"@Plop!"
+}
+:07CD
+    JUMP 0x00a9
+    KEYWORDS lab
+    ANSWER
+:07D7
+    {"I like the black ones... especially when they're puppies."
+}
+:0813
+    JUMP 0x00a9
+    KEYWORDS bye
+    ANSWER
+:081D
+    {"Ja, ja, shut up! Just shut up!"
+}
+:083E
+    BYE
+:083F
+    KEYWORDS *
+    ANSWER
+:0842
+    DECLARE [0x00, 0xb2] = [N8(0x00) N8(0x07) RAND ]
+:084C
+    IF [0x00 B2 N8(0x00) == ]
+:0853
+    {"Cleese, if you're going to squawk, squawk in English!"
+}
+:088B
+    JUMP 0x00a9
+:0890
+    ENDIF
+:0891
+    IF [0x00 B2 N8(0x01) == ]
+:0898
+    {"Crunchy frog! Crunchy frog!"
+}
+:08B6
+    JUMP 0x00a9
+:08BB
+    ENDIF
+:08BC
+    IF [0x00 B2 N8(0x02) == ]
+:08C3
+    {"Alphabet soup!"
+}
+:08D4
+    JUMP 0x00a9
+:08D9
+    ENDIF
+:08DA
+    IF [0x00 B2 N8(0x03) == ]
+:08E1
+    {"New girls! New madam! SQUAWK! But the same old customers!"
+}
+:091D
+    JUMP 0x00a9
+:0922
+    ENDIF
+:0923
+    IF [0x00 B2 N8(0x04) == ]
+:092A
+    {"$Z! SQUAWK!"}
+:0937
+    JUMP 0x00a9
+:093C
+    ENDIF
+:093D
+    IF [0x00 B2 N8(0x05) == ]
+:0944
+    {"SQUAWK! $Z!"}
+:0951
+    JUMP 0x00a9
+:0956
+    ENDIF
+:0957
+    IF [0x00 B2 N8(0x06) == ]
+:095E
+    {"Parrot joke! AWK!"}
+:0971
+    JUMP 0x00a9
+:0976
+    ENDIF
+:0977
+    IF [0x00 B2 N8(0x07) == ]
+:097E
+    {"Caudal! Cattle! AWK! Kettle!"}
+:099C
+    JUMP 0x00a9
+:09A1
+    ENDIF
+:09A2
+    BYE
+    END_ANSWER

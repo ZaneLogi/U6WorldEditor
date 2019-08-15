@@ -1,5 +1,27 @@
 #pragma once
 
+/*
+the text pattern is used in the script as below
+
+@ : following word is highlighted
+* : stop and wait for ENTER/SPACE/ESC key (similiar to `wait' command)
+
+$G : gender title ("milord", "milady")
+$P : player name
+$N : NPC name
+$T : time of day ("morning", "afternoon", "evening")
+$Y : set-able name, of any NPC
+$Z : previous input
+$X : the value of string variable X
+#X : the value of variable X
+<> : upper-case text between greater-than & less-than brackets is printed as
+        Runic; lower-case text is printed as Gargish
+/\ : !?? related to plural word inflections, text after \ is printed if some
+        variable is not 1, text after / is printed if some variable is 1 ??
+&& : ! a block of text before the first ampersand may be "translated" - replaced
+        by a block of text before the second ampersand
+*/
+
 #define U6OP_GT         0x81        // >
 #define U6OP_GE         0x82        // >=
 #define U6OP_LT         0x83        // <
@@ -25,13 +47,15 @@
 #define U6OP_CANCARRY   0x9a
 #define U6OP_WEIGHT     0x9b
 
+#define U6OP_RAND       0xa0        // generate a random number (min, max)
+
 #define U6OP_FLAG       0xab        // get npc flags
 
 #define U6OP_JUMP       0xb0        // jump to the address
 
-#define U6OP_VAR        0xb2
-#define U6OP_SVAR       0xb3
-#define U6OP_DATA       0xb4
+#define U6OP_VAR        0xb2        // integer data
+#define U6OP_SVAR       0xb3        // string data
+#define U6OP_DATA       0xb4        // list data
 
 #define U6OP_BYE        0xb6
 
@@ -52,6 +76,19 @@
 #define U6OP_NUM32      0xd2
 #define U6OP_NUM8       0xd3
 #define U6OP_NUM16      0xd4
+
+#define U6OP_SET_Y      0xd8        // set NPC name for $Y in the text
+#define U6OP_HEAL       0xd9
+#define U6OP_WOUNDED    0xda
+
+#define U6OP_POISONED   0xdc
+#define U6OP_NPC        0xdd        // return NPC id based on the index
+
+#define U6OP_EXP        0xe0
+#define U6OP_LVL        0xe1
+#define U6OP_STR        0xe2
+#define U6OP_INT        0xe3
+#define U6OP_DEX        0xe4
 
 #define U6OP_ENDANSWER  0xee
 #define U6OP_KEYWORDS   0xef

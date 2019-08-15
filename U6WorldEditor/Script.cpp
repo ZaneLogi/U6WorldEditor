@@ -750,12 +750,21 @@ void ScriptInterpreter::collect_eval(std::string& result, const uint8_t* &p, con
         case U6OP_LAND:         result += "& "; break;
         case U6OP_CANCARRY:     result += "CANCARRY "; break;
         case U6OP_WEIGHT:       result += "WEIGHT "; break;
+        case U6OP_RAND:         result += "RAND "; break;
         case U6OP_FLAG:         result += "FLAG "; break;
         case U6OP_OBJCOUNT:     result += "OBJCOUNT "; break;
         case U6OP_INPARTY:      result += "INPARTY "; break;
         case U6OP_OBJINPARTY:   result += "OBJINPARTY "; break;
         case U6OP_JOIN:         result += "JOIN "; break;
         case U6OP_LEAVE:        result += "LEAVE "; break;
+        case U6OP_WOUNDED:      result += "WOUNDED "; break;
+        case U6OP_POISONED:     result += "POISONED "; break;
+        case U6OP_NPC:          result += "NPC "; break;
+        case U6OP_EXP:          result += "EXP. "; break;
+        case U6OP_LVL:          result += "LVL. "; break;
+        case U6OP_STR:          result += "STR. "; break;
+        case U6OP_INT:          result += "INT. "; break;
+        case U6OP_DEX:          result += "DEX. "; break;
         default:
             assert(value < 0x80);
             result += format_string("0x%02x ", value);
@@ -814,8 +823,23 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                 while (p < script_end)
                 {
                     script_offset = p - script_start;
+                    if (*p != U6OP_KEYWORDS)
+                    {
+                        // it is possible that there is something before KEYWORDS
+                        collect_format(result, p, script_start, script_end, U6OP_ASK);
+                    }
+
+                    script_offset = p - script_start;
                     assert(*p == U6OP_KEYWORDS);
                     p++;
+
+                    // force_to_end_the_answer is used to solve the last answer has no the code U6OP_ENDANSWER
+                    // but it would be not perfect because it is a guess where is the end of the answer.
+                    // check how U6OP_IF and U6OP_JUMP handle this situation.
+
+                    if (*p == '*')
+                        force_to_end_the_answer = true;
+
                     result += "    KEYWORDS ";
                     collect_text(result, p, script_start, script_end);
                     result += "\r\n";
@@ -827,13 +851,6 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                     collect_format(result, p, script_start, script_end, U6OP_ANSWER);
                     if (*p == U6OP_ENDANSWER || force_to_end_the_answer)
                         break;
-
-                    // force_to_end_the_answer is used to solve the last answer has no the code U6OP_ENDANSWER
-                    // but it would be not perfect because it is a guess where is the end of the answer.
-                    // check how U6OP_IF and U6OP_JUMP handle this situation.
-
-                    if (*(p + 1) == '*')
-                        force_to_end_the_answer = true;
                 }
                 assert(*p == U6OP_ENDANSWER || force_to_end_the_answer);
                 if (*p == U6OP_ENDANSWER)
@@ -842,6 +859,9 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                 break;
             }
             case U6OP_KEYWORDS:
+                p--;
+                assert(block_type == U6OP_ANSWER || block_type == U6OP_ASK);
+                return;
             case U6OP_ENDANSWER:
                 p--;
                 assert(block_type == U6OP_ANSWER);
@@ -990,6 +1010,13 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
             case U6OP_BYE: // bye
             {
                 result += "    BYE\r\n";
+
+                if (block_type == U6OP_ANSWER && *(p-2) == U6OP_ENDIF)
+                {
+                    // this is the case that there is no U6OP_ENDANSWER after the last answert '*' in Denys' script 0x094f
+                    // if it is BYE after U6OP_ENDIF, treat is as the end of the answer
+                    return;
+                }
                 break;
             }
             case U6OP_NEW: // 0xb9
@@ -1040,6 +1067,20 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                 result += "\r\n";
                 break;
             }
+            case U6OP_SET_Y:
+            {
+                result += "    SET_$Y ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
+            case U6OP_HEAL:
+            {
+                result += "    HEAL ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
             default:
             {
                 if (!collect_unknown(result, p, script_start, script_end, code))
@@ -1062,22 +1103,32 @@ bool ScriptInterpreter::collect_unknown(std::string& result, const uint8_t* &p, 
     {
         // unknown op code for Yunapotli (SE)
         // should be used for opeing the door of the city
-        assert(m_npc_name == "Yunapotli" && *(uint32_t*)p == 0xa700ded4);
-        result += "Unknown code [d1 ";
-        result += format_hex_string(p, p + 4);
-        result += "]\r\n";
-        p += 4;
-        return true;
+        if (m_npc_name == "Yunapotli" && *(uint32_t*)p == 0xa700ded4)
+        {
+            result += "Unknown code [d1 ";
+            result += format_hex_string(p, p + 4);
+            result += "]\r\n";
+            p += 4;
+            return true;
+        }
+        else if (m_npc_name == "Chizzztl" && *(uint32_t*)p == 0xb6a702d3)
+        {
+            result += "Unknown code [d1 ";
+            result += format_hex_string(p, p + 3);
+            result += "]\r\n";
+            p += 3;
+            return true;
+        }
+        assert(false);
     }
-    case 0xd8:
+
+    case 0xd6:
     {
-        // unknown op code for Yunapotli (SE)
-        // should be used for putting the crystal brain into its head
-        assert(m_npc_name == "Yunapotli" && *(uint32_t*)p == 0x54a7b200);
-        result += "Unknown code [d8 ";
-        result += format_hex_string(p, p + 3);
+        // unknown op code for Balakai (SE)
+        assert(m_npc_name == "Balakai");
+        result += "Unknown code [d6 ";
+        collect_eval(result, p, script_start, script_end);
         result += "]\r\n";
-        p += 3;
         return true;
     }
 
@@ -1108,5 +1159,14 @@ void ScriptInterpreter::collect_strange(std::string& result, const uint8_t* &p, 
             result += "    // NOTE: a strange A2 is here\r\n";
         }
         break;
+
+    case 0x171e:
+        if (*p == 0xee && m_npc_name == "Chafblum")
+        {
+            p++;
+            result += "    // NOTE: a strange EE is here\r\n";
+        }
+        break;
     }
+
 }

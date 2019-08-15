@@ -409,7 +409,7 @@ Unknown code [d1 d4 de 00 a7 ]
 :144B
     SET_FLAG [N8(0xeb) ], [N8(0x07) ]
 :1452
-Unknown code [d8 00 b2 a7 ]
+    SET_$Y [0x00 B2 ]
 :1456
     {The automaton takes the crystal brain from $Y. A door opens in the side of the golden head, and Yunapotli places the brain inside its skull.
 }

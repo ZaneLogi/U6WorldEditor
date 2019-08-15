@@ -1,0 +1,1029 @@
+:0000
+    NPC_ID: npc id: 20, npc name: Chafblum
+:000A
+    NPC_LOOK: a short, scowling, black-haired, drunken native man.
+*
+:0041
+    START CONVERSION
+:0042
+    IF [N8(0xeb) 0x00 FLAG ]
+:0048
+    {"Oh, YOU again."
+}
+:0059
+    ELSE
+:005A
+    {"Oh... a wise man, eh?"
+}
+:0072
+    ENDIF
+:0073
+    JUMP 0x0078
+:0078
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:007F
+    JUMP 0x0113
+:0084
+    ENDIF
+:0085
+    IF [N8(0x04) INPARTY ]
+:008A
+    PAUSE
+:008B
+    {
+}
+:008C
+    PORTRAIT [N8(0x04) ]
+:0090
+    {"All the time I was locked up by these Disquiqui, I had the weird feeling I'd seen this guy somewhere before..."
+}
+:0101
+    PAUSE
+:0102
+    PORTRAIT [N8(0xeb) ]
+:0106
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:010D
+    ENDIF
+:010E
+    JUMP 0x0113
+:0113
+    {
+}
+:0114
+    ASK
+    KEYWORDS name
+    ANSWER
+:011B
+    {He whacks you with a wooden spoon. "Chafblum did not tell you to speak. Now Chafblum will never tell you his name."
+}
+:018F
+    PAUSE
+:0190
+    {
+}
+:0191
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0197
+    PORTRAIT [N8(0xeb) ]
+:019B
+    {He thinks about that for a moment, tries to figure out what went wrong, and scowls.
+}
+:01EF
+    JUMP 0x0113
+    KEYWORDS chaf
+    ANSWER
+:01FA
+    {He scowls at you, and gestures for you to continue.
+}
+:022E
+    JUMP 0x0113
+    KEYWORDS job
+    ANSWER
+:0238
+    {"Chafblum is father of @Guoblum. And Chafblum is a lizard-wrestler. Two jobs, very much same."
+}
+:0297
+    PAUSE
+:0298
+    {
+}
+:0299
+    PORTRAIT [N8(0x26) ]
+:029D
+    {"No, he is not! Chafblum is chief of Disquiqui tribe!"
+}
+:02D4
+    PAUSE
+:02D5
+    {
+}
+:02D6
+    PORTRAIT [N8(0xeb) ]
+:02DA
+    {"Shaddup. Chafblum did not ask you." He whacks the native with his wooden spoon. "Chafblum is modest lizard-wrestler."
+}
+:0351
+    PAUSE
+:0352
+    {
+}
+:0353
+    PORTRAIT [N8(0x1c) ]
+:0357
+    {"Daddy Chafblum is greatest chief in all the valley."
+}
+:038D
+    PAUSE
+:038E
+    {
+}
+:038F
+    PORTRAIT [N8(0xeb) ]
+:0393
+    {His scowl grows deeper. "Chafblum has never seen that woman before in his life."
+}
+:03E4
+    JUMP 0x0113
+    KEYWORDS trib
+    ANSWER
+:03EF
+    {"Chafblum knows nothing of tribes. Especially this one."
+}
+:0428
+    JUMP 0x0113
+    KEYWORDS moct
+    ANSWER
+:0433
+    {"Who? Oh, right, Moctasomething, the Nahuatla guy. }
+:0466
+    IF [N8(0x28) N8(0x07) FLAG ]
+:046D
+    {Glad he left - he was no fun."
+}
+:048C
+    ELSE
+:048D
+    {He's here somewhere... always sitting around moaning about being exiled."
+}
+:04D7
+    ENDIF
+:04D8
+    JUMP 0x0113
+    KEYWORDS good,stuff,pulq
+    ANSWER
+:04EE
+    {"Chafblum makes great Pulque. Guoblum drinks it all. Guoblum is a greedy lizard."
+}
+:0540
+    JUMP 0x0113
+    KEYWORDS thre,stoo,curl,shem,moe
+    ANSWER
+:055E
+    {"Your words call up strange memories, as if Chafblum once lived far away, under different name..."
+}
+:05C1
+    PAUSE
+:05C2
+    {
+He blinks, then whacks you with his wooden spoon. "Stop that. It is distracting."
+}
+:0615
+    JUMP 0x0113
+    KEYWORDS padd
+    ANSWER
+:0620
+    {"Paddle?  There is a paddle here, somewhere..."
+}
+:0650
+    PAUSE
+:0651
+    {
+He looks around, but appears to be having trouble focusing very far, and quickly gives up.
+}
+:06AD
+    PAUSE
+:06AE
+    {
+"You want paddle, go find one yourself!"
+}
+:06D8
+    JUMP 0x0113
+    KEYWORDS guob,daug
+    ANSWER
+:06E8
+    {"Guoblum is daughter of Chafblum. Smile at the strangers, Guoblum."
+}
+:072C
+    PAUSE
+:072D
+    {
+}
+:072E
+    IF [N8(0x04) INPARTY ]
+:0733
+    PORTRAIT [N8(0x1c) ]
+:0737
+    {"Yoo hoo! Jimmy Malone! Come sit next to best girl, Guoblum!"
+}
+:0775
+    PAUSE
+:0776
+    {
+}
+:0777
+    PORTRAIT [N8(0x04) ]
+:077B
+    {"Yoo hoo! Guoblum! Go swimming in river full of piranhas! Take flying leap at rolling dinosaur!"
+}
+:07DC
+    PAUSE
+:07DD
+    {
+}
+:07DE
+    PORTRAIT [N8(0x1c) ]
+:07E2
+    {"Oh, @Jimmy is no fun."
+}
+:07FA
+    PAUSE
+:07FB
+    {
+}
+:07FC
+    PORTRAIT [N8(0xeb) ]
+:0800
+    JUMP 0x0113
+:0805
+    ELSE
+:0806
+    PORTRAIT [N8(0x1c) ]
+:080A
+    {"Yoo hoo! Handsome stranger! Come sit next to Guoblum."
+}
+:0842
+    PAUSE
+:0843
+    {
+}
+:0844
+    PORTRAIT [N8(0xeb) ]
+:0848
+    {"Leave Guoblum alone, stranger. Guoblum is great beauty, but is not for you. Guoblum is marrying another stranger, called @Jimmy Malone."
+}
+:08D2
+    JUMP 0x0113
+:08D7
+    ENDIF
+    KEYWORDS jim,jimm,malo,marr
+    ANSWER
+:08EC
+    IF [N8(0x04) INPARTY ]
+:08F1
+    {"Why, there is Jimmy Malone!" He points at Jimmy. "How did Jimmy get out of hut?"
+}
+:0943
+    PAUSE
+:0944
+    {
+}
+:0945
+    PORTRAIT [N8(0x04) ]
+:0949
+    {"Why, don't you remember, Chafblum-old-pal? You got drunk and decided that $P here would be a much better husband for Guoblum, and you let me out."
+}
+:09DD
+    PAUSE
+:09DE
+    {
+}
+:09DF
+    PORTRAIT [N8(0xeb) ]
+:09E3
+    {"Did Chafblum do that? Must have; Jimmy Malone is free." He turns to you. "Ready for wedding?"
+}
+:0A42
+    PAUSE
+:0A43
+    {
+}
+:0A44
+    PORTRAIT [N8(0x1c) ]
+:0A48
+    {"Wait! Jimmy Malone is big liar! Let $P find his own woman. Guoblum is for Jimmy Malone."
+}
+:0AA2
+    PAUSE
+:0AA3
+    {
+}
+:0AA4
+    PORTRAIT [N8(0xeb) ]
+:0AA8
+    {"Sorry, stranger. Guoblum's mind is set. Find own woman."
+}
+:0AE2
+    JUMP 0x0113
+:0AE7
+    ELSE
+:0AE8
+    {"Stupid name, Jimmy Malone. Skinny stranger. Jimmy Malone now in prison hut here in village."
+}
+:0B46
+    PAUSE
+:0B47
+    {
+He looks around for the prison hut, but his eyes refuse to focus that far, so he gives up.
+"Disquiqui feed him up so he will be fit mate for daughter Guoblum."
+}
+:0BE8
+    JUMP 0x0113
+:0BED
+    ENDIF
+    KEYWORDS larr,sham
+    ANSWER
+:0BF9
+    {"Disquiqui shaman is called Larrifin." He shouts: "Larrifin! Where is Larrifin?"
+}
+:0C4A
+    PAUSE
+:0C4B
+    {
+}
+:0C4C
+    PORTRAIT [N8(0x26) ]
+:0C50
+    {"He's not here!
+}
+:0C60
+    PAUSE
+:0C61
+    {
+}
+:0C62
+    PORTRAIT [N8(0xeb) ]
+:0C66
+    {"Too bad. Larrifin is not here."
+}
+:0C87
+    JUMP 0x0113
+    KEYWORDS tuom,drum
+    ANSWER
+:0C97
+    {"You want drums? Go to Tuomaxx. Best drum-maker in all Disquiqui village."
+}
+:0CE2
+    PAUSE
+:0CE3
+    {
+}
+:0CE4
+    PORTRAIT [N8(0x27) ]
+:0CE8
+    {"Chafblum banished him, remember?"
+}
+:0D0B
+    PAUSE
+:0D0C
+    {
+}
+:0D0D
+    PORTRAIT [N8(0xeb) ]
+:0D11
+    {"Shaddup! Who asked you?"
+}
+:0D2B
+    PAUSE
+:0D2C
+    {
+"Yes, Chafblum banished Tuomaxx. Long story. Want to hear long story?"
+}
+:0D74
+    JUMP 0x23e5
+    KEYWORDS unit,ally,alli
+    ANSWER
+:0D89
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0D90
+    {"$P did well. Can hear Sharptooth in plenty of time to run away."
+}
+:0DD2
+    PAUSE
+:0DD3
+    {
+"Will join $P's union of tribes, when the time comes."
+}
+:0E0B
+    JUMP 0x0113
+:0E10
+    ENDIF
+:0E11
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:0E18
+    {He whacks you with his spoon. "Talked about that already! Must put noise-maker on @Sharptooth."
+}
+:0E78
+    JUMP 0x0113
+:0E7D
+    ENDIF
+:0E7E
+    IF [N8(0xeb) N8(0x04) FLAG ]
+:0E85
+    {He puts the bowl of his wooden spoon on your chest. "Look here. Stain." When you look, he brings it up to whack your nose. "Fooled you, $P!"
+}
+:0F12
+    PAUSE
+:0F13
+    {
+"Want to unite Disquiqui with other tribes? Tried that once. $P failed test of bravery. Want to try again?"
+}
+:0F80
+    PAUSE
+:0F81
+    {
+He pulls out a big jug filled with whitish fluid and looks at you expectantly.
+}
+:0FD1
+    JUMP 0x171f
+:0FD6
+    ENDIF
+:0FD7
+    JUMP 0x13c5
+    KEYWORDS shar
+    ANSWER
+:0FE2
+    {"Sharptooth is big lizard. Bigger lizard even than Larrifin over there."
+}
+:102B
+    PAUSE
+:102C
+    {
+}
+:102D
+    PORTRAIT [N8(0x26) ]
+:1031
+    {"Larrifin heard that!"
+}
+:1048
+    PAUSE
+:1049
+    {
+}
+:104A
+    PORTRAIT [N8(0xeb) ]
+:104E
+    {"Sharptooth lives southeast of village most of the time. Eats Disquiqui warriors and sleeps it off rest of the time."
+}
+:10C4
+    JUMP 0x0113
+    KEYWORDS plac
+    ANSWER
+:10CF
+    {"Want more plachta?"
+}
+:10E4
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:10EA
+    {"Too bad! Get your own."
+}
+:1103
+    JUMP 0x0113
+    KEYWORDS n
+    ANSWER
+:110B
+    {"Then why you ask?" He whacks you with his jug of plachta.
+}
+:1146
+    JUMP 0x0113
+    END_ANSWER
+:114C
+    KEYWORDS bye
+    ANSWER
+:1151
+    {"Ahhh, riddance is good."
+}
+:116B
+    BYE
+:116C
+    KEYWORDS *
+    ANSWER
+:116F
+    {"Chafblum doesn't know anything about $Z."
+}
+:119A
+    JUMP 0x0113
+    END_ANSWER
+:119F
+    BYE
+:11A0
+    IF [N8(0x04) INPARTY ]
+:11A5
+    JUMP 0x11bf
+:11AA
+    ELSE
+:11AB
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:11B2
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:11B9
+    JUMP 0x0113
+:11BE
+    ENDIF
+:11BF
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:11C6
+    PAUSE
+:11C7
+    {
+}
+:11C8
+    IF [N8(0x04) N8(0x06) FLAG ]
+:11CF
+    PORTRAIT [N8(0x04) ]
+:11D3
+    {Jimmy has been frantically writing all this down in his @notebook as everyone has been speaking. "It was a severe test of my masterful shorthand speed, $P-old-plachta-fiend, but I got it."
+}
+:1290
+    PORTRAIT [N8(0xeb) ]
+:1294
+    JUMP 0x0113
+:1299
+    ELSE
+:129A
+    PORTRAIT [N8(0x04) ]
+:129E
+    {Jimmy speaks up. "Tell you what, boss. It could be that we're going to have a lot of these little chores ahead of us. I'll note down what each chief wants."
+}
+:133B
+    PAUSE
+:133C
+    {
+"Any time you want to check out what we've got in store for us, ask me about my @notebook. It never forgets."
+}
+:13AB
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:13B2
+    SET_FLAG [N8(0x04) ], [N8(0x03) ]
+:13B9
+    PAUSE
+:13BA
+    {
+}
+:13BB
+    PORTRAIT [N8(0xeb) ]
+:13BF
+    JUMP 0x0113
+:13C4
+    ENDIF
+:13C5
+    {"You want to make alliance with Disquiqui and other tribes? Keep other tribes from humiliating -- "
+}
+:1429
+    PAUSE
+:142A
+    {
+}
+:142B
+    PORTRAIT [N8(0x27) ]
+:142F
+    {"Attacking!"
+}
+:143C
+    PAUSE
+:143D
+    {
+}
+:143E
+    PORTRAIT [N8(0xeb) ]
+:1442
+    {" -- attacking Disquiqui all the time? Yes, will gladly join alliance!"
+}
+:148A
+    PAUSE
+:148B
+    {
+}
+:148C
+    PORTRAIT [N8(0x26) ]
+:1490
+    {"Wait! Must always strike bargain first. Traditional way. Demand test of virtue, test of bravery, test of skill."
+}
+:1502
+    PAUSE
+:1503
+    {
+
+}
+:1505
+    PORTRAIT [N8(0xeb) ]
+:1509
+    {"Larrifin is right. Cannot join alliance until you pass three tests." He gives you a close look and turns back to Larrifin. "Two tests. This one never pass test of virtue."
+}
+:15B6
+    PAUSE
+:15B7
+    {
+
+}
+:15B9
+    PORTRAIT [N8(0x26) ]
+:15BD
+    {"True. Two tests enough. Bravery and Skill."
+}
+:15EA
+    PAUSE
+:15EB
+    {
+}
+:15EC
+    PORTRAIT [N8(0xeb) ]
+:15F0
+    {"First test. Bravery."
+}
+:1607
+    PAUSE
+:1608
+    {
+He pulls up a big jug of a clotted white liquid.
+}
+:163A
+    PAUSE
+:163B
+    {
+"Called 'plachta.' You must sample its smooth and delicate flavor." Even from here, it smells like a paper mill having an early-morning belching duel with a stockyard.
+}
+:16E4
+    PAUSE
+:16E5
+    {
+"Time to test bravery. Brave enough to drink it?"
+
+}
+:1719
+    JUMP 0x171f
+:171E
+    // NOTE: a strange EE is here
+:171F
+    {Do you drink from the jug of plachta?
+}
+:1745
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:174B
+    {Lifting the jug to your lips, you gamely swallow some of the harsh liquid. A cheer goes up from the crowd.
+}
+:17B6
+    PAUSE
+:17B7
+    {
+You shudder as the toxic goo crawls down your throat.
+}
+:17EE
+    PAUSE
+:17EF
+    {
+For a moment, you can't remember your name. Your legs and mouth go numb. Your eyes snap open and won't shut. You feel something like steam whistling out your ears and nose.
+}
+:189D
+    PAUSE
+:189E
+    {
+}
+:189F
+    PORTRAIT [N16(0x00fe) ]
+:18A4
+    {Then you go blind.
+}
+:18B7
+    PAUSE
+:18B8
+    {
+You hear Chafblum's voice: "Good plachta today!"
+}
+:18EA
+    PAUSE
+:18EB
+    {
+}
+:18EC
+    PORTRAIT [N8(0xeb) ]
+:18F0
+    {But your sight does return.
+}
+:190C
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1913
+    JUMP 0x19b7
+    KEYWORDS n
+    ANSWER
+:191B
+    {There is a low moan of disappointment from the crowd.
+}
+:1951
+    PAUSE
+:1952
+    {
+}
+:1953
+    SET_FLAG [N8(0xeb) ], [N8(0x04) ]
+:195A
+    {"You are big coward." Chafblum hits you with his spoon. "Go away." He turns away from you.
+}
+:19B5
+    BYE
+:19B6
+    END_ANSWER
+:19B7
+    {"What would be good test of skill?"
+}
+:19DB
+    PAUSE
+:19DC
+    {
+}
+:19DD
+    PORTRAIT [N8(0x26) ]
+:19E1
+    {"Marrying Guoblum!"
+}
+:19F5
+    PAUSE
+:19F6
+    {
+}
+:19F7
+    PORTRAIT [N8(0x27) ]
+:19FB
+    {"No, that is another test of bravery!"
+}
+:1A22
+    PAUSE
+:1A23
+    {
+}
+:1A24
+    PORTRAIT [N8(0x1c) ]
+:1A28
+    {Guoblum throws a double handful of fruit at the other woman.
+}
+:1A65
+    PAUSE
+:1A66
+    {
+}
+:1A67
+    PORTRAIT [N8(0xeb) ]
+:1A6B
+    {"Wait! I know. This man must put noise-maker on @Sharptooth."
+}
+:1AA9
+    PAUSE
+:1AAA
+    {
+The crowd cheers.
+}
+:1ABD
+    PAUSE
+:1ABE
+    {
+"There is big lizard near here. Usually southeast of village. We call it Sharptooth. Stands tall like hut."
+}
+:1B2B
+    PAUSE
+:1B2C
+    {
+"Eats Disquiqui warriors. Wanders around staggering afterwards. But always comes back for more."
+}
+:1B8E
+    PAUSE
+:1B8F
+    {
+"For test of skill, must put noise-maker on Sharptooth so Disquiqui warriors can hear Sharptooth coming."
+}
+:1BFA
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1C01
+    PAUSE
+:1C02
+    {
+}
+:1C03
+    PORTRAIT [N8(0x1c) ]
+:1C07
+    {"Father, that would be stupid! If we hear Sharptooth coming, we might become frightened and run away!"
+}
+:1C6E
+    PAUSE
+:1C6F
+    {
+}
+:1C70
+    PORTRAIT [N8(0xeb) ]
+:1C74
+    {"Ignore her." He whacks her with his spoon.
+}
+:1CA0
+    PAUSE
+:1CA1
+    {
+"Larrifin, give him the noise-maker."
+}
+:1CC8
+    PAUSE
+:1CC9
+    {
+}
+:1CCA
+    PORTRAIT [N8(0x26) ]
+:1CCE
+    SET_FLAG [N8(0x26) ], [0x00 ]
+:1CD4
+    NEW [N8(0x01) ], [N8(0x2b) ], [N8(0x00) ], [N8(0x01) ]
+:1CE1
+    IF [0x1d B2 ]
+:1CE5
+    {The shaman hands you a large copper bell, rather like a cow-bell.
+}
+:1D27
+    PAUSE
+:1D28
+    {
+}
+:1D29
+    PORTRAIT [N8(0xeb) ]
+:1D2D
+    {"Put that on Sharptooth.}
+:1D45
+    ELSE
+:1D46
+    SET_FLAG [N8(0x26) ], [N8(0x05) ]
+:1D4D
+    {"But he's got too much stuff!"
+}
+:1D6C
+    PAUSE
+:1D6D
+    {
+}
+:1D6E
+    PORTRAIT [N8(0xeb) ]
+:1D72
+    {"Go bother Larrifin about the @bell later, then. When you can carry it, put bell on Sharptooth.}
+:1DD1
+    ENDIF
+:1DD2
+    { Then we join alliance."
+}
+:1DEB
+    PAUSE
+:1DEC
+    {
+}
+:1DED
+    PORTRAIT [N8(0x1c) ]
+:1DF1
+    {Guoblum begins sniffling. "Nice man will be all eaten up. Only a great warrior could hold @Sharptooth still to put noise-maker on it."
+}
+:1E78
+    PAUSE
+:1E79
+    {
+}
+:1E7A
+    PORTRAIT [N8(0xeb) ]
+:1E7E
+    {"Hmmm... daughter is right. $P is one dead warrior. Too bad."
+}
+:1EBC
+    PAUSE
+:1EBD
+    {
+}
+:1EBE
+    PORTRAIT [N8(0x27) ]
+:1EC2
+    {"Spear of Shamap! Spear of Shamap!"
+}
+:1EE6
+    PAUSE
+:1EE7
+    {
+}
+:1EE8
+    PORTRAIT [N8(0xeb) ]
+:1EEC
+    {"Good idea! Shamap was strange member of Disquiqui. Not like the rest of us. Liked to pull teeth out of big lizards."
+}
+:1F62
+    PAUSE
+:1F63
+    {
+"Shamap would put big skin of plachta on point of spear and hit lizard with it. Lizard would fall down. Not surprising: So would Chafblum."
+}
+:1FF0
+    PAUSE
+:1FF1
+    {
+}
+:1FF2
+    NEW [N8(0x01) ], [N8(0x3f) ], [N8(0x00) ], [N8(0x02) ]
+:1FFF
+    IF [0x1d B2 ]
+:2003
+    {"Here is more plachta for Spear of Shamap. Don't use it up before you make spear."
+}
+:2056
+    ELSE
+:2057
+    SET_FLAG [N8(0x26) ], [N8(0x04) ]
+:205E
+    {"Larrifin doesn't have enough to do... Larrifin! Give warrior plachta when he can carry it."
+}
+:20BB
+    PAUSE
+:20BC
+    {
+}
+:20BD
+    PORTRAIT [N8(0x26) ]
+:20C1
+    {The shaman grumbles, but nods in agreement.
+}
+:20ED
+    PAUSE
+:20EE
+    {
+}
+:20EF
+    PORTRAIT [N8(0xeb) ]
+:20F3
+    ENDIF
+:20F4
+    JUMP 0x11a0
+:20F9
+    {"Enemy warrior named Nakola, of Barrab tribe, was scaring Disquiqui warriors to death. Tuomaxx went to Barrab tribe to teach them lesson."
+}
+:2184
+    PAUSE
+:2185
+    {
+"But Barrab chief is too wily for Tuomaxx."
+}
+:21B2
+    PAUSE
+:21B3
+    {
+}
+:21B4
+    PORTRAIT [N8(0x27) ]
+:21B8
+    {"So are most trees."
+}
+:21CD
+    PAUSE
+:21CE
+    {
+}
+:21CF
+    PORTRAIT [N8(0xeb) ]
+:21D3
+    {"Shaddup. Barrab chief use magics to steal Tuomaxx' mind away. Makes Tuomaxx happy, since he didn't like mind anyway."
+}
+:224A
+    PAUSE
+:224B
+    {
+"When Tuomaxx comes home, he has lost mind and not avenged scaring of Disquiqui warriors. Stops feasting and drinking with other Disquiqui."
+}
+:22D9
+    PAUSE
+:22DA
+    {
+"Just builds drums and flutes and sings to himself. So, to make long story short -- "
+}
+:2331
+    PAUSE
+:2332
+    {
+}
+:2333
+    PORTRAIT [N8(0x1c) ]
+:2337
+    {"Too late."
+}
+:2343
+    PAUSE
+:2344
+    {
+}
+:2345
+    PORTRAIT [N8(0xeb) ]
+:2349
+    {"Shaddup. -- Chafblum exiles him."
+}
+:236C
+    PAUSE
+:236D
+    {
+"Shame, too. Tuomaxx builds better drums and flutes than anyone. Think he is living on hill somewhere back east."
+}
+:23E0
+    JUMP 0x0113
+:23E5
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:23EB
+    JUMP 0x20f9
+    KEYWORDS n
+    ANSWER
+:23F3
+    {"Good choice."
+}
+:2402
+    JUMP 0x0113
+    END_ANSWER

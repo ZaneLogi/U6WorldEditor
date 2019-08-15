@@ -1,0 +1,37 @@
+:0000
+    NPC_ID: npc id: 21, npc name: Chizzztl
+:000A
+    NPC_LOOK: a Myrmidex soldier, bigger and glossier than the rest.
+*
+:0043
+    START CONVERSION
+:0044
+    IF [N8(0xeb) 0x00 FLAG ]
+:004A
+    JUMP 0x014e
+:004F
+    ELSE
+:0050
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0056
+    {Its mandibles writhe and clack as it forces itself to speak something like the human tongue. "Not allowed here. Must die. Will ask Queen."
+}
+:00E1
+    PAUSE
+:00E2
+    {
+It cocks its head for about half a second. Then: "Queen agrees. Hive alerted. Meat-beings must die!"
+}
+:0148
+Unknown code [d1 d3 02 a7 ]
+:014C
+    BYE
+:014D
+    ENDIF
+:014E
+    {"Talking again? Why still alive?" It waits a moment. "Queen confirms. Meat-beings must be chewed!"
+}
+:01B1
+Unknown code [d1 d3 02 a7 ]
+:01B5
+    BYE

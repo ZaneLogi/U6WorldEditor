@@ -1,0 +1,882 @@
+:0000
+    NPC_ID: npc id: 19, npc name: Balakai
+:0009
+    NPC_LOOK: a somber man wearing shamanistic face-paints.
+*
+:0039
+    START CONVERSION
+:003A
+    IF [N8(0xeb) 0x00 FLAG ]
+:0040
+    JUMP 0x00ac
+:0045
+    ELSE
+:0046
+    {"This one is tending a very @sick boy, and humbly begs that all visitors remain soft of voice."
+}
+:00A6
+    JUMP 0x023c
+:00AB
+    ENDIF
+:00AC
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:00B3
+    {"Balakai welcomes noble $P, hero of the Barrab, savior of young Nakai."
+}
+:00FB
+    JUMP 0x0107
+:0100
+    ELSE
+:0101
+    JUMP 0x01b0
+:0106
+    ENDIF
+:0107
+    DECLARE [0x08, 0xb2] = [N8(0x00) ]
+:010E
+    JUMP 0x0113
+:0113
+    IF [0x08 B2 0x18 B2 > ]
+:011A
+    JUMP 0x016d
+:011F
+    ENDIF
+:0120
+    IF [0x08 B2 N8(0x00) NPC WOUNDED N8(0x01) == ]
+:012B
+    {
+"This one sees that someone here is hurt."
+}
+:0157
+    JUMP 0x15ed
+:015C
+    ELSE
+:015D
+    DECLARE [0x08, 0xb2] = [0x08 B2 N8(0x01) + ]
+:0167
+    JUMP 0x0113
+:016C
+    ENDIF
+:016D
+    IF [N8(0xf9) N8(0x00) OBJINPARTY N16(0x8001) == ]
+:0178
+    JUMP 0x023c
+:017D
+    ELSE
+:017E
+    {
+"This one sees that someone here is hurt."
+}
+:01AA
+    JUMP 0x15ed
+:01AF
+    ENDIF
+:01B0
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:01B7
+    {He springs up eagerly: "Has the noble visitor $P brought medicine for Nakai?"
+}
+:0205
+    JUMP 0x1fc2
+:020A
+    ELSE
+:020B
+    {"Balakai welcomes his most noble guest $P."}
+:0236
+    JUMP 0x023c
+:023B
+    ENDIF
+:023C
+    {
+}
+:023D
+    ASK
+    KEYWORDS name,bala
+    ANSWER
+:0249
+    {"This one is addressed by the name Balakai."
+}
+:0276
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:027C
+    PORTRAIT [N8(0xeb) ]
+:0280
+    JUMP 0x023c
+    KEYWORDS job,chie,shama
+    ANSWER
+:0295
+    {"This one is chief to the Barrab tribe, and also shaman."
+}
+:02CF
+    JUMP 0x023c
+    KEYWORDS shamu
+    ANSWER
+:02DB
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:02E1
+    PORTRAIT [N8(0xeb) ]
+:02E5
+    {"Balakai has heard of one named Shamuru, but does not know him."
+}
+:0326
+    JUMP 0x023c
+    KEYWORDS sham
+    ANSWER
+:0331
+    {"What do you mean by '$Z'?"
+}
+:034D
+    JUMP 0x023c
+    KEYWORDS trib
+    ANSWER
+:0358
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:035E
+    PORTRAIT [N8(0xeb) ]
+:0362
+    {"Balakai belongs to the Barrab tribe."
+}
+:0389
+    PAUSE
+:038A
+    {
+"Nearby, to the west, are the @Sakkhra; they are not men, but reptiles shaped as warriors."
+}
+:03E7
+    PAUSE
+:03E8
+    {
+"Far to the east are the Disquiqui; the Barrab trade with them. Balakai once fought a duel with one of them, called @Tuomaxx the Drum-Maker."
+}
+:0477
+    PAUSE
+:0478
+    {
+"Much further east, there is a tribe called Urali. Balakai has only met one of them, a shaman called @Topuru."
+}
+:04E8
+    PAUSE
+:04E9
+    {
+"Somewhere far away are the @Myrmidex."
+}
+:0512
+    JUMP 0x023c
+    KEYWORDS barr
+    ANSWER
+:051D
+    {"You are among the Barrab, dwellers on the mesa."
+}
+:054F
+    JUMP 0x023c
+    KEYWORDS mesa
+    ANSWER
+:055A
+    {"Yes, Barrab dwell on mesa. To north are two other mesas. One is too small to live on, and we cannot reach the @Great Mesa."
+}
+:05D7
+    JUMP 0x023c
+    KEYWORDS sick,son,naka
+    ANSWER
+:05EB
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:05F2
+    {"Nakai is no longer sick, thanks to $P."
+}
+:061B
+    JUMP 0x023c
+:0620
+    ELSE
+:0621
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0627
+    PORTRAIT [N8(0xeb) ]
+:062B
+    {"Balakai's son Nakai is very ill. The illness is beyond Balakai's ability to cure. There is a @medicine which will cure his fever..."
+}
+:06B1
+    SET_FLAG [N8(0x2a) ], [0x00 ]
+:06B7
+    JUMP 0x023c
+:06BC
+    ENDIF
+    KEYWORDS nako
+    ANSWER
+:06C3
+    {"Nakola is very shy.  She is probably hiding while strange $P is here."
+}
+:070B
+    JUMP 0x023c
+    KEYWORDS blue,ston,rock
+    ANSWER
+:0720
+    {"The visitor wishes to hear the story of the blue stone?"
+}
+:075A
+    JUMP 0x1b35
+    KEYWORDS sakk
+    ANSWER
+:0765
+    {"Sakkhra live to the west, in the caves where this one used to find his @blue stones. Their king is called @Sysskarr."
+}
+:07DC
+    JUMP 0x023c
+    KEYWORDS heal
+    ANSWER
+:07E7
+    {"Is there a need for healing?"
+}
+:0806
+    JUMP 0x23aa
+    KEYWORDS medi
+    ANSWER
+:0811
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0818
+    {"Is there a need for healing?"
+}
+:0837
+    JUMP 0x1571
+:083C
+    ELSE
+:083D
+    {"There is a giant flower with pale petals. Balakai thinks that the @roots of the flower will cure Balakai's son of the fever."
+}
+:08BC
+    PAUSE
+:08BD
+    {
+"But it has all but vanished. The last any member of the Barrab saw of it was on the @Great Mesa."
+}
+:0921
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:0928
+    JUMP 0x023c
+:092D
+    ENDIF
+:092E
+    KEYWORDS topu
+    ANSWER
+:0934
+    {"Does the noble visitor wish to hear the story of Topuru?" He seems amused.
+}
+:0980
+    JUMP 0x1b35
+    KEYWORDS grea
+    ANSWER
+:098B
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0992
+    {"Balakai does not understand the words of his visitor."
+}
+:09CA
+    JUMP 0x023c
+:09CF
+    ELSE
+:09D0
+    {"The Great Mesa is northwest of here. Once there was a span of land from it to the small mesa to its south..."
+}
+:0A3F
+    PAUSE
+:0A40
+    {
+"... but that fell many years ago. Now there is no way for me to reach the Great Mesa."
+}
+:0A99
+    JUMP 0x023c
+:0A9E
+    ENDIF
+    KEYWORDS tuom,drum
+    ANSWER
+:0AAA
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0AB1
+    {"Balakai knows of a drum-maker called Tuomaxx. A member of the Disquiqui tribe."
+}
+:0B02
+    PAUSE
+:0B03
+    {
+"One of the Barrab warriors had sent many warriors of the Disquiqui into flight, and Tuomaxx came for revenge."
+}
+:0B74
+    PAUSE
+:0B75
+    {
+"This one," he indicates himself, "confronted Tuomaxx and duelled him."
+}
+:0BBE
+    PAUSE
+:0BBF
+    {
+"Though Balakai received many poking fingers from Tuomaxx, he convinced Tuomaxx that he had removed Tuomaxx' mind and placed it in a @blue stone. And Tuomaxx believed."
+}
+:0C69
+    PAUSE
+:0C6A
+    {
+"Tuomaxx was so delighted to be free of human intelligence that Tuomaxx thanked Balakai and left."
+}
+:0CCE
+    JUMP 0x023c
+:0CD3
+    ELSE
+:0CD4
+    {"That is tribal business. Unless... his visitor were willing to do a favor for Balakai."
+}
+:0D2D
+    PAUSE
+:0D2E
+    {
+"If the noble visitor were to go and find some @medicine for Balakai's @sick son Nakai, this one would tell his visitor all about the drum-maker Tuomaxx."
+}
+:0DCA
+    SET_FLAG [N8(0x2a) ], [0x00 ]
+:0DD0
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:0DD7
+    JUMP 0x023c
+:0DDC
+    ENDIF
+    KEYWORDS root
+    ANSWER
+:0DE3
+    {"It is the roots of the large pale flower that act as medicine. Chop it down, and bring the roots back to Balakai, and I may make Nakai well again."
+}
+:0E78
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:0E7F
+    SET_FLAG [N8(0x2a) ], [0x00 ]
+:0E85
+    JUMP 0x023c
+    KEYWORDS myrm
+    ANSWER
+:0E90
+    {"Balakai has seen them in his dreams. Balakai fears the Myrmidex. They are so fierce, and all fight as one."
+}
+:0EFD
+    PAUSE
+:0EFE
+    {
+"Balakai has had many @dreams about the Myrmidex."
+}
+:0F32
+    JUMP 0x023c
+    KEYWORDS drea
+    ANSWER
+:0F3D
+    {"In his dreams, Balakai has seen a warrior from some distant tribe. The warrior comes and @unites the tribes against the Myrmidex."
+}
+:0FC1
+    JUMP 0x023c
+    KEYWORDS unit,ally,alli
+    ANSWER
+:0FD6
+    {"Does the noble visitor speak of uniting the tribes?"
+}
+:100C
+    JUMP 0x1207
+    KEYWORDS syss
+    ANSWER
+:1017
+    {"The Sakkhra king is called Sysskarr. A mighty fighter."
+}
+:1050
+    PAUSE
+:1051
+    {
+"When Balakai was but a stripling youth, and Sysskarr was a cunning, experienced warrior, they fought. They fought all day and all night."
+}
+:10DD
+    PAUSE
+:10DE
+    {
+"Balakai was fortunate enough to defeat Sysskarr. He thought Sysskarr must have died from grievous wounds, but Sysskarr survived and leads the Sakkhra still."
+}
+:117E
+    JUMP 0x023c
+    KEYWORDS bye
+    ANSWER
+:1188
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:118E
+    {"There is always hospitality here for noble visitors."
+}
+:11C5
+    BYE
+:11C6
+    KEYWORDS *
+    ANSWER
+:11C9
+    {"Balakai does not understand the words of his visitor."
+}
+:1201
+    JUMP 0x023c
+    END_ANSWER
+:1206
+    BYE
+:1207
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:120D
+    {"The tribes might not wish to be united."
+}
+:1237
+    PAUSE
+:1238
+    {
+}
+:1239
+    JUMP 0x127a
+    KEYWORDS n
+    ANSWER
+:1241
+    {"Doubtless the noble visitor has other ambitions."
+}
+:1274
+    JUMP 0x023c
+    END_ANSWER
+:127A
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:1281
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1288
+    {"This one is in his visitor's debt for curing Nakai. When the noble visitor wishes this one's aid, he will have it."
+}
+:12FD
+    JUMP 0x023c
+:1302
+    ELSE
+:1303
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:1309
+    {"Balakai would be willing to help... if only his visitor could find the @medicine Balakai needs to cure his @sick son."
+}
+:1381
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:1388
+    JUMP 0x138e
+:138D
+    ENDIF
+:138E
+    IF [N8(0x04) INPARTY ]
+:1393
+    JUMP 0x13ad
+:1398
+    ELSE
+:1399
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:13A0
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:13A7
+    JUMP 0x023c
+:13AC
+    ENDIF
+:13AD
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:13B4
+    PAUSE
+:13B5
+    {
+}
+:13B6
+    IF [N8(0x04) N8(0x06) FLAG ]
+:13BD
+    PORTRAIT [N8(0x04) ]
+:13C1
+    {Jimmy whips out his @notebook and scribbles in it. "I've got that. YOU don't need to learn how to read with Jimmy around."
+}
+:143C
+    PAUSE
+:143D
+    PORTRAIT [N8(0xeb) ]
+:1441
+    JUMP 0x023c
+:1446
+    ELSE
+:1447
+    PORTRAIT [N8(0x04) ]
+:144B
+    {Jimmy speaks up. "Tell you what, boss. It could be that we're going to have a lot of these little chores ahead of us. I'll note down what each chief wants."
+}
+:14E8
+    PAUSE
+:14E9
+    {
+"Any time you want to check out what we've got in store for us, ask me about my @notebook. It never forgets."
+}
+:1558
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:155F
+    SET_FLAG [N8(0x04) ], [N8(0x03) ]
+:1566
+    PAUSE
+:1567
+    PORTRAIT [N8(0xeb) ]
+:156B
+    JUMP 0x023c
+:1570
+    ENDIF
+:1571
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:1577
+    {"As shaman, this one may heal those who have suffered harm."
+}
+:15B4
+    PAUSE
+:15B5
+    {
+}
+:15B6
+    JUMP 0x15ed
+    KEYWORDS n
+    ANSWER
+:15BE
+    {"It is fortunate that no one is unwell."
+}
+:15E7
+    JUMP 0x023c
+    END_ANSWER
+:15ED
+    {The shaman throws back his head and takes a deep breath... seeking knowledge from the spirits.
+}
+:164C
+    DECLARE [0x00, 0xb2] = [N8(0x00) ]
+:1653
+    DECLARE [0x01, 0xb2] = [N8(0x00) ]
+:165A
+    DECLARE [0x02, 0xb2] = [N8(0x00) ]
+:1661
+    DECLARE [0x03, 0xb2] = [N8(0x00) ]
+:1668
+    DECLARE [0x04, 0xb2] = [N8(0x00) ]
+:166F
+    JUMP 0x1674
+:1674
+    IF [0x03 B2 N8(0x10) > ]
+:167B
+    PAUSE
+:167C
+    {
+"No one here suffers injury."
+}
+:169B
+    JUMP 0x16be
+:16A0
+    ENDIF
+:16A1
+    IF [0x03 B2 N8(0x00) NPC WOUNDED ]
+:16A9
+    JUMP 0x1743
+:16AE
+    ENDIF
+:16AF
+    DECLARE [0x03, 0xb2] = [0x03 B2 N8(0x01) + ]
+:16B9
+    JUMP 0x1674
+:16BE
+    IF [N8(0xf9) N8(0x00) OBJINPARTY N16(0x8001) == ]
+:16C9
+    PAUSE
+:16CA
+    {
+"No one here is grievously wounded."
+}
+:16F0
+    JUMP 0x16fc
+:16F5
+    ELSE
+:16F6
+    JUMP 0x1743
+:16FB
+    ENDIF
+:16FC
+    PAUSE
+:16FD
+    {
+The shaman opens his eyes. "No one here is in need of healing."
+}
+:173E
+    JUMP 0x023c
+:1743
+    {The shaman's breathing becomes quicker... and a hard wind whips across you.
+}
+:178F
+    JUMP 0x1794
+:1794
+    IF [0x00 B2 0x18 B2 > ]
+:179B
+    JUMP 0x181e
+:17A0
+    ENDIF
+:17A1
+    IF [0x00 B2 N8(0x00) NPC WOUNDED ]
+:17A9
+    HEAL [0x00 B2 N8(0x00) NPC ]
+:17B0
+    SET_$Y [0x00 B2 N8(0x00) NPC ]
+:17B7
+    {"Spirit of Kukuzz, $N invokes you to bestow a blessing upon $Y!"
+... and $Y is healed!
+}
+:180E
+    ENDIF
+:180F
+    DECLARE [0x00, 0xb2] = [0x00 B2 N8(0x01) + ]
+:1819
+    JUMP 0x1794
+:181E
+    IF [N8(0xf9) N8(0x00) OBJINPARTY N16(0x8001) == ]
+:1829
+    JUMP 0x1a8e
+:182E
+    ELSE
+:182F
+    DECLARE [0x01, 0xb2] = [N8(0xf9) N8(0x00) OBJINPARTY ]
+:1839
+    SET_$Y [0x01 B2 ]
+:183D
+    PAUSE
+:183E
+    {
+"Mighty Spirit Kukuzz, look upon the mortal $Y. That which $Y carries is a valued friend and ally."
+}
+:18A3
+    PAUSE
+:18A4
+    {
+}
+:18A5
+Unknown code [d6 [0x01 B2 ]]
+:18A9
+    ENDIF
+:18AA
+    IF [0x1b B2 N8(0x00) > 0x1b B2 N8(0x10) < & ]
+:18B7
+    {"$N beseeches Kukuzz, bestow the blessing of strength and health to $Y, so that $Y might walk and fight again!"
+}
+:1927
+    PAUSE
+:1928
+    {
+The wind howls, a raging torrent, around you...
+Every hair on your body stands on end...
+And the wounds disappear from $Y's body! $Y's eyes open!
+}
+:19BB
+    JUMP 0x181e
+:19C0
+    ELSE
+:19C1
+    {The shaman examines the body sadly. "The spirits do not respond... there is nothing Balakai can do."
+}
+:1A26
+    PAUSE
+:1A27
+    {
+Taking the body the body from you, he says "Balakai will have this buried with proper respect."
+}
+:1A88
+    JUMP 0x023c
+:1A8D
+    ENDIF
+:1A8E
+    PAUSE
+:1A8F
+    {
+The wind dies down, and the shaman slumps where he stands. After a moment, he looks up, exhausted.
+}
+:1AF3
+    PAUSE
+:1AF4
+    {
+"The spirits have been generous," he says. "All are well."
+}
+:1B30
+    JUMP 0x023c
+:1B35
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:1B3B
+    {"Many years in the past, a shaman named @Topuru challenged Balakai to a contest of magic."
+}
+:1B96
+    PAUSE
+:1B97
+    {
+"Long and fierce was the competition. Topuru would demonstrate great powers; Balakai would demonstrate great powers."
+}
+:1C0E
+    PAUSE
+:1C0F
+    {
+"But Balakai could see that Topuru was strained of mind. So this one tricked Topuru. Balakai summoned his daughter @Nakola."
+}
+:1C8D
+    PAUSE
+:1C8E
+    {
+"Nakola knew well what to do. Balakai produced a piece of @blue stone and invoked the name of a spirit who does not exist."
+}
+:1D0B
+    PAUSE
+:1D0C
+    {
+"Nakola soon began to gibber, and Balakai told Topuru that he had ripped her mind from Nakola and put it in the stone."
+}
+:1D85
+    PAUSE
+:1D86
+    {
+"Then, because Balakai was angry, he repeated the ceremony upon Topuru. Topuru believed that his mind was placed into a rock."
+}
+:1E06
+    PAUSE
+:1E07
+    {
+"Balakai told him that the rock would be smashed if ever Topuru annoyed any of the Barrab. Topuru went far, far away."
+}
+:1E7F
+    PAUSE
+:1E80
+    {
+"One could cure @Topuru by giving him ANY @blue stone, for no stone truly holds his mind."
+}
+:1EDC
+    PAUSE
+:1EDD
+    {
+"If the noble visitor wishes to have some of the rock, he must visit the Sakkhra caves."
+}
+:1F37
+    PAUSE
+:1F38
+    {
+"There is a large stone there; strike it with a hammer, and small pieces will break off."
+}
+:1F93
+    JUMP 0x023c
+    KEYWORDS n
+    ANSWER
+:1F9B
+    {"So sad. It is an amusing tale."
+}
+:1FBC
+    JUMP 0x023c
+    END_ANSWER
+:1FC2
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:1FC8
+    {"Yes? Quickly, let Balakai see!"
+}
+:1FE9
+    JUMP 0x2071
+    KEYWORDS n
+    ANSWER
+:1FF1
+    {He sighs and slumps back. "So. Ever Balakai's son draws closer to death, and there is no hope for him without @medicine."
+}
+:206B
+    JUMP 0x023c
+    END_ANSWER
+:2071
+    IF [N8(0x4e) N8(0x00) OBJINPARTY N16(0x8001) == ]
+:207C
+    PAUSE
+:207D
+    {
+He waits....
+}
+:208B
+    PAUSE
+:208C
+    {
+"Balakai has been cruelly lied to. While his son lies dying, his visitor makes jests. Jests!"
+}
+:20EB
+    PAUSE
+:20EC
+    {
+"The visitor is invited to leave, and not return until he has brought the medicine to save young Nakai."
+}
+:2156
+    BYE
+:2157
+    ELSE
+:2158
+    DECLARE [0x05, 0xb2] = [N8(0x4e) N8(0x00) OBJINPARTY ]
+:2162
+    DELETE [0x05 B2 ], [N8(0x4e) ], [N8(0x00) ], [N8(0x01) ]
+:216F
+    {With trembling fingers, he takes the root.
+}
+:219A
+    PAUSE
+:219B
+    {
+Working quickly, he grinds it into a cup, adds water, and says a quick prayer over the mixture.
+}
+:21FC
+    PAUSE
+:21FD
+    {
+He carefully trickles the fluid into his son's mouth, waiting patiently as his son swallows.
+}
+:225B
+    PAUSE
+:225C
+    {
+Even as you watch, the boy's color improves... and within a few minutes his eyes open.
+}
+:22B4
+    SET_FLAG [N8(0xeb) ], [N8(0x07) ]
+:22BB
+    PAUSE
+:22BC
+    {
+}
+:22BD
+    PORTRAIT [N8(0x2a) ]
+:22C1
+    {"Father? This one is very cold."
+}
+:22E2
+    PAUSE
+:22E3
+    {
+}
+:22E4
+    PORTRAIT [N8(0xeb) ]
+:22E8
+    {"Nakai has been ill. Lie back and rest, Nakai."
+}
+:2318
+    PAUSE
+:2319
+    {
+He turns back to you, beaming. "Balakai is unable to express his gratitude for $P's aid. $P may come and go freely through Barrab lands."
+}
+:23A4
+    JUMP 0x023c
+:23A9
+    ENDIF
+:23AA
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:23B0
+    JUMP 0x15ed
+    KEYWORDS n
+    ANSWER
+:23B8
+    {"How fortunate."
+}
+:23C9
+    JUMP 0x023c
+    END_ANSWER

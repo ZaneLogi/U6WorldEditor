@@ -68,19 +68,23 @@ $X : the value of string variable X
 #define U6OP_INPARTY    0xc6
 #define U6OP_OBJINPARTY 0xc7
 
+#define U6OP_GIVE       0xc9
 #define U6OP_JOIN       0xca        // return 3: ALREADY IN PARTY, 2: PARTY TOO LARGE, 1: NOT ON LAND (vehicle), 0: SUCCESS
 #define U6OP_PAUSE      0xcb        // pause the script and wait to hit any key
 #define U6OP_LEAVE      0xcc        // return 2: NOT IN PARTY, 1: NOT ON LAND, 0: SUCCESS
 #define U6OP_WORKTYPE   0xcd
 
+#define U6OP_FUNC       0xd1        // execute the specific functions which are hard-coded.
 #define U6OP_NUM32      0xd2
 #define U6OP_NUM8       0xd3
 #define U6OP_NUM16      0xd4
 
+#define U6OP_REVIVE     0xd6
+
 #define U6OP_SET_Y      0xd8        // set NPC name for $Y in the text
 #define U6OP_HEAL       0xd9
 #define U6OP_WOUNDED    0xda
-
+#define U6OP_CURE       0xdb
 #define U6OP_POISONED   0xdc
 #define U6OP_NPC        0xdd        // return NPC id based on the index
 

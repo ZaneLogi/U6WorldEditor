@@ -1,0 +1,143 @@
+:0000
+    NPC_ID: npc id: 30, npc name: Halisa
+:0008
+    NPC_LOOK: a cute, energetic teenaged native girl.
+*
+:0032
+    START CONVERSION
+:0033
+    IF [N8(0xeb) 0x00 FLAG ]
+:0039
+    JUMP 0x016f
+:003E
+    ELSE
+:003F
+    CLEAR_FLAG [N8(0xeb) ], [0x08 N8(0x07) + ]
+:0048
+    SET_FLAG [N8(0x1d) ], [N8(0x07) ]
+:004F
+    {"This great, strange warrior has come to rescue Halisa!"
+Delighted, she runs up and gives you a brief hug.
+}
+:00BA
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:00C0
+    PORTRAIT [N8(0xeb) ]
+:00C4
+    PAUSE
+:00C5
+    {
+"Come!  Halisa will race strange warrior to Barako village. Halisa knows fastest way.  Will even wait until warrior is out of sight to give warrior a head start!"
+}
+:0169
+    JUMP 0x01b0
+:016E
+    ENDIF
+:016F
+    {"Halisa sees the mighty warrior and rescuer, $P the Great!"
+}
+:01AB
+    JUMP 0x01b0
+:01B0
+    {
+}
+:01B1
+    ASK
+    KEYWORDS name
+    ANSWER
+:01B8
+    {"Halisa." She seems both shy around and fascinated by you.
+}
+:01F3
+    JUMP 0x01b0
+    KEYWORDS hali
+    ANSWER
+:01FE
+    {She smiles shyly at you and nods.
+}
+:0220
+    JUMP 0x01b0
+    KEYWORDS job
+    ANSWER
+:022A
+    {"Halisa is learning to be queen of the Barako tribe, as her @mother is."
+}
+:0273
+    JUMP 0x01b0
+    KEYWORDS moth,quee,chie
+    ANSWER
+:0288
+    {"Halawa is queen of the @Barakos, and is Halisa's mother."
+}
+:02C3
+    JUMP 0x01b0
+    KEYWORDS trib
+    ANSWER
+:02CE
+    {"There are two tribes in the north. One is Halisa's own tribe, the @Barakos, south of where the mighty hunter rescued Halisa."
+}
+:034D
+    PAUSE
+:034E
+    {
+"There are also the @Pindiro, who are further north, near the waterfall lake."
+}
+:039E
+    PAUSE
+:039F
+    {
+"Oh, and there is mad @Topuru."
+}
+:03C0
+    JUMP 0x01b0
+    KEYWORDS topu
+    ANSWER
+:03CB
+    {"Topuru is a shaman who lives alone on an island, west of the Barako village. But Topuru is not a whole tribe."
+}
+:043B
+    JUMP 0x01b0
+    KEYWORDS pind
+    ANSWER
+:0446
+    {"Halisa knows little of the Pindiro tribe. We have fought with them for as long as Halisa can remember. Halisa does not understand why."
+}
+:04CF
+    JUMP 0x01b0
+    KEYWORDS bara
+    ANSWER
+:04DA
+    {"Halisa belongs to the Barako tribe. The Barako live on the plains in the northern part of the valley."
+}
+:0542
+    JUMP 0x01b0
+    KEYWORDS candy
+    ANSWER
+:054E
+    {"Candy? What is candy?"
+}
+:0566
+    JUMP 0x01b0
+    KEYWORDS unit,ally,alli
+    ANSWER
+:057B
+    {"That is a question for the queen, Halawa; Halisa doesn't know."
+}
+:05BC
+    JUMP 0x01b0
+    KEYWORDS bye
+    ANSWER
+:05C6
+    {"Oh. Well, perhaps you will talk with Halisa later."
+}
+:05FB
+    BYE
+:05FC
+    KEYWORDS *
+    ANSWER
+:05FF
+    {"Halisa does not know about that."
+}
+:0622
+    JUMP 0x01b0
+    END_ANSWER

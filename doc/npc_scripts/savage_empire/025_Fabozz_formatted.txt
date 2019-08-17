@@ -1,0 +1,158 @@
+:0000
+    NPC_ID: npc id: 25, npc name: Fabozz
+:0008
+    NPC_LOOK: a giant stone head with luminescent green stone eyes.
+*
+:0040
+    START CONVERSION
+:0041
+    IF [N8(0x19) N8(0x03) FLAG ]
+:0048
+    JUMP 0x0054
+:004D
+    ELSE
+:004E
+    JUMP 0x00ee
+:0053
+    ENDIF
+:0054
+    {As the bright flash from your light floods the cave, there is a second, brighter flash.
+}
+:00AC
+    PORTRAIT [N16(0x00ff) ]
+:00B1
+    {And when it fades...
+}
+:00C6
+    PAUSE
+:00C7
+    {
+}
+:00C8
+    PORTRAIT [N16(0x00fd) ]
+:00CD
+    {Fabozz is gone!
+}
+:00DD
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x03) ]
+:00E4
+    U6OP_FUNC [N16(0x00af) ]
+:00E9
+    JUMP 0x0170
+:00EE
+    IF [N8(0x19) N8(0x05) FLAG ]
+:00F5
+    JUMP 0x0170
+:00FA
+    ELSE
+:00FB
+    {A deep, sepulchral voice rumbles around you, moaning a single word: "Light." The voice fades, and silence returns.
+}
+:016E
+    BYE
+:016F
+    ENDIF
+:0170
+    IF [N8(0xeb) 0x00 FLAG ]
+:0176
+    JUMP 0x05ea
+:017B
+    ELSE
+:017C
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0182
+    SET_FLAG [N8(0x19) ], [N8(0x05) ]
+:0189
+    {A sharp wind whips through the stone chamber.
+}
+:01B7
+    PAUSE
+:01B8
+    {
+From deep caves and tunnels comes the sound of frogs croaking, rising in volume... and gradually, eerily forming SPOKEN WORDS.
+}
+:0238
+    PAUSE
+:0239
+    {
+"$P," croak the voices. "You have restored the Great Fabozz to his true place, where the sun may again reach him."
+}
+:02AD
+    PAUSE
+:02AE
+    {
+The frog-croaking becomes deeper and more random for a moment, then settles down again into words.
+}
+:0312
+    PAUSE
+:0313
+    {
+"$P is friend to the Great Fabozz and all the Urali. Let every Urali warrior carry word of what he has done."
+}
+:0382
+    PAUSE
+:0383
+    {
+"Henceforth, $P and all he counts as friends may pass unharmed through Urali lands. The mighty lizard which guards the Urali village will do you no harm."
+}
+:041F
+    PAUSE
+:0420
+    {
+}
+:0421
+    JUMP 0x0427
+:0426
+    ENDIF
+:0427
+    IF [N8(0x35) N8(0x05) FLAG ]
+:042E
+    JUMP 0x049f
+:0433
+    ELSE
+:0434
+    {"Darden's influence is no more."
+}
+:0455
+    PAUSE
+:0456
+    {
+"The Great Fabozz commands that Wamap the Shaman become chief."
+}
+:0497
+    PAUSE
+:0498
+    {
+}
+:0499
+    JUMP 0x049f
+:049E
+    ENDIF
+:049F
+    IF [N8(0x10) N8(0x07) FLAG ]
+:04A6
+    JUMP 0x0552
+:04AB
+    ELSE
+:04AC
+    {"$P, the spirit-winds say that you seek the one called Aiela. You will find her in the cave to the south of the Urali village. The guards will not stop you."
+}
+:054A
+    PAUSE
+:054B
+    {
+}
+:054C
+    JUMP 0x0552
+:0551
+    ENDIF
+:0552
+    {"All is well. The Great Fabozz is content." The croaking and chirping of the frogs becomes louder and more random, then dies down and silence returns.
+}
+:05E9
+    BYE
+:05EA
+    {The stone face looks at you enigmatically. You hear a lone frog croaking somewhere out in the mists, but the Great Fabozz does not address you.
+}
+:067A
+    BYE

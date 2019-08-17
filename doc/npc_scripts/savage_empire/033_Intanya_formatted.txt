@@ -1,0 +1,850 @@
+:0000
+    NPC_ID: npc id: 33, npc name: Intanya
+:0009
+    NPC_LOOK: a native man wearing an elaborate jaguar headdress.
+
+:003E
+    START CONVERSION
+:003F
+    IF [N8(0xeb) 0x00 FLAG ]
+:0045
+    JUMP 0x0274
+:004A
+    ELSE
+:004B
+    {"You are returning to wakefulness. It is good."
+}
+:007B
+    PAUSE
+:007C
+    {
+"Intanya's potion is powerful magic. It has granted you the speech of the people of this valley. Now you may understand what is said to you."
+}
+:010B
+    PAUSE
+:010C
+    {
+"In fevered ravings, you spoke much of @Aiela, our chieftain's daughter, as well as a @Rafkin and a @Jimmy. Intanya thinks you must find them as soon as possible."
+}
+:01B1
+    PAUSE
+:01B2
+    {
+"But the valley is full of danger. Before Intanya can let $P rise again and search for his comrades, Intanya must ask $P a question, to see if his mind has healed as well as his body."
+}
+:026C
+    PAUSE
+:026D
+    {
+}
+:026E
+    JUMP 0x1980
+:0273
+    ENDIF
+:0274
+    IF [N8(0x21) N8(0x05) FLAG ]
+:027B
+    JUMP 0x03d0
+:0280
+    ELSE
+:0281
+    DECLARE [0x00, 0xb2] = [N8(0x00) ]
+:0288
+    JUMP 0x028e
+:028D
+    ENDIF
+:028E
+    IF [0x00 B2 0x18 B2 > ]
+:0295
+    DECLARE [0x01, 0xb2] = [N8(0x00) ]
+:029C
+    JUMP 0x02bf
+:02A1
+    ENDIF
+:02A2
+    IF [0x00 B2 N8(0x00) NPC WOUNDED ]
+:02AA
+    JUMP 0x0307
+:02AF
+    ENDIF
+:02B0
+    DECLARE [0x00, 0xb2] = [0x00 B2 N8(0x01) + ]
+:02BA
+    JUMP 0x028e
+:02BF
+    IF [0x01 B2 0x18 B2 > ]
+:02C6
+    DECLARE [0x02, 0xb2] = [N8(0x00) ]
+:02CD
+    JUMP 0x02f0
+:02D2
+    ENDIF
+:02D3
+    IF [0x01 B2 N8(0x00) NPC POISONED ]
+:02DB
+    JUMP 0x0307
+:02E0
+    ENDIF
+:02E1
+    DECLARE [0x01, 0xb2] = [0x01 B2 N8(0x01) + ]
+:02EB
+    JUMP 0x02bf
+:02F0
+    IF [N8(0xf9) N8(0x00) OBJINPARTY N16(0x8001) == ]
+:02FB
+    JUMP 0x0344
+:0300
+    ELSE
+:0301
+    JUMP 0x0307
+:0306
+    ENDIF
+:0307
+    {"The spirits tell Intanya that someone here is unwell."
+}
+:033F
+    JUMP 0x1371
+:0344
+    IF [0x17 B2 N8(0x00) == ]
+:034B
+    PAUSE
+:034C
+    {
+"Intanya is pleased to see $P returned unharmed."
+}
+:037F
+    JUMP 0x04f2
+:0384
+    ELSE
+:0385
+    PAUSE
+:0386
+    {
+"Intanya is pleased to see $P and $P's friends returned unharmed."
+}
+:03CA
+    JUMP 0x04f2
+:03CF
+    ENDIF
+:03D0
+    {"Intanya rejoices to see $P awake again. $P was very hurt when Intanya's men found him. Intanya's men have brought $P here for healing."
+}
+:0459
+    PAUSE
+:045A
+    {
+"Your wounds are healed, but I must know if your memory is intact. I have drawn the question from your own memory, so it is in your own words."
+}
+:04EB
+    PAUSE
+:04EC
+    {
+}
+:04ED
+    JUMP 0x1980
+:04F2
+    {
+}
+:04F3
+    ASK
+    KEYWORDS name,inta
+    ANSWER
+:04FF
+    {"Long has the name Intanya been borne.&
+}
+:0527
+    JUMP 0x04f2
+    KEYWORDS job,shama
+    ANSWER
+:0537
+    {"Intanya is shaman to the Kurak tribe. Intanya consults the @spirits; he also @heals the ill and injured."
+}
+:05A2
+    JUMP 0x04f2
+    KEYWORDS trib,kura,alor,chie
+    ANSWER
+:05BC
+    {The shaman gestures around him. "This is the Kurak tribe. Aloron is our chief; $P should go and speak with him."
+}
+:062D
+    JUMP 0x04f2
+    KEYWORDS myrm
+    ANSWER
+:0638
+    {"The Myrmidex are strange, fierce warriors. Insects of great size, they attack and kill our warriors without cause."
+}
+:06AD
+    JUMP 0x04f2
+    KEYWORDS men
+    ANSWER
+:06B7
+    {"Intanya is friends with many warriors from many tribes. They travel the valley, seeking out the unknown and telling all to Intanya."
+}
+:073D
+    IF [N8(0x08) INPARTY ]
+:0742
+    PAUSE
+:0743
+    {
+}
+:0744
+    PORTRAIT [N8(0x08) ]
+:0748
+    {Shamuru interrupts: "It is true, $P. Shamuru has been long been a friend of Intanya, and helped Intanya in many things, though Shamuru is not of the Kurak tribe. Many other warriors do the same."
+}
+:080C
+    PORTRAIT [N8(0xeb) ]
+:0810
+    JUMP 0x04f2
+:0815
+    ELSE
+:0816
+    JUMP 0x04f2
+:081B
+    ENDIF
+    KEYWORDS trio
+    ANSWER
+:0822
+    {"Triolo came into the valley many moons ago. Intanya made Triolo his assistant, and has been teaching him the secrets of the Shaman."
+}
+:08A8
+    JUMP 0x04f2
+    KEYWORDS plat
+    ANSWER
+:08B3
+    {"The story of the glowing plates on the ground has been handed down from shaman to shaman for more generations than Intanya can count."
+}
+:093B
+    PAUSE
+:093C
+    {
+"Legends say the plates are very dangerous. Any person who walks upon one dissapears and never returns."
+}
+:09A6
+    JUMP 0x04f2
+    KEYWORDS yopo
+    ANSWER
+:09B1
+    {"You speak of the powder used in appeasing spirits. It is powerful, best left to shamans."
+}
+:0A0C
+    JUMP 0x04f2
+    KEYWORDS pind
+    ANSWER
+:0A17
+    {"Pinde is used to help guide spirits and produce visions."
+}
+:0A52
+    JUMP 0x04f2
+    KEYWORDS choc
+    ANSWER
+:0A5D
+    {"Strong flavor and smell. Brings light, calms animals, many other spells, when invoking the right spirits."
+}
+:0AC9
+    JUMP 0x04f2
+    KEYWORDS tote
+    ANSWER
+:0AD4
+    {"Totems are used to invoke the spirits."
+}
+:0AFD
+    JUMP 0x04f2
+    KEYWORDS apha
+    ANSWER
+:0B08
+    {"Aphaz is the spirit of emotions, and strength."
+}
+:0B39
+    JUMP 0x04f2
+    KEYWORDS mota
+    ANSWER
+:0B44
+    {"Motazz is the spirit of battle."
+}
+:0B66
+    JUMP 0x04f2
+    KEYWORDS helu
+    ANSWER
+:0B71
+    {"That is the spirit of knowledge and visions."
+}
+:0BA0
+    JUMP 0x04f2
+    KEYWORDS ava,avat,brit
+    ANSWER
+:0BB4
+    {His eyes narrow. "Intanya knows from his dreams that $P has been to dream-land called Britannia, and bears important title there. The dreams say $P is a mighty warrior and hero."
+}
+:0C67
+    PAUSE
+:0C68
+    {
+"Intanya knows more than that. Much more." There is laughter in his eyes, but he does not elaborate.
+}
+:0CCE
+    JUMP 0x04f2
+    KEYWORDS heal
+    ANSWER
+:0CD9
+    {"Intanya has great powers of healing."
+}
+:0D00
+    PAUSE
+:0D01
+    {
+}
+:0D02
+    JUMP 0x1371
+    KEYWORDS magi,spel,invo
+    ANSWER
+:0D17
+    {"Intanya knows much about magic, the invoking of @spirits to perform many kinds of magics. He has taught some of these to Triolo."
+}
+:0D9A
+    JUMP 0x04f2
+    KEYWORDS spir
+    ANSWER
+:0DA5
+    {"There are many spirits in the Valley of Eodon: Spirits of trees and winds, spirits of animals and life."
+}
+:0E0F
+    PAUSE
+:0E10
+    {
+"Intanya senses how the spirits feel and tells his fellows; Intanya draws on the powers of the spirits to @heal those who must be healed."
+}
+:0E9C
+    JUMP 0x04f2
+    KEYWORDS aiel
+    ANSWER
+:0EA7
+    IF [N8(0x01) N8(0x00) FLAG ]
+:0EAE
+    {"Aiela is a great treasure. Intanya knows that her father is grateful to $P for returning her to the Kurak."
+}
+:0F1B
+    ELSE
+:0F1C
+    {"Warriors search the valley for Aiela. The Urali are well hidden, and the spirits will not tell Intanya where they lie."
+}
+:0F95
+    PAUSE
+:0F96
+    {
+"And yet, the spirits do promise that someone will find her. You should speak with Aloron, our chieftain, if you wish to aid in the search."
+}
+:1024
+    ENDIF
+:1025
+    JUMP 0x04f2
+    KEYWORDS jimm,jim,malo
+    ANSWER
+:1039
+    IF [N8(0x04) INPARTY ]
+:103E
+    {"He is with $P now."
+}
+:1053
+    JUMP 0x04f2
+:1058
+    ELSE
+:1059
+    {"Intanya has had dreams of one such. Search among the Disquiqui, far to the south; Intanya hears their drums and music when shown the face of Jimmy Malone in his dreams."
+}
+:1104
+    JUMP 0x04f2
+:1109
+    ENDIF
+    KEYWORDS disq
+    ANSWER
+:1110
+    {"The Disquiqui are happy people, but their shaman does not know much. They live far from here, west of the great stone city of the @Nahuatla."
+}
+:119F
+    JUMP 0x04f2
+    KEYWORDS nahu,tich
+    ANSWER
+:11AF
+    {"The Nahuatla call their stone city 'Tichticatl'. They are very proud of it. They live south of the @Yolaru village."
+}
+:1225
+    JUMP 0x04f2
+    KEYWORDS yola
+    ANSWER
+:1230
+    {"The Yolaru are dark-skinned warriors. Their village is about a day's travel east of here."
+}
+:128C
+    JUMP 0x04f2
+    KEYWORDS rafk,prof
+    ANSWER
+:129C
+    IF [N8(0x07) INPARTY ]
+:12A1
+    {"He is with $P now."
+}
+:12B6
+    JUMP 0x04f2
+:12BB
+    ELSE
+:12BC
+    {"Word has reached Intanya that one such stays with the Yolaru tribe, to the east."
+}
+:130F
+    JUMP 0x04f2
+:1314
+    ENDIF
+    KEYWORDS bye
+    ANSWER
+:131A
+    {"May the spirits protect you, $P Ava-Tar."
+}
+:1345
+    BYE
+:1346
+    KEYWORDS *
+    ANSWER
+:1349
+    {"$P must learn of $Z by himself."
+}
+:136B
+    JUMP 0x04f2
+    END_ANSWER
+:1370
+    BYE
+:1371
+    {Intanya throws back his head and closes his eyes. You can almost hear the voices of the spirits whispering in his ears.
+}
+:13E9
+    DECLARE [0x00, 0xb2] = [N8(0x00) ]
+:13F0
+    DECLARE [0x01, 0xb2] = [N8(0x00) ]
+:13F7
+    DECLARE [0x02, 0xb2] = [N8(0x00) ]
+:13FE
+    DECLARE [0x03, 0xb2] = [N8(0x00) ]
+:1405
+    DECLARE [0x04, 0xb2] = [N8(0x00) ]
+:140C
+    JUMP 0x1411
+:1411
+    IF [0x03 B2 0x18 B2 > ]
+:1418
+    JUMP 0x143b
+:141D
+    ENDIF
+:141E
+    IF [0x03 B2 N8(0x00) NPC WOUNDED ]
+:1426
+    JUMP 0x14c0
+:142B
+    ENDIF
+:142C
+    DECLARE [0x03, 0xb2] = [0x03 B2 N8(0x01) + ]
+:1436
+    JUMP 0x1411
+:143B
+    IF [0x04 B2 0x18 B2 > ]
+:1442
+    JUMP 0x1465
+:1447
+    ENDIF
+:1448
+    IF [0x04 B2 N8(0x00) NPC POISONED ]
+:1450
+    JUMP 0x14c0
+:1455
+    ENDIF
+:1456
+    DECLARE [0x04, 0xb2] = [0x04 B2 N8(0x01) + ]
+:1460
+    JUMP 0x143b
+:1465
+    IF [N8(0xf9) N8(0x00) OBJINPARTY N16(0x8001) == ]
+:1470
+    JUMP 0x147c
+:1475
+    ELSE
+:1476
+    JUMP 0x14c0
+:147B
+    ENDIF
+:147C
+    PAUSE
+:147D
+    {
+Intanya opens his eyes. "No one here is in need of healing."
+}
+:14BB
+    JUMP 0x04f2
+:14C0
+    {Intanya gasps for breath and spasms as if hit by an electrical current. A hard, hot wind whips across you.
+}
+:152B
+    JUMP 0x1530
+:1530
+    IF [0x00 B2 0x18 B2 > ]
+:1537
+    JUMP 0x1639
+:153C
+    ENDIF
+:153D
+    IF [0x00 B2 N8(0x00) NPC WOUNDED ]
+:1545
+    HEAL [0x00 B2 N8(0x00) NPC ]
+:154C
+    SET_$Y [0x00 B2 N8(0x00) NPC ]
+:1553
+    {"Spirit of Kukuzz, $N invokes you to bestow a blessing upon $Y!"
+... and $Y is healed!
+}
+:15AA
+    ENDIF
+:15AB
+    IF [0x00 B2 N8(0x00) NPC POISONED ]
+:15B3
+    CURE [0x00 B2 N8(0x00) NPC ]
+:15BA
+    SET_$Y [0x00 B2 N8(0x00) NPC ]
+:15C1
+    {"Spirit of Motazz, $N invokes you to purge the blood of $Y of foulness!"
+... and $Y is cured of poison!
+}
+:1629
+    ENDIF
+:162A
+    DECLARE [0x00, 0xb2] = [0x00 B2 N8(0x01) + ]
+:1634
+    JUMP 0x1530
+:1639
+    IF [N8(0xf9) N8(0x00) OBJINPARTY N16(0x8001) == ]
+:1644
+    JUMP 0x18ad
+:1649
+    ELSE
+:164A
+    DECLARE [0x01, 0xb2] = [N8(0xf9) N8(0x00) OBJINPARTY ]
+:1654
+    SET_$Y [0x01 B2 ]
+:1658
+    PAUSE
+:1659
+    {
+"Mighty Spirit Kukuzz, look upon the mortal $Y. That which $Y carries is a valued friend and ally."
+}
+:16BE
+    PAUSE
+:16BF
+    {
+}
+:16C0
+    REVIVE [0x01 B2 ]
+:16C4
+    ENDIF
+:16C5
+    IF [0x1b B2 N8(0x00) > 0x1b B2 N8(0x10) < & ]
+:16D2
+    {"$N beseeches Kukuzz, bestow the blessing of strength and health to $Y, so that $Y might walk and fight again!"
+}
+:1742
+    PAUSE
+:1743
+    {
+The wind howls, a raging torrent, around you...
+Every hair on your body stands on end...
+And the wounds disappear from $Y's body! $Y's eyes open!
+}
+:17D6
+    JUMP 0x1639
+:17DB
+    ELSE
+:17DC
+    {The shaman examines the body sadly. "The spirits do not respond... there is nothing Intanya can do for this one."
+}
+:184E
+    PAUSE
+:184F
+    {
+Taking the body from you, he says "Intanya will have this buried with proper respect."
+}
+:18A7
+    JUMP 0x04f2
+:18AC
+    ENDIF
+:18AD
+    PAUSE
+:18AE
+    {
+The wind dies down, and Intanya slowly regains his poise. After a few moments, he looks up, his expression serene.
+}
+:1922
+    PAUSE
+:1923
+    {
+"The spirits have been generous," he says. }
+:194F
+    IF [0x18 B2 N8(0x01) < ]
+:1956
+    {"You }
+:195B
+    ELSE
+:195C
+    {"All in your party }
+:196F
+    ENDIF
+:1970
+    {are well."
+}
+:197B
+    JUMP 0x04f2
+:1980
+    DECLARE [0x09, 0xb2] = [N8(0x01) N8(0x09) RAND ]
+:198A
+    DECLARE [0x09, 0xb2] = [N8(0x01) N8(0x09) RAND ]
+:1994
+    DECLARE [0x09, 0xb2] = [N8(0x01) N8(0x09) RAND ]
+:199E
+    DECLARE [0x09, 0xb2] = [N8(0x01) N8(0x09) RAND ]
+:19A8
+    DECLARE [0x09, 0xb2] = [N8(0x01) N8(0x09) RAND ]
+:19B2
+    DECLARE [0x09, 0xb2] = [N8(0x01) N8(0x09) RAND ]
+:19BC
+    DECLARE [0x09, 0xb2] = [N8(0x01) N8(0x09) RAND ]
+:19C6
+    IF [0x09 B2 N8(0x01) == ]
+:19CD
+    {What sort of cover does Jimmy's notebook have?
+@(page @22):}
+:1A08
+    JUMP 0x1c8e
+:1A0D
+    ENDIF
+:1A0E
+    IF [0x09 B2 N8(0x02) == ]
+:1A15
+    {In your dreams, you saw birds. What sort of eyes did they have?
+@(page @6):}
+:1A60
+    JUMP 0x1ca2
+:1A65
+    ENDIF
+:1A66
+    IF [0x09 B2 N8(0x03) == ]
+:1A6D
+    {In your dreams, what was it that you lacked?
+@(page @6):}
+:1AA5
+    JUMP 0x1cbb
+:1AAA
+    ENDIF
+:1AAB
+    IF [0x09 B2 N8(0x04) == ]
+:1AB2
+    {In your dreams, what did you think of as an old and trusty friend?
+@(page @6):}
+:1B00
+    JUMP 0x1ccf
+:1B05
+    ENDIF
+:1B06
+    IF [0x09 B2 N8(0x05) == ]
+:1B0D
+    {"What does Professor Rafkin think the Valley is akin to?"@(page @24) :}
+:1B53
+    JUMP 0x1ce8
+:1B58
+    ENDIF
+:1B59
+    IF [0x09 B2 N8(0x06) == ]
+:1B60
+    {What does Rafkin say happens frequently between tribes?
+@(page @25) :}
+:1BA5
+    JUMP 0x1d01
+:1BAA
+    ENDIF
+:1BAB
+    IF [0x09 B2 N8(0x07) == ]
+:1BB2
+    {What expedition has returned?
+@(page @40) :}
+:1BDD
+    JUMP 0x1d15
+:1BE2
+    ENDIF
+:1BE3
+    IF [0x09 B2 N8(0x08) == ]
+:1BEA
+    {Who is shown on the cover of Ultimate Adventures Magazine?
+@(page @1) :}
+:1C31
+    JUMP 0x1d2e
+:1C36
+    ENDIF
+:1C37
+    IF [0x09 B2 N8(0x09) 0x09 B2 | == N8(0x00) == ]
+:1C44
+    {What is the first tribe Rafkin discusses in his notes?
+@(page @25) :}
+:1C88
+    JUMP 0x1d42
+:1C8D
+    ENDIF
+:1C8E
+    ASK
+    KEYWORDS weat
+    ANSWER
+:1C95
+    JUMP 0x1d56
+    KEYWORDS *
+    ANSWER
+:1C9D
+    JUMP 0x1ff2
+    END_ANSWER
+:1CA2
+    ASK
+    KEYWORDS cold,rept
+    ANSWER
+:1CAE
+    JUMP 0x1d56
+    KEYWORDS *
+    ANSWER
+:1CB6
+    JUMP 0x1ff2
+    END_ANSWER
+:1CBB
+    ASK
+    KEYWORDS memo
+    ANSWER
+:1CC2
+    JUMP 0x1d56
+    KEYWORDS *
+    ANSWER
+:1CCA
+    JUMP 0x1ff2
+    END_ANSWER
+:1CCF
+    ASK
+    KEYWORDS bowi,knif
+    ANSWER
+:1CDB
+    JUMP 0x1d56
+    KEYWORDS *
+    ANSWER
+:1CE3
+    JUMP 0x1ff2
+    END_ANSWER
+:1CE8
+    ASK
+    KEYWORDS time,caps
+    ANSWER
+:1CF4
+    JUMP 0x1d56
+    KEYWORDS *
+    ANSWER
+:1CFC
+    JUMP 0x1ff2
+    END_ANSWER
+:1D01
+    ASK
+    KEYWORDS clas
+    ANSWER
+:1D08
+    JUMP 0x1d56
+    KEYWORDS *
+    ANSWER
+:1D10
+    JUMP 0x1ff2
+    END_ANSWER
+:1D15
+    ASK
+    KEYWORDS wild,basi
+    ANSWER
+:1D21
+    JUMP 0x1d56
+    KEYWORDS *
+    ANSWER
+:1D29
+    JUMP 0x1ff2
+    END_ANSWER
+:1D2E
+    ASK
+    KEYWORDS coat
+    ANSWER
+:1D35
+    JUMP 0x1d56
+    KEYWORDS *
+    ANSWER
+:1D3D
+    JUMP 0x1ff2
+    END_ANSWER
+:1D42
+    ASK
+    KEYWORDS nahu
+    ANSWER
+:1D49
+    JUMP 0x1d56
+    KEYWORDS *
+    ANSWER
+:1D51
+    JUMP 0x1ff2
+    END_ANSWER
+:1D56
+    {The shaman looks pleased. "Intanya sees that $P's memory has returned, and he is fit to travel the land again."
+}
+:1DC6
+    IF [N8(0xeb) 0x00 FLAG N8(0x00) == ]
+:1DCF
+    PAUSE
+:1DD0
+    {
+He becomes very serious. "Intanya has had many dreams of one such as $P. Intanya believes $P to be very important."
+}
+:1E45
+    PAUSE
+:1E46
+    {
+"Intanya's @men will try to follow $P and perhaps help $P when he is in danger. Intanya's men are the best in all the Valley of Eodon, and can find $P anywhere... even in the Caves of the @Myrmidex"
+}
+:1F0E
+    PAUSE
+:1F0F
+    {
+"My student, @Triolo, will join you on your search for @Jimmy and @Rafkin. He has learned some of the simpler invocations, and will help you as much as he can."
+}
+:1FB1
+    PAUSE
+:1FB2
+    {
+}
+:1FB3
+    ENDIF
+:1FB4
+    {"Speak now. $P may ask what he wishes."
+}
+:1FDC
+    CLEAR_FLAG [N8(0x21) ], [N8(0x05) ]
+:1FE3
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:1FE9
+    PORTRAIT [N8(0xeb) ]
+:1FED
+    JUMP 0x04f2
+:1FF2
+    {The shaman looks saddened. "Intanya sees that $P's memory has not fully returned. $P must return to sleep and heal further."}
+:206E
+    PAUSE
+:206F
+    {
+He wafts vapors from a burning incense in your direction, and darkness swifly returns.}
+:20C6
+    PAUSE
+:20C7
+    {
+}
+:20C8
+    U6OP_FUNC [N8(0x0a) ] kick out to DOS.
+:20CC
+    BYE

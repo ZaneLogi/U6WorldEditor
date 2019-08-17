@@ -23,7 +23,7 @@
 It cocks its head for about half a second. Then: "Queen agrees. Hive alerted. Meat-beings must die!"
 }
 :0148
-Unknown code [d1 d3 02 a7 ]
+    U6OP_FUNC [N8(0x02) ]
 :014C
     BYE
 :014D
@@ -32,6 +32,6 @@ Unknown code [d1 d3 02 a7 ]
     {"Talking again? Why still alive?" It waits a moment. "Queen confirms. Meat-beings must be chewed!"
 }
 :01B1
-Unknown code [d1 d3 02 a7 ]
+    U6OP_FUNC [N8(0x02) ]
 :01B5
     BYE

@@ -307,11 +307,11 @@ How many would you like?"
 :0AF0
     ENDIF
 :0AF1
-    NEW [N8(0x01) ], [N8(0x1f) ], [N8(0x00) ], [0x00 B2 ]
+    NEW npc [N8(0x01) ], obj [N8(0x1f) ], quality [N8(0x00) ], quantity [0x00 B2 ]
 :0AFE
     IF [0x1d B2 ]
 :0B02
-    DELETE [N8(0x01) ], [N8(0x49) ], [N8(0x00) ], [0x01 B2 ]
+    DELETE npc [N8(0x01) ], obj [N8(0x49) ], quality [N8(0x00) ], quantity [0x01 B2 ]
 :0B0F
     {She takes #1 emerald\s from you and gives you #0 bow\s.
 "}
@@ -356,11 +356,11 @@ How many would you like?"
 :0BEF
     ENDIF
 :0BF0
-    NEW [N8(0x01) ], [N8(0x2d) ], [N8(0x00) ], [0x00 B2 ]
+    NEW npc [N8(0x01) ], obj [N8(0x2d) ], quality [N8(0x00) ], quantity [0x00 B2 ]
 :0BFD
     IF [0x1d B2 ]
 :0C01
-    DELETE [N8(0x01) ], [N8(0x49) ], [N8(0x00) ], [0x01 B2 ]
+    DELETE npc [N8(0x01) ], obj [N8(0x49) ], quality [N8(0x00) ], quantity [0x01 B2 ]
 :0C0E
     {She takes #1 emerald\s from you and gives you #0 arrow\s.
 "}
@@ -394,11 +394,11 @@ How many would you like?"
 :0CC2
     ENDIF
 :0CC3
-    NEW [N8(0x01) ], [N8(0x19) ], [N8(0x00) ], [0x00 B2 ]
+    NEW npc [N8(0x01) ], obj [N8(0x19) ], quality [N8(0x00) ], quantity [0x00 B2 ]
 :0CD0
     IF [0x1d B2 ]
 :0CD4
-    DELETE [N8(0x01) ], [N8(0x49) ], [N8(0x00) ], [0x01 B2 ]
+    DELETE npc [N8(0x01) ], obj [N8(0x49) ], quality [N8(0x00) ], quantity [0x01 B2 ]
 :0CE1
     {She takes #1 emerald\s from you and gives you #0 kni/fe\ves.
 "}
@@ -432,11 +432,11 @@ How many would you like?"
 :0D92
     ENDIF
 :0D93
-    NEW [N8(0x01) ], [N8(0x21) ], [N8(0x00) ], [0x00 B2 ]
+    NEW npc [N8(0x01) ], obj [N8(0x21) ], quality [N8(0x00) ], quantity [0x00 B2 ]
 :0DA0
     IF [0x1d B2 ]
 :0DA4
-    DELETE [N8(0x01) ], [N8(0x49) ], [N8(0x00) ], [0x01 B2 ]
+    DELETE npc [N8(0x01) ], obj [N8(0x49) ], quality [N8(0x00) ], quantity [0x01 B2 ]
 :0DB1
     {She takes #1 emeralds from you and gives you #0 sword\s.
 "}
@@ -470,11 +470,11 @@ How many would you like?"
 :0E60
     ENDIF
 :0E61
-    NEW [N8(0x01) ], [N8(0x08) ], [N8(0x00) ], [0x00 B2 ]
+    NEW npc [N8(0x01) ], obj [N8(0x08) ], quality [N8(0x00) ], quantity [0x00 B2 ]
 :0E6E
     IF [0x1d B2 ]
 :0E72
-    DELETE [N8(0x01) ], [N8(0x49) ], [N8(0x00) ], [0x01 B2 ]
+    DELETE npc [N8(0x01) ], obj [N8(0x49) ], quality [N8(0x00) ], quantity [0x01 B2 ]
 :0E7F
     {She takes #1 emeralds from you and gives you #0 set\s of armor.
 "}
@@ -508,11 +508,11 @@ How many would you like?"
 :0F36
     ENDIF
 :0F37
-    NEW [N8(0x01) ], [N8(0x0e) ], [N8(0x00) ], [0x00 B2 ]
+    NEW npc [N8(0x01) ], obj [N8(0x0e) ], quality [N8(0x00) ], quantity [0x00 B2 ]
 :0F44
     IF [0x1d B2 ]
 :0F48
-    DELETE [N8(0x01) ], [N8(0x49) ], [N8(0x00) ], [0x01 B2 ]
+    DELETE npc [N8(0x01) ], obj [N8(0x49) ], quality [N8(0x00) ], quantity [0x01 B2 ]
 :0F55
     {She takes #1 emerald\s from you and gives you #0 shield\s.
 "}

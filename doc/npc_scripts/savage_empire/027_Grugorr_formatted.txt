@@ -1,0 +1,343 @@
+:0000
+    NPC_ID: npc id: 27, npc name: Grugorr
+:0009
+    NPC_LOOK: an aged, sly-looking Neanderthal man.
+*
+:0031
+    START CONVERSION
+:0032
+    IF [N8(0xeb) 0x00 FLAG ]
+:0038
+    JUMP 0x00ca
+:003D
+    ELSE
+:003E
+    {The Neanderthal peers nearsightedly at you; his nostrils flare. "New smell. Strange smell. Not scared. Not mad. What wants new smell?"}
+:00C4
+    JUMP 0x0130
+:00C9
+    ENDIF
+:00CA
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:00D1
+    {"Smell of $P in air. Does $P have shield?"
+}
+:00FC
+    JUMP 0x0b1a
+:0101
+    ELSE
+:0102
+    {"Smell of $P in air. Grugorr greets $P."}
+:012A
+    JUMP 0x0130
+:012F
+    ENDIF
+:0130
+    {
+}
+:0131
+    ASK
+    KEYWORDS name,grug
+    ANSWER
+:013D
+    {He pounds on his chest proudly. The concussion dislodges small rocks from the cave ceiling. "Grugorr."
+}
+:01A4
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:01AA
+    PORTRAIT [N8(0xeb) ]
+:01AE
+    JUMP 0x0130
+    KEYWORDS job
+    ANSWER
+:01B8
+    {"Chief. Chief of Haakur. Protect Haakur from @Jukari and @spiders."
+}
+:01FC
+    JUMP 0x0130
+    KEYWORDS trib,haak
+    ANSWER
+:020C
+    {"Haakur tribe. Strongest. Live caves. Other tribes stupid: Build weak caves. Ha!"
+}
+:025E
+    JUMP 0x0130
+    KEYWORDS juka
+    ANSWER
+:0269
+    {"Jukari build huts outside. Stupid. Live where hot rock rivers run. Stupid! Attack Haakur. STUPID!"
+}
+:02CD
+    JUMP 0x0130
+    KEYWORDS spid
+    ANSWER
+:02D8
+    IF [N8(0xeb) N8(0x06) FLAG N8(0x01) == N8(0xeb) N8(0x07) FLAG N8(0x00) == & ]
+:02EB
+    {"Spider cave south, along cliff. Full of spiders. Full of webs. Shield of Krukk there."
+}
+:0343
+    PAUSE
+:0344
+    {
+"Kill spiders. Destroy @webs. Bring shield of Krukk to Grugorr. Then Grugorr make ally with other tribes."
+}
+:03B0
+    JUMP 0x0130
+:03B5
+    ENDIF
+:03B6
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:03BD
+    {"Not matter. Spiders all dead."
+}
+:03DD
+    JUMP 0x0130
+:03E2
+    ENDIF
+:03E3
+    {"Spiders live cave south. Full of @webs. Big spiders. Come at night. Eat Haakur. Too fast for Haakur. Too smart for Haakur."
+}
+:0460
+    PAUSE
+:0461
+    {
+He looks very sad. "Grugorr had son @Krukk. Krukk went kill spiders. Not came back. Krukk dead."
+}
+:04C3
+    JUMP 0x0130
+    KEYWORDS web
+    ANSWER
+:04CD
+    {"Webs too sticky. Can't break. Can't hurt. Just sticky."
+}
+:0506
+    PAUSE
+:0507
+    {
+"Grugorr heard torches hurt webs. Haakur no have torches. Torches hurt Haakur."
+}
+:0558
+    JUMP 0x0130
+    KEYWORDS unit,ally,alli
+    ANSWER
+:056D
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0574
+    {"Grugorr gave word. $P kept word.  Killed spiders. Brought shield. Haakur will join $P union of tribes."
+}
+:05DD
+    JUMP 0x0130
+:05E2
+    ELSE
+:05E3
+    {"Uh? Unite? Help weaker tribes? No."
+}
+:0608
+    PAUSE
+:0609
+    {
+He peers at you thoughtfully. "Maybe."
+}
+:0631
+    PAUSE
+:0632
+    {
+He thinks about it some more. "Not like Jukari. But not like spiders even more."
+}
+:0684
+    PAUSE
+:0685
+    {
+"Go kill spiders. Go destroy webs. Go find shield where spiders and webs are. Shield was Krukk's. @Krukk dead. Get shield, prove spiders dead. Bring shield to Grugorr."
+}
+:072F
+    PAUSE
+:0730
+    {
+"Do, and Grugorr unite, even with Jukari."
+}
+:075C
+    JUMP 0x07fb
+:0761
+    ENDIF
+:0762
+    KEYWORDS kruk
+    ANSWER
+:0768
+    {He looks sad. "Krukk was son of Grugorr. Brave warrior. Went kill spiders. Spiders kill Krukk."
+}
+:07C8
+    JUMP 0x0130
+    KEYWORDS bye
+    ANSWER
+:07D2
+    {"Go."
+}
+:07D8
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:07DE
+    BYE
+:07DF
+    KEYWORDS *
+    ANSWER
+:07E2
+    {"Grugorr not care."
+}
+:07F6
+    JUMP 0x0130
+    END_ANSWER
+:07FB
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:0802
+    IF [N8(0x04) INPARTY ]
+:0807
+    JUMP 0x081a
+:080C
+    ELSE
+:080D
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:0814
+    JUMP 0x0130
+:0819
+    ENDIF
+:081A
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:0821
+    PAUSE
+:0822
+    {
+}
+:0823
+    IF [N8(0x04) N8(0x06) FLAG ]
+:082A
+    PORTRAIT [N8(0x04) ]
+:082E
+    {Jimmy has been scribbling in his @notebook. "How about this: 'The hideous simulacrum of a man had little difficulty communicating with $P, his equal in intellect and charisma."
+}
+:08DF
+    PAUSE
+:08E0
+    {
+" 'He told $P that he wanted a nest of giant spiders -- the local equivalent of a violent street gang -- removed from the picture, their webs rubbed out, and a leather shield -- souvenir of the bloody task -- returned to him.'"
+}
+:09C5
+    PAUSE
+:09C6
+    {
+"I got all that, $P-old-pal."
+}
+:09E5
+    PAUSE
+:09E6
+    PORTRAIT [N8(0xeb) ]
+:09EA
+    JUMP 0x0130
+:09EF
+    ELSE
+:09F0
+    PORTRAIT [N8(0x04) ]
+:09F4
+    {Jimmy speaks up. "Tell you what, boss. It could be that we're going to have a lot of these little chores ahead of us. I'll note down what each chief wants."
+}
+:0A91
+    PAUSE
+:0A92
+    {
+"Any time you want to check out what we've got in store for us, ask me about my @notebook. It never forgets."
+}
+:0B01
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:0B08
+    SET_FLAG [N8(0x04) ], [N8(0x03) ]
+:0B0F
+    PAUSE
+:0B10
+    PORTRAIT [N8(0xeb) ]
+:0B14
+    JUMP 0x0130
+:0B19
+    ENDIF
+:0B1A
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0B20
+    {He peers closely at your gear.
+}
+:0B3F
+    JUMP 0x0b89
+    KEYWORDS n
+    ANSWER
+:0B47
+    {He twists his lip in irritation and pretends to ignore you.
+}
+:0B83
+    JUMP 0x0130
+    END_ANSWER
+:0B89
+    DECLARE [0x00, 0xb2] = [N8(0x02) N8(0x00) OBJINPARTY ]
+:0B93
+    IF [0x00 B2 N16(0x8001) == ]
+:0B9B
+    PAUSE
+:0B9C
+    {
+He draws back. "No shield of Krukk. Go away."
+}
+:0BCB
+    BYE
+:0BCC
+    ELSE
+:0BCD
+    JUMP 0x0bd3
+:0BD2
+    ENDIF
+:0BD3
+    DECLARE [0x01, 0xb2] = [N8(0xeb) ]
+:0BDA
+    IF [0x00 B2 N8(0x00) == ]
+:0BE1
+    PAUSE
+:0BE2
+    {
+He points at you. "Have brought shield of Krukk. Good." He takes the shield from you.
+}
+:0C39
+    SET_FLAG [N8(0xeb) ], [N8(0x07) ]
+:0C40
+    GIVE obj [N8(0x02) ], qual [N8(0x00) ], from [0x00 B2 ], to [0x01 B2 ]
+:0C4D
+    PAUSE
+:0C4E
+    {
+"Grugorr is glad. Spiders dead. No Haakur be eaten now. Haakur will join with $P union."
+}
+:0CA8
+    JUMP 0x0130
+:0CAD
+    ELSE
+:0CAE
+    PAUSE
+:0CAF
+    {
+}
+:0CB0
+    SET_$Y [0x00 B2 ]
+:0CB4
+    {He points at $Y. "Have brought shield of Krukk. Good." He takes the shield.
+}
+:0D00
+    SET_FLAG [N8(0xeb) ], [N8(0x07) ]
+:0D07
+    GIVE obj [N8(0x02) ], qual [N8(0x00) ], from [0x00 B2 ], to [0x01 B2 ]
+:0D14
+    PAUSE
+:0D15
+    {
+"Grugorr is glad. Spiders dead. No Haakur be eaten now. Haakur will join with $P union."
+}
+:0D6F
+    JUMP 0x0130
+:0D74
+    ENDIF

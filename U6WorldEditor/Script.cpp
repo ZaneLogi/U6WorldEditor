@@ -754,7 +754,7 @@ void ScriptInterpreter::collect_eval(std::string& result, const uint8_t* &p, con
         case U6OP_FLAG:         result += "FLAG "; break;
         case U6OP_OBJCOUNT:     result += "OBJCOUNT "; break;
         case U6OP_INPARTY:      result += "INPARTY "; break;
-        case U6OP_OBJINPARTY:   result += "OBJINPARTY "; break;
+        case U6OP_OBJINPARTY:   result += "OBJINPARTY "; break; // arg1: obj, arg2: qual, return: should push npc id who has this specific object.
         case U6OP_JOIN:         result += "JOIN "; break;
         case U6OP_LEAVE:        result += "LEAVE "; break;
         case U6OP_WOUNDED:      result += "WOUNDED "; break;
@@ -1019,28 +1019,41 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                 }
                 break;
             }
+            case U6OP_GIVE:
+            {
+                result += "    GIVE obj ";
+                collect_eval(result, p, script_start, script_end);
+                result += ", qual ";
+                collect_eval(result, p, script_start, script_end);
+                result += ", from ";
+                collect_eval(result, p, script_start, script_end);
+                result += ", to ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
             case U6OP_NEW: // 0xb9
             {
-                result += "    NEW ";
+                result += "    NEW npc ";
                 collect_eval(result, p, script_start, script_end);
-                result += ", ";
+                result += ", obj ";
                 collect_eval(result, p, script_start, script_end);
-                result += ", ";
+                result += ", quality ";
                 collect_eval(result, p, script_start, script_end);
-                result += ", ";
+                result += ", quantity ";
                 collect_eval(result, p, script_start, script_end);
                 result += "\r\n";
                 break;
             }
             case U6OP_DELETE: // 0xba
             {
-                result += "    DELETE ";
+                result += "    DELETE npc ";
                 collect_eval(result, p, script_start, script_end);
-                result += ", ";
+                result += ", obj ";
                 collect_eval(result, p, script_start, script_end);
-                result += ", ";
+                result += ", quality ";
                 collect_eval(result, p, script_start, script_end);
-                result += ", ";
+                result += ", quantity ";
                 collect_eval(result, p, script_start, script_end);
                 result += "\r\n";
                 break;
@@ -1081,6 +1094,13 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                 result += "\r\n";
                 break;
             }
+            case U6OP_CURE:
+            {
+                result += "    CURE ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
             default:
             {
                 if (!collect_unknown(result, p, script_start, script_end, code))
@@ -1098,37 +1118,63 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
 
 bool ScriptInterpreter::collect_unknown(std::string& result, const uint8_t* &p, const uint8_t* script_start, const uint8_t* script_end, int unknown_code)
 {
+    auto script_offset = p - script_start;
+
     switch (unknown_code) {
-    case 0xd1:
+    case U6OP_FUNC:
     {
         // unknown op code for Yunapotli (SE)
         // should be used for opeing the door of the city
         if (m_npc_name == "Yunapotli" && *(uint32_t*)p == 0xa700ded4)
         {
-            result += "Unknown code [d1 ";
-            result += format_hex_string(p, p + 4);
-            result += "]\r\n";
+            result += "    U6OP_FUNC ";
+            collect_eval(result, p, script_start, script_end);
+            result += "\r\n";
             p += 4;
             return true;
         }
         else if (m_npc_name == "Chizzztl" && *(uint32_t*)p == 0xb6a702d3)
         {
-            result += "Unknown code [d1 ";
-            result += format_hex_string(p, p + 3);
-            result += "]\r\n";
-            p += 3;
+            result += "    U6OP_FUNC ";
+            collect_eval(result, p, script_start, script_end);
+            result += "\r\n";
+            return true;
+        }
+        else if (m_npc_name == "Fabozz" && *(uint32_t*)p == 0xa700afd4)
+        {
+            result += "    U6OP_FUNC ";
+            collect_eval(result, p, script_start, script_end);
+            result += "\r\n";
+            return true;
+        }
+        else if (m_npc_name == "Huitlapacti" && *(uint32_t*)p == 0xcda701d3)
+        {
+            result += "    U6OP_FUNC ";
+            collect_eval(result, p, script_start, script_end);
+            result += "\r\n";
+            return true;
+        }
+        else if (m_npc_name == "Intanya" && *(uint32_t*)p == 0xb6a70ad3)
+        {
+            result += "    U6OP_FUNC ";
+            collect_eval(result, p, script_start, script_end);
+            result += " kick out to DOS.\r\n";
             return true;
         }
         assert(false);
     }
 
-    case 0xd6:
+    case U6OP_REVIVE:
     {
-        // unknown op code for Balakai (SE)
-        assert(m_npc_name == "Balakai");
-        result += "Unknown code [d6 ";
+        // something related to revive people
+        // op code for Balakai (SE), Intanya (SE)
+        // it needs to remove the dead body from the evaluation, npc_id who has the dead body
+        // the npc id of the dead body will be assigned to [0x1b B2],
+        // also set $Y as the npc name who is revived.
+        assert(m_npc_name == "Balakai" || m_npc_name == "Intanya" );
+        result += "    REVIVE ";
         collect_eval(result, p, script_start, script_end);
-        result += "]\r\n";
+        result += "\r\n";
         return true;
     }
 

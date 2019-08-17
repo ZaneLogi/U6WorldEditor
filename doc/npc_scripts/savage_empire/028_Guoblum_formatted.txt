@@ -1,0 +1,276 @@
+:0000
+    NPC_ID: npc id: 28, npc name: Guoblum
+:0009
+    NPC_LOOK: a drunken, monstrously overweight, friendly woman.
+*
+:003E
+    START CONVERSION
+:003F
+    IF [N8(0xeb) 0x00 FLAG ]
+:0045
+    JUMP 0x0108
+:004A
+    ELSE
+:004B
+    {"Ho! Handsome man. Perhaps he will stay with us." She gives you a flirtatious look over the rim of the bowl she is drinking from. "The Disquiqui need more good, strong men among us."
+}
+:0102
+    JUMP 0x0148
+:0107
+    ENDIF
+:0108
+    {"(Hic) Greetings again! Perhaps $P will have some pulque."
+}
+:0143
+    JUMP 0x0148
+:0148
+    {
+}
+:0149
+    ASK
+    KEYWORDS name
+    ANSWER
+:0150
+    {She indicates herself. "Guoblum." She pronounces it GWO-blum.
+}
+:018E
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0194
+    PORTRAIT [N8(0xeb) ]
+:0198
+    JUMP 0x0148
+    KEYWORDS guob
+    ANSWER
+:01A3
+    {"Yes? What does strange warrior want?"
+}
+:01CA
+    JUMP 0x0148
+    KEYWORDS job
+    ANSWER
+:01D4
+    {She has to think about that. Then she brightens up. "Drinking @pulque! Guoblum also dances. Guoblum is chief's daughter. Guoblum will soon be bride of @Jimmy Malone."
+}
+:027B
+    JUMP 0x0148
+    KEYWORDS trib,disq
+    ANSWER
+:028B
+    {"Guoblum belongs to Disquiqui tribe. Disquiquis are the happiest tribe." She smiles and takes another drink from her bowl.
+}
+:0306
+    PAUSE
+:0307
+    {
+"@Chafblum is chief of Disquiqui. @Larrifin is shaman. @Lerei is best friend of Guoblum. @Tuomaxx is drum-maker. No, wait, Tuomaxx is gone."
+}
+:0395
+    PAUSE
+:0396
+    {
+}
+:0397
+    PORTRAIT [N8(0x27) ]
+:039B
+    {Another partygoer cuts in: "Friend! Lerei hates Guoblum."
+}
+:03D5
+    PAUSE
+:03D6
+    {
+}
+:03D7
+    PORTRAIT [N8(0xeb) ]
+:03DB
+    {"That was Lerei. Joking, of course."
+}
+:0400
+    JUMP 0x0148
+    KEYWORDS jim,malo
+    ANSWER
+:040F
+    {"Jimmy Malone? Guoblum knows the name of Jimmy Malone. Jimmy Malone will soon be Guoblum's mate. We will be wed when this celebration ends."
+}
+:049C
+    IF [N8(0x04) INPARTY ]
+:04A1
+    PAUSE
+:04A2
+    {
+}
+:04A3
+    PORTRAIT [N8(0x04) ]
+:04A7
+    {Jimmy speaks up, whispering: "Lucky for me, celebrations NEVER end around here."
+}
+:04F8
+    PAUSE
+:04F9
+    {
+}
+:04FA
+    PORTRAIT [N8(0xeb) ]
+:04FE
+    {Guoblum smiles sweetly. "Guoblum heard that, mate-to-be Jimmy. Chafblum will call a halt in celebration when Guoblum is ready to marry Jimmy."
+}
+:058D
+    JUMP 0x0148
+:0592
+    ELSE
+:0593
+    JUMP 0x0148
+:0598
+    ENDIF
+    KEYWORDS lere
+    ANSWER
+:059F
+    {"Lerei is friend of Guoblum. Poor, sad thing. Skinny like tree, ugly like lizard."
+}
+:05F2
+    PAUSE
+:05F3
+    {
+}
+:05F4
+    PORTRAIT [N8(0x27) ]
+:05F8
+    {"So says Guoblum, from whom the lizards run in fear!"
+}
+:062E
+    PAUSE
+:062F
+    {
+}
+:0630
+    PORTRAIT [N8(0xeb) ]
+:0634
+    {"That was Lerei. Brave girl. Pretends not to be hideous."
+}
+:066E
+    JUMP 0x0148
+    KEYWORDS pulq
+    ANSWER
+:0679
+    {"Pulque." She offers you a sip from her bowl. "Pulque is very very very very good."
+}
+:06CD
+    PAUSE
+:06CE
+    {
+It smells like celery that has been out in the sun for a few days too many. Do you drink it?
+}
+:072C
+    JUMP 0x0b1a
+    KEYWORDS chie,fath,chaf
+    ANSWER
+:0741
+    {"Guoblum's father is Chafblum. Wisest man in all the world. He is chief of Disquiqui. Brews the best pulque in all the world."
+}
+:07C0
+    JUMP 0x0148
+    KEYWORDS tuom
+    ANSWER
+:07CB
+    {"Guoblum remembers Tuomaxx. No, she doesn't. Yes, she does. (Hic!)"
+}
+:080F
+    PAUSE
+:0810
+    {
+"Tuomaxx is of Disquiqui tribe. Round warrior. All pulque in village would not make him drunk. Makes drums. Hits tribesmen with drumsticks."
+}
+:089E
+    PAUSE
+:089F
+    {
+"Makes 'bonk' noise when hitting warriors. Very strange. Tuomaxx is exile now. Lives on hill somewhere east."
+}
+:090E
+    JUMP 0x0148
+    KEYWORDS larr,sham
+    ANSWER
+:091E
+    {"Larrifin. Shaman of Disquiqui. Very bald and old. Guoblum would not marry him." She bats her eyes at you.
+}
+:0989
+    IF [N8(0x04) INPARTY ]
+:098E
+    PAUSE
+:098F
+    {
+}
+:0990
+    PORTRAIT [N8(0x04) ]
+:0994
+    {"Hey, boss, looks like you've got a special new friend..."
+}
+:09CF
+    PAUSE
+:09D0
+    {
+}
+:09D1
+    PORTRAIT [N8(0xeb) ]
+:09D5
+    {"Guoblum is just trying to make Jimmy Malone jealous! Jimmy Malone has no sense."
+}
+:0A27
+    JUMP 0x0148
+:0A2C
+    ELSE
+:0A2D
+    JUMP 0x0148
+:0A32
+    ENDIF
+    KEYWORDS myrm
+    ANSWER
+:0A39
+    {"Guoblum remembers Myrmidex. Ugly warriors from far away. Don't drink pulque. Don't dance. Guoblum doesn't like them."
+}
+:0AB0
+    JUMP 0x0148
+    KEYWORDS bye
+    ANSWER
+:0ABA
+    {She doesn't even notice you turning away from her.
+}
+:0AED
+    BYE
+:0AEE
+    KEYWORDS *
+    ANSWER
+:0AF1
+    {"Guoblum does not know about that."
+}
+:0B15
+    JUMP 0x0148
+    END_ANSWER
+:0B1A
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0B20
+    {The taste of the stuff jolts through you, clears your sinuses, burns your throat, causes ringing in your ears, and brings tears to your eyes.
+}
+:0BAE
+    PAUSE
+:0BAF
+    {
+And it TASTES like celery that has been out in the sun for a few days too many.
+}
+:0C00
+    PAUSE
+:0C01
+    {
+Guoblum smiles sweetly. "Very mild batch. Ask Guoblum's father for the good stuff."
+}
+:0C56
+    JUMP 0x0148
+    KEYWORDS n
+    ANSWER
+:0C5E
+    {She draws back, looking disappointed. "Make Guoblum sad. Perhaps she will offer you nothing else." She bats her eyes at you coquettishly.
+}
+:0CE8
+    JUMP 0x0148
+    END_ANSWER

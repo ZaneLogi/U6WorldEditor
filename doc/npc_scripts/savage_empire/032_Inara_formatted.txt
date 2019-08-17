@@ -1,0 +1,252 @@
+:0000
+    NPC_ID: npc id: 32, npc name: Inara
+:0007
+    NPC_LOOK: a sharp-eyed matriarch with greying hair.
+*
+:0033
+    START CONVERSION
+:0034
+    IF [N8(0xeb) 0x00 FLAG ]
+:003A
+    JUMP 0x00cd
+:003F
+    ELSE
+:0040
+    {"Another @stranger. Word has reached the Pindiro that such a warrior roams the valley. What does the stranger want among the Pindiro?"
+}
+:00C7
+    JUMP 0x013f
+:00CC
+    ENDIF
+:00CD
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:00D4
+    {"The warrior comes before us. Welcome, $P."
+}
+:0100
+    JUMP 0x013f
+:0105
+    ENDIF
+:0106
+    {"It is $P come before us again. What does $P wish?"
+}
+:013A
+    JUMP 0x013f
+:013F
+    {
+}
+:0140
+    ASK
+    KEYWORDS name,inar
+    ANSWER
+:014C
+    {"The warrior addresses Inara."
+}
+:016B
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0171
+    PORTRAIT [N8(0xeb) ]
+:0175
+    JUMP 0x013f
+    KEYWORDS job
+    ANSWER
+:017F
+    {"Inara is queen of the Pindiro @tribe."
+}
+:01A7
+    JUMP 0x013f
+    KEYWORDS trib,pind
+    ANSWER
+:01B7
+    {"The Pindiros are plains-runners. We live free on the open plains, hunting @beasts of the field and @fish of the water."
+}
+:0230
+    PAUSE
+:0231
+    {
+"Our enemies are the @Barakos."
+}
+:0252
+    JUMP 0x013f
+    KEYWORDS beas
+    ANSWER
+:025D
+    {"The Pindiro are the best hunters of the plains. Pindiro warriors are strong and tireless."
+}
+:02B9
+    JUMP 0x013f
+    KEYWORDS fish
+    ANSWER
+:02C4
+    {"Many of our people pull fish from the rivers, and paddle @rafts out into the great lake to hunt the larger fish that live there."
+}
+:0347
+    JUMP 0x013f
+    KEYWORDS raft
+    ANSWER
+:0352
+    {"It is dangerous to go into the great lake without a raft and four people with @paddles. The creatures under the water will eat any warrior they find swimming."
+}
+:03F3
+    JUMP 0x013f
+    KEYWORDS padd,disq
+    ANSWER
+:0403
+    {"The Disquiqui make our paddles. They are a strange tribe, far to the south."
+}
+:0451
+    JUMP 0x013f
+    KEYWORDS bara
+    ANSWER
+:045C
+    {"The Barakos live to the west and south. They dwell on the slopes of the mountain. They come into Pindiro territory too often; we beat them back."
+}
+:04EF
+    JUMP 0x013f
+    KEYWORDS stra
+    ANSWER
+:04FA
+    {"West of the Pindiro village, along the northern cliff face, is a cave where lives a strange man... a man as strange as he whom Inara now addresses."
+}
+:0590
+    PAUSE
+:0591
+    {
+"His skin and clothes are odd. He fights without spear or knife, but only with clenched fists. Yet no Pindiro warrior can stand before him."
+}
+:061F
+    JUMP 0x013f
+    KEYWORDS topu
+    ANSWER
+:062A
+    {"Inara knows of one with that name. An old shaman. Topuru lives on a small island west of the @Barako village."
+}
+:069A
+    JUMP 0x013f
+    KEYWORDS unit,ally,alli
+    ANSWER
+:06AF
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:06B6
+    {"Inara has already decided to join $P's union of tribes."
+}
+:06F0
+    JUMP 0x013f
+:06F5
+    ELSE
+:06F6
+    {"The strange warrior wishes to unite the tribes? This warrior has seen his mind laid low by the sun." She laughs at you.
+}
+:076F
+    PAUSE
+:0770
+    {
+Then she thinks about it. "Strange warrior, the Pindiro fight many brave enemies, such as the Barakos. This is our way of life."
+}
+:07F2
+    PAUSE
+:07F3
+    {
+"But many good warriors die in this constant fighting. Inara might be willing to trade one way for the other."  She thinks a while longer.
+}
+:087F
+    PAUSE
+:0880
+    {
+"Inara will accept a union of tribes."
+}
+:08A8
+    JUMP 0x0995
+:08AD
+    ENDIF
+:08AE
+    KEYWORDS bye
+    ANSWER
+:08B3
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:08B9
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:08C0
+    {"$P Peace-Bringer is welcome here. $P may return any time."
+}
+:08FC
+    BYE
+:08FD
+    ELSE
+:08FE
+    {"So long as the strange warrior does not bring harm to any of the Pindiro tribe, he may walk where he wishes."
+}
+:096D
+    BYE
+:096E
+    ENDIF
+:096F
+    KEYWORDS *
+    ANSWER
+:0972
+    {"Inara knows nothing of $Z."
+}
+:098F
+    JUMP 0x013f
+    END_ANSWER
+:0994
+    BYE
+:0995
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:099C
+    SET_FLAG [N8(0xeb) ], [N8(0x07) ]
+:09A3
+    IF [N8(0x04) INPARTY ]
+:09A8
+    JUMP 0x09bb
+:09AD
+    ELSE
+:09AE
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:09B5
+    JUMP 0x013f
+:09BA
+    ENDIF
+:09BB
+    PAUSE
+:09BC
+    {
+}
+:09BD
+    IF [N8(0x04) N8(0x06) FLAG ]
+:09C4
+    PORTRAIT [N8(0x04) ]
+:09C8
+    {Jimmy looks quite suprised. "Well, that sure was easy, for a change. Guess they must be really tired of fighting."
+}
+:0A3B
+    PAUSE
+:0A3C
+    {
+}
+:0A3D
+    PORTRAIT [N8(0xeb) ]
+:0A41
+    JUMP 0x013f
+:0A46
+    ELSE
+:0A47
+    PORTRAIT [N8(0x04) ]
+:0A4B
+    {Jimmy speaks up. "Well that sure was easy. Guess they must be really tired of fighting. This whole unite-the-tribes thing might be a snap, after all!"
+}
+:0AE2
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:0AE9
+    SET_FLAG [N8(0x04) ], [N8(0x03) ]
+:0AF0
+    PAUSE
+:0AF1
+    {
+}
+:0AF2
+    PORTRAIT [N8(0xeb) ]
+:0AF6
+    JUMP 0x013f
+:0AFB
+    ENDIF

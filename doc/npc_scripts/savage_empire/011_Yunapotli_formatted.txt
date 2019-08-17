@@ -398,14 +398,14 @@ The automaton closes its eyes with a 'clack' and appears to concentrate. There i
 :1401
     SET_FLAG [N8(0x23) ], [N8(0x05) ]
 :1408
-Unknown code [d1 d4 de 00 a7 ]
-:140D
-    {His eyes 'clack' open. "There! It is done."
+    U6OP_FUNC [N16(0x00de) ]
+:1411
+    {eyes 'clack' open. "There! It is done."
 }
 :1439
     JUMP 0x02c1
 :143E
-    DELETE [0x00 B2 ], [N8(0x03) ], [N8(0x00) ], [N8(0x01) ]
+    DELETE npc [0x00 B2 ], obj [N8(0x03) ], quality [N8(0x00) ], quantity [N8(0x01) ]
 :144B
     SET_FLAG [N8(0xeb) ], [N8(0x07) ]
 :1452

@@ -1,0 +1,293 @@
+:0000
+    NPC_ID: npc id: 26, npc name: Fritz
+:0007
+    NPC_LOOK: a strong-looking blond man in tattered Earth clothes.
+*
+:003F
+    START CONVERSION
+:0040
+    IF [N8(0xeb) 0x00 FLAG ]
+:0046
+    JUMP 0x00c9
+:004B
+    ELSE
+:004C
+    {"Mein Gott! It is a civilized man! Another outer-world man trapped in zis primordial hole. Velcome to Hell, stranger."
+}
+:00C3
+    JUMP 0x0100
+:00C8
+    ENDIF
+:00C9
+    {"Ah. It is ze Earth-Hero-Gone-Native." He snorts.
+}
+:00FB
+    JUMP 0x0100
+:0100
+    {
+}
+:0101
+    ASK
+    KEYWORDS name
+    ANSWER
+:0108
+    {"I am Fritz von Hundlaben. I am from Munich."
+}
+:0136
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:013C
+    PORTRAIT [N8(0xeb) ]
+:0140
+    JUMP 0x0100
+    KEYWORDS frit
+    ANSWER
+:014B
+    {"Ja? Wvat?"
+}
+:0157
+    JUMP 0x0100
+    KEYWORDS job
+    ANSWER
+:0161
+    {He smiles mockingly. "I am ze world's worst chooser of employers. Actually, I am an archaeologist."
+}
+:01C5
+    PAUSE
+:01C6
+    {
+"Until recently I vas assistant to Dr. Johann @Spector. Not a real job, but an amazing simulation."
+}
+:022B
+    JUMP 0x0100
+    KEYWORDS spec
+    ANSWER
+:0236
+    {"Ja, Spector. A brilliant man. Archaeologist, anthropologist, geologist. I vent on many digs vith him. And it is my @fault zat he went mad."
+}
+:02C3
+    JUMP 0x0100
+    KEYWORDS crys,brai
+    ANSWER
+:02D3
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:02DA
+    {"Haff I not told you uf the crystal brain before? Spector thought it wvas zome kind uf memory device. But then, Spector wvas a loon."
+}
+:0360
+    JUMP 0x0100
+:0365
+    ENDIF
+:0366
+    {Rummaging in his pockets for a moment, he pulls out a strange crystalline device. "I haff no idea why @Spector called this a brain."
+}
+:03EB
+    PAUSE
+:03EC
+    {
+"I asked him wvy he did, und he said a great many things dot made no sense wvatsoever. }
+:0444
+    NEW [N8(0x01) ], [N8(0x03) ], [N8(0x00) ], [N8(0x01) ]
+:0451
+    IF [0x1d B2 ]
+:0455
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:045C
+    {Here, perhaps you vill be able to figure it out." He hands you the device.
+}
+:04A7
+    ELSE
+:04A8
+    {I wvould giff it to you, but you haff no place to carry it."
+}
+:04E5
+    ENDIF
+:04E6
+    JUMP 0x0100
+    KEYWORDS faul
+    ANSWER
+:04F1
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:04F8
+    JUMP 0x0967
+:04FD
+    ELSE
+:04FE
+    JUMP 0x0a13
+:0503
+    ENDIF
+:0504
+    KEYWORDS hand
+    ANSWER
+:050A
+    {"Ja. It vas zis human-like hand made of gold. Very valuable. But he took it vis him somevere, I believe.  He said he intended to put it back wvere it came from."
+}
+:05AC
+    JUMP 0x0100
+    KEYWORDS head
+    ANSWER
+:05B7
+    {"I found a gold head once, but @Spector took it from me."
+}
+:05F1
+    JUMP 0x0100
+    KEYWORDS amm
+    ANSWER
+:05FB
+    {"Ja, I haff zome rifle ammunition in my cave. No rifle -- Johann destroyed it wven I called him ein fruitcake."
+}
+:066B
+    IF [N8(0x32) N8(0x00) OBJINPARTY N16(0x8001) == ]
+:0676
+    JUMP 0x0100
+:067B
+    ELSE
+:067C
+    PAUSE
+:067D
+    {
+He looks around and sees the rifle in your gear. "I see you could probably use some. Help yourzelf to it. But remember me if you find ze way out of zis jungle sewer."
+}
+:0725
+    JUMP 0x0100
+:072A
+    ENDIF
+    KEYWORDS nati
+    ANSWER
+:0731
+    {"Ja, there are many native tribes in zis vicinity. Pindiros to ze southeast of my cave, Barako to ze southwest. Others to ze far south."
+}
+:07BA
+    PAUSE
+:07BB
+    {
+"Ve didn't get along wven I first came here, but I haff convinced them zat I am a worthy warrior. Zey don't know anything about boxing here. Now I am highly respected."
+}
+:0865
+    JUMP 0x0100
+    KEYWORDS join
+    ANSWER
+:0870
+    {"Nein, nein, I vill just stay around here. This way I know I wvont run into @Spector again.
+}
+:08CC
+    JUMP 0x0100
+    KEYWORDS bye
+    ANSWER
+:08D6
+    {"Vell, return wvenever you wish. It is quite a treat for me to speak to a civilized human being."
+}
+:0938
+    BYE
+:0939
+    KEYWORDS *
+    ANSWER
+:093C
+    {"Pardon? My English is not so good."
+}
+:0961
+    JUMP 0x0100
+    END_ANSWER
+:0966
+    BYE
+:0967
+    {"I haff told you zis long story already. Are you sure you vant to hear it again?"
+}
+:09B9
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:09BF
+    {"Vell, if you vish."
+
+}
+:09D5
+    JUMP 0x0a13
+    KEYWORDS n
+    ANSWER
+:09DD
+    {"Gut. It vas a long, long story ze first time."
+}
+:0A0D
+    JUMP 0x0100
+    END_ANSWER
+:0A13
+    {He sighs. "I vas on a dig in Guatemala. I found zome rocks. Black, charred rocks wvich I did not recognize. Much later, back in Germany, I showed zem to Dr. @Spector."
+}
+:0ABB
+    PAUSE
+:0ABC
+    {
+"Johann grew very interested in zem. Said zey contained interesting radiant energies. Wrote many of his colleagues about zem."
+}
+:0B3C
+    PAUSE
+:0B3D
+    {
+}
+:0B3E
+    IF [N8(0x07) INPARTY ]
+:0B43
+    PORTRAIT [N8(0x07) ]
+:0B47
+    {Prof. Rafkin interrupts gently: "I can attest to the veracity of that statement, $P."
+}
+:0B9D
+    PAUSE
+:0B9E
+    {
+}
+:0B9F
+    PORTRAIT [N8(0xeb) ]
+:0BA3
+    {"Good to see you, Professor Rafkin. Ja, I know you by reputation."
+}
+:0BE6
+    PAUSE
+:0BE7
+    {
+}
+:0BE8
+    ENDIF
+:0BE9
+    {"Anyvay, I visited him von day wven he had ze stones hooked up to some sort of funny battery apparatus. He vanted to show me wvat he could do vith the stones now. He said zey created strange ripples in ze fabric of time und space."
+}
+:0CD1
+    PAUSE
+:0CD2
+    {
+"He surprised even himself zis time. He began to channel power from ze stones, and suddenly zis black... door, I guess it vas... descended upon us. Brought us here." He gestures around, encompassing all the valley.
+}
+:0DAA
+    PAUSE
+:0DAB
+    {
+"Anyvay... I did all ze work, trying to hunt food and protect us from hostile @natives, wvile he tried to reverse ze process zat brought us here."
+}
+:0E3F
+    PAUSE
+:0E40
+    {
+"But he gradually changed. Stopped trying to escape. Started trying to track down the source of other energy emissions."
+}
+:0EBA
+    PAUSE
+:0EBB
+    {
+"Von day, he vent avay, vas gone for veeks. He came back vith a mad light in his eyes, and a thing he called a crystal @brain."
+}
+:0F3C
+    PAUSE
+:0F3D
+    {
+"He said he had found zis underground city, far to ze southvest, und zis brain vas proof of ze vonders he had seen. He had zese plans to use ze energies he had mastered to conquer ze Earth."
+}
+:0FFD
+    PAUSE
+:0FFE
+    {
+"Zo, I told him he vas a nutcase, und he told me to leave. I ran away, vith all our supplies, @ammunition, und the @brain, und came here. Ze @natives seem to like me here."
+}
+:10AC
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:10B3
+    JUMP 0x0100

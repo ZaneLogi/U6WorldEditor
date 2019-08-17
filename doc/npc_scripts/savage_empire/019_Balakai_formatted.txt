@@ -650,7 +650,7 @@ The shaman opens his eyes. "No one here is in need of healing."
     {
 }
 :18A5
-Unknown code [d6 [0x01 B2 ]]
+    REVIVE [0x01 B2 ]
 :18A9
     ENDIF
 :18AA
@@ -812,7 +812,7 @@ He waits....
 :2158
     DECLARE [0x05, 0xb2] = [N8(0x4e) N8(0x00) OBJINPARTY ]
 :2162
-    DELETE [0x05 B2 ], [N8(0x4e) ], [N8(0x00) ], [N8(0x01) ]
+    DELETE npc [0x05 B2 ], obj [N8(0x4e) ], quality [N8(0x00) ], quantity [N8(0x01) ]
 :216F
     {With trembling fingers, he takes the root.
 }

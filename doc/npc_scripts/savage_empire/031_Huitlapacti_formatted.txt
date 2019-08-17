@@ -1,0 +1,112 @@
+:0000
+    NPC_ID: npc id: 31, npc name: Huitlapacti
+:000D
+    NPC_LOOK: a rather sullen, jewelry-bedecked Nahuatla man.
+
+:003E
+    START CONVERSION
+:003F
+    IF [N8(0x37) N8(0x05) FLAG ]
+:0046
+    JUMP 0x00fb
+:004B
+    ELSE
+:004C
+    {The man looks at you with contempt.
+}
+:0070
+    PAUSE
+:0071
+    {
+"You may not speak with Huitlapacti until you have received permission from Zipactriotl, you scabrous dog," he says, then ignores you.
+}
+:00F9
+    BYE
+:00FA
+    ENDIF
+:00FB
+    IF [N8(0xeb) 0x00 FLAG ]
+:0101
+    JUMP 0x0456
+:0106
+    ELSE
+:0107
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:010D
+    {The man's sullen, disinterested eyes briefly fix on you. "What do you want, insignificant one?"
+}
+:016D
+    JUMP 0x0173
+:0172
+    ENDIF
+:0173
+    {
+}
+:0174
+    ASK
+    KEYWORDS name,huit
+    ANSWER
+:0180
+    {"Shake and cringe before the thunder and majesty of my name. I am Huitlapacti." (He pronounces it wheat-la-PACK-tea.)
+}
+:01F6
+    PAUSE
+:01F7
+    {
+"Huitlapacti, the ruler of all I behold, vanquisher of the enemy, destroyer of the weak, master of the brutes of the forests and plains."
+}
+:0282
+    JUMP 0x0173
+    KEYWORDS job
+    ANSWER
+:028C
+    {He scowls at you. "'Job'? Do you imagine that I  perform labor? I am the king! I rule. I dominate. I conquer."
+}
+:02FB
+    PAUSE
+:02FC
+    {
+"I scatter lesser men, such as yourselves, as corn before the reaping-blade."
+}
+:034B
+    JUMP 0x0173
+    KEYWORDS *
+    ANSWER
+:0353
+    {A thought appears to penetrate his consciousness. "Wait. You are not one of my subjects. You have not shown me proper deference. You have not knelt before me, nor licked clean the dusty soles of my feet!"
+}
+:0420
+    PAUSE
+:0421
+    {
+"You must die. Guards! Kill this man!"
+}
+:0449
+    U6OP_FUNC [N8(0x01) ]
+:044D
+    WORKTYPE [N8(0xeb) ], [N8(0x9b) ]
+:0454
+    BYE
+:0455
+    END_ANSWER
+:0456
+    {Huitlapacti glances at you, then his eyes widen in amazement. "$P, I did not fully understand the depths of your arrogance."
+}
+:04D3
+    PAUSE
+:04D4
+    {
+"You return here when you know I can cut you down with a clap of my hands, with a cough, with a harsh look!"
+}
+:0542
+    PAUSE
+:0543
+    {
+"It is time for you to die; do not even attempt to flee. Guards! Destroy this fool!"
+}
+:0599
+    U6OP_FUNC [N8(0x01) ]
+:059D
+    WORKTYPE [N8(0xeb) ], [N8(0x9b) ]
+:05A4
+    BYE

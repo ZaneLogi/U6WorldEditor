@@ -1,0 +1,282 @@
+:0000
+    NPC_ID: npc id: 29, npc name: Halawa
+:0008
+    NPC_LOOK: a weary, handsome native woman with regal bearing.
+*
+:003D
+    START CONVERSION
+:003E
+    IF [N8(0xeb) 0x00 FLAG ]
+:0044
+    JUMP 0x01d9
+:0049
+    ENDIF
+:004A
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0051
+    {Her eyes grow wide as she sets sight on you and your companions. "It is $P, the rescuer of Halisa! When Halisa returned to the village, she told Halawa of $P."
+}
+:00F1
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:00F7
+    PORTRAIT [N8(0xeb) ]
+:00FB
+    PAUSE
+:00FC
+    {
+"Halawa, Queen of the Barako, owes $P a great debt for rescuing Halisa from the giant ape-thing. Come: $P must talk with Halawa."
+}
+:017F
+    JUMP 0x0342
+:0184
+    ELSE
+:0185
+    {"Spirits' blessings on the stranger," she says. She looks sad and distracted.
+}
+:01D3
+    JUMP 0x0342
+:01D8
+    ENDIF
+:01D9
+    IF [N8(0xeb) N8(0x06) FLAG N8(0x01) == N8(0xeb) N8(0x07) FLAG N8(0x00) == & ]
+:01EC
+    {She looks eagerly at you and those around you, and then seems to slump. "The warrior from beyond has not found young Halisa. So it is. What does the warrior want now?"
+}
+:0294
+    JUMP 0x0342
+:0299
+    ENDIF
+:029A
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:02A1
+    {"Spirits blessing on $P, who saved Halisa from the giant ape-thing.
+}
+:02E5
+    ELSE
+:02E6
+    {"Ah. It is the strange warrior from beyond.
+}
+:0312
+    ENDIF
+:0313
+    {What does $P wish from the Barako queen?"
+}
+:033D
+    JUMP 0x0342
+:0342
+    {
+}
+:0343
+    ASK
+    KEYWORDS name
+    ANSWER
+:034A
+    {"Halawa, mother of @Halisa."
+}
+:0367
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:036D
+    PORTRAIT [N8(0xeb) ]
+:0371
+    JUMP 0x0342
+    KEYWORDS hala
+    ANSWER
+:037C
+    {"Yes?"
+}
+:0383
+    JUMP 0x0342
+    KEYWORDS job
+    ANSWER
+:038D
+    {"Halawa is queen of the Barako tribe. Her daughter @Halisa will be queen in times to come."
+}
+:03E9
+    JUMP 0x0342
+    KEYWORDS trib,bara
+    ANSWER
+:03F9
+    {"Halawa belongs to the Barako tribe, Mountain-Dwellers of the North."
+}
+:043F
+    JUMP 0x0342
+    KEYWORDS hali,daug
+    ANSWER
+:044F
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0456
+    {"Halisa is Halawa's daughter... as $P already knows. $P rescued Halawa from the horrid ape-thing."
+}
+:04B9
+    JUMP 0x0342
+:04BE
+    ELSE
+:04BF
+    {"Halisa is Halawa's daughter. But Halisa has been seized and carried away."
+}
+:050B
+    PAUSE
+:050C
+    {
+"A gigantic ape-thing, bigger than any warrior, lives on a ledge north of the Barako village, near the river."
+}
+:057C
+    PAUSE
+:057D
+    {
+"Not long ago, it came down off its ledge and seized Halisa, carrying her away."
+}
+:05CF
+    PAUSE
+:05D0
+    {
+"Halawa's warriors sometimes see them upon the ledge, but can never climb up to the ledge. We do not know when the ape-thing will choose to harm Halisa, to dash her to death..." A tear trickles down her cheek.
+}
+:06A3
+    JUMP 0x0342
+:06A8
+    ENDIF
+    KEYWORDS topu
+    ANSWER
+:06AF
+    {"There is an old shaman who bears that name. Topuru lives on a small island just west of the Barako village. Topuru talks like one sun-touched."
+}
+:0740
+    JUMP 0x0342
+    KEYWORDS myrm
+    ANSWER
+:074B
+    {"Halawa knows of the Myrmidex. They live to the south, fierce ant-things. Halawa fears that if they destroy the tribes to the south, they will next move against the Barako."
+}
+:07F9
+    JUMP 0x0342
+    KEYWORDS unit,ally,alli
+    ANSWER
+:080E
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0815
+    {"Unite? Tribes unite? Why would we wish to do that? We have old hatred with the other tribes, especially the @Pindiro."
+}
+:088D
+    PAUSE
+:088E
+    {
+"Still... $P has rescued Halisa. Halawa owes $P a great debt of gratitude. For rescuing Halisa, Halawa will unite her tribe with the others... even the Pindiro."
+}
+:0931
+    JUMP 0x0baa
+:0936
+    ELSE
+:0937
+    {"Unite? Tribes unite? Never. There is old hatred between the tribes, especially between Barako and Pindiro."
+}
+:09A4
+    PAUSE
+:09A5
+    {
+A shadow crosses her face. "Still... Halawa would unite with other tribes, even Pindiro... for the warrior great enough to bring her daughter @Halisa back to her."
+}
+:0A4A
+    JUMP 0x0baa
+:0A4F
+    ENDIF
+:0A50
+    KEYWORDS pind
+    ANSWER
+:0A56
+    {"The Pindiro run the plains and stay away from the mountain slopes. They live far north and east of the Barako, in a village by the lake."
+}
+:0AE1
+    JUMP 0x0342
+    KEYWORDS bye
+    ANSWER
+:0AEB
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0AF1
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0AF8
+    {"Spirits bless you, $P-rescuer-of-Halisa."
+}
+:0B23
+    BYE
+:0B24
+    ELSE
+:0B25
+    {She gives you a distracted little gesture of goodbye and turns somberly to other thoughts.
+}
+:0B80
+    BYE
+:0B81
+    ENDIF
+:0B82
+    KEYWORDS *
+    ANSWER
+:0B85
+    {"Halawa knows nothing of this."
+}
+:0BA5
+    JUMP 0x0342
+    END_ANSWER
+:0BAA
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:0BB1
+    IF [N8(0x04) INPARTY ]
+:0BB6
+    JUMP 0x0bc9
+:0BBB
+    ELSE
+:0BBC
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:0BC3
+    JUMP 0x0342
+:0BC8
+    ENDIF
+:0BC9
+    PAUSE
+:0BCA
+    {
+}
+:0BCB
+    IF [N8(0x04) N8(0x06) FLAG ]
+:0BD2
+    PORTRAIT [N8(0x04) ]
+:0BD6
+    {Jimmy whips out his @notebook. "Got it, boss."
+}
+:0C05
+    PAUSE
+:0C06
+    {
+}
+:0C07
+    PORTRAIT [N8(0xeb) ]
+:0C0B
+    JUMP 0x0342
+:0C10
+    ELSE
+:0C11
+    PORTRAIT [N8(0x04) ]
+:0C15
+    {Jimmy speaks up. "Tell you what, boss. It could be that we're going to have a lot of these little chores ahead of us. I'll note down what each chief wants."
+}
+:0CB2
+    PAUSE
+:0CB3
+    {
+"Any time you want to check out what we've got in store for us, ask me about my @notebook. It never forgets."
+}
+:0D22
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:0D29
+    SET_FLAG [N8(0x04) ], [N8(0x03) ]
+:0D30
+    PAUSE
+:0D31
+    {
+}
+:0D32
+    PORTRAIT [N8(0xeb) ]
+:0D36
+    JUMP 0x0342
+:0D3B
+    ENDIF

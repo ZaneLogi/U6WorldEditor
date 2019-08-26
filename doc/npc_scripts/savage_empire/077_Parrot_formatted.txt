@@ -1,0 +1,141 @@
+:0000
+    NPC_ID: npc id: 77, npc name: Parrot
+:0008
+    NPC_LOOK: a colorful, bright-eyed parrot.
+*
+:002A
+    START CONVERSION
+:002B
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0031
+    {"SQUAWK!"}
+:003A
+    JUMP 0x003f
+:003F
+    {
+}
+:0040
+    ASK
+    KEYWORDS name,job
+    ANSWER
+:004B
+    {"$Z!"}
+:0050
+    JUMP 0x003f
+    KEYWORDS poll
+    ANSWER
+:005B
+    {"Yes, yes, yes, yes. Wants a cracker."
+}
+:0082
+    JUMP 0x003f
+    KEYWORDS blow
+    ANSWER
+:008D
+    {"With this beak?"
+}
+:009F
+    JUMP 0x003f
+    KEYWORDS ctsa
+    ANSWER
+:00AA
+    {"No handles allowed!" SQUAWK!
+}
+:00C8
+    JUMP 0x003f
+    KEYWORDS norw,blue,pini,fjor,mont,pyth
+    ANSWER
+:00EC
+    {"I don't watch that show!"
+}
+:0107
+    JUMP 0x003f
+    KEYWORDS unite
+    ANSWER
+:0113
+    {"If we all pull together, we parrots are bound to be able to drop a boulder on that @Tyrannosaurus!"
+}
+:0178
+    JUMP 0x003f
+    KEYWORDS t-re,tyra
+    ANSWER
+:0188
+    {"Parrot eater!" SQUAWK!
+}
+:01A0
+    JUMP 0x003f
+    KEYWORDS crac
+    ANSWER
+:01AB
+    {"Feed me!"
+}
+:01B6
+    JUMP 0x003f
+    KEYWORDS chea,ulti
+    ANSWER
+:01C6
+    {"Spam spam spam!"
+SQUAWK!
+"Humbug!"
+}
+:01EA
+    JUMP 0x003f
+    KEYWORDS pizza
+    ANSWER
+:01F6
+    {"No anchovies!"
+}
+:0206
+    JUMP 0x003f
+    KEYWORDS help
+    ANSWER
+:0211
+    {"Parrots can't read!" SQUAWK!
+}
+:022F
+    JUMP 0x003f
+    KEYWORDS jagu
+    ANSWER
+:023A
+    {"Pretty kitty!"
+}
+:024A
+    JUMP 0x003f
+    KEYWORDS sabr,tige
+    ANSWER
+:025A
+    {"Big kitty!"
+}
+:0267
+    JUMP 0x003f
+    KEYWORDS vote
+    ANSWER
+:0272
+    {"Rock the vote! SQUAWK!"
+}
+:028B
+    JUMP 0x003f
+    KEYWORDS eat,hate,kill,die
+    ANSWER
+:02A3
+    {The parrot looks at you in a frigtened manner, then flies to a higher branch and squawks over its shoulder "Hurry up with that boulder!"
+}
+:032C
+    BYE
+:032D
+    KEYWORDS bye
+    ANSWER
+:0332
+    {"Bye! Ingrate! SQUAWK!"}
+:0349
+    BYE
+:034A
+    KEYWORDS *
+    ANSWER
+:034D
+    {"$Z!"}
+:0352
+    JUMP 0x003f
+    END_ANSWER
+:0357
+    BYE

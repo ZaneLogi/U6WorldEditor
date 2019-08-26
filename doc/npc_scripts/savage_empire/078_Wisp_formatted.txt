@@ -1,0 +1,270 @@
+:0000
+    NPC_ID: npc id: 78, npc name: Wisp
+:0006
+    NPC_LOOK: a strange, floating ball of glowing light.
+*
+:0033
+    START CONVERSION
+:0034
+    {"Once more 'you' of Earth address 'I' of the Xorinite dimension."
+}
+:0076
+    PAUSE
+:0077
+    {
+"At this progression point in the temporal continuity, how do 'you' wish to be addressed?"
+}
+:00D3
+    ASK
+:00D4
+    DECLARE [0x09, 0xb3] = [0x23 B3 ]
+:00DB
+    {
+"'$9'. A series of vocal sounds serving as a temporary referent for 'you'. Very well. Does '$9' recall previous conversations with 'me'?"
+}
+:0166
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:016C
+    {"Excellent. This obviates the need for reiteration of previous declarations of origin, intent, and activity. What shall 'we' speak of?"
+}
+:01F4
+    JUMP 0x04d0
+    KEYWORDS n
+    ANSWER
+:01FC
+    {"Unfortunate. Repetition of previously-discussed information required. 'You' must sometime learn to extend perception along 'your' temporal continuity to avoid such confusion."
+}
+:02AD
+    PAUSE
+:02AE
+    {
+"The manifestation before 'you' is a life-form projection from the Xorinite dimension."
+}
+:0307
+    PAUSE
+:0308
+    {
+"'I' of Xorinia communicate with  the bipedal organic units of Earth through this projection."
+}
+:0368
+    PAUSE
+:0369
+    {
+"'I' observe activity at various points along Earth's temporal axis. In wealthier dimensions 'I' trade information, but 'you' of Earth have never offered any of significant value."
+}
+:041F
+    PAUSE
+:0420
+    {
+"'My' projections are at this point in space time primarily to allow 'me' to observe and analyze the surrounding space-time @anomaly. What do 'you' wish to know, '$9'?"
+}
+:04CA
+    JUMP 0x04d0
+    END_ANSWER
+:04D0
+    {
+}
+:04D1
+    ASK
+    KEYWORDS name
+    ANSWER
+:04D8
+    {"'I' do not utilize the communications function referred to as 'name'. On Earth, any of my projections is referred to as 'wisp'."
+}
+:055A
+    PAUSE
+:055B
+    {
+"If the manifestation '$9' must use a 'name' to remain functional, it may use 'wisp'."
+}
+:05B3
+    JUMP 0x04d0
+    KEYWORDS wisp
+    ANSWER
+:05BE
+    {"Correct."
+}
+:05C9
+    JUMP 0x04d0
+    KEYWORDS trib
+    ANSWER
+:05D4
+    {"A subset of the more general superset of bipedal organic units. A primitive example of the more complete evolutionary point of which 'I' am an example."
+}
+:066E
+    JUMP 0x04d0
+    KEYWORDS eart
+    ANSWER
+:0679
+    {"That is correct. We are on Earth."}
+:069C
+    JUMP 0x04d0
+    KEYWORDS job,xori
+    ANSWER
+:06AB
+    {"Xorinia acts as a conduit for information between different continua, planes, dimensions. Xorinia also retains information which will improve Xorinia."
+}
+:0744
+    PAUSE
+:0745
+    {
+"The manifestation in proximity of '$9' is at location 'here-now' to observe energy @anomalies."
+}
+:07A7
+    JUMP 0x04d0
+    KEYWORDS anom,vall,eodo,here
+    ANSWER
+:07C1
+    {"The geographical superset commonly referred to by its local bipedal manifestations as 'valley' and 'Eodon' and 'here' is a source of energy stress."
+}
+:0857
+    PAUSE
+:0858
+    {
+"A @power source of significant relative magnitude exerts considerable distorting influence on this space-time region."
+}
+:08D1
+    PAUSE
+:08D2
+    {
+"Analysis of the situation indicates that at some temporal point in the 'past' an energy source bearing the Britannian vocal referent 'moonstone' embedded itself in this proximity."
+}
+:0989
+    PAUSE
+:098A
+    {
+"@Modification of the energies of said 'moonstone' have resulted in the geographical superset 'here-now' 'Eodon' 'Valley' being placed outside the normal space-time continuum."
+}
+:0A3C
+    PAUSE
+:0A3D
+    {
+"Life-units which in other 'here-now' positions have ceased to manifest on both individual and collective bases have adapted to the distortion by continuing to exist in both individual and collective senses."
+}
+:0B0F
+    PAUSE
+:0B10
+    {
+"Continuing stress on the space-time continuum by the damaged 'moonstone' has resulted in scattering of small but volatile @distortions all through the space-time continuum."
+}
+:0BC0
+    JUMP 0x04d0
+    KEYWORDS dist
+    ANSWER
+:0BCB
+    {"Stresses from power source called 'moonstone' exert tremendous influence on the space-time continuum. This results in ripples and holes in the continuum."
+}
+:0C67
+    PAUSE
+:0C68
+    {
+"This can create temporary points of intersection between space-time points -- that is, 'places' -- which should customarily enjoy no contact."
+}
+:0CF9
+    PAUSE
+:0CFA
+    {
+"Left uncorrected, this situation can permanently distort and blend space-time regions, perhaps @destroying them."
+}
+:0D6E
+    JUMP 0x04d0
+    KEYWORDS moon,ston,powe
+    ANSWER
+:0D83
+    {"Object containing the distorting energy is similar to objects which are called 'moonstones' in the dimension 'Britannia.'"
+}
+:0DFF
+    PAUSE
+:0E00
+    {
+"This one has been subtly altered, and differs from other examples of its type in ways your language has no words for."
+}
+:0E79
+    PAUSE
+:0E7A
+    {
+"Vocal interpretations of its physical state of being result in the words 'black' and 'stone'."
+}
+:0EDB
+    PAUSE
+:0EDC
+    {
+"Amounts of power indicated that the referent 'large' or 'enormous' should also be appended."
+}
+:0F3B
+    JUMP 0x04d0
+    KEYWORDS modi
+    ANSWER
+:0F46
+    {"Available data indicate that life-forms studying the power source 'moonstone' enacted energies upon it, modifying it beyond its original scope."
+}
+:0FD8
+    PAUSE
+:0FD9
+    {
+"These modifications have resulted in distortions to the space-time continuum."
+}
+:102A
+    JUMP 0x04d0
+    KEYWORDS dest
+    ANSWER
+:1035
+    {"Unchecked emission of energies from power-source 'moonstone' can result in blending, blurring, and ultimately destruction of large regions of the @multiverse."
+}
+:10D6
+    JUMP 0x04d0
+    KEYWORDS mult
+    ANSWER
+:10E1
+    {"'Multiverse' is a word-referent of your life-form; it signifies all reality in all universes."
+}
+:1141
+    JUMP 0x04d0
+    KEYWORDS wher
+    ANSWER
+:114C
+    {"Where is a 'you' word-referent interrogative requesting data on space-time coordinates, correct?"
+}
+:11AF
+    PAUSE
+:11B0
+    {
+"It is impossible to relate space-time coordinates as this manifestation grasps them to coordinates as the life-form 'you' understands them."
+}
+:123F
+    JUMP 0x04d0
+    KEYWORDS bye
+    ANSWER
+:1249
+    {"It is redundant for 'you' to make notification of 'your' intent to move to different spatial points."
+}
+:12B0
+    PAUSE
+:12B1
+    {
+"A short trip forward on the time continuum reveals that intent much more precisely. However, in the manner of 'your' life-form: 'Good-bye.'"
+}
+:1340
+    PAUSE
+:1341
+    {
+"The information 'I' have just given 'you' can be considered a free sample. If 'you' offer 'me' valuable information at a point further along the time continuum, 'I' will present 'you' with information of true value."
+}
+:141C
+    BYE
+:141D
+    KEYWORDS *
+    ANSWER
+:1420
+    {"The communications form 'you' refer to as 'language' is too inexact and interpretive. This manifestation cannot answer 'your' interrogative."
+}
+:14AF
+    JUMP 0x04d0
+    END_ANSWER
+:14B4
+    BYE
+    KEYWORDS 
+    ANSWER
+    END_ANSWER

@@ -1,0 +1,50 @@
+:0000
+    NPC_ID: npc id: 75, npc name: Naguard
+:0009
+    NPC_LOOK: a strapping warrior in Aztec-like clothing.
+*
+:0037
+    START CONVERSION
+:0038
+    IF [N8(0x28) N8(0x07) FLAG ]
+:003F
+    JUMP 0x004b
+:0044
+    ELSE
+:0045
+    JUMP 0x0081
+:004A
+    ENDIF
+:004B
+    {"It is the mighty $P. I have heard much of you.&
+}
+:007C
+    JUMP 0x00d3
+:0081
+    {"What are you doing here? You are an intruder! You must die by my knife!&
+}
+:00CB
+    WORKTYPE [N8(0xeb) ], [N8(0x9b) ]
+:00D2
+    BYE
+:00D3
+    {
+}
+:00D4
+    ASK
+    KEYWORDS bye
+    ANSWER
+:00DA
+    {"Goodbye, friend $P.&
+}
+:00F0
+    BYE
+:00F1
+    KEYWORDS *
+    ANSWER
+:00F4
+    {"I cannot speak to you while I am on duty, mighty $P. I am sorry.&
+}
+:0137
+    BYE
+    END_ANSWER

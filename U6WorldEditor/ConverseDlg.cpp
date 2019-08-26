@@ -132,8 +132,8 @@ void CConverseDlg::OnSelchangeNpc()
         m_interpreter.load(npc_script);
 
 #define SAVE_RAW 0
-#define FORMAT_SCRIPT 1
-#define SAVE_FORMATTED 1
+#define FORMAT_SCRIPT 0
+#define SAVE_FORMATTED 0
 
 #if SAVE_RAW
         auto bin_filename = format_string("d:\\%03d_%s.bin", nSel, npc_name.c_str());

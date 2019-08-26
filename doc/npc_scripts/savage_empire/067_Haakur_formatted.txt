@@ -1,0 +1,96 @@
+:0000
+    NPC_ID: npc id: 67, npc name: Haakur
+:0008
+    NPC_LOOK: a gnarled, dangerous-looking Neanderthal.
+*
+:0034
+    START CONVERSION
+:0035
+    {It grunts: "Uhhh. Uhhh."
+}
+:004E
+    JUMP 0x0053
+:0053
+    {
+}
+:0054
+    ASK
+    KEYWORDS name
+    ANSWER
+:005B
+    {"Uhhh. Haakur. Uhhh."
+}
+:0071
+    IF [N8(0x07) INPARTY ]
+:0076
+    PAUSE
+:0077
+    {
+}
+:0078
+    PORTRAIT [N8(0x07) ]
+:007C
+    {"From what little I can make out, $P, only the most important people of the Haakur tribe are granted names."
+}
+:00E9
+    PAUSE
+:00EA
+    {
+}
+:00EB
+    PORTRAIT [N8(0xeb) ]
+:00EF
+    ENDIF
+:00F0
+    JUMP 0x0053
+    KEYWORDS job
+    ANSWER
+:00FA
+    {It struggles to speak, and manages a few painful-sounding words: "@Haakur. Tribe. Warrior."
+}
+:0156
+    JUMP 0x0053
+    KEYWORDS haak,trib
+    ANSWER
+:0166
+    {"Haakur." It slaps itself. "Haakur tribe."
+}
+:0191
+    JUMP 0x0053
+    KEYWORDS chie,grug
+    ANSWER
+:01A1
+    {"Chief. Grugorr. Find. Haakur. @Caves."
+}
+:01C9
+    JUMP 0x0053
+    KEYWORDS cave
+    ANSWER
+:01D4
+    {"Cave."
+}
+:01DC
+    JUMP 0x0053
+    KEYWORDS myrm
+    ANSWER
+:01E7
+    {"Kill. Myrm. Dex."
+}
+:01FA
+    JUMP 0x0053
+    KEYWORDS bye
+    ANSWER
+:0204
+    {"Uhhh. Uhhh."
+}
+:0212
+    BYE
+:0213
+    KEYWORDS *
+    ANSWER
+:0216
+    {It shakes its head, not understanding.
+}
+:023D
+    JUMP 0x0053
+    END_ANSWER

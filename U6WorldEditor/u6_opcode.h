@@ -99,6 +99,7 @@ $X : the value of string variable X
 
 #define U6OP_LOOK       0xf1
 #define U6OP_CONVERSE   0xf2
+#define U6OP_PREFIX     0xf3
 
 #define U6OP_ANSWER     0xf6
 #define U6OP_ASK        0xf7

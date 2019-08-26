@@ -1,0 +1,98 @@
+:0000
+    NPC_ID: npc id: 72, npc name: Sakkhra
+:0009
+    NPC_LOOK: a man-shaped reptile with intelligence in its eyes.
+*
+:003F
+    START CONVERSION
+:0040
+    {The thing eyes you suspiciously. "Yesss, huuuman?"
+}
+:0073
+    JUMP 0x0078
+:0078
+    {
+}
+:0079
+    ASK
+    KEYWORDS name
+    ANSWER
+:0080
+    {It hisses something at you. It doesn't sound menacing. But if that's its name, there's no way you could say it.
+}
+:00F0
+    JUMP 0x0078
+    KEYWORDS job
+    ANSWER
+:00FA
+    {"Thisss one ssseeksss food for the young of the @Sakkhra. Tries to thiink of way to ssslay @Thunderer."
+}
+:0162
+    JUMP 0x0078
+    KEYWORDS thun
+    ANSWER
+:016D
+    {"Yesss, Thunderer. Enormousss liizard. Kills and eatsss @Sakkhra who go to the grove of @medicine trees."
+}
+:01D7
+    JUMP 0x0078
+    KEYWORDS medi,tree
+    ANSWER
+:01E7
+    {"Trees with green fruit. Good medicine for Sakkhra."
+}
+:021C
+    JUMP 0x0078
+    KEYWORDS barr
+    ANSWER
+:0227
+    {"Barraaab huumans. Live eassst of Sakkhra caaaves."
+}
+:025B
+    JUMP 0x0078
+    KEYWORDS sakk,trib
+    ANSWER
+:026B
+    {"Sakkhra. Sssmartessst of all ssscaly ones. Ssstronger than huumans. Chief is caaalled @Sysskarr."
+}
+:02CE
+    JUMP 0x0078
+    KEYWORDS syss
+    ANSWER
+:02D9
+    {"Yesss, Sysskarr. Chief of Sakkhra. Ooold and wiise."
+}
+:030F
+    JUMP 0x0078
+    KEYWORDS myrm
+    ANSWER
+:031A
+    {"Eeevil! Insssects. Enemies of aaaall."
+}
+:0342
+    JUMP 0x0078
+    KEYWORDS unit,ally,alli
+    ANSWER
+:0357
+    {"Aaasssk @Sysskarr about thaaat."
+}
+:0379
+    JUMP 0x0078
+    KEYWORDS bye
+    ANSWER
+:0383
+    {"Ssssss."
+}
+:038D
+    BYE
+:038E
+    KEYWORDS *
+    ANSWER
+:0391
+    {"Not underssstaaand."
+}
+:03A7
+    JUMP 0x0078
+    END_ANSWER
+:03AC
+    BYE

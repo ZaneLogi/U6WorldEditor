@@ -1,0 +1,79 @@
+:0000
+    NPC_ID: npc id: 76, npc name: Uraguard
+:000A
+    NPC_LOOK: a sallow-skinned male warrior with suspicious eyes.
+*
+:0040
+    START CONVERSION
+:0041
+    IF [N8(0x35) N8(0x05) FLAG ]
+:0048
+    JUMP 0x0054
+:004D
+    ELSE
+:004E
+    JUMP 0x00a8
+:0053
+    ENDIF
+:0054
+    {"Ah! It is $P, mighty slayer of Darden the Huge. $P is a friend to the Urali."
+}
+:00A3
+    JUMP 0x0151
+:00A8
+    IF [N8(0x35) N8(0x07) FLAG ]
+:00AF
+    JUMP 0x010a
+:00B4
+    ELSE
+:00B5
+    {"A stranger! An enemy of the Urali! I must kill him -- so Darden commands!"
+}
+:0101
+    WORKTYPE [N8(0xeb) ], [N8(0x06) ]
+:0108
+    BYE
+:0109
+    ENDIF
+:010A
+    {"Ah! It is $P, who rescued the Great Fabozz! $P is welcome here."
+}
+:014C
+    JUMP 0x0151
+:0151
+    {
+}
+:0152
+    ASK
+    KEYWORDS name
+    ANSWER
+:0159
+    {"Among the Urali, true names are not so freely given. You may call me 'friend.'"
+}
+:01AA
+    JUMP 0x0151
+    KEYWORDS job
+    ANSWER
+:01B4
+    {"This one is a warrior and guard of the Urali."
+}
+:01E4
+    JUMP 0x0151
+    KEYWORDS bye
+    ANSWER
+:01EE
+    {"May the spirits watch over you, $P."
+}
+:0214
+    BYE
+:0215
+    KEYWORDS *
+    ANSWER
+:0218
+    {"This warrior is on duty. Guarding. $P should speak to those who are not guarding." He looks apologetic but does not answer your question.
+}
+:02A3
+    JUMP 0x0151
+    END_ANSWER
+:02A8
+    BYE

@@ -288,6 +288,7 @@ ScriptInterpreter::status ScriptInterpreter::run(const std::string& input, std::
                 m_npc_look = get_string(m_current, m_script_end);
                 break;
             case U6OP_CONVERSE:
+            case U6OP_PREFIX:
                 TRACE("START CONVERSION\n");
                 break;
             case U6OP_ASK:
@@ -814,6 +815,11 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
             case U6OP_CONVERSE:
             {
                 result += "    START CONVERSION\r\n";
+                break;
+            }
+            case U6OP_PREFIX:
+            {
+                result += "    START PREFIX\r\n";
                 break;
             }
             case U6OP_ASK:

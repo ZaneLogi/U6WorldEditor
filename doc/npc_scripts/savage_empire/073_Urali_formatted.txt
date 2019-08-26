@@ -1,0 +1,510 @@
+:0000
+    NPC_ID: npc id: 73, npc name: Urali
+:0007
+    NPC_LOOK: a sallow-skinned, suspicious-eyed native.
+*
+:0033
+    START CONVERSION
+:0034
+    IF [N8(0x35) N8(0x05) FLAG ]
+:003B
+    JUMP 0x00a0
+:0040
+    ELSE
+:0041
+    {The native stays at a safe distance and remains cautious. "What does the stranger want?"
+}
+:009A
+    JUMP 0x0169
+:009F
+    ENDIF
+:00A0
+    {The native gives you a cautious, appraising look; then a broad smile breaks out on the native's face. "It is you, the $P one who slew @Darden. You are a friend to Urali. Ask what you will of me."
+}
+:0164
+    JUMP 0x0169
+:0169
+    {
+}
+:016A
+    ASK
+    KEYWORDS name
+    ANSWER
+:0171
+    IF [N8(0x35) N8(0x05) FLAG ]
+:0178
+    {"My name is pale and weak beside yours, oh $P. I do not wish to utter it and be ashamed. Let it be enough that I am one of the Urali."
+}
+:01FF
+    JUMP 0x0169
+:0204
+    ELSE
+:0205
+    {The native laughs. "To ask one of the Urali his name is foolishness. I would never tell you my name. Why should I give you power over me? I am one of the Urali. That is enough."
+}
+:02B7
+    JUMP 0x0169
+:02BC
+    ENDIF
+    KEYWORDS job
+    ANSWER
+:02C2
+    {"I hunt, and fish, and gather plants to eat; I harvest our lovely swamp, as do all @Urali."
+}
+:031E
+    JUMP 0x0169
+    KEYWORDS ural,trib
+    ANSWER
+:032E
+    {"We are the Urali. Mighty in war. Defended and fed by our mother, the swamp, which is bountiful to the Urali, dangerous to all @others."
+}
+:03B7
+    PAUSE
+:03B8
+    {
+"We Urali know all the @trails and paths through the swamp, which you would never find."
+}
+:0412
+    PAUSE
+:0413
+    {
+}
+:0414
+    IF [N8(0x35) N8(0x05) FLAG ]
+:041B
+    {"Wamap}
+:0421
+    ELSE
+:0422
+    {"@Darden}
+:042A
+    ENDIF
+:042B
+    { is our chieftain."
+}
+:043F
+    JUMP 0x0169
+    KEYWORDS trai,path
+    ANSWER
+:044F
+    IF [N8(0x35) N8(0x05) FLAG ]
+:0456
+    {"You do not need to know our secret trails, oh $P. You are already friend of the Urali and have nothing to fear here."
+}
+:04CD
+    JUMP 0x0169
+:04D2
+    ELSE
+:04D3
+    {"First I must know: Are you a @friend of Darden the Huge, or Darden's @enemy?"
+}
+:0522
+    JUMP 0x0169
+:0527
+    ENDIF
+    KEYWORDS grea,fabo
+    ANSWER
+:0533
+    {"The Great Fabozz is a spirit of the Valley of Eodon. His are the virtues of courage and strength as the animals possess them."
+}
+:05B3
+    PAUSE
+:05B4
+    {
+"It is the Great Fabozz who commands the Mighty Lizard which guards the pathway to the Urali village.}
+:061A
+    IF [N8(0x35) N8(0x07) FLAG N8(0x00) == ]
+:0624
+    { But our @statue of Fabozz has been taken by @Darden the Huge.}
+:0662
+    ENDIF
+:0663
+    {"
+}
+:0665
+    JUMP 0x0169
+    KEYWORDS frie
+    ANSWER
+:0670
+    IF [N8(0x35) N8(0x05) FLAG ]
+:0677
+    {"I know you are the friend of the Urali. If you were not, you would not have slain Darden the Huge."
+}
+:06DC
+    JUMP 0x0169
+:06E1
+    ELSE
+:06E2
+    {"If you are the friend of @Darden the Huge, you do not need to speak to one so lowly as I." The native gives you an ugly look and turns away from you.
+}
+:0779
+    BYE
+:077A
+    ENDIF
+:077B
+    KEYWORDS enem
+    ANSWER
+:0781
+    IF [N8(0x35) N8(0x05) FLAG ]
+:0788
+    {"I do not understand you."
+}
+:07A3
+    JUMP 0x0169
+:07A8
+    ELSE
+:07A9
+    {The native looks at you closely and suspiciously. "I do not know why, but I believe you. So I will tell you."
+}
+:0817
+    PAUSE
+:0818
+    {
+"A path runs from the entrance to Urali lands, through our village, and to the cave where Darden lives and keeps Darden's prisoners. Do not follow it; it is well-manned by Urali guards."
+}
+:08D4
+    PAUSE
+:08D5
+    {
+"Instead, go west until you reach the swamp water and turn south from there. Travel south holding close to the water."
+}
+:094D
+    PAUSE
+:094E
+    {
+"Follow the swamp as it curves and twists, until you are moving north again. Soon you will come upon a guarded cave opening."
+}
+:09CD
+    PAUSE
+:09CE
+    {
+"It is there that you will find Darden and those @Darden holds @prisoner. This path will lead you secretly past most guards; only at the cave mouth, perhaps, will you confront guards."
+}
+:0A88
+    JUMP 0x0169
+:0A8D
+    ENDIF
+    KEYWORDS neit
+    ANSWER
+:0A94
+    IF [N8(0x35) N8(0x05) FLAG ]
+:0A9B
+    {"I do not understand you."
+}
+:0AB6
+    ELSE
+:0AB7
+    {"You cannot be neither! You are either Darden's @friend or Darden's @enemy!"
+}
+:0B04
+    ENDIF
+:0B05
+    JUMP 0x0169
+    KEYWORDS dard
+    ANSWER
+:0B10
+    {"Darden the Huge. The old chief died childless, so his sister's son Darden became chief, not long ago."
+}
+:0B78
+    PAUSE
+:0B79
+    {
+}
+:0B7A
+    IF [N8(0x35) N8(0x05) FLAG ]
+:0B81
+    {"He was evil and cruel. But now things are better. Darden is dead."
+}
+:0BC5
+    JUMP 0x1870
+:0BCA
+    ELSE
+:0BCB
+    {The Urali looks at you suspiciously.
+}
+:0BF0
+    PAUSE
+:0BF1
+    {
+"Few wanted him to be chief. But ever since Darden imprisoned @Fabozz, the Urali are in Darden's power."
+}
+:0C5B
+    PAUSE
+:0C5C
+    {
+"Since Darden became chief, it is fighting, always fighting. Darden tells the Urali to raid into the lands of @other tribes, else Darden will set the Mighty Lizard upon Darden's own warriors!"
+}
+:0D1E
+    PAUSE
+:0D1F
+    {
+"It is bad. Here is all the Urali could ever want. The Urali never want to leave, even to fight @other tribes. Now we must raid, we must kill, we must take @prisoners."
+}
+:0DC9
+    JUMP 0x0169
+:0DCE
+    ENDIF
+:0DCF
+    KEYWORDS myrm
+    ANSWER
+:0DD5
+    {"The Myrmidex are beasts, more savage than any man, or even Urali. They live far away from the Urali. But they will come for the Urali some day. It would be good if tribes would @unite to fight them. The Myrmidex are too fierce for the Urali."
+}
+:0EC9
+    JUMP 0x0169
+    KEYWORDS pris,impr
+    ANSWER
+:0ED9
+    {"Do you speak of Darden's prisoner @Aiela, or his spirit-prisoner, the Great @Fabozz?"
+}
+:0F30
+    JUMP 0x0169
+    KEYWORDS stat
+    ANSWER
+:0F3B
+    {"Darden stole the statue of the Great @Fabozz. It commands the Mighty Lizard which guards the Urali village."
+}
+:0FA9
+    PAUSE
+:0FAA
+    {
+"Darden told the Urali that Darden would make the Mighty Lizard destroy the Urali if Darden were not made chieftain. So we made him chief." The native sounds sad.
+}
+:104E
+    PAUSE
+:104F
+    {
+"@Darden used his big riding lizard to take the statue deep into the cave, where light could not reach. Many warriors have brought light to Fabozz, but our torches and fires are not enough."
+}
+:110F
+    PAUSE
+:1110
+    {
+}
+:1111
+    IF [N8(0x35) N8(0x07) FLAG ]
+:1118
+    {The native brightens. "But that is all over. The Great Fabozz is once again where he belongs, thanks to you."
+}
+:1186
+    JUMP 0x0169
+:118B
+    ELSE
+:118C
+    {The native looks at you curiously. "You look as strong as a warrior, but strange, like a spirit-made-flesh. Perhaps you could rescue the Great Fabozz. Would you?"
+}
+:122F
+    JUMP 0x1927
+:1234
+    ENDIF
+:1235
+    KEYWORDS tar
+    ANSWER
+:123A
+    {"There is tar here, in the swamp valley. On the west side of the swamp water, south of the land bridge that leads to the Urali village, is a great tar pit."
+}
+:12D7
+    JUMP 0x0169
+    KEYWORDS topu
+    ANSWER
+:12E2
+    {"Topuru was one of the Urali once, shaman to the Urali. Topuru angered the shaman of a faraway tribe and was driven mad. I have never seen him since."
+}
+:1379
+    JUMP 0x0169
+    KEYWORDS resc
+    ANSWER
+:1384
+    IF [N8(0x35) N8(0x07) FLAG ]
+:138B
+    {"I do not understand you."
+}
+:13A6
+    JUMP 0x0169
+:13AB
+    ELSE
+:13AC
+    {"You wish to rescue the Great @Fabozz?"
+}
+:13D4
+    JUMP 0x1c75
+:13D9
+    ENDIF
+:13DA
+    KEYWORDS othe
+    ANSWER
+:13E0
+    {"I do not know many of the tribes. Outside our swamp valley, nearby, there are the Yolaru to the north; they are black-skinned warriors, very fierce."
+}
+:1477
+    PAUSE
+:1478
+    {
+"Beyond them, to the northwest, there are the Kurak, cunning in the forests."
+}
+:14C7
+    PAUSE
+:14C8
+    {
+"South of the Yolaru, there are the Nahuatla, who build their city of stone."
+}
+:1517
+    PAUSE
+:1518
+    {
+"And west of the Nahuatla, down below, are the Disquiqui, who fight poorly but live merry lives."
+}
+:157B
+    PAUSE
+:157C
+    {
+"There are more tribes besides those, but I do not know them."
+}
+:15BC
+    JUMP 0x0169
+    KEYWORDS unit,ally,alli
+    ANSWER
+:15D1
+    {"Unite the tribes? If it can be done, it is for the chiefs to decide."
+}
+:1618
+    PAUSE
+:1619
+    {
+}
+:161A
+    IF [N8(0x35) N8(0x05) FLAG ]
+:1621
+    {"Since Darden is dead, our chief is the shaman Wamap. Travel the swamp and speak to all; you will find Wamap."
+}
+:1690
+    JUMP 0x0169
+:1695
+    ELSE
+:1696
+    {"@Darden is our chief, but Darden will never help another tribe. While Darden lives, the tribes may never be united."
+}
+:170C
+    JUMP 0x0169
+:1711
+    ENDIF
+    KEYWORDS aiel
+    ANSWER
+:1718
+    {"Aiela, Princess of the Kuraks. @Darden coveted her. Darden captured and imprisoned her."
+}
+:1772
+    PAUSE
+:1773
+    {
+}
+:1774
+    IF [N8(0x17) N8(0x05) FLAG ]
+:177B
+    {"But you have freed her."
+}
+:1795
+    JUMP 0x0169
+:179A
+    ELSE
+:179B
+    {"Aiela is kept in a cave in the south of the swamp. You need to know about the @path."
+}
+:17F2
+    JUMP 0x0169
+:17F7
+    ENDIF
+    KEYWORDS bye
+    ANSWER
+:17FD
+    {"May the spirits protect you... so long as you do not seek to harm the Urali."
+}
+:184C
+    BYE
+:184D
+    KEYWORDS *
+    ANSWER
+:1850
+    {"I do not understand you."
+}
+:186B
+    JUMP 0x0169
+    END_ANSWER
+:1870
+    PAUSE
+:1871
+    {
+}
+:1872
+    IF [N8(0x35) N8(0x07) FLAG ]
+:1879
+    {"And you have likewise restored Fabozz to the Urali, so the Urali are again free."
+}
+:18CC
+    JUMP 0x0169
+:18D1
+    ELSE
+:18D2
+    {"But @Fabozz remains away from the Urali, so the Urali can not truly be free."
+}
+:1921
+    JUMP 0x0169
+:1926
+    ENDIF
+:1927
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:192D
+    JUMP 0x19c0
+    KEYWORDS n
+    ANSWER
+:1935
+    {The native sighs. "I have asked too much of you. I should know better. And Fabozz must remain a prisoner in Fabozz' cavern @prison."
+}
+:19BA
+    JUMP 0x0169
+    END_ANSWER
+:19C0
+    {The native brightens. "Yes? Yes? I will tell you how."
+}
+:19F7
+    PAUSE
+:19F8
+    {
+"In the center of our village is a circle of fires. There we talk to the Great Fabozz, and sometimes we are honored to have him talk to the Urali."
+}
+:1A8D
+    PAUSE
+:1A8E
+    {
+"@Darden took the Great Fabozz from that place and into a deep cave at the northern end of the swamp. Now we cannot reach him."
+}
+:1B0F
+    PAUSE
+:1B10
+    {
+"Until the Great Fabozz is returned to his rightful place, the Urali are prisoners, not free men and women. Without our spirit, we are less than true Urali."
+}
+:1BAF
+    PAUSE
+:1BB0
+    {
+"If you would free the Great Fabozz, go far back into that cave in the north of the swamplands, and move the Great Fabozz back onto his circle of fire, where the sun may shine on him again."
+}
+:1C70
+    JUMP 0x0169
+:1C75
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:1C7B
+    JUMP 0x19c0
+    KEYWORDS n
+    ANSWER
+:1C83
+    {The native sighs. "I have asked too much of you. I should know better. And Fabozz must remain a prisoner in his cavern @prison."
+}
+:1D04
+    JUMP 0x0169
+    END_ANSWER

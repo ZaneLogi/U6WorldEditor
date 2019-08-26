@@ -14,6 +14,7 @@ IMPLEMENT_DYNAMIC(CConverseDlg, CDialogEx)
 CConverseDlg::CConverseDlg(MapManager* mm, CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_CONVERSE, pParent), m_map_manager(*mm)
 {
+    m_selected_npc_id = -1;
 }
 
 CConverseDlg::~CConverseDlg()
@@ -33,6 +34,7 @@ BEGIN_MESSAGE_MAP(CConverseDlg, CDialogEx)
     ON_BN_CLICKED(IDOK, &CConverseDlg::OnBnClickedOk)
     ON_BN_CLICKED(IDCANCEL, &CConverseDlg::OnBnClickedCancel)
     ON_LBN_SELCHANGE(IDC_NPC, &CConverseDlg::OnSelchangeNpc)
+    ON_BN_CLICKED(IDC_FIND_NPC, &CConverseDlg::OnBnClickedFindNpc)
 END_MESSAGE_MAP()
 
 
@@ -122,9 +124,11 @@ void CConverseDlg::OnSelchangeNpc()
     auto npc_script = m_map_manager.script.get_script(nSel);
     auto npc_name = m_map_manager.script.get_npc_name(nSel);
 
+    m_selected_npc_id = -1;
     m_text.clear();
     if (!npc_script.empty())
     {
+        m_selected_npc_id = nSel;
         m_interpreter.load(npc_script);
 
 #define SAVE_RAW 0
@@ -156,4 +160,10 @@ void CConverseDlg::OnSelchangeNpc()
     s.Format(_T("\n%hs\n"), m_text.c_str());
     m_output.SetSel(0xffff0000);
     m_output.ReplaceSel(s);
+}
+
+
+void CConverseDlg::OnBnClickedFindNpc()
+{
+    EndDialog(IDC_FIND_NPC);
 }

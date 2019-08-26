@@ -702,8 +702,11 @@ void CChildView::OnHackConverse()
     //file.close();
 
     CConverseDlg dlg(&gMapManager);
-    dlg.DoModal();
-
+    if (IDC_FIND_NPC == dlg.DoModal() && dlg.m_selected_npc_id != -1)
+    {
+        auto actor = gMapManager.obj_manager.get_actor(dlg.m_selected_npc_id);
+        MoveToTile(actor.x, actor.y, actor.z);
+    }
 }
 
 void CChildView::OnHackTilemanager()

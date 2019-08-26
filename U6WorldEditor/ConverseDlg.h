@@ -31,9 +31,12 @@ public:
     CEdit m_input;
     CEdit m_output;
 
+    int m_selected_npc_id;
+
     MapManager& m_map_manager;
     ScriptInterpreter m_interpreter;
     std::string m_text;
     CListBox m_lbNPCs;
     afx_msg void OnSelchangeNpc();
+    afx_msg void OnBnClickedFindNpc();
 };

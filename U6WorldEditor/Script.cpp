@@ -884,6 +884,11 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                     script_offset = p - script_start;
                     assert(*p == U6OP_ANSWER);
                     possible_answer_count--;
+                    if (*anchor == '*') // wildcard, 056_Kunawo
+                    {
+                        possible_answer_count = 0;
+                    }
+
                     p++;
                     result += "    ANSWER\r\n";
                     collect_format(result, p, script_start, script_end, U6OP_ANSWER);
@@ -957,7 +962,7 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
             {
                 auto var_index = *p++;
                 auto var_type = *p++;
-                result += format_string("    INPUT (%02x, %02x) ");
+                result += format_string("    INPUT (vi=%02x, vt=%02x) ", var_index, var_type);
                 collect_text(result, p, script_start, script_end);
                 result += "\r\n";
                 break;
@@ -966,7 +971,7 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
             {
                 auto var_index = *p++;
                 auto var_type = *p++;
-                result += format_string("    INPUT (%02x, %02x) ");
+                result += format_string("    INPUTNUM (vi=%02x, vt=%02x) ", var_index, var_type);
                 collect_text(result, p, script_start, script_end);
                 result += "\r\n";
                 break;
@@ -1182,7 +1187,9 @@ bool ScriptInterpreter::collect_unknown(std::string& result, const uint8_t* &p, 
         // it needs to remove the dead body from the evaluation, npc_id who has the dead body
         // the npc id of the dead body will be assigned to [0x1b B2],
         // also set $Y as the npc name who is revived.
-        assert(m_npc_name == "Balakai" || m_npc_name == "Intanya" );
+        assert(m_npc_name == "Balakai" ||
+               m_npc_name == "Intanya" ||
+               m_npc_name == "Kunawo");
         result += "    REVIVE ";
         collect_eval(result, p, script_start, script_end);
         result += "\r\n";
@@ -1222,6 +1229,14 @@ void ScriptInterpreter::collect_strange(std::string& result, const uint8_t* &p, 
         {
             p++;
             result += "    // NOTE: a strange EE is here\r\n";
+        }
+        break;
+
+    case 0x00bd:
+        if (*p == 0xa2 && m_npc_name == "Kunawo")
+        {
+            p++;
+            result += "    // NOTE: a strange A2 is here\r\n";
         }
         break;
     }

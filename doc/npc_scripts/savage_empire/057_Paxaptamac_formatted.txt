@@ -1,0 +1,297 @@
+:0000
+    NPC_ID: npc id: 57, npc name: Paxaptamac
+:000C
+    NPC_LOOK: an intense looking man in native clothing.
+*
+:0039
+    START CONVERSION
+:003A
+    IF [N8(0xeb) 0x00 FLAG ]
+:0040
+    JUMP 0x00cf
+:0045
+    ENDIF
+:0046
+    {He looks over your clothing with a surprised expression. "Blessings of the spirits on the stranger. May I help you with something?"
+}
+:00CA
+    JUMP 0x010a
+:00CF
+    {"Hello again, $P. I hope the spirits have been kind."
+}
+:0105
+    JUMP 0x0a59
+:010A
+    {
+}
+:010B
+    ASK
+    KEYWORDS name,paxa
+    ANSWER
+:0117
+    {"I am Paxaptamac."
+}
+:012A
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0130
+    PORTRAIT [N8(0xeb) ]
+:0134
+    JUMP 0x010a
+    KEYWORDS job
+    ANSWER
+:013E
+    {"I make fine ornaments and feathered robes of the best @cloth."
+}
+:017E
+    PAUSE
+:017F
+    {
+"Normally I would be able to @trade with you for something, but I recently finished a large feathered cloak, and my stock is depleted."
+}
+:0208
+    JUMP 0x010a
+    KEYWORDS trib,nahu
+    ANSWER
+:0218
+    {"This is the Nahuatla tribe.  Most civilized of all the tribes."
+}
+:0259
+    PAUSE
+:025A
+    {
+He grins at you. "Best dressed, too."
+}
+:0281
+    JUMP 0x010a
+    KEYWORDS trad,robe,cloa
+    ANSWER
+:0296
+    {"As I said, I recently sold my last cloak, and it will take quite some time for me to make another... even if I had the @feathers I need."
+}
+:0321
+    JUMP 0x010a
+    KEYWORDS parr,feat
+    ANSWER
+:0331
+    {"I use only the finest parrot feathers. When I was younger, I could go out and hunt parrots myself. A few minutes work on a dead parrot with my knife, and I could usually find several usable feathers."
+}
+:03FB
+    PAUSE
+:03FC
+    {
+He looks at you thoughtfully for a moment.
+}
+:0428
+    PAUSE
+:0429
+    {
+"If you were to bring me feathers, I would trade with you for them. One emerald for ten feathers."
+}
+:048D
+    JUMP 0x0a59
+    KEYWORDS emer
+    ANSWER
+:0498
+    {"I will trade you one emerald for 10 parrot feathers."
+}
+:04CF
+    JUMP 0x010a
+    KEYWORDS loom
+    ANSWER
+:04DA
+    {"Using a loom on flax will produce cloth."
+}
+:0505
+    JUMP 0x010a
+    KEYWORDS blue,ston
+    ANSWER
+:0515
+    {"I sometimes use blue stones in my ornaments. The @Barrab seem to have many of them."
+}
+:056B
+    JUMP 0x010a
+    KEYWORDS barr
+    ANSWER
+:0576
+    {"The Barrab live somewhere to the west, I hear."
+}
+:05A7
+    JUMP 0x010a
+    KEYWORDS bone
+    ANSWER
+:05B2
+    {He shakes his head. "I do not use any bones in my work."
+}
+:05EB
+    JUMP 0x010a
+    KEYWORDS clot
+    ANSWER
+:05F6
+    {"Cloth made from good @flax is wonderfully easy to work with. Soft, easily sewn, easily decorated. Much better than the simple @hides some tribes use."
+}
+:068E
+    JUMP 0x010a
+    KEYWORDS flax
+    ANSWER
+:0699
+    {"@Yucca plants are a good source of flax, though it can be quite tedious to collect enough for a good garment."
+}
+:0709
+    JUMP 0x010a
+    KEYWORDS yucc,plan
+    ANSWER
+:0719
+    {"Most of them have reddish orange flowers. There are a couple out behind my shop."
+}
+:076C
+    JUMP 0x010a
+    KEYWORDS hide
+    ANSWER
+:0777
+    {"Many of the more primitive tribes use hides as clothing. I find @cloth much easier to work with."
+}
+:07DA
+    JUMP 0x010a
+    KEYWORDS moct
+    ANSWER
+:07E5
+    IF [N8(0x28) N8(0x07) FLAG ]
+:07EC
+    {"King Moctapotl is once again upon the throne. He was in exile, but when we found that Huitlapacti was truly mortal..." he shudders.
+}
+:0871
+    PAUSE
+:0872
+    {
+"Huitalpacti will trouble none of us again."
+}
+:08A0
+    JUMP 0x010a
+:08A5
+    ELSE
+:08A6
+    {He looks at you with great concern. "Stranger, that is a name that none should speak in Tichticatl."
+}
+:090B
+    JUMP 0x010a
+:0910
+    ENDIF
+    KEYWORDS myrm
+    ANSWER
+:0917
+    {"I have heard of the Myrmidex, but I have never seen one. I hope I never do!"
+}
+:0965
+    JUMP 0x010a
+    KEYWORDS huit
+    ANSWER
+:0970
+    IF [N8(0x28) N8(0x07) FLAG ]
+:0977
+    {"Huitalpacti is dead, at last. The Nahuatla are happier for his passing."
+}
+:09C1
+    JUMP 0x010a
+:09C6
+    ELSE
+:09C7
+    {He frowns and looks at the ground. "All hail the king."
+}
+:09FF
+    JUMP 0x010a
+:0A04
+    ENDIF
+    KEYWORDS bye
+    ANSWER
+:0A0A
+    {"May the spirits follow you, $P."
+}
+:0A2C
+    BYE
+:0A2D
+    KEYWORDS *
+    ANSWER
+:0A30
+    {"I do not understand what you say."
+}
+:0A54
+    JUMP 0x010a
+    END_ANSWER
+:0A59
+    IF [N8(0x01) N8(0x30) OBJCOUNT ]
+:0A60
+    {"I see you have some feathers, $Y... would you like to sell them to me?"}
+:0AA8
+    JUMP 0x0ab4
+:0AAD
+    ELSE
+:0AAE
+    JUMP 0x010a
+:0AB3
+    ENDIF
+:0AB4
+    {
+}
+:0AB5
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0ABB
+    {"Ah, good!  Let me see just how many you have brought for me."
+
+}
+:0AFB
+    JUMP 0x0b3c
+    KEYWORDS n
+    ANSWER
+:0B03
+    {"Ah well," he sighs. "Perhaps another time, then."
+ }
+:0B37
+    JUMP 0x010a
+    END_ANSWER
+:0B3C
+    DECLARE [0x01, 0xb2] = [N8(0x01) N8(0x30) OBJCOUNT ]
+:0B46
+    IF [0x01 B2 N8(0x0a) < ]
+:0B4D
+    {"You do not have even 10 feathers for me. When you have more than 10, we can discuss trading again."
+}
+:0BB2
+    JUMP 0x010a
+:0BB7
+    ENDIF
+:0BB8
+    DECLARE [0x02, 0xb2] = [0x01 B2 N8(0x0a) / ]
+:0BC2
+    {
+"Will you take #2 emerald\s for your #1 feathers?"}
+:0BF5
+    JUMP 0x0bfa
+:0BFA
+    ASKC [ynq ]
+    KEYWORDS y
+    ANSWER
+:0C02
+    JUMP 0x0c68
+    KEYWORDS *
+    ANSWER
+:0C0A
+    {"That's the best price I can offer. Perhaps another day. What else can I help you with?"
+}
+:0C63
+    JUMP 0x010a
+    END_ANSWER
+:0C68
+    DECLARE [0x01, 0xb2] = [N8(0x01) N8(0x30) OBJCOUNT ]
+:0C72
+    DELETE npc [N8(0x01) ], obj [N8(0x30) ], quality [N8(0x00) ], quantity [0x01 B2 ]
+:0C7F
+    NEW npc [N8(0x01) ], obj [N8(0x49) ], quality [N8(0x00) ], quantity [0x02 B2 ]
+:0C8C
+    {"Good!" He collects the feathers and gives you #2 emerald\s.
+}
+:0CC9
+    JUMP 0x010a
+:0CCE
+    BYE

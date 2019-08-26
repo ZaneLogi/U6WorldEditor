@@ -36,6 +36,10 @@ $X : the value of string variable X
 #define U6OP_LOR        0x94        // |
 #define U6OP_LAND       0x95        // &
 
+#define U6OP_CANCARRY   0x9a
+#define U6OP_WEIGHT     0x9b
+
+#define U6OP_RAND       0xa0        // generate a random number (min, max)
 #define U6OP_IF         0xa1
 #define U6OP_ENDIF      0xa2
 #define U6OP_ELSE       0xa3
@@ -44,10 +48,6 @@ $X : the value of string variable X
 #define U6OP_DECL       0xa6        // declare variable
 #define U6OP_EVAL       0xa7        // evaluate
 #define U6OP_ASSIGN     0xa8        // assign value to the declared variable
-#define U6OP_CANCARRY   0x9a
-#define U6OP_WEIGHT     0x9b
-
-#define U6OP_RAND       0xa0        // generate a random number (min, max)
 
 #define U6OP_FLAG       0xab        // get npc flags
 

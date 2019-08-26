@@ -1,0 +1,627 @@
+:0000
+    NPC_ID: npc id: 56, npc name: Kunawo
+:0008
+    NPC_LOOK: a balding, nearly toothless native man.
+*
+:0032
+    START CONVERSION
+:0033
+    IF [N8(0xeb) 0x00 FLAG ]
+:0039
+    JUMP 0x00be
+:003E
+    ELSE
+:003F
+    ENDIF
+:0040
+    {"Kunawo hears }
+:004E
+    IF [0x17 B2 N8(0x00) == ]
+:0055
+    {a stranger, one }
+:0065
+    ELSE
+:0066
+    {strangers, warriors }
+:007A
+    ENDIF
+:007B
+    {not of the Pindiro.&
+}
+:0090
+    PAUSE
+:0091
+    {
+"Speak, say what you wish of Kunawo.&
+}
+:00B8
+    JUMP 0x0163
+:00BD
+    // NOTE: a strange A2 is here
+    IF [0x18 B2 N8(0x00) == ]
+:00C5
+    {"Kunawo senses $P has returned. He is welcome in Kunawo's hut.&
+}
+:0105
+    ELSE
+:0106
+    {"Kunawo senses $P has returned, with companions. You are welcome within Kunawo's hut.&
+}
+:015D
+    ENDIF
+:015E
+    JUMP 0x0163
+:0163
+    {
+}
+:0164
+    ASK
+    KEYWORDS name,kuna
+    ANSWER
+:0170
+    {"Kunawo is this one's name.&
+}
+:018D
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0193
+    PORTRAIT [N8(0xeb) ]
+:0197
+    JUMP 0x0163
+    KEYWORDS job
+    ANSWER
+:01A1
+    {"Shaman of the Pindiro. @Trade with visitors. Speak with @spirits, advise chief. @Heal warriors. Many jobs.&
+}
+:020E
+    JUMP 0x0163
+    KEYWORDS trib
+    ANSWER
+:0219
+    {"You are among the @Pindiro.&
+}
+:0237
+    JUMP 0x0163
+    KEYWORDS pind
+    ANSWER
+:0242
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:0249
+    {"The Pindiro are great warriors. Barako are our enemy.&
+}
+:0281
+    JUMP 0x0163
+:0286
+    ELSE
+:0287
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:028E
+    {"The Pindiro are....& he stops, and stares at you with sightless eyes.
+}
+:02D5
+    PAUSE
+:02D6
+    {
+"Spirit voices have told Kunawo one named $P would come to the valley. $P. Strange name.&
+}
+:0331
+    PAUSE
+:0332
+    {
+"There are other strangers in the valley with strange names. Pindiro warriors tell Kunawo of Fritz, who fights without weapons. @Fritz has won the respect of many.&
+}
+:03D8
+    PAUSE
+:03D9
+    {
+"Spirits have told Kunawo of another, who has changed much in the lives of the Nahuatla. But the spirits do not tell his name.&
+}
+:045A
+    JUMP 0x0163
+:045F
+    ENDIF
+    KEYWORDS blin
+    ANSWER
+:0466
+    {"Though Kunawo has lost the use of his eyes, Kunawo has other ways of seeing.&
+}
+:04B5
+    JUMP 0x0163
+    KEYWORDS frit
+    ANSWER
+:04C0
+    {"Fritz has chosen to live within the cave west of the great lake.&
+}
+:0503
+    JUMP 0x0163
+    KEYWORDS myrm,drea
+    ANSWER
+:0513
+    {He rocks slowly back and forth. "Kunawo has had dreams of monstrous creatures, great warriors. They kill and kill, without purpose. Myrmidex is the name that fills Kunawo's ears in these dreams.&
+}
+:05D7
+    JUMP 0x0163
+    KEYWORDS trad
+    ANSWER
+:05E2
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:05E9
+    JUMP 0x0ec2
+:05EE
+    ELSE
+:05EF
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:05F6
+    {"Many Pindiro hunt fish from the waters. Use much @flax in making fishing strings.
+Kunawo will trade one pinde, chocolatl and yopo for five flax. But only with his fellow shamans.&
+}
+:06AB
+    PAUSE
+:06AC
+    {
+}
+:06AD
+    JUMP 0x0ec2
+:06B2
+    ENDIF
+:06B3
+    KEYWORDS flax
+    ANSWER
+:06B9
+    IF [N8(0x07) INPARTY ]
+:06BE
+    PORTRAIT [N8(0x07) ]
+:06C2
+    {"I imagine he's talking about the fibers of the yucca plant, my boy. They would be a good source of flax.&
+}
+:072D
+    PAUSE
+:072E
+    {
+}
+:072F
+    PORTRAIT [N8(0xeb) ]
+:0733
+    {The shaman nods.}
+:0743
+    ELSE
+:0744
+    {"The yucca will yield up its flaxen fibers easily.&
+}
+:0778
+    ENDIF
+:0779
+    JUMP 0x0163
+    KEYWORDS heal
+    ANSWER
+:0784
+    {The ancient shaman tilts his head, as though listening to voices you cannot hear.
+}
+:07D6
+    DECLARE [0x01, 0xb2] = [N8(0x00) ]
+:07DD
+    DECLARE [0x02, 0xb2] = [N8(0x00) ]
+:07E4
+    DECLARE [0x03, 0xb2] = [N8(0x00) ]
+:07EB
+    DECLARE [0x04, 0xb2] = [N8(0x00) ]
+:07F2
+    PAUSE
+:07F3
+    {
+}
+:07F4
+    JUMP 0x094f
+    KEYWORDS spir
+    ANSWER
+:07FF
+    {"There are many spirits. Spirits of the plains, animals, rivers. Many spirits. They speak to Kunawo.&
+}
+:0865
+    PAUSE
+:0866
+    {
+"Kunawo speaks with chief and warriors. Tells them what spirits say.&
+}
+:08AD
+    PAUSE
+:08AE
+    {
+"Often Kunawo must ask spirits to help him @heal sick or wounded tribesmen.&
+}
+:08FC
+    JUMP 0x0163
+    KEYWORDS bye
+    ANSWER
+:0906
+    {"May the spirits protect you.&
+}
+:0925
+    BYE
+:0926
+    KEYWORDS *
+    ANSWER
+:0929
+    {"Kunawo does not know of this.&
+}
+:0949
+    JUMP 0x0163
+    END_ANSWER
+:094E
+    BYE
+:094F
+    IF [0x04 B2 0x18 B2 > ]
+:0956
+    JUMP 0x0987
+:095B
+    ENDIF
+:095C
+    IF [0x04 B2 N8(0x00) NPC WOUNDED ]
+:0964
+    JUMP 0x09b2
+:0969
+    ENDIF
+:096A
+    IF [0x04 B2 N8(0x00) NPC POISONED ]
+:0972
+    JUMP 0x09b2
+:0977
+    ENDIF
+:0978
+    DECLARE [0x04, 0xb2] = [0x04 B2 N8(0x01) + ]
+:0982
+    JUMP 0x094f
+:0987
+    IF [N8(0xf9) N8(0x00) OBJINPARTY N16(0x8001) == ]
+:0992
+    {"No one here is wounded.&
+}
+:09AC
+    JUMP 0x0163
+:09B1
+    ENDIF
+:09B2
+    IF [N8(0xf9) N8(0x00) OBJINPARTY N16(0x8001) == ]
+:09BD
+    JUMP 0x0c9b
+:09C2
+    ELSE
+:09C3
+    JUMP 0x09c9
+:09C8
+    ENDIF
+:09C9
+    IF [N8(0xf9) N8(0x00) OBJINPARTY N16(0x8001) == ]
+:09D4
+    JUMP 0x0c1a
+:09D9
+    ELSE
+:09DA
+    DECLARE [0x01, 0xb2] = [N8(0xf9) N8(0x00) OBJINPARTY ]
+:09E4
+    SET_$Y [0x01 B2 ]
+:09E8
+    PAUSE
+:09E9
+    {
+"Mighty Kukuzz, look upon the mortal $Y. $Y carries a companion felled in battle.&
+}
+:0A3D
+    PAUSE
+:0A3E
+    {
+}
+:0A3F
+    REVIVE [0x01 B2 ]
+:0A43
+    ENDIF
+:0A44
+    IF [0x1b B2 N8(0x00) > 0x1b B2 N8(0x10) < & ]
+:0A51
+    {"$N beseeches Kukuzz, bless $Y with strength and health, that $Y might walk and fight again!&
+}
+:0AAF
+    PAUSE
+:0AB0
+    {
+A fierce wind springs from nowhere, howling around you...
+Every hair on your body stands on end...
+And the wounds disappear from $Y's body! $Y's eyes open!
+}
+:0B4D
+    JUMP 0x09c9
+:0B52
+    ELSE
+:0B53
+    {The shaman shakes his head sadly. "Kukuzz does not respond... there is nothing to be done for this one.&
+}
+:0BBC
+    PAUSE
+:0BBD
+    {
+Taking the body from you, he says "Kunawo will have this buried with proper respect.&
+}
+:0C14
+    JUMP 0x0163
+:0C19
+    ENDIF
+:0C1A
+    PAUSE
+:0C1B
+    {
+The wind dies down, and Kunawo slowly recovers.
+}
+:0C4C
+    PAUSE
+:0C4D
+    {
+"Kukuzz has been kind," he says. "Those once badly injured walk again.&
+}
+:0C96
+    JUMP 0x0c9b
+:0C9B
+    IF [0x03 B2 0x18 B2 > ]
+:0CA2
+    PAUSE
+:0CA3
+    {
+"No one here is wounded.&
+}
+:0CBE
+    JUMP 0x0163
+:0CC3
+    ENDIF
+:0CC4
+    IF [0x03 B2 N8(0x00) NPC WOUNDED ]
+:0CCC
+    JUMP 0x0cef
+:0CD1
+    ENDIF
+:0CD2
+    IF [0x03 B2 N8(0x00) NPC POISONED ]
+:0CDA
+    JUMP 0x0cef
+:0CDF
+    ENDIF
+:0CE0
+    DECLARE [0x03, 0xb2] = [0x03 B2 N8(0x01) + ]
+:0CEA
+    JUMP 0x0c9b
+:0CEF
+    {Kunawo gasps for breath and shakes violently. A wild, hot wind whips across you.
+}
+:0D40
+    DECLARE [0x03, 0xb2] = [N8(0x00) ]
+:0D47
+    JUMP 0x0d4c
+:0D4C
+    IF [0x03 B2 0x18 B2 > ]
+:0D53
+    JUMP 0x0e47
+:0D58
+    ENDIF
+:0D59
+    IF [0x03 B2 N8(0x00) NPC WOUNDED ]
+:0D61
+    HEAL [0x03 B2 N8(0x00) NPC ]
+:0D68
+    SET_$Y [0x03 B2 N8(0x00) NPC ]
+:0D6F
+    {"Spirit of Kukuzz, $N invokes your blessing upon $Y!&
+... and $Y is healed!
+}
+:0DBB
+    PAUSE
+:0DBC
+    {
+}
+:0DBD
+    ENDIF
+:0DBE
+    IF [0x03 B2 N8(0x00) NPC POISONED ]
+:0DC6
+    CURE [0x03 B2 N8(0x00) NPC ]
+:0DCD
+    SET_$Y [0x03 B2 N8(0x00) NPC ]
+:0DD4
+    {"Spirit of Motazz, $N invokes your aid to purge the blood of $Y!&
+... and $Y is cured of poison!
+}
+:0E35
+    PAUSE
+:0E36
+    {
+}
+:0E37
+    ENDIF
+:0E38
+    DECLARE [0x03, 0xb2] = [0x03 B2 N8(0x01) + ]
+:0E42
+    JUMP 0x0d4c
+:0E47
+    {With an exhausted gasp, the ancient shaman sags onto his seat. "The spirits are most kind today. All are well again.&
+}
+:0EBD
+    JUMP 0x0163
+:0EC2
+    IF [N8(0x09) INPARTY ]
+:0EC7
+    {"I sense one who also knows the ways of the spirits with you}
+:0F03
+    JUMP 0x0fc4
+:0F08
+    ELSE
+:0F09
+    {"I will not trade with those who know not the ways of the spirits. Offerings must be treated with respect.&
+}
+:0F75
+    PAUSE
+:0F76
+    {
+"When you find one who will aid you in these matters, visit me again.&
+}
+:0FBE
+    JUMP 0x0163
+:0FC3
+    ENDIF
+:0FC4
+    IF [N8(0x09) N8(0xd2) OBJCOUNT N8(0x04) > ]
+:0FCE
+    {. Kunawo will trade with his fellow shaman.&
+}
+:0FFB
+    PAUSE
+:0FFC
+    {
+}
+:0FFD
+    JUMP 0x1037
+:1002
+    ELSE
+:1003
+    {, but he does not have enough flax to trade.&
+}
+:1031
+    JUMP 0x0163
+:1036
+    ENDIF
+:1037
+    IF [N8(0x09) N8(0xd2) OBJCOUNT N8(0x04) > ]
+:1041
+    {"Do you wish @pinde, @yopo or @chocolatl?
+Or are you @finished trading?"
+}
+:108A
+    JUMP 0x10c3
+:108F
+    ELSE
+:1090
+    {"Triolo does not have enough flax to trade.&
+}
+:10BD
+    JUMP 0x0163
+:10C2
+    ENDIF
+:10C3
+    ASKC [pycfq ]
+    KEYWORDS p
+    ANSWER
+:10CD
+    DECLARE [0x02, 0xb2] = [N8(0x37) ]
+:10D4
+    DECLARE [0x02, 0xb3] = [N8(0x37) ]
+:10DB
+    {"How many pinde?"}
+:10EC
+    JUMP 0x1171
+    KEYWORDS y
+    ANSWER
+:10F4
+    DECLARE [0x02, 0xb2] = [N8(0x38) ]
+:10FB
+    DECLARE [0x02, 0xb3] = [N8(0x38) ]
+:1102
+    {"How many yopo?"}
+:1112
+    JUMP 0x1171
+    KEYWORDS c
+    ANSWER
+:111A
+    DECLARE [0x02, 0xb2] = [N8(0x36) ]
+:1121
+    DECLARE [0x02, 0xb3] = [N8(0x36) ]
+:1128
+    {"How many chocolatl?"}
+:113D
+    JUMP 0x1171
+    KEYWORDS *
+    ANSWER
+:1145
+    {"Return again when you wish to trade.&
+}
+:116C
+    JUMP 0x0163
+    END_ANSWER
+:1171
+    INPUT (vi=01, vt=b2) 
+:1174
+    IF [0x01 B2 N8(0x01) < ]
+:117B
+    JUMP 0x1037
+:1180
+    ENDIF
+:1181
+    DECLARE [0x00, 0xb2] = [N8(0x09) N8(0xd2) OBJCOUNT ]
+:118B
+    DECLARE [0x03, 0xb2] = [0x01 B2 N8(0x05) * ]
+:1195
+    IF [0x03 B2 0x00 B2 > ]
+:119C
+    {"You would need #3 for that much, and you have but #0 flax to trade.&
+*
+}
+:11E4
+    JUMP 0x1037
+:11E9
+    ELSE
+:11EA
+    NEW npc [N8(0x09) ], obj [0x02 B2 ], quality [N8(0x00) ], quantity [0x01 B2 ]
+:11F7
+    ENDIF
+:11F8
+    IF [0x1d B2 N8(0x00) == ]
+:11FF
+    {"You are carrying too much already.&
+}
+:1224
+    JUMP 0x0163
+:1229
+    ENDIF
+:122A
+    DELETE npc [N8(0x09) ], obj [N8(0xd2) ], quality [N8(0x00) ], quantity [0x03 B2 ]
+:1237
+    {Triolo exchanges #3 flax for #1 }
+:1257
+    IF [0x02 B2 N8(0x37) == ]
+:125E
+    {pinde.
+}
+:1265
+    JUMP 0x1296
+:126A
+    ENDIF
+:126B
+    IF [0x02 B2 N8(0x38) == ]
+:1272
+    {yopo.
+}
+:1278
+    JUMP 0x1296
+:127D
+    ENDIF
+:127E
+    IF [0x02 B2 N8(0x36) == ]
+:1285
+    {chocolatl.
+}
+:1290
+    JUMP 0x1296
+:1295
+    ENDIF
+:1296
+    {
+}
+:1297
+    IF [N8(0x09) N8(0xd2) OBJCOUNT N8(0x04) > ]
+:12A1
+    JUMP 0x1037
+:12A6
+    ELSE
+:12A7
+    {"Triolo no longer has enough flax to trade. Let us now speak of other things.&
+}
+:12F6
+    JUMP 0x0163
+:12FB
+    ENDIF
+:12FC
+    BYE

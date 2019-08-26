@@ -1,0 +1,245 @@
+:0000
+    NPC_ID: npc id: 58, npc name: Seggalion
+:000B
+    NPC_LOOK: a germanic man wearing worn modern clothes.
+*
+:0039
+    START CONVERSION
+:003A
+    {Cautiously, he waits for you to speak.
+
+}
+:0062
+    ASK
+    KEYWORDS name
+    ANSWER
+:0069
+    {He eyes you suspiciously. "It's Seggalion."
+}
+:0095
+    JUMP 0x066c
+    KEYWORDS job
+    ANSWER
+:009F
+    {"I don't know if I should tell you or not..."
+}
+:00CD
+    PAUSE
+:00CE
+    {
+"I'm searching for @diamonds."
+}
+:00EE
+    JUMP 0x066c
+    KEYWORDS diam,gem
+    ANSWER
+:00FD
+    {"I knew I shouldn't have told you! Now you'll try to get them first!"
+}
+:0143
+    JUMP 0x066c
+    KEYWORDS knig,lege
+    ANSWER
+:0153
+    {He looks at you suspiciously. "You're not looking for modules, are you?"
+}
+:019C
+    JUMP 0x066c
+    KEYWORDS lord,brit
+    ANSWER
+:01AC
+    {"I've met him, a time or two. What's it to you?"
+}
+:01DD
+    JUMP 0x066c
+    KEYWORDS rich,garr
+    ANSWER
+:01ED
+    IF [N8(0x08) INPARTY ]
+:01F2
+    {He looks askance at Shamuru.
+"Never heard of him. Nope. Never."
+}
+:0232
+    ELSE
+:0233
+    {"He looked familiar... I've seen that face before, somewhere."
+}
+:0272
+    ENDIF
+:0273
+    JUMP 0x066c
+    KEYWORDS eric,todd,mitc,port
+    ANSWER
+:028D
+    {He glares at you angrily. "That's NOT my name!"
+}
+:02BD
+    WORKTYPE [N8(0xeb) ], [N8(0x11) ]
+:02C4
+    BYE
+:02C5
+    KEYWORDS bad,blood
+    ANSWER
+:02D0
+    {He shudders, as though from a bad memory. "That was a terrible place. Never did like dogs, anyway."
+}
+:0334
+    JUMP 0x066c
+    KEYWORDS frit
+    ANSWER
+:033F
+    {"I don't know anyone named Fritz."
+}
+:0362
+    JUMP 0x066c
+    KEYWORDS origin
+    ANSWER
+:036F
+    {"Work.... work.... The greatest joy is work....."
+
+"Arbeit macht frei!"
+}
+:03B7
+    JUMP 0x066c
+    KEYWORDS aaro,alls
+    ANSWER
+:03C7
+    {"Ah... I have heard of the Great And Powerful Allston."
+}
+:03FF
+    JUMP 0x066c
+    KEYWORDS stev,beem
+    ANSWER
+:040F
+    {"If you ain't Steve, you ain't shit."
+}
+:0435
+    JUMP 0x066c
+    KEYWORDS keit,berd
+    ANSWER
+:0445
+    JUMP 0x066c
+    KEYWORDS dan
+    ANSWER
+:044F
+    JUMP 0x066c
+    KEYWORDS phil,brog
+    ANSWER
+:045F
+    {"Don't listen to him, he's always putting words in people's mouths!"
+}
+:04A4
+    JUMP 0x066c
+    KEYWORDS gryph
+    ANSWER
+:04B0
+    {"Squawrk!"
+}
+:04BB
+    JUMP 0x066c
+    KEYWORDS aman,mand
+    ANSWER
+:04CB
+    {"Love those wiper-weasels!"
+}
+:04E7
+    JUMP 0x066c
+    KEYWORDS bob,quin
+    ANSWER
+:04F6
+    {"Bob? He said something about getting some sleep. I wouldn't disturb him... he had a gun."
+}
+:0551
+    JUMP 0x066c
+    KEYWORDS mike,rome
+    ANSWER
+:0561
+    {"Go, Oilers!&
+}
+:056F
+    JUMP 0x066c
+    KEYWORDS marc,scha
+    ANSWER
+:057F
+    JUMP 0x066c
+    KEYWORDS jaso,temp
+    ANSWER
+:058F
+    {"Jason? He's fired!"
+}
+:05A4
+    JUMP 0x066c
+    KEYWORDS john,wats
+    ANSWER
+:05B4
+    JUMP 0x066c
+    KEYWORDS jeff,joha
+    ANSWER
+:05C4
+    {"Get back to work!"
+}
+:05D8
+    WORKTYPE [N8(0xeb) ], [N8(0x11) ]
+:05DF
+    BYE
+:05E0
+    KEYWORDS glen
+    ANSWER
+:05E6
+    {"Glen? What? He still owes me money!"
+}
+:060C
+    JUMP 0x066c
+    KEYWORDS wing,comm
+    ANSWER
+:061C
+    JUMP 0x066c
+    KEYWORDS bye
+    ANSWER
+:0626
+    {"Goodbye. Leave me in peace."
+}
+:0644
+    BYE
+:0645
+    KEYWORDS *
+    ANSWER
+:0648
+    {"What are you talking about?"
+}
+:0666
+    JUMP 0x066c
+    END_ANSWER
+:066B
+    BYE
+:066C
+    {
+}
+:066D
+    DECLARE [0x00, 0xb2] = [N8(0x00) N8(0x02) RAND ]
+:0677
+    IF [0x00 B2 N8(0x00) == ]
+:067E
+    {"Please, leave me alone."}
+:0697
+    ENDIF
+:0698
+    IF [0x00 B2 N8(0x01) == ]
+:069F
+    {"Go away, leave me alone."}
+:06B9
+    ENDIF
+:06BA
+    IF [0x00 B2 N8(0x02) == ]
+:06C1
+    {"Now go... get out of here."}
+:06DD
+    ENDIF
+:06DE
+    WORKTYPE [N8(0xeb) ], [N8(0x11) ]
+:06E5
+    {
+}
+:06E6
+    BYE

@@ -1,0 +1,385 @@
+:0000
+    NPC_ID: npc id: 34, npc name: Jumu
+:0006
+    NPC_LOOK: a youthful warrior trying to look dignified.
+*
+:0035
+    START CONVERSION
+:0036
+    IF [N8(0xeb) 0x00 FLAG ]
+:003C
+    JUMP 0x00b9
+:0041
+    ELSE
+:0042
+    {"Spirits' blessings on the strange visitor.& He looks at you closely. "The strange visitor from no known tribe.&
+}
+:00B3
+    JUMP 0x0319
+:00B8
+    ENDIF
+:00B9
+    IF [N8(0xeb) N8(0x06) FLAG N8(0xeb) N8(0x07) FLAG & ]
+:00C6
+    {"Hail mighty $P, who returned to us the sacred hide!&
+}
+:00FC
+    JUMP 0x0319
+:0101
+    ELSE
+:0102
+    JUMP 0x0108
+:0107
+    ENDIF
+:0108
+    IF [N8(0x13) N8(0x00) OBJINPARTY N16(0x8001) != ]
+:0113
+    DECLARE [0x00, 0xb2] = [N8(0x13) N8(0x00) OBJINPARTY ]
+:011D
+    SET_$Y [0x00 B2 ]
+:0121
+    {The chieftain's face lights up as he sees the sacred hide in $Y's inventory. "The sacred hide of the Jukari is returned!&
+}
+:019B
+    PAUSE
+:019C
+    {
+}
+:019D
+    DELETE npc [0x00 B2 ], obj [N8(0x13) ], quality [N8(0x00) ], quantity [N8(0x01) ]
+:01AA
+    SET_FLAG [N8(0xeb) ], [N8(0x07) ]
+:01B1
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:01B8
+    {With obvious relief, he takes the hide and examines it carefully. Satisfied that it is undamaged, he carefully folds it and tucks it away.
+}
+:0243
+    PAUSE
+:0244
+    {
+"The Jukari owe you a great debt, mighty $P.&}
+:0272
+    JUMP 0x0319
+:0277
+    ENDIF
+:0278
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:027F
+    {"Spirits' blessings on the $P.& He looks depressed. "Jumu hears that $P has not yet found the way to the sacred hide.&
+}
+:02F6
+    ELSE
+:02F7
+    {"Spirits' blessings on $P.&
+}
+:0313
+    JUMP 0x0319
+:0318
+    ENDIF
+:0319
+    {
+}
+:031A
+    ASK
+    KEYWORDS name,jumu
+    ANSWER
+:0326
+    {"Jumu the Fearless, Jumu the All-High.&
+}
+:034E
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0354
+    PORTRAIT [N8(0xeb) ]
+:0358
+    JUMP 0x0319
+    KEYWORDS job,chie
+    ANSWER
+:0367
+    {"Jumu is chief of the Jukari tribe. Jumu has been chief several days already.&
+}
+:03B6
+    PAUSE
+:03B7
+    {
+}
+:03B8
+    IF [N8(0xeb) N8(0x06) FLAG N8(0xeb) N8(0x07) FLAG & ]
+:03C5
+    {"And Jumu's first great task has been accomplished, by Jumu's great friend $P: The sacred hide is returned to Jumu's people.&
+}
+:0443
+    JUMP 0x0319
+:0448
+    ELSE
+:0449
+    {"Jumu's father, who was chief before Jumu, died several days ago. A mountain spat fire and buried him... and denied us our path to the sacred @cave.&
+}
+:04DF
+    JUMP 0x0319
+:04E4
+    ENDIF
+    KEYWORDS trib
+    ANSWER
+:04EB
+    {"Ours is the Jukari tribe. We are one with the mountains, with the hills which spit fire, with the ground that shakes, with the boulders that roll.&
+}
+:0580
+    JUMP 0x0319
+    KEYWORDS cave
+    ANSWER
+:058B
+    {"Far to the east of the Jukari village is our sacred cave. Was a long journey, even before the flowing rock came. The spirits would speak to our @shaman there, when shaman was alive.&
+}
+:0643
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:064A
+    JUMP 0x0319
+:064F
+    ENDIF
+:0650
+    PAUSE
+:0651
+    {
+"The history of the Jukari is kept there, written on the sacred hide.&
+}
+:0699
+    PAUSE
+:069A
+    {
+"Not long ago, the mountain over the cave shook and threw out a river of flowing rock. The @flowing rock prevents us from reaching the sacred @hide.&
+}
+:0731
+    JUMP 0x0319
+    KEYWORDS lava,flow
+    ANSWER
+:0741
+    {"Rock that flows from the shaking mountains. Very hot, glows at night.  We cannot pass over it.&
+}
+:07A2
+    IF [N8(0x07) INPARTY ]
+:07A7
+    PAUSE
+:07A8
+    {
+}
+:07A9
+    PORTRAIT [N8(0x07) ]
+:07AD
+    {Rafkin says: "You know, my boy, I once knew a man by the name of James Wildman.  He used to tell a story about using a fire extinguisher to cross the superheated deck of a burning ship.&
+}
+:0868
+    PAUSE
+:0869
+    {
+"While lava is considerably hotter, this technique might still prove viable. Chances are that the lava will re-melt fairly quickly, though.&
+}
+:08F7
+    PAUSE
+:08F8
+    {
+"I had a fire extinguisher in my lab.&
+}
+:0920
+    PORTRAIT [N8(0xeb) ]
+:0924
+    JUMP 0x0319
+:0929
+    ENDIF
+:092A
+    IF [N8(0x04) INPARTY ]
+:092F
+    PAUSE
+:0930
+    {
+}
+:0931
+    PORTRAIT [N8(0x04) ]
+:0935
+    {"You know, I'd bet old Rafkin would know something about this kinda stuff...&
+}
+:0983
+    PAUSE
+:0984
+    PORTRAIT [N8(0xeb) ]
+:0988
+    JUMP 0x0319
+:098D
+    ENDIF
+:098E
+    JUMP 0x0319
+    KEYWORDS hide
+    ANSWER
+:0999
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:09A0
+    {"We have not yet chosen a @shaman to care for the sacred hide, which you returned to us.&
+}
+:09FA
+    JUMP 0x0319
+:09FF
+    ELSE
+:0A00
+    {"The sacred hide is important to our people. And with no @shaman, the Jukari need it even more.&
+}
+:0A61
+    ENDIF
+:0A62
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:0A69
+    PAUSE
+:0A6A
+    {
+"If $P could find a way to the @cave and bring back the sacred hide, the Jumu would be greatly in $P's dept.&
+}
+:0AD9
+    JUMP 0x0319
+:0ADE
+    ELSE
+:0ADF
+    JUMP 0x0319
+:0AE4
+    ENDIF
+    KEYWORDS sham
+    ANSWER
+:0AEB
+    {"We have no shaman. Old shaman died when mountain spirits became angry and threw stones down on him.&
+}
+:0B51
+    JUMP 0x0319
+    KEYWORDS diam,emer
+    ANSWER
+:0B61
+    {"He who wants diamonds and emeralds of the Jukari must go to the sacred @cave.&
+}
+:0BB1
+    JUMP 0x0319
+    KEYWORDS unit,ally,alli
+    ANSWER
+:0BC6
+    {"Unite? Unite with other tribes? Jumu does not like to fight other tribes.&
+}
+:0C12
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0C19
+    PAUSE
+:0C1A
+    {
+"Since $P has brought the sacred hide back to the Jukari, Jumu will ally himself with $P and $P's union of tribes.&
+}
+:0C8F
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:0C96
+    JUMP 0x0319
+:0C9B
+    ELSE
+:0C9C
+    PAUSE
+:0C9D
+    {
+"If... the strange warrior were to retrieve the Jukari's sacred @hide, Jumu would join the warrior's union of tribes.&
+}
+:0D15
+    JUMP 0x0dcb
+:0D1A
+    ENDIF
+:0D1B
+    KEYWORDS bye
+    ANSWER
+:0D20
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0D26
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0D2D
+    {"Walk with the spirits' blessing, oh $P, friend of the Jukari.&
+}
+:0D6D
+    BYE
+:0D6E
+    ELSE
+:0D6F
+    {"Walk with the spirits' blessing, strange one.&
+}
+:0D9F
+    BYE
+:0DA0
+    ENDIF
+:0DA1
+    KEYWORDS *
+    ANSWER
+:0DA4
+    {"Jumu does not understand that.&
+}
+:0DC5
+    JUMP 0x0319
+    END_ANSWER
+:0DCA
+    BYE
+:0DCB
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:0DD2
+    IF [N8(0x04) INPARTY ]
+:0DD7
+    JUMP 0x0e78
+:0DDC
+    ELSE
+:0DDD
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:0DE4
+    JUMP 0x0319
+:0DE9
+    ENDIF
+:0DEA
+    {"The @cave itself is full of diamonds and emeralds. You may take diamonds from the cave, if you can reach it," the chief adds hopefully.
+}
+:0E73
+    JUMP 0x0319
+:0E78
+    PAUSE
+:0E79
+    {
+}
+:0E7A
+    IF [N8(0x04) N8(0x06) FLAG ]
+:0E81
+    PORTRAIT [N8(0x04) ]
+:0E85
+    {Jimmy whips out his notebook. "Get across lava flow and bring back a holy throw-rug. Sounds like a heap o' laughs. I've got it written, boss.&
+}
+:0F14
+    PAUSE
+:0F15
+    {
+}
+:0F16
+    PORTRAIT [N8(0xeb) ]
+:0F1A
+    JUMP 0x0dea
+:0F1F
+    ELSE
+:0F20
+    PORTRAIT [N8(0x04) ]
+:0F24
+    {Jimmy speaks up. "Tell you what, boss. It could be that we're going to have a lot of these little chores ahead of us. I'll note down what each chief wants.&
+}
+:0FC1
+    PAUSE
+:0FC2
+    {
+"Any time you want to check out what we've got in store for us, ask me about my @notebook. It never forgets.&
+}
+:1031
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:1038
+    SET_FLAG [N8(0x04) ], [N8(0x03) ]
+:103F
+    PAUSE
+:1040
+    {
+}
+:1041
+    PORTRAIT [N8(0xeb) ]
+:1045
+    JUMP 0x0dea
+:104A
+    ENDIF

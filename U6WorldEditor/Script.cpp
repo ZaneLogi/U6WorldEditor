@@ -870,6 +870,7 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
             {
                 auto anchor = p;
                 skip_text(p, script_end);
+                auto possible_answer_count = p - anchor;
                 result += format_string("    ASKC [%s]\r\n", std::string((char*)anchor, p - anchor).c_str());
                 while (p < script_end)
                 {
@@ -882,19 +883,28 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
 
                     script_offset = p - script_start;
                     assert(*p == U6OP_ANSWER);
+                    possible_answer_count--;
                     p++;
                     result += "    ANSWER\r\n";
                     collect_format(result, p, script_start, script_end, U6OP_ANSWER);
                     if (*p == U6OP_ENDANSWER)
+                    {
+                        p++;
                         break;
+                    }
 
                     // Atlipacta (SE) script offset 0x0aa8 does not have U6OP_ENDANSWER but U6OP_BYE
                     if (*p == U6OP_BYE)
+                    {
+                        p++;
+                        break;
+                    }
+
+                    // 035 Katalkotl (SE) script offset 0x10d7 does not have U6OP_ENDANSWER
+                    if (*p != U6OP_KEYWORDS && possible_answer_count == 0)
                         break;
                 }
-                script_offset = p - script_start;
-                assert(*p == U6OP_ENDANSWER || *p == U6OP_BYE);
-                p++;
+                assert(possible_answer_count == 0);
                 result += "    END_ANSWER\r\n";
                 break;
             }
@@ -1127,28 +1137,16 @@ bool ScriptInterpreter::collect_unknown(std::string& result, const uint8_t* &p, 
         // should be used for opeing the door of the city
         if (m_npc_name == "Yunapotli" && *(uint32_t*)p == 0xa700ded4)
         {
+            // func 222:
             result += "    U6OP_FUNC ";
             collect_eval(result, p, script_start, script_end);
             result += "\r\n";
             p += 4;
             return true;
         }
-        else if (m_npc_name == "Chizzztl" && *(uint32_t*)p == 0xb6a702d3)
-        {
-            result += "    U6OP_FUNC ";
-            collect_eval(result, p, script_start, script_end);
-            result += "\r\n";
-            return true;
-        }
         else if (m_npc_name == "Fabozz" && *(uint32_t*)p == 0xa700afd4)
         {
-            result += "    U6OP_FUNC ";
-            collect_eval(result, p, script_start, script_end);
-            result += "\r\n";
-            return true;
-        }
-        else if (m_npc_name == "Huitlapacti" && *(uint32_t*)p == 0xcda701d3)
-        {
+            // func 175:
             result += "    U6OP_FUNC ";
             collect_eval(result, p, script_start, script_end);
             result += "\r\n";
@@ -1156,12 +1154,25 @@ bool ScriptInterpreter::collect_unknown(std::string& result, const uint8_t* &p, 
         }
         else if (m_npc_name == "Intanya" && *(uint32_t*)p == 0xb6a70ad3)
         {
+            // func 010: kick out to DOS
             result += "    U6OP_FUNC ";
             collect_eval(result, p, script_start, script_end);
             result += " kick out to DOS.\r\n";
             return true;
         }
-        assert(false);
+        else
+        {
+            // func 001: ask guards to kill the player (055_Zipactriotl)(031_Huitlapacti)
+            // func 002: ask guards to kill the player (021_Chizzztl)
+            // func 003: ask guards to kill the player (036_Kipotli)
+            // func 004: ask guards to kill the player (049_Tlapatla)
+            // func 005: ask guards to kill the player (054_Xyxxxtl)
+            // func 150: 052_Tuomaxx made a biggest drum on the Hill of Drum
+            result += "    U6OP_FUNC ";
+            collect_eval(result, p, script_start, script_end);
+            result += "\r\n";
+            return true;
+        }
     }
 
     case U6OP_REVIVE:

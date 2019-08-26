@@ -1,0 +1,366 @@
+:0000
+    NPC_ID: npc id: 35, npc name: Katalkotl
+:000B
+    NPC_LOOK: a tall, elegant reptile man with intelligent eyes.
+*
+:0040
+    START CONVERSION
+:0041
+    IF [N8(0xeb) 0x00 FLAG ]
+:0047
+    JUMP 0x00b1
+:004C
+    ELSE
+:004D
+    {"Greetingss to the visitor." The thing's accent is strange, but its words are understandable.
+}
+:00AB
+    JUMP 0x00db
+:00B0
+    ENDIF
+:00B1
+    {"I am pleased to welcome you again."
+}
+:00D6
+    JUMP 0x00db
+:00DB
+    {
+}
+:00DC
+    ASK
+    KEYWORDS name
+    ANSWER
+:00E3
+    {"I am Katalkotl. Rather, I am a memory of Katalkotl. I know much of the true @Katalkotl."
+}
+:013D
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0143
+    PORTRAIT [N8(0xeb) ]
+:0147
+    JUMP 0x00db
+    KEYWORDS job,stor
+    ANSWER
+:0156
+    {"I am a sspeaker of memories. Assk me and you will hear many interessting sstoriess."
+}
+:01AC
+    PAUSE
+:01AD
+    {
+}
+:01AE
+    IF [N8(0x07) INPARTY ]
+:01B3
+    PORTRAIT [N8(0x07) ]
+:01B7
+    {Prof. Rafkin reaches out to touch the reptile, but his hand goes clean through it.
+}
+:020A
+    PAUSE
+:020B
+    {
+"I thought it looked a little translucent... this is amazing, my boy! This is no physical object at all, but some sort of projected image!"
+}
+:0298
+    PAUSE
+:0299
+    {
+}
+:029A
+    PORTRAIT [N8(0xeb) ]
+:029E
+    {"Yess, it is true. I am a memory and a sspeaker of sstories."
+}
+:02DC
+    PAUSE
+:02DD
+    {
+}
+:02DE
+    ENDIF
+:02DF
+    {"I have had little opportunity to tell my sstories since the Kotl left. The only @sstranger here will not lissten to me."
+}
+:0359
+    PAUSE
+:035A
+    {
+"I know sstoriess about the @Kotl, the @Myrmidex, @humans, and the real @Katalkotl."
+}
+:03B0
+    JUMP 0x00db
+    KEYWORDS trib
+    ANSWER
+:03BB
+    {"I am the image of @Katalkotl, who was of the Kotl race."
+}
+:03F5
+    JUMP 0x00db
+    KEYWORDS kata
+    ANSWER
+:0400
+    {"Katalkotl was a member of the Kotl race in the disstant passt. He was a great explorer."
+}
+:045A
+    PAUSE
+:045B
+    {
+"When the Myrmidex rebelled against the Kotl and fled, the Kotl needed new sservantss. Katalkotl led a force of Kotl out into the world to find those sservantss."
+}
+:04FF
+    PAUSE
+:0500
+    {
+"Katalkotl wandered the world, visiting many human tribes. He perssuaded many to come back to the city of the Kotl and serve the Kotl."
+}
+:0589
+    PAUSE
+:058A
+    {
+"For bringing a new generation of sservantss to the Kotl, the Kotl honored Katalkotl by placing his image here, for all time. I am that image."
+}
+:061B
+    JUMP 0x00db
+    KEYWORDS sstr,stra,spec
+    ANSWER
+:0630
+    {"There iss a human here in the city. He walkss by and ignoress me. He has sspoken to me very little. He doess not believe what I ssay."
+}
+:06B8
+    PAUSE
+:06B9
+    {
+"His name is Spector."
+}
+:06D1
+    JUMP 0x00db
+    KEYWORDS kotl
+    ANSWER
+:06DC
+    {"Would you care to hear the hisstory of the Kotl?"
+}
+:070F
+    JUMP 0x0e24
+    KEYWORDS gene,powe
+    ANSWER
+:071F
+    {"The city is powered by mystical generator crystals which draw their power from the black sstone."
+}
+:0782
+    PAUSE
+:0783
+    {
+"They are really quite beautiful. Would you like to see them?"
+}
+:07C3
+    JUMP 0x0e55
+    KEYWORDS myrm
+    ANSWER
+:07CE
+    {"The Myrmidex were bred from antss. The Kotl thought that the Myrmidex might inherit the industriouss nature of the antss. But the Myrmidex also inherited the warlike nature of the antss."
+}
+:088B
+    PAUSE
+:088C
+    {
+"The Myrmidex left the Kotl city, taking with them the giant black sstone which @powerss the city. The city continuess to draw power from the sstone, though it is far away."
+}
+:093B
+    PAUSE
+:093C
+    {
+"The Myrmidex came back centuriess later, and killed mosst or all of the Kotl."
+}
+:098D
+    JUMP 0x00db
+    KEYWORDS huma
+    ANSWER
+:0998
+    {"The humanss were brought here from many different tribess from the outer world."
+}
+:09EA
+    PAUSE
+:09EB
+    {
+"The Kotl created a language from all their languages and taught it to all the humanss, for the Kotl tongue cannot be sspoken by human throatss. The created language is that which I sspeak now."
+}
+:0AAF
+    PAUSE
+:0AB0
+    {
+"But the humanss were independent of heart, and chose to esscape into the upper world. I do not know what became of them. This was centuriess ago."
+}
+:0B45
+    PAUSE
+:0B46
+    {
+"The Kotl were left behind with only their @automatonss as sservants... until the @Myrmidex came back."
+}
+:0BAF
+    JUMP 0x00db
+    KEYWORDS auto
+    ANSWER
+:0BBA
+    {"The automatonss are like sstatues... but made to walk and talk through a mysstic power."
+}
+:0C14
+    PAUSE
+:0C15
+    {
+}
+:0C16
+    IF [N8(0x0b) INPARTY ]
+:0C1B
+    {"I see there is one with you now, my old friend Yunapotli."
+}
+:0C57
+    PAUSE
+:0C58
+    {
+}
+:0C59
+    PORTRAIT [N8(0x0b) ]
+:0C5D
+    {"It is true, Kat-al-kot-l. I ac-com-pa-ny these no-ble souls a-round the ci-ty."
+}
+:0CAE
+    PAUSE
+:0CAF
+    {
+}
+:0CB0
+    PORTRAIT [N8(0xeb) ]
+:0CB4
+    {"It is good that you found Yunapotli. He is the besst and the most intelligent of the automatonss."
+}
+:0D18
+    JUMP 0x00db
+:0D1D
+    ELSE
+:0D1E
+    {"There is an automaton called Yunapotli, made of gold. He iss clever and helpful. The otherss are ssilver, and not so bright. They may attack you as intruderss."
+}
+:0DC0
+    JUMP 0x00db
+:0DC5
+    ENDIF
+    KEYWORDS bye
+    ANSWER
+:0DCB
+    {"Goodbye. You are welcome to return anytime."
+}
+:0DF9
+    BYE
+:0DFA
+    KEYWORDS *
+    ANSWER
+:0DFD
+    {"Nothing of $Z is in my memory."
+}
+:0E1E
+    JUMP 0x00db
+    END_ANSWER
+:0E23
+    BYE
+:0E24
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0E2A
+    JUMP 0x10d7
+    KEYWORDS n
+    ANSWER
+:0E32
+    {"Then I will not sspeak it."
+}
+:0E4F
+    JUMP 0x00db
+    END_ANSWER
+:0E55
+    ASKC [yn]
+    KEYWORDS n
+    ANSWER
+:0E5B
+    {"Perhapss you will visit them later, then."
+}
+:0E87
+    JUMP 0x00db
+    KEYWORDS y
+    ANSWER
+:0E8F
+    {"Near where you entered the city, there is a cluster of transportation plates. Step onto the south central plate."
+}
+:0F02
+    PAUSE
+:0F03
+    {
+"You will find yourself in the southern portion of the city. Walk east and then south as far as you can."
+}
+:0F6E
+    PAUSE
+:0F6F
+    {
+"Move east until you can enter the complex corridors where the @humans used to live. Work your way north through the hallways as far as you can."
+}
+:1002
+    PAUSE
+:1003
+    {
+"It can be confusing... you may find it easiest to ssimply follow the left wall."
+}
+:1056
+    PAUSE
+:1057
+    {
+"Move wesst until you find a transportation plate. Step onto the plate. You will find the generator chamber to the east."
+}
+:10D2
+    JUMP 0x00db
+    END_ANSWER
+:10D7
+    {"The Kotl built this city. Unlike you, they were desscended of reptilian ancesstorss. They looked much like me."
+}
+:1148
+    PAUSE
+:1149
+    {
+"From their earliesst timess, they were in possession of a huge black sstone. Their mysstics learned to draw powerss from the sstone."
+}
+:11D1
+    PAUSE
+:11D2
+    {
+"With those powerss, they built this city, and lit it, and made the automatonss to sserve them."
+}
+:1234
+    PAUSE
+:1235
+    {
+"They could not power enough automatonss to sserve them, so they ssought to breed a race of sservants. This ressulted in the Myrmidex."
+}
+:12BE
+    PAUSE
+:12BF
+    {
+"The Myrmidex left and took the black sstone with them, but the city sstill had power, drawing it from the sstone at a great distance."
+}
+:1348
+    PAUSE
+:1349
+    {
+"The Kotl needed new sservantss, so they ssent out the hero Katalkotl into the outer world. Katalkotl brought back many humanss to be sservants."
+}
+:13DC
+    PAUSE
+:13DD
+    {
+"The humanss, too, left the Kotl city. And the Myrmidex came back to kill and desstroy."
+}
+:1437
+    PAUSE
+:1438
+    {"The Myrmidex killed and killed. Perhapss some Kotl ssurvived to esscape; I do not know. The Myrmidex left, and the city clossed up behind them. Sso hass it been until the sstrangers came -- you, and the other @sstranger."
+}
+:1517
+    JUMP 0x00db

@@ -1,0 +1,433 @@
+:0000
+    NPC_ID: npc id: 52, npc name: Tuomaxx
+:0009
+    NPC_LOOK: a scowling, round man with a strange look in his eyes.
+*
+:0042
+    START CONVERSION
+:0043
+    IF [N8(0xeb) 0x00 FLAG ]
+:0049
+    JUMP 0x00a7
+:004E
+    ELSE
+:004F
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0055
+    {The rotund man looks at you evilly and makes strange barking noises at you.
+}
+:00A1
+    JUMP 0x00f9
+:00A6
+    ENDIF
+:00A7
+    IF [N8(0xeb) N8(0x03) FLAG ]
+:00AE
+    {"Oh, YOU again."
+}
+:00BF
+    JUMP 0x00f9
+:00C4
+    ENDIF
+:00C5
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:00CC
+    {"Oh, YOU again.
+}
+:00DC
+    JUMP 0x0ec9
+:00E1
+    ELSE
+:00E2
+    {"Oh, YOU again."
+}
+:00F3
+    JUMP 0x00f9
+:00F8
+    ENDIF
+:00F9
+    {
+}
+:00FA
+    ASK
+    KEYWORDS name
+    ANSWER
+:0101
+    {He flutters his hand in front of your face and then pokes you in the eyes. "Tuomaxx. And don't forget it." (He pronounces it TWO-mash.)
+}
+:0189
+    JUMP 0x00f9
+    KEYWORDS tuom
+    ANSWER
+:0194
+    {"You remembered!"
+}
+:01A6
+    JUMP 0x00f9
+    KEYWORDS job
+    ANSWER
+:01B0
+    {From underneath his ragged garments he draws a pair of club-like weapons. "Tuomaxx makes @drums and drumsticks." To demonstrate, he brings one down on your head, which makes a ringing 'bonk' noise.
+}
+:0276
+    PAUSE
+:0277
+    {
+}
+:0278
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:027F
+    JUMP 0x00f9
+:0284
+    ENDIF
+:0285
+    {"You want a drum made?"
+}
+:029D
+    JUMP 0x0657
+    KEYWORDS drum
+    ANSWER
+:02A8
+    {"I like drums! Drums are great! Drums are my life!
+You want me to make you one?"
+}
+:02F9
+    JUMP 0x0657
+    KEYWORDS trib
+    ANSWER
+:0304
+    {"Tuomaxx was a member of the @Disquiqui tribe. Don't talk about them. Since Tuomaxx lost his @mind, Tuomaxx has lived alone."
+}
+:0382
+    JUMP 0x00f9
+    KEYWORDS disq
+    ANSWER
+:038D
+    {"Tuomaxx said not to mention them!" He whacks you with his drumstick.
+}
+:03D3
+    JUMP 0x00f9
+    KEYWORDS mind
+    ANSWER
+:03DE
+    {"Tuomaxx had a mind once. But a great foreign shanam -- er, shamam -- uh, shamozz -- witch doctor removed it." He points proudly to the unscarred surface of his bald head.
+}
+:048A
+    JUMP 0x00f9
+    KEYWORDS bone
+    ANSWER
+:0495
+    {"No, thank you, Tuomaxx just ate."
+}
+:04B8
+    JUMP 0x00f9
+    KEYWORDS hide
+    ANSWER
+:04C3
+    {"Hide? Is something fierce nearby?" He pulls his furs up over his head.
+}
+:050B
+    JUMP 0x00f9
+    KEYWORDS hill
+    ANSWER
+:0516
+    {"Hill of the @Drum. Not far from Nahuatla stone city, northwest of city." He points east. He thinks about it and corrects, pointing south.
+}
+:05A1
+    PAUSE
+:05A2
+    {
+"No, wait... this is the hill! Don't be so confusing!"
+}
+:05DA
+    JUMP 0x00f9
+    KEYWORDS bigbig
+    ANSWER
+:05E7
+    {"You want a @really big drum, or the @biggest drum possible?"
+}
+:0625
+    JUMP 0x0b60
+    KEYWORDS bye
+    ANSWER
+:062F
+    {"Ahhh, who needs you?"
+}
+:0646
+    BYE
+:0647
+    KEYWORDS *
+    ANSWER
+:064A
+    {"Huh?"
+}
+:0651
+    JUMP 0x00f9
+    END_ANSWER
+:0656
+    BYE
+:0657
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:065D
+    {"You want a @small drum or a @large drum?"
+}
+:0688
+    JUMP 0x06d5
+    KEYWORDS n
+    ANSWER
+:0690
+    {"Wasting Tuomaxx' time, eh?" He whacks you with the drumstick.
+}
+:06CF
+    JUMP 0x00f9
+    END_ANSWER
+:06D5
+    {
+}
+:06D6
+    ASK
+    KEYWORDS smal
+    ANSWER
+:06DD
+    {He smacks himself on the forehead about a dozen times and shuffles his feet. "Tuomaxx asks again: You want a @small drum or a @large drum?"
+}
+:0769
+    JUMP 0x080e
+    KEYWORDS larg
+    ANSWER
+:0774
+    {With his drumsticks, he beats out a melodious tattoo on your forehead. "You want a @large drum or a @really large drum?"
+}
+:07ED
+    JUMP 0x08cc
+    KEYWORDS *
+    ANSWER
+:07F5
+    {"Huh? What's a $Z?"
+}
+:0809
+    JUMP 0x00f9
+    END_ANSWER
+:080E
+    {
+}
+:080F
+    ASK
+    KEYWORDS smal
+    ANSWER
+:0816
+    JUMP 0x0dfe
+    KEYWORDS larg
+    ANSWER
+:0821
+    {"That's better." With his drumsticks, he beats out a melodious tattoo on your forehead. "You want a @large drum or a @really large drum?"
+}
+:08AB
+    JUMP 0x08cc
+    KEYWORDS *
+    ANSWER
+:08B3
+    {"Huh? What's a $Z?"
+}
+:08C7
+    JUMP 0x00f9
+    END_ANSWER
+:08CC
+    {
+}
+:08CD
+    ASK
+    KEYWORDS larg
+    ANSWER
+:08D4
+    {He scowls ferociously, whacks you in the stomach with one drumstick and on the forehead with another. "Oh, a wise man. Tuomaxx has made too many just-large drums. Tuomaxx asks again: You want a @large drum or a @really large drum?"
+}
+:09BC
+    JUMP 0x0a65
+    KEYWORDS real
+    ANSWER
+:09C7
+    {He sticks his face in yours and emits several short barking noises. "You want just a @really big drum or the @biggest drum?"
+}
+:0A44
+    JUMP 0x0b60
+    KEYWORDS *
+    ANSWER
+:0A4C
+    {"Huh? What's a $Z?"
+}
+:0A60
+    JUMP 0x00f9
+    END_ANSWER
+:0A65
+    {
+}
+:0A66
+    ASK
+    KEYWORDS larg
+    ANSWER
+:0A6D
+    JUMP 0x0dfe
+    KEYWORDS real
+    ANSWER
+:0A78
+    {He grabs your earlobe and drags you around in a circle for a moment. Then he sticks his face in yours and emits several short barking noises. "You want just a @really big drum or the @biggest drum?"
+}
+:0B3F
+    JUMP 0x0b60
+    KEYWORDS *
+    ANSWER
+:0B47
+    {"Huh? What's a $Z?"
+}
+:0B5B
+    JUMP 0x00f9
+    END_ANSWER
+:0B60
+    {
+}
+:0B61
+    ASK
+    KEYWORDS bigg
+    ANSWER
+:0B68
+    {"Well, why didn't you say so? Let Tuomaxx think."
+}
+:0B9A
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:0BA1
+    CLEAR_FLAG [N8(0xeb) ], [0x08 N8(0x07) + ]
+:0BAA
+    PAUSE
+:0BAB
+    {
+He struggles at it awhile. "Tuomaxx tries to think but nothing happens."
+}
+:0BF5
+    PAUSE
+:0BF6
+    {
+Finally, he shrugs and gives up.
+}
+:0C18
+    PAUSE
+:0C19
+    {
+"Wait! Tuomaxx has it. You must bring Tuomaxx @hide for drum-head. Then Tuomaxx can make biggest drum."
+}
+:0C82
+    PAUSE
+:0C83
+    {
+He looks around him. "Only one place to build biggest drum. Do you know where that is?" He flutters his hand in front of his face, but now, wise to him, you block his attempt to poke your eyes.
+}
+:0D46
+    PAUSE
+:0D47
+    {
+"That's right. Hill of the Drum. Right here. Bring Tuomaxx @hide for drum-head to @Hill of the Drum, and Tuomaxx will make biggest drum."
+}
+:0DD2
+    JUMP 0x00f9
+    KEYWORDS real
+    ANSWER
+:0DDD
+    JUMP 0x0dfe
+    KEYWORDS *
+    ANSWER
+:0DE5
+    {"Huh? What's a $Z?"
+}
+:0DF9
+    JUMP 0x00f9
+    END_ANSWER
+:0DFE
+    {His eyes narrow and he makes a noise like a cat being strangled. He shuffles his feet again, gives you an evil look, and turns an odd shade of purple.
+}
+:0E95
+    PAUSE
+:0E96
+    {
+"Wrong! No! Not gonna build that kind! Go away!"
+}
+:0EC8
+    BYE
+:0EC9
+    {Did you bring me the @hide for the drum?"
+}
+:0EF3
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0EF9
+    JUMP 0x0f11
+    KEYWORDS n
+    ANSWER
+:0F01
+    {"Why not?"
+}
+:0F0C
+    JUMP 0x00f9
+    END_ANSWER
+:0F11
+    {
+}
+:0F12
+    DECLARE [0x01, 0xb2] = [N8(0x5c) N8(0x00) OBJINPARTY ]
+:0F1C
+    IF [0x01 B2 N16(0x8001) == ]
+:0F24
+    {He looks through your inventory for a moment, then steps back and stares at you.  "Where hide? Tuomaxx doesn't find one anywhere! You have to do better than that!"
+}
+:0FC8
+    PAUSE
+:0FC9
+    {
+"Let's try again."
+}
+:0FDD
+    PAUSE
+:0FDE
+    {
+"}
+:0FE0
+    JUMP 0x0ec9
+:0FE5
+    ENDIF
+:0FE6
+    DELETE npc [0x01 B2 ], obj [N8(0x5c) ], quality [N8(0x00) ], quantity [N8(0x01) ]
+:0FF3
+    {Tuomaxx takes the hide from your party and throws it over your face to admire it. (The hide. Not your face.)
+}
+:1060
+    PORTRAIT [N16(0x00fe) ]
+:1065
+    PAUSE
+:1066
+    {
+"Not bad, not bad," he says in his endearingly whiny voice. "It'll do just fine." He whips the hide back off of your face.
+}
+:10E2
+    SET_FLAG [N8(0xeb) ], [N8(0x03) ]
+:10E9
+    PORTRAIT [N8(0xeb) ]
+:10ED
+    PAUSE
+:10EE
+    {
+Then he gets to work. Moving with incredible speed for one so round and erratic, he sets up several bones into a round framework, soaks the big hide, stretches the hide across the frame, and lashes it down tight.
+}
+:11C4
+    PAUSE
+:11C5
+    {
+"Should be perfect. It'll sound better if you let it dry for a while but you can beat it now."
+}
+:1225
+    SET_FLAG [N8(0xeb) ], [N8(0x07) ]
+:122C
+    U6OP_FUNC [N16(0x0096) ]
+:1231
+    BYE

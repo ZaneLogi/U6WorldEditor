@@ -1,0 +1,244 @@
+:0000
+    NPC_ID: npc id: 38, npc name: Larrifin
+:000A
+    NPC_LOOK: a balding, curly-haired, wild-eyed shaman.
+*
+:0037
+    START CONVERSION
+:0038
+    IF [N8(0xeb) 0x00 FLAG ]
+:003E
+    JUMP 0x00af
+:0043
+    ELSE
+:0044
+    {"What? What?& He's sawing two sticks together and doesn't look as though he wants to be interrupted.
+}
+:00A9
+    JUMP 0x00ed
+:00AE
+    ENDIF
+:00AF
+    {"What? What?& He's still sawing his two sticks together.
+}
+:00E8
+    JUMP 0x00ed
+:00ED
+    {
+}
+:00EE
+    ASK
+    KEYWORDS name
+    ANSWER
+:00F5
+    {"Who is asking?& he sneers.
+}
+:0111
+    PAUSE
+:0112
+    {
+}
+:0113
+    PORTRAIT [N8(0x14) ]
+:0117
+    {"Tell our visitor your name, or Chafblum will hit you so hard your hair will be straight.&
+}
+:0172
+    PAUSE
+:0173
+    {
+}
+:0174
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:017A
+    PORTRAIT [N8(0xeb) ]
+:017E
+    {"Oh. That is different. I am Larrifin.&
+}
+:01A6
+    JUMP 0x00ed
+    KEYWORDS larr
+    ANSWER
+:01B1
+    {"WHAT?!&
+}
+:01BA
+    JUMP 0x00ed
+    KEYWORDS job
+    ANSWER
+:01C4
+    {"Larrifin is shaman of whole tribe. Larrifin is famous @healer.&
+}
+:0205
+    JUMP 0x00ed
+    KEYWORDS bell,nois
+    ANSWER
+:0215
+    IF [N8(0xeb) N8(0x05) FLAG N8(0x00) == ]
+:021F
+    {He nods sagely. "Yes, Larrifin agrees.&
+}
+:0247
+    JUMP 0x00ed
+:024C
+    ENDIF
+:024D
+    NEW npc [N8(0x01) ], obj [N8(0x2b) ], quality [N8(0x00) ], quantity [N8(0x01) ]
+:025A
+    IF [0x1d B2 ]
+:025E
+    {The shaman hands you a large copper bell, rather like a cow-bell.
+"Good luck!&
+}
+:02AD
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x05) ]
+:02B4
+    ELSE
+:02B5
+    {"You've still got too much stuff!&
+}
+:02D8
+    ENDIF
+:02D9
+    JUMP 0x00ed
+    KEYWORDS plac,jug
+    ANSWER
+:02E8
+    IF [N8(0xeb) N8(0x04) FLAG N8(0x00) == ]
+:02F2
+    {"Talk to chief about that.&
+}
+:030E
+    JUMP 0x00ed
+:0313
+    ENDIF
+:0314
+    NEW npc [N8(0x01) ], obj [N8(0x3f) ], quality [N8(0x00) ], quantity [N8(0x02) ]
+:0321
+    IF [0x1d B2 ]
+:0325
+    {The shaman hands you two large jugs of plachta.
+}
+:0355
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x04) ]
+:035C
+    ELSE
+:035D
+    {"You've still got too much stuff!&
+}
+:0380
+    ENDIF
+:0381
+    JUMP 0x00ed
+    KEYWORDS trib
+    ANSWER
+:038C
+    {"This is Disquiqui tribe. Happiest tribe.&
+}
+:03B7
+    JUMP 0x00ed
+    KEYWORDS stic
+    ANSWER
+:03C2
+    {"You like sticks?  @Tuomaxx make sticks.&
+}
+:03EC
+    JUMP 0x00ed
+    KEYWORDS tuom
+    ANSWER
+:03F7
+    {"Echo?&}
+:03FE
+    JUMP 0x00ed
+    KEYWORDS echo
+    ANSWER
+:0409
+    {"Echo!&}
+:0410
+    JUMP 0x00ed
+    KEYWORDS heal
+    ANSWER
+:041B
+    {"Yes, Larrifin is great healer.& He looks nervous. "Uh... does one here need healing?&
+}
+:0472
+    JUMP 0x04e9
+    KEYWORDS bye
+    ANSWER
+:047C
+    {"Good idea. You make distraction and Larrifin will escape.&
+}
+:04B8
+    BYE
+:04B9
+    KEYWORDS *
+    ANSWER
+:04BC
+    {He nods sagely. "Yes, Larrifin agrees.&
+}
+:04E4
+    JUMP 0x00ed
+    END_ANSWER
+:04E9
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:04EF
+    {"Oh.& He looks uncomfortable. "Then Larrifin must heal.& He puts down his sticks.
+}
+:0541
+    PAUSE
+:0542
+    {
+He pats around his fur garments, then brightens up. "Larrifin does not have his spirit-tokens! Cannot heal. Sorry.&
+}
+:05B7
+    PAUSE
+:05B8
+    {
+}
+:05B9
+    PORTRAIT [N8(0x27) ]
+:05BD
+    {"Larrifin does not even know how to heal! Larrifin is rotten shaman.&
+}
+:0603
+    PAUSE
+:0604
+    {
+}
+:0605
+    PORTRAIT [N8(0xeb) ]
+:0609
+    {"Liar! That woman was withered crone until Larrifin healed her.&
+}
+:064A
+    PAUSE
+:064B
+    {
+}
+:064C
+    PORTRAIT [N8(0x27) ]
+:0650
+    {"Larrifin has that backwards. Larrifin gets his hands on a woman, she turns into a withered crone.&
+}
+:06B4
+    PAUSE
+:06B5
+    {
+}
+:06B6
+    PORTRAIT [N8(0xeb) ]
+:06BA
+    {"Oooh, she will be sorry the next time she has a splinter. No one can take out a splinter as Larrifin can.&
+}
+:0726
+    JUMP 0x00ed
+    KEYWORDS n
+    ANSWER
+:072E
+    {He breathes a sigh of relief. "Good.&
+}
+:0754
+    JUMP 0x00ed
+    END_ANSWER

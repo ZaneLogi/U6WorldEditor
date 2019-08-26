@@ -1,0 +1,455 @@
+:0000
+    NPC_ID: npc id: 44, npc name: Oaxtepac
+:000A
+    NPC_LOOK: an elderly man in rich Aztec-like garments.
+*
+:0038
+    START CONVERSION
+:0039
+    IF [N8(0xeb) 0x00 FLAG ]
+:003F
+    JUMP 0x01bf
+:0044
+    ENDIF
+:0045
+    IF [N8(0x01) N8(0x02) FLAG ]
+:004C
+    {He looks at you narrowly. "You are not @Nahuatla, nor of the other tribes in the Valley of Eodon. What do you wish of me, outsider?"
+}
+:00D1
+    ELSE
+:00D2
+    {He looks at you narrowly. "You are not @Nahuatla, nor of the other tribes in the Valley of Eodon. And if you have broken down my prison door, you are certainly no friend of Huitlapacti and Zipactriotl."
+}
+:019D
+    PAUSE
+:019E
+    {
+"What do you wish of me?"
+}
+:01B9
+    ENDIF
+:01BA
+    JUMP 0x02b3
+:01BF
+    IF [N8(0x01) N8(0x02) FLAG ]
+:01C6
+    {"It is my friend $P! I am glad to see you again. How may I help you?"
+}
+:020C
+    ELSE
+:020D
+    {"It is my friend and rescuer, $P! I am glad to see you again. As you can see, I have kept out of sight of the guards here and remain free. How may I help you?"
+}
+:02AD
+    ENDIF
+:02AE
+    JUMP 0x02b3
+:02B3
+    {
+}
+:02B4
+    ASK
+    KEYWORDS name,oaxt
+    ANSWER
+:02C0
+    {"I am Oaxtepac." He pronounces it WASH-tuh-pack.}
+:02F0
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:02F6
+    PORTRAIT [N8(0xeb) ]
+:02FA
+    JUMP 0x02b3
+    KEYWORDS job
+    ANSWER
+:0304
+    IF [N8(0x01) N8(0x02) FLAG ]
+:030B
+    {"Now that the evil mage Zipactriotl has vanished, I am once again the shaman to the @Nahuatla. I interpret the will of the spirits, advising the king."
+}
+:03A3
+    JUMP 0x02b3
+:03A8
+    ELSE
+:03A9
+    {"I am... I WAS... shaman to the @Nahuatla. It is I who interpreted the will of the spirits, and related their wishes to the Nahuatla. I was deposed by the spirit-mage @Zipactriotl, when my king @Moctapotl was banished."
+}
+:0485
+    JUMP 0x02b3
+:048A
+    ENDIF
+    KEYWORDS nahu
+    ANSWER
+:0491
+    {"The people here are called the Nahuatla, and have been since our most ancient memories. Once, we dwelled far, far away."
+}
+:050B
+    PAUSE
+:050C
+    {
+"Mighty @beings brought us to the valley of Eodon to be their servants, in their hidden @city. Our ancestors rebelled and slew their masters, then built Tichticatl."
+}
+:05B3
+    JUMP 0x02b3
+    KEYWORDS moct
+    ANSWER
+:05BE
+    {"Moctapotl is the true king of the @Nahuatla. He is a stern but just king."
+}
+:060A
+    PAUSE
+:060B
+    {
+}
+:060C
+    IF [N8(0x01) N8(0x02) FLAG ]
+:0613
+    {"He sits upon his rightful throne once again."
+}
+:0642
+    JUMP 0x02b3
+:0647
+    ELSE
+:0648
+    {"He does not have the strength to defeat the magic that protects @Zipactriotl and @Huitlapacti; perhaps no man does. He is now an exile, eluding the soldiers who hunt him."
+}
+:06F5
+    JUMP 0x02b3
+:06FA
+    ENDIF
+    KEYWORDS bein,migh
+    ANSWER
+:0706
+    {"We and the other tribes of the Valley of Eodon were brought here by mighty beings. The legends say different things about them."
+}
+:0788
+    PAUSE
+:0789
+    {
+"Some say they were the spirits of the valley. Some say they were like the Sakkhra, but wise. Some say they were the great, thundering lizards of the valley, in a time when they had the wisdom of men and much greater power than men."
+}
+:0874
+    JUMP 0x02b3
+    KEYWORDS vall,eodo
+    ANSWER
+:0884
+    {"We are in the Valley of Eodon. We may never leave; the cliffs are too high to scale."
+}
+:08DB
+    JUMP 0x02b3
+    KEYWORDS tich
+    ANSWER
+:08E6
+    {"This is Tichticatl, the home of the @Nahuatla. It is a town built of stone, the only one in the Valley of Eodon; this is proof that the Nahuatla are a greater race than all the other, savage tribes of the valley."
+}
+:09BD
+    JUMP 0x02b3
+    KEYWORDS myrm
+    ANSWER
+:09C8
+    {"The Myrmidex are evil beings, like ants grown to the size of men. They kill and carry off our people. We fight them and fight them, but they always come."
+}
+:0A64
+    PAUSE
+:0A65
+    {
+"I think that if all men in the Valley, both the great @Nahuatla and the lesser tribes, were to @unite against the Myrmidex, we could beat them. But it has never happened."
+}
+:0B13
+    JUMP 0x02b3
+    KEYWORDS huit
+    ANSWER
+:0B1E
+    IF [N8(0x28) N8(0x07) FLAG ]
+:0B25
+    {"He was briefly king of the @Nahuatla. When the the glow of power that protected him vanished, the people realized he was no longer immortal, and tore him apart like a pack of dogs. Praise be the spirits, he will torment us no more."
+}
+:0C0F
+    JUMP 0x02b3
+:0C14
+    ELSE
+:0C15
+    {"He is the new king of the @Nahuatla; he deposed the old king, @Moctapotl. He is cruel and horrid."
+}
+:0C79
+    JUMP 0x02b3
+:0C7E
+    ENDIF
+    KEYWORDS join
+    ANSWER
+:0C85
+    {"I am honored that you would ask this of me, but I can not join you. My duties are here, among my people."
+}
+:0CF0
+    JUMP 0x02b3
+    KEYWORDS trib
+    ANSWER
+:0CFB
+    {"The other tribes, the lesser tribes, are these:"
+}
+:0D2D
+    PAUSE
+:0D2E
+    {
+"There are the Kurak, Yolaru, and Disquiqui, who live near us. The Kurak and Yolaru are savage but noble, while the Disquiqui are mostly wastrels."
+}
+:0DC3
+    PAUSE
+:0DC4
+    {
+"Far to the north are the Pindiro and Barako, who live in the plains. Far to the southwest are the Barrab, who live atop a tall mesa, while southeast are the Jukari, who live near the volcanoes."
+}
+:0E89
+    PAUSE
+:0E8A
+    {
+"Somewhere to the east, we do not know where, live the Urali. They ride mighty lizards and, recently, they raid us like the Myrmidex."
+}
+:0F12
+    PAUSE
+:0F13
+    {
+"Then there are two races which are not truly like men. The Haakur, far southeast, are nearly men, but bent and brutish. The Sakkhra, far southwest, are lizards who walk like men; they are not men at all."
+}
+:0FE2
+    JUMP 0x02b3
+    KEYWORDS juka
+    ANSWER
+:0FED
+    {"The Jukari are a primitive tribe. They live in a wild land southeast of Tichticatl. Leave our city and travel southeast along the path. You will travel through a narrow passage. Keep to the western cliffs and you will find the Jukari."
+}
+:10DA
+    JUMP 0x02b3
+    KEYWORDS barr
+    ANSWER
+:10E5
+    {"The Barrab live a long distance to the west, on a great mesa."
+}
+:1125
+    JUMP 0x02b3
+    KEYWORDS unit,ally,alli
+    ANSWER
+:113A
+    {"I truly think it would be possible to unite the tribes against the Myrmidex. But it would take a very great hero, and he would have to persuade each tribal chief to help him."
+}
+:11EB
+    JUMP 0x02b3
+    KEYWORDS zipa,glow,powe
+    ANSWER
+:1200
+    IF [N8(0x01) N8(0x02) FLAG ]
+:1207
+    {"Zipactriotl has dissapeared, and with him the glow of power from around @Huitalpacti."
+}
+:125F
+    ELSE
+:1260
+    {"I was until recently the shaman in the king's palace. But not long ago, the being called Zipactriotl came. He was protected by a glow of great power. No dagger, spear or arrow would penetrate it."
+}
+:1326
+    PAUSE
+:1327
+    {
+"He cowed the nobles and warriors, and said that the spirits had sent him to command them. I argued against him. He persuaded many fickle warriors to rise up against me and the king, @Moctapotl."
+}
+:13EC
+    PAUSE
+:13ED
+    {
+"@Moctapotl is swift, and escaped. I am old and slow, and I was captured, as you can see."
+}
+:1449
+    ENDIF
+:144A
+    JUMP 0x02b3
+    KEYWORDS unde,city,hidd
+    ANSWER
+:145F
+    {"Yes. As the story goes, the mighty beings which brought the Nahuatla to the Valley of Eodon had a hidden city near the land of the mesas. They brought us there to be their servants."
+}
+:1517
+    PAUSE
+:1518
+    {
+"Then the Nahuatla rebelled and left the city. Left without servants, the mighty beings decided eventually to abandon it. They left it, they closed it, but they left a key behind in case they should ever want to occupy it again."
+}
+:15FF
+    PAUSE
+:1600
+    {
+"Do you want to know what the legends say of finding the city?"
+}
+:1641
+    JUMP 0x19ef
+    KEYWORDS head
+    ANSWER
+:164C
+    {"You speak of the head of the golden statue of a man, yes? I believe it was a @Barrab tribesman who I found it on. It was in my possession for many years... until Zipactriotl came."
+}
+:1702
+    PAUSE
+:1703
+    {
+"I showed it to Zipactriotl's servant, a man named @Fritaz. He grew excited and told his master about it."
+}
+:176F
+    PAUSE
+:1770
+    {
+"I imagine that Zipactriotl has it now, either in the treasury or in his quarters in the palace. They were once my quarters."
+}
+:17EF
+    JUMP 0x02b3
+    KEYWORDS frit
+    ANSWER
+:17FA
+    {"Yes, Fritaz, a strange and difficult name. Zipactriotl drove him away in a fit of madness. I do not know where he has gone."
+}
+:1878
+    JUMP 0x02b3
+    KEYWORDS gian,gem
+    ANSWER
+:1887
+    {"The giant gem was once in the treasury of the Nahuatla. I would gladly give it to you now, if only I had it. It was stolen away by the Urali, not long ago."
+}
+:1925
+    IF [N8(0x10) N8(0x07) FLAG ]
+:192C
+    JUMP 0x1e49
+:1931
+    ELSE
+:1932
+    JUMP 0x02b3
+:1937
+    ENDIF
+:1938
+    KEYWORDS bye
+    ANSWER
+:193D
+    IF [N8(0x01) N8(0x02) FLAG ]
+:1944
+    {"May the spirits travel with you, great $P."
+}
+:1971
+    ELSE
+:1972
+    {"Fare well, $P. Return here if you ever have another request of me."
+}
+:19B7
+    ENDIF
+:19B8
+    BYE
+    KEYWORDS *
+    ANSWER
+:19BC
+    {"That is something of which I know nothing."
+}
+:19E9
+    JUMP 0x02b3
+    END_ANSWER
+:19EE
+    BYE
+:19EF
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:19F5
+    {"To find the city, you must go to the land of the mesas, which is southwest of Tichticatl, beyond a narrow pass."
+}
+:1A67
+    PAUSE
+:1A68
+    {
+"There, you will find three mesas. One is very small. One is larger, and the village of the Barrab is atop it. The last is very large. You must go to the top of the largest mesa."
+}
+:1B1D
+    PAUSE
+:1B1E
+    {
+"There, on a promontory on the north of the mesa, you will find a remnant of the beings who built the city. It is a device, a sculpture... I know not what. In that device, you must place a @giant gem, and then wait for many hours."
+}
+:1C07
+    PAUSE
+:1C08
+    {
+"At a certain time of day, the sunlight will strike the @giant gem and reveal the location of the hidden city. Or so the legend has it."
+}
+:1C92
+    PAUSE
+:1C93
+    {
+"There is more. The legend says that a strange man guards the entrance to the city, a man made of solid gold!"
+}
+:1D03
+    PAUSE
+:1D04
+    {
+"I was certain that this must have been another legend, until one day many years ago when I found the @head of such a man in the possession of a captured tribesman. It appears to have been pulled from a golden statue. If the golden man was real, perhaps the city is real."
+}
+:1E16
+    JUMP 0x02b3
+    KEYWORDS n
+    ANSWER
+:1E1E
+    {"Well, perhaps it IS only a legend."
+}
+:1E43
+    JUMP 0x02b3
+    END_ANSWER
+:1E49
+    IF [N8(0x01) N8(0x01) FLAG ]
+:1E50
+    JUMP 0x02b3
+:1E55
+    ENDIF
+:1E56
+    PAUSE
+:1E57
+    {
+}
+:1E58
+    IF [N8(0x02) INPARTY ]
+:1E5D
+    PORTRAIT [N8(0x02) ]
+:1E61
+    {"Yes, Oaxtepac, Darden the Huge stole the gem from the Nahuatla. Darden gave it to me, trying to buy my love. Darden did not know Aiela could never love such a cruel man."
+}
+:1F0D
+    PAUSE
+:1F0E
+    {
+}
+:1F0F
+    PORTRAIT [N8(0xeb) ]
+:1F13
+    {"I see. Please, keep the gem. I have no use for it."
+}
+:1F48
+    JUMP 0x02b3
+:1F4D
+    ENDIF
+:1F4E
+    IF [N8(0x09) INPARTY ]
+:1F53
+    PORTRAIT [N8(0x09) ]
+:1F57
+    {"Did not Aiela have a gem much like that, $P? Perhaps Darden gave it to her while she was imprisoned?"
+}
+:1FBE
+    PAUSE
+:1FBF
+    {
+}
+:1FC0
+    PORTRAIT [N8(0xeb) ]
+:1FC4
+    {"Should you ever find the gem, please keep it. I have no use for it, now."
+}
+:200F
+    JUMP 0x02b3
+:2014
+    ENDIF
+:2015
+    JUMP 0x02b3
+:201A
+    BYE

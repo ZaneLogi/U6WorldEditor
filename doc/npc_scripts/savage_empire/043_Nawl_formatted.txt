@@ -1,0 +1,206 @@
+:0000
+    NPC_ID: npc id: 43, npc name: Nawl
+:0006
+    NPC_LOOK: a slender, balding, intent tribesman.
+*
+:002E
+    START CONVERSION
+:002F
+    IF [N8(0xeb) 0x00 FLAG ]
+:0035
+    JUMP 0x0188
+:003A
+    ENDIF
+:003B
+    {"I know you, or one like you. You are a warrior of the @Haakur, are you not?&
+}
+:0089
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:008F
+    {"I knew it. I can always tell one of the @Haakur, even when they conceal their true natures.&
+}
+:00ED
+    JUMP 0x01fc
+    KEYWORDS n
+    ANSWER
+:00F5
+    {He sighs. "If you wish to pretend, I will not stop you, my @Haakur friend. But you must know your disguise is a poor one. What do you want?&
+}
+:0182
+    JUMP 0x01fc
+    END_ANSWER
+:0188
+    {"Ah! It is my @Haakur friend again. I am glad you have returned. I have so much to tell you. Ask me anything.&
+}
+:01F7
+    JUMP 0x01fc
+:01FC
+    {
+}
+:01FD
+    ASK
+    KEYWORDS name
+    ANSWER
+:0204
+    {"I am Nawl of the @Barrab tribe. I am the most clever warrior of the most clever tribe. My cunning is legendary. I know everything. And I never boast.&
+}
+:029C
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:02A2
+    PORTRAIT [N8(0xeb) ]
+:02A6
+    JUMP 0x01fc
+    KEYWORDS nawl
+    ANSWER
+:02B1
+    {"Yes, I am Nawl.&
+}
+:02C3
+    JUMP 0x01fc
+    KEYWORDS job
+    ANSWER
+:02CD
+    {"My duty is to wander the land and learn all there is to learn. There is not one corner of these valleys I have not seen, not one cave I have not visited, not one @enemy I have not defeated.&
+}
+:038D
+    JUMP 0x01fc
+    KEYWORDS haak
+    ANSWER
+:0398
+    {"Haakur? I need not tell YOU of the Haakur. You need not pretend you are not one of that tribe. You cannot fool the cunning Nawl. Do not try.&
+}
+:0427
+    JUMP 0x01fc
+    KEYWORDS barr
+    ANSWER
+:0432
+    {"Yes, the cunning Nawl is of the Barrab tribe, the greatest tribe of all. We are more mighty, more clever than all other men.&
+}
+:04B1
+    JUMP 0x01fc
+    KEYWORDS blue,ston
+    ANSWER
+:04C1
+    {"The mighty Barrab tribe has the only blue stone in all the land. It is that stone which makes us the greatest tribe.&
+}
+:0538
+    PAUSE
+:0539
+    {
+"Not that we would be any less great without it. Ask the chieftain, @Balakai, about the blue stone.&
+}
+:059F
+    JUMP 0x01fc
+    KEYWORDS bala
+    ANSWER
+:05AA
+    {"Yes, Balakai. He is the shaman and chief of the Barrab, the greatest tribe. He is the master of the @blue stone.&
+}
+:061D
+    PAUSE
+:061E
+    {
+"In the land of the three mesas you will find him, for he and the rest of the Barrabs live atop one of the mesas.&
+}
+:0692
+    PAUSE
+:0693
+    {
+"I am not allowed -- er, I do not visit there often, I cannot show you the way.&
+}
+:06E5
+    JUMP 0x01fc
+    KEYWORDS enem
+    ANSWER
+:06F0
+    {"You speak to the greatest warrior ever born. The cunning Nawl HAS no enemies. I have conquered or enslaved them all.&
+}
+:0767
+    JUMP 0x01fc
+    KEYWORDS myrm
+    ANSWER
+:0772
+    {"The Myrmidex? I know them. I lived among them for many years. A kindly race of dull-wits. I almost married their princess. I seem to remember they are very homely.&
+}
+:0818
+    JUMP 0x01fc
+    KEYWORDS feat,nahu
+    ANSWER
+:0828
+    {"I know them well, the Nahuatla."
+*
+"They... uh... when a warrior knows so much he sometimes is slow to remember it all..."
+*
+"They are the warriors with the feathers on their heads.&
+}
+:08E0
+    JUMP 0x01fc
+    KEYWORDS nako
+    ANSWER
+:08EB
+    {"Nakola?& His eyes stand out from their sockets. "Is that she-demon here? Oh, no! I said her name! Perhaps she heard me! I must flee!&
+}
+:0972
+    WORKTYPE [N8(0xeb) ], [N8(0x11) ]
+:0979
+    BYE
+:097A
+    KEYWORDS wet,ural
+    ANSWER
+:0984
+    {"I don't know about that. No, that is not true, the cunning Nawl knows all. They're the Urali. They're the moist warriors from the swamps, are they not? Yes.&
+}
+:0A23
+    JUMP 0x01fc
+    KEYWORDS trib
+    ANSWER
+:0A2E
+    {"Yes, there are many tribes in this land other than the mighty @Barrab."
+*
+"There are... uh... those who have all the @feathers, and the ones with the sandals, and the ones where it's @wet. And even more than that. I have met them all. I know everything.&}
+:0B2D
+    JUMP 0x01fc
+    KEYWORDS unit,ally,alli
+    ANSWER
+:0B42
+    {"You wish to unite the mighty Barrab tribe with those lesser races? Hah!&
+}
+:0B8C
+    PAUSE
+:0B8D
+    {
+He thinks about it for a long moment.}
+:0BB3
+    PAUSE
+:0BB4
+    {
+"In truth, that decision is for the chieftain of the @Barrab to make. His name is @Balakai. Please do not tell him that the cunning Nawl said 'Hah.' Though I have no fear of him, or of you either.&
+}
+:0C7B
+    JUMP 0x01fc
+    KEYWORDS bara,disq,juka,kura,pind,sakk,yola
+    ANSWER
+:0CA4
+    {"I've heard of them. I mean, er, the mighty Nawl lived among them for a long time. Nawl could have been their chief. They are one of those other tribes, yes?&
+}
+:0D43
+    JUMP 0x01fc
+    KEYWORDS bye
+    ANSWER
+:0D4D
+    {"So, you have learned all you can understand from the cunning Nawl? Return to me sometime when you feel you can learn more!&
+}
+:0DCA
+    BYE
+:0DCB
+    KEYWORDS *
+    ANSWER
+:0DCE
+    {"The cunning Nawl knows all about that.
+But I will tell you nothing. You could not possibly understand it.&
+}
+:0E3A
+    JUMP 0x01fc
+    END_ANSWER

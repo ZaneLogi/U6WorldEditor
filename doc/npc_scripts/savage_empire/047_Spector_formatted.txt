@@ -1,0 +1,448 @@
+:0000
+    NPC_ID: npc id: 47, npc name: Spector
+:0009
+    NPC_LOOK: a lean, dark-bearded man with shrewd eyes.
+*
+:0036
+    START CONVERSION
+:0037
+    IF [N8(0xeb) 0x00 FLAG ]
+:003D
+    JUMP 0x0049
+:0042
+    ELSE
+:0043
+    JUMP 0x005b
+:0048
+    ENDIF
+:0049
+    IF [N8(0x37) 0x00 FLAG ]
+:004F
+    JUMP 0x006d
+:0054
+    ELSE
+:0055
+    JUMP 0x012a
+:005A
+    ENDIF
+:005B
+    IF [N8(0x37) 0x00 FLAG ]
+:0061
+    JUMP 0x01e7
+:0066
+    ELSE
+:0067
+    JUMP 0x0315
+:006C
+    ENDIF
+:006D
+    {Spector glares at you. "Oh, you're back. Why do you persist in coming here?"
+}
+:00BA
+    PAUSE
+:00BB
+    {
+"You cannot hurt me or my mystic @generators. We are too well protected. Do yourself a favor and leave."
+}
+:0125
+    JUMP 0x03be
+:012A
+    SET_FLAG [N8(0x37) ], [0x00 ]
+:0130
+    {Spector sighs and rolls his eyes. "Why, it's the ever-inquisitive $P. I take it you've come to annoy me again, like a sleepless child bothering his father for a glass of water."
+}
+:01E2
+    JUMP 0x03be
+:01E7
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:01ED
+    PORTRAIT [N8(0xeb) ]
+:01F1
+    {Spector's eyes fall on you and his jaw drops. "It's $P! However did you find my city?" He gapes at you for a moment.
+}
+:0266
+    PAUSE
+:0267
+    {
+"Well, it won't do you any good. These @generators you see around you are protected by the same force @field that protects me. You can't hurt me, you can't hurt them."
+}
+:0310
+    JUMP 0x03be
+:0315
+    SET_FLAG [N8(0x37) ], [0x00 ]
+:031B
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0321
+    {"$P! I'd heard rumors of you, that you and your friends were wandering through the valley... but I never dreamed that you'd find my @underground city."
+}
+:03B9
+    JUMP 0x03be
+:03BE
+    {
+}
+:03BF
+    ASK
+    KEYWORDS name
+    ANSWER
+:03C6
+    {"I am Dr. Johann Schleimann Spector."
+}
+:03EC
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:03F2
+    PORTRAIT [N8(0xeb) ]
+:03F6
+    JUMP 0x03be
+    KEYWORDS zipa
+    ANSWER
+:0401
+    {"Yes, yes, Zipactriotl is how the Nahuatla know me."
+}
+:0436
+    JUMP 0x03be
+    KEYWORDS spec,joha
+    ANSWER
+:0446
+    {He nods sagely. "Learn my name well."
+}
+:046C
+    JUMP 0x03be
+    KEYWORDS job
+    ANSWER
+:0476
+    {He shakes his head. "I am beyond the concern of mere workaday professions. I am the world's only hope for a future @paradise. I am the future master of the @Myrmidex and @conquerer of the world."}
+:0539
+    JUMP 0x03be
+    KEYWORDS brin,peac,para,conq
+    ANSWER
+:0553
+    {"You want to hear about my plan to bring @paradise to Earth?"
+}
+:0591
+    JUMP 0x2236
+    KEYWORDS myrm
+    ANSWER
+:059C
+    {"The Myrmidex are a race of ant-like creatures. They're the size of humans and even more ferocious."
+}
+:0601
+    PAUSE
+:0602
+    {
+"They have mutated to human-like intelligence by the power of the black @stone in their possession... the same black stone which powers the mystic generators you see around you."
+}
+:06B6
+    JUMP 0x03be
+    KEYWORDS kotl
+    ANSWER
+:06C1
+    {"I'm not sure what to make of the Kotl. They must have been a @tribe of men in ancient times, but in all their art they represent themselves as man-shaped lizards."
+}
+:0766
+    JUMP 0x03be
+    KEYWORDS glow,forc,fiel
+    ANSWER
+:077B
+    {"I'm protected by a force field which is emitted by the @generators you see around you. These energies resonate with a @belt I've made from rare metals I found in this city."
+}
+:082A
+    JUMP 0x03be
+    KEYWORDS belt,meta
+    ANSWER
+:083A
+    {"I wear the belt under my clothes. It also serves to hold my pants up."
+}
+:0882
+    JUMP 0x03be
+    KEYWORDS old
+    ANSWER
+:088C
+    {"Do you mean the old king, @Moctapotl, or the old shaman, @Oaxtepac?"
+}
+:08D2
+    JUMP 0x03be
+    KEYWORDS moct
+    ANSWER
+:08DD
+    {"Moctapotl was a fool. He wasn't willing to send his warriors all over the valley looking for clues to help me tap the power of the @Kotl generators. I deposed him. He managed to escape."
+}
+:0999
+    PAUSE
+:099A
+    {
+"I put Huitlapacti on the throne to replace him."
+}
+:09CD
+    JUMP 0x03be
+    KEYWORDS craz,insa,delu,luna,fool,dumb,stup,mani,mad,madm
+    ANSWER
+:0A04
+    {He snarls. "That's what Fritz said. He called me mad. I'll show you mad. Go ahead, poke around, look at everything you want. And when this city rises up to bite you, don't call me for help. I'll laugh as you die!"
+}
+:0ADA
+    PAUSE
+:0ADB
+    {
+He turns his back on you and pretends not to hear what you say.
+}
+:0B1C
+    WORKTYPE [N8(0xeb) ], [N8(0x11) ]
+:0B23
+    BYE
+:0B24
+    KEYWORDS plan
+    ANSWER
+:0B2A
+    {"My plan for bringing @paradise to the Earth."
+}
+:0B59
+    JUMP 0x03be
+    KEYWORDS oaxt
+    ANSWER
+:0B64
+    {"Oaxtepac was the shaman of the Nahuatla. I told him to say that the spirits commanded them to find the power-@stone of the Myrmidex, to seek out all sorts of clues."
+}
+:0C0B
+    PAUSE
+:0C0C
+    {
+"He refused. So I locked him up in the great pyramid in the city of @Tichticatl."
+}
+:0C5F
+    JUMP 0x03be
+    KEYWORDS peop,nahu
+    ANSWER
+:0C6F
+    {"The most civilized people in this valley are the Nahuatla. I think their ancestors were also ancestors of the Aztecs."
+}
+:0CE7
+    PAUSE
+:0CE8
+    {
+"The other humans in this valley... they're hopeless. Too feral and disorganized to follow orders."
+}
+:0D4D
+    JUMP 0x03be
+    KEYWORDS king,huit
+    ANSWER
+:0D5D
+    {"The new king of the @Nahuatla is Huitlapacti. Nobody wanted him to be king; all he wants to do is have people killed. If he weren't protected by my force @field, they'd rise up and kill him."}
+:0E1D
+    JUMP 0x03be
+    KEYWORDS ener,gene,powe
+    ANSWER
+:0E32
+    {"These generators you see in this room are mystic batteries. I don't quite understand how they work. They draw power from the far-away black @stone held by the Myrmidex."
+}
+:0EDD
+    JUMP 0x03be
+    KEYWORDS trib
+    ANSWER
+:0EE8
+    {"There are many tribes out there. These Nahuatla are the most civilized of them. I haven't bothered learning the names of the others."
+}
+:0F6F
+    PAUSE
+:0F70
+    {
+"They seem to have been drawn from all over the Earth: Central America, Africa, Asia, lots of places. But they're disorganized and dangerous. Best to destroy or enslave them and get back to business."}
+:1039
+    JUMP 0x03be
+    KEYWORDS frit,hund,assi
+    ANSWER
+:104E
+    {"Fritz von Hundlaben was my research assistant and bodyguard. Where did you hear about him? Never mind." He shakes his head.
+}
+:10CB
+    PAUSE
+:10CC
+    {
+"Fritz was drawn along with me when I reached this valley. But as I began developing my plan for @conquering the Earth, he became... strange. Withdrawn."
+}
+:1167
+    PAUSE
+:1168
+    {
+"He went insane... and convinced himself that I was mad, that my plan was mad. Poor fellow. He just disappeared one day. He's probably out in the jungle somewhere, eating rabbits raw and howling at the moon."}
+:1239
+    JUMP 0x03be
+    KEYWORDS no
+    ANSWER
+:1242
+    {He stiffens. "You know," he says slowly, "in the city of Tichticatl, where I am the shaman, saying the word 'no' to me carries a penalty of death." He smiles thinly. "But I have no guards here. I cannot call for your execution."
+}
+:1327
+    PAUSE
+:1328
+    {
+He reaches out and slaps you across the face. "There," he smiles. "That should hold you until you manage to kill yourself in your explorations of this city."
+}
+:13C7
+    JUMP 0x03be
+    KEYWORDS blac,ston
+    ANSWER
+:13D7
+    {"I'm certain, from my calculations, that the Myrmidex are in possession of a great black stone such as the small ones which brought me to this valley. I have never seen it... but I'm certain they have it."
+}
+:14A5
+    PAUSE
+:14A6
+    {
+"The generators in this room draw their power from it, and I've come to believe that a side-effect of the stone's power is causing an odd change in the flow of time within the valley." He shrugs, obviously unconcerned.
+}
+:1582
+    PAUSE
+:1583
+    {
+"I'm certain that if I can bring that stone here, I can use it to implement my plans for bringing paradise to the Earth."
+}
+:15FE
+    JUMP 0x03be
+    KEYWORDS city
+    ANSWER
+:1609
+    {"Which city? @Tichticatl, or the @Underground city of the @Kotl, where you are now?"
+}
+:165E
+    JUMP 0x03be
+    KEYWORDS tich
+    ANSWER
+:1669
+    {"Tichticatl is the city of the Nahuatla. It has many similarities to Maya and Aztec architecture. I'll have to study it at length, once I've @conquered the Earth."
+}
+:170D
+    JUMP 0x03be
+    KEYWORDS unde
+    ANSWER
+:1718
+    {He gestures around him. "Fantastic, isn't it? This city was built by some forgotten people called the @Kotl."
+}
+:1786
+    PAUSE
+:1787
+    {
+"They've left no record behind of their origin or accomplishments." His face twitches; he sounds rather as though he's lying.
+}
+:1806
+    PAUSE
+:1807
+    {
+"They seem to have learned many secrets of mysticism and mystic power. This is another place I will have to study at length once I've @conquered the Earth."
+}
+:18A5
+    JUMP 0x03be
+    KEYWORDS bye
+    ANSWER
+:18AF
+    {He smiles. "Of course. Go about your business. I'm sure you'll enjoy your stay in the city." He laughs, then turns his attention elsewhere.
+}
+:193B
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:1941
+    BYE
+:1942
+    KEYWORDS *
+    ANSWER
+:1945
+    {"Don't bother me with irrelevancies."
+}
+:196B
+    JUMP 0x03be
+    END_ANSWER
+:1970
+    {He takes a deep breath. "Several months ago, my assistant Fritz came to me with some interesting @stones he'd fished out of a meteor crater in Guatemala."
+}
+:1A0B
+    PAUSE
+:1A0C
+    {
+"They were black, and pitted, as if exposed to some incredible heat in the distant past. And they pulsed with energy."
+}
+:1A84
+    PAUSE
+:1A85
+    {
+"The energy eventually brought strange thoughts to my mind. I knew they were the key to a bright future era, if only I could learn to use the power."
+}
+:1B1C
+    PAUSE
+:1B1D
+    {
+"I experimented with the @stones, trying to tap that power. One night, my experiments went awry... and Fritz and I suddenly appeared here."
+}
+:1BAA
+    PAUSE
+:1BAB
+    {
+"I could feel the presence of the power of the @stones here, in the valley. But I needed manpower to find it."
+}
+:1C1B
+    PAUSE
+:1C1C
+    {
+"Learning that there were dangerous humans in the valley, I experimented, and created my invincible force @field, initially drawing its power from the @stones that I brought along from Germany."
+}
+:1CE0
+    PAUSE
+:1CE1
+    {
+"In the city of Tichticatl, I told them that I was a great being from elsewhere and that they had best obey me. The king and the shaman wouldn't, so I got rid of them."
+}
+:1D8B
+    PAUSE
+:1D8C
+    {
+"With the aid of the warriors of the Nahuatla, I was able to find where the energy of the @stones was emanating from. One source was in the Myrmidex Caves, which I could not enter."
+}
+:1E43
+    PAUSE
+:1E44
+    {
+"The other source was here, in this city of the @Kotl, these generators you see around you."
+}
+:1EA2
+    PAUSE
+:1EA3
+    {
+"My idea is to use the city's automatons to enter the Myrmidex Caves and retrieve the black @stone which I know to be there. Then, I should be able to control the Myrmidex. Between them and the automatons, I'll have the most ferocious army ever known."
+}
+:1FA1
+    PAUSE
+:1FA2
+    {
+"Then, utilizing the power of the @stone, I can open a gigantic rift and transport the entire @Underground City of the @Kotl... to Washington, D.C. Within hours, the United States will be under my command."
+}
+:2072
+    PAUSE
+:2073
+    {
+"It's a simple matter to repeat the process a few more times. The Kremlin, Downing Street and Buckingham Palace, no citadel where rulers rest will be safe from me." He smiles, happy as a child.
+}
+:2136
+    PAUSE
+:2137
+    {
+"I'll organize the world's population like the Myrmidex. The world will consist of human ants, every man and woman obedient, doing the job I assign him, building the world toward a happy tomorrow."
+}
+:21FE
+    PAUSE
+:21FF
+    {
+"Anyway... That is the plan. What do you think?"
+}
+:2231
+    JUMP 0x03be
+:2236
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:223C
+    JUMP 0x1970
+    KEYWORDS n
+    ANSWER
+:2244
+    {"Then, why did you ask? Oh, never mind." He looks miffed.
+}
+:227E
+    JUMP 0x03be
+    END_ANSWER

@@ -1,0 +1,138 @@
+:0000
+    NPC_ID: npc id: 39, npc name: Lerei
+:0007
+    NPC_LOOK: a clear-eyed, amused-looking native woman.
+*
+:0034
+    START CONVERSION
+:0035
+    IF [N8(0xeb) 0x00 FLAG ]
+:003B
+    JUMP 0x00be
+:0040
+    ELSE
+:0041
+    {"Ah, it is a strange warrior. What would a real warrior want among the Disquiqui?& She gives you a long, curious look.
+}
+:00B8
+    JUMP 0x00fe
+:00BD
+    ENDIF
+:00BE
+    {"Ah. Against all sense, $P has returned to the Disquiqui.&
+}
+:00F9
+    JUMP 0x00fe
+:00FE
+    {
+}
+:00FF
+    ASK
+    KEYWORDS name,lere
+    ANSWER
+:010B
+    {"Lerei. Often called Lerei-of-not-enough-Plachta.&
+}
+:013E
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0144
+    PORTRAIT [N8(0xeb) ]
+:0148
+    JUMP 0x00fe
+    KEYWORDS job,pris
+    ANSWER
+:0157
+    {"Lerei is in charge of feeding the prisoners. It is usually very easy, for our warriors are not good enough to capture anyone. But now Lerei must work, for we have a prisoner.&
+}
+:0208
+    IF [N8(0x04) INPARTY ]
+:020D
+    PAUSE
+:020E
+    {
+"In fact, there he is. Hello, Jimmy.&
+}
+:0235
+    PAUSE
+:0236
+    {
+}
+:0237
+    PORTRAIT [N8(0x04) ]
+:023B
+    {"Hello, doll. You're a rotten cook.&
+}
+:0260
+    PAUSE
+:0261
+    {
+}
+:0262
+    PORTRAIT [N8(0xeb) ]
+:0266
+    {"Lerei has never been in charge of a prisoner before! How did Jimmy get out?&
+}
+:02B4
+    PAUSE
+:02B5
+    {
+}
+:02B6
+    PORTRAIT [N8(0x04) ]
+:02BA
+    {"$P here staged a jailbreak. I'm escaping, see. Care to come along?&
+}
+:02FF
+    PAUSE
+:0300
+    {
+}
+:0301
+    PORTRAIT [N8(0xeb) ]
+:0305
+    {"Maybe if it were just $P. But if Jimmy is going along, Lerei will stay here.&
+}
+:0354
+    JUMP 0x00fe
+:0359
+    ELSE
+:035A
+    PAUSE
+:035B
+    {
+"His name is Jimmy. He is in one of the huts.& She waves distractedly in the direction of the village hut.
+}
+:03C7
+    JUMP 0x00fe
+:03CC
+    ENDIF
+    KEYWORDS trib
+    ANSWER
+:03D3
+    {She looks around, incredulous. "Can you imagine that Lerei would stay here if she were not one of the Disquiqui?&
+}
+:0445
+    JUMP 0x00fe
+    KEYWORDS stir,fry,parr
+    ANSWER
+:0459
+    {"Stir-fried chocolate-chameleon-and-parrot? It's my speciality!&
+}
+:049A
+    JUMP 0x00fe
+    KEYWORDS bye
+    ANSWER
+:04A4
+    {"Good choice. Better anywhere than Disquiqui village.&
+}
+:04DB
+    BYE
+:04DC
+    KEYWORDS *
+    ANSWER
+:04DF
+    {"Lerei doesn't understand $Z.&
+}
+:04FE
+    JUMP 0x00fe
+    END_ANSWER

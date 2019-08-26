@@ -1,0 +1,403 @@
+:0000
+    NPC_ID: npc id: 46, npc name: Sahree
+:0008
+    NPC_LOOK: a beautiful warrior-woman with a bold look in her eye.
+*
+:0041
+    START CONVERSION
+:0042
+    IF [N8(0x10) N8(0x07) FLAG ]
+:0049
+    {"Sahree sees $P, rescuer of @Aiela."
+}
+:006E
+    JUMP 0x0341
+:0073
+    ENDIF
+:0074
+    IF [N8(0x10) N8(0x06) FLAG ]
+:007B
+    {She looks very distressed.
+}
+:0096
+    PAUSE
+:0097
+    {
+"Aiela is Sahree's best friend. Often did Aiela join Sahree in exploring, talking, and making trouble."
+}
+:0100
+    PAUSE
+:0101
+    {
+"But Sahree has not seen Aiela for many days. Something bad may have happened to Aiela."
+}
+:015B
+    PAUSE
+:015C
+    {
+"When Sahree was sneaki..." she blushes, then corrects herself. }
+:019D
+    PAUSE
+:019E
+    {
+"When Sahree was near the @Kurak village, she heard the warriors there say @Aiela had been captured by Darden the Huge, from the @Urali tribe."
+}
+:022F
+    PAUSE
+:0230
+    {
+"Sahree has searched for the Urali, but their village is hidden... but it must be somewhere to the southeast of the Yolaru village."
+}
+:02B6
+    JUMP 0x0462
+:02BB
+    ENDIF
+:02BC
+    IF [N8(0xeb) 0x00 FLAG ]
+:02C2
+    {"Spirits' blessings on $P."
+}
+:02DE
+    ELSE
+:02DF
+    {"It is the from-far-away warrior they call $P. The @Kuraks speak of $P. What does $P wish?"
+}
+:033B
+    ENDIF
+:033C
+    JUMP 0x0462
+:0341
+    IF [N8(0x02) INPARTY ]
+:0346
+    PAUSE
+:0347
+    {
+She doesn't seem to see Aiela at all.
+}
+:036E
+    PAUSE
+:036F
+    {
+}
+:0370
+    PORTRAIT [N8(0x02) ]
+:0374
+    {"Sahree ignores Aiela when there is a handsome warrior around? It is to be expected."
+}
+:03CA
+    PAUSE
+:03CB
+    {
+}
+:03CC
+    PORTRAIT [N8(0xeb) ]
+:03D0
+    {The woman grins broadly. "Sahree was just comparing the from-far-away warrior to the tales told of him. Spirits' blessings on @Aiela, too."
+}
+:045C
+    ENDIF
+:045D
+    JUMP 0x0462
+:0462
+    {
+}
+:0463
+    ASK
+    KEYWORDS name,sahr
+    ANSWER
+:046F
+    {"Sahree is my name, Sahree daughter of @Mosagann."
+}
+:04A2
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:04A8
+    PORTRAIT [N8(0xeb) ]
+:04AC
+    JUMP 0x0462
+    KEYWORDS job
+    ANSWER
+:04B6
+    {"Sahree chooses to make trouble wherever there is trouble to be made."
+}
+:04FD
+    PAUSE
+:04FE
+    {
+}
+:04FF
+    IF [N8(0x02) INPARTY ]
+:0504
+    PORTRAIT [N8(0x02) ]
+:0508
+    {Aiela nods reflectively. "Sahree is the best bringer of trouble there is. The spirits stand in awe before her."
+}
+:0578
+    PAUSE
+:0579
+    {
+}
+:057A
+    PORTRAIT [N8(0xeb) ]
+:057E
+    ENDIF
+:057F
+    {"Where men say that women should not take up the spear and the bow, Sahree goes and demonstrates warrior's prowess."
+}
+:05F4
+    PAUSE
+:05F5
+    {
+"Where a bad chief stands in pretended dignity, Sahree hides in the trees and hurls spoor at him."
+}
+:0659
+    PAUSE
+:065A
+    {
+"These are the things Sahree does."
+}
+:067F
+    JUMP 0x0462
+    KEYWORDS trib
+    ANSWER
+:068A
+    {"Sahree is of the Yolaru tribe, great hunters. Our fiercest enemies are the @Kuraks. But Sahree's greatest @friend is of the Kuraks."
+}
+:0710
+    JUMP 0x0462
+    KEYWORDS yola
+    ANSWER
+:071B
+    {"Sahree is of the Yolaru tribe."
+}
+:073C
+    JUMP 0x0462
+    KEYWORDS mosa
+    ANSWER
+:0747
+    {"Mosagann, Sahree's father is shaman of the Yolaru tribe."
+}
+:0782
+    JUMP 0x0462
+    KEYWORDS ural
+    ANSWER
+:078D
+    IF [N8(0x10) N8(0x07) FLAG N8(0x02) INPARTY | ]
+:0798
+    {"$P must know of the Urali already, for did he not rescue Sahree's good friend @Aiela from them?"
+}
+:07FA
+    ELSE
+:07FB
+    {She looks quite angry. "The Urali are no friend of Sahree, for they have captured Sahree's companion in trouble-making, @Aiela."
+}
+:087C
+    PAUSE
+:087D
+    {
+"Sahree does not know where their tribe is, or she would go there and make trouble for them."
+}
+:08DC
+    ENDIF
+:08DD
+    JUMP 0x0462
+    KEYWORDS kura
+    ANSWER
+:08E8
+    {"Kuraks live to the west of the Yolaru. Good warriors. Yolaru fight them all the time. Too often: If we fought the @Myrmidex as often as each other, more Myrmidex would be dead."
+}
+:099B
+    JUMP 0x0462
+    KEYWORDS mous,sher
+    ANSWER
+:09AB
+    {She makes a small squeaking sound, then coughs politely. "Sahree has a small cold," she explains."
+}
+:0A0E
+    JUMP 0x0462
+    KEYWORDS frie,aiel
+    ANSWER
+:0A1E
+    {"Sahree's best friend is Aiela of the @Kurak tribe. }
+:0A52
+    IF [N8(0x10) N8(0x07) FLAG N8(0x00) == N8(0x02) INPARTY N8(0x00) == & ]
+:0A63
+    {But now Aiela is missing. Darden the Huge of the @Urali tribe has captured her."
+}
+:0AB4
+    JUMP 0x0462
+:0AB9
+    ENDIF
+:0ABA
+    {Sahree and Aiela get into trouble together all the time."
+}
+:0AF4
+    IF [N8(0x02) INPARTY ]
+:0AF9
+    PAUSE
+:0AFA
+    {
+}
+:0AFB
+    PORTRAIT [N8(0x02) ]
+:0AFF
+    {Aiela speaks up, sweetly: "Sahree had best keep her stories to herself. Aiela has stories, too."
+}
+:0B60
+    PAUSE
+:0B61
+    {
+}
+:0B62
+    PORTRAIT [N8(0xeb) ]
+:0B66
+    {"... but Sahree would never tell of any of these troubles. Never, never."
+}
+:0BB0
+    ENDIF
+:0BB1
+    JUMP 0x0462
+    KEYWORDS myrm
+    ANSWER
+:0BBC
+    {"Myrmidex are evil ant-things. They live west of the Kurak village. They raid against the people all the time. Kill and eat, kill and eat. @Aiela and Sahree wish to @unite tribes against them."
+}
+:0C7E
+    JUMP 0x0462
+    KEYWORDS trou
+    ANSWER
+:0C89
+    {"Sahree must not talk of trouble. Such things are between Sahree and @Aiela."
+}
+:0CD7
+    JUMP 0x0462
+    KEYWORDS rafk,schw
+    ANSWER
+:0CE7
+    {"Sahree knows that name. There is one whose true name is Rafkin who acts as the schweitzer of the Yolaru tribe."
+}
+:0D58
+    JUMP 0x0462
+    KEYWORDS unit,ally,alli
+    ANSWER
+:0D6D
+    {"The tribes cannot stand singly before the @Myrmidex. They must unite. Sahree knows this. @Aiela knows this. But Sahree and Aiela cannot persuade their chiefs of this."
+}
+:0E16
+    PAUSE
+:0E17
+    {
+"There is a legend of one warrior who united the tribes in the past. Has $P heard this story, of Oloro?"
+}
+:0E81
+    JUMP 0x1070
+    KEYWORDS olor
+    ANSWER
+:0E8C
+    {"There is a legend of one warrior who united the tribes in the past. Has $P heard this story, of Oloro?"
+}
+:0EF5
+    JUMP 0x1070
+    KEYWORDS drum,hill
+    ANSWER
+:0F05
+    {"The hill of the drum is northwest of the stone village of the @Nahuatla people. It is a small hill."
+}
+:0F6B
+    JUMP 0x0462
+    KEYWORDS nahu
+    ANSWER
+:0F76
+    {"The Nahuatla are a people who build all in stone. Their stone village is southwest of the Yolaru village."
+}
+:0FE2
+    JUMP 0x0462
+    KEYWORDS join
+    ANSWER
+:0FED
+    {"No, Sahree has plenty to do already."
+}
+:1014
+    JUMP 0x0462
+    KEYWORDS bye
+    ANSWER
+:101E
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:1024
+    {"Spirits protect you, $P."
+}
+:103F
+    BYE
+:1040
+    KEYWORDS *
+    ANSWER
+:1043
+    {She shakes her head, not understanding.
+}
+:106B
+    JUMP 0x0462
+    END_ANSWER
+:1070
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:1076
+    {"Good. If only the tribes had an Oloro now, the evil of the @Myrmidex might end."
+}
+:10C8
+    JUMP 0x0462
+    KEYWORDS n
+    ANSWER
+:10D0
+    {"Once in the past, the lizards of the jungle became too numerous and fierce, and all tribes were in danger. All men might have been eaten and destroyed."
+}
+:116A
+    PAUSE
+:116B
+    {
+"Yet they would never fight as brothers; when they did not fight the lizards, they fought one another, and even more good warriors died."
+}
+:11F6
+    PAUSE
+:11F7
+    {
+"One warrior was Oloro-of-no-tribe. Oloro was an exile; Sahree thinks he must have been Yolaru once."
+}
+:125E
+    PAUSE
+:125F
+    {
+"Oloro went from chief to chief and did a mighty service for each one. Each chief promised to unite with former enemies only if some great service were done, and Oloro went out and did that great service."
+}
+:132E
+    PAUSE
+:132F
+    {
+"When each service was done, Oloro went to each chief and said, 'When the sound of the greatest drum there could ever be sounds through the jungle, come to that sound, and we will destroy the fierce lizards."
+}
+:1401
+    PAUSE
+:1402
+    {
+"When all the services were done, he built a great drum on a small hill northwest of the Nahuatla stone village. It is still called @Hill of the Drum."
+}
+:149B
+    PAUSE
+:149C
+    {
+"He beat the drum until all the chiefs and all the warriors assembled. And though there was anger between the warriors, they fought as brothers, and the lizards were killed."
+}
+:154C
+    PAUSE
+:154D
+    {
+"Sahree thinks that a new Oloro could come and do the same, for all the warriors know the story of Oloro. If a great warrior could do a service for each chief, and then build Oloro's drum, the warriors might come."
+}
+:1625
+    PAUSE
+:1626
+    {
+"But the chiefs do not listen to Sahree. Sahree cannot even try to do these great deeds when the chiefs will not listen to her."
+}
+:16A8
+    JUMP 0x0462
+    END_ANSWER

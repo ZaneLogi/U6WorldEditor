@@ -1,0 +1,111 @@
+:0000
+    NPC_ID: npc id: 41, npc name: Mosagann
+:000A
+    NPC_LOOK: a lean, elegant man wearing shamanistic paints.
+*
+:003C
+    START CONVERSION
+:003D
+    IF [N8(0xeb) 0x00 FLAG ]
+:0043
+    JUMP 0x0102
+:0048
+    ELSE
+:0049
+    {He appears to be chanting to himself and counting on his fingers, but it's hard to tell. He gives you a quick look, obviously hoping that you'll go away, and tries to ignore you.
+}
+:00FC
+    JUMP 0x0125
+:0101
+    ENDIF
+:0102
+    {"Mosagann is still busy, $P.&
+}
+:0120
+    JUMP 0x0125
+:0125
+    {
+}
+:0126
+    ASK
+    KEYWORDS name,mosa
+    ANSWER
+:0132
+    {"Mosagann is my name. Do not interrupt.&
+}
+:015B
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0161
+    PORTRAIT [N8(0xeb) ]
+:0165
+    JUMP 0x0125
+    KEYWORDS job
+    ANSWER
+:016F
+    {"Shaman. Father of @Sahree. Go away. Very busy now.&
+}
+:01A4
+    JUMP 0x0125
+    KEYWORDS busy
+    ANSWER
+:01AF
+    {"Yes, very busy.&
+}
+:01C1
+    JUMP 0x0125
+    KEYWORDS trade
+    ANSWER
+:01CD
+    {"No, too busy to trade now.&
+}
+:01EA
+    JUMP 0x0125
+    KEYWORDS yola,trib
+    ANSWER
+:01FA
+    {"Yolaru tribe.& He nods quickly. "We are Yolaru. Go find someone else to talk to.&
+}
+:024D
+    JUMP 0x0125
+    KEYWORDS sahr
+    ANSWER
+:0258
+    {His face breaks into a smile and he stops his chanting and counting. "Yes, Sahree is my daughter. Sahree is a fine she-warrior. A better warrior than the men of the Yolaru.&
+}
+:0306
+    PAUSE
+:0307
+    {
+"Sahree is beautiful and clever as her mother, as busy as her father.& He taps his chest, indicating himself.
+}
+:0376
+    PAUSE
+:0377
+    {
+"Busy.& A thought occurs to him. He begins to look distracted again. "Go away. Mosagann is busy.&
+}
+:03DA
+    JUMP 0x0125
+    KEYWORDS apat,chie
+    ANSWER
+:03EA
+    {"Apaton. Chief of the Yolaru. Go speak to Apaton.&
+}
+:041D
+    JUMP 0x0125
+    KEYWORDS bye
+    ANSWER
+:0427
+    {"Speak to Mosagann again when you have less time.&
+}
+:045A
+    BYE
+:045B
+    KEYWORDS *
+    ANSWER
+:045E
+    {He sighs and ignores you.
+}
+:0478
+    JUMP 0x0125
+    END_ANSWER

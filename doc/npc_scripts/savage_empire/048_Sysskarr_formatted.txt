@@ -1,0 +1,425 @@
+:0000
+    NPC_ID: npc id: 48, npc name: Sysskarr
+:000A
+    NPC_LOOK: a sly but aged male of the reptile men.
+*
+:0034
+    START CONVERSION
+:0035
+    IF [N8(0xeb) 0x00 FLAG ]
+:003B
+    JUMP 0x1271
+:0040
+    ELSE
+:0041
+    {"Sssoo, you are $P we hear sssoo much offf. You traaavel, you quessst. Now you are in  Sssakkhra lands. Whhhat want you heeere, eh?"
+}
+:00C6
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:00CC
+    JUMP 0x00d2
+:00D1
+    ENDIF
+:00D2
+    {
+}
+:00D3
+    ASK
+    KEYWORDS name,syss
+    ANSWER
+:00DF
+    {"You ssspeak to Sysskarr, ssspawn of @Ssslisssith."
+}
+:0113
+    JUMP 0x00d2
+    KEYWORDS job
+    ANSWER
+:011D
+    {"Sysskarr wasss haaatched to be ruler of all @Ssakkhra, and Sysskarr will rule until he falls and wooorms take him."
+}
+:0192
+    PAUSE
+:0193
+    {
+"Sysskarr iss alssso enemy of the @Thunderer."
+}
+:01C3
+    JUMP 0x00d2
+    KEYWORDS trib
+    ANSWER
+:01CE
+    {"We are Sssaakkhra, perfect race. Hiide like aarmor, jawws like death."
+}
+:0216
+    PAUSE
+:0217
+    {
+"There are other triiibes. Nearby are @Barrab, live on top of mesa. Sssometimes we fight, sssometimes we ignore."
+}
+:028A
+    PAUSE
+:028B
+    {
+"Further away, ooother races. Nahuatla with sstone knives and goold. @Disssquiqui by the river, drink and feassst all of time. Kuraaak in the foressst, sssneak around in trees."
+}
+:033E
+    PAUSE
+:033F
+    {
+"Many more even fuurther away, we neever meet. Barako, Yolaaaru, uuugly Haakur, swaampy Urali, faar-away Jukari and Pindiro."
+}
+:03BE
+    PAUSE
+:03BF
+    {
+"Last, there are @Myrmidex, fierce like ants."
+}
+:03EF
+    JUMP 0x00d2
+    KEYWORDS sssl
+    ANSWER
+:03FA
+    {"Ssslisssith was my sssire. Mighty waarior. Ssslew maany Barrab. Worms haave him now."
+}
+:0451
+    JUMP 0x00d2
+    KEYWORDS worm
+    ANSWER
+:045C
+    {"Worms taake everyone, wiith time. Why you sssit here and taalk of worms?"
+}
+:04A7
+    JUMP 0x00d2
+    KEYWORDS thun
+    ANSWER
+:04B2
+    {"Yesss, Thunderer. Miighty lizard, taall as mesa, sswift as river. When he waalks, earth ssshakes like thunder. When he roooars, sound breeaks boulders from cliffs and birds die of feeear."
+}
+:0570
+    JUMP 0x00d2
+    KEYWORDS jim,malo
+    ANSWER
+:057F
+    {"Sysskarr haass heard of one sssuch. @Dissquiqui haaave him, or uuused to have. Sssay he wearsss ssstrange hidesss, is too ssskinny to eeat."
+}
+:060D
+    JUMP 0x00d2
+    KEYWORDS disq,diss
+    ANSWER
+:061D
+    {"To find Disquiqui, taake path to foressst lands. Asss ssoon as in foressst, before reach Nahuatla city, turn north."
+}
+:0693
+    JUMP 0x00d2
+    KEYWORDS myrm
+    ANSWER
+:069E
+    {"We haate Myrmidex. We kill Myrmidex. They live faaar away, we know not wheere."
+}
+:06EF
+    JUMP 0x00d2
+    KEYWORDS sakk,ssak,sssa
+    ANSWER
+:0704
+    {"We are Sssaakkhra, perfect race. Hiide like aarmor, jawws like death. Dessscendantsss of the @Kotl."
+}
+:076A
+    JUMP 0x00d2
+    KEYWORDS unit,ally,alli
+    ANSWER
+:077F
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0786
+    {"You have dessstroyed the Thunderer. Sysssskar will stand by $P when the @drum sounds to unite the tribes."
+}
+:07F2
+    JUMP 0x00d2
+:07F7
+    ENDIF
+:07F8
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:07FF
+    {"You aaalready know how to uuunite tribesss. Sysskarr has aaalready told you. Sakkhra will help you if you dessstroy @Thunderer."
+}
+:0881
+    JUMP 0x00d2
+:0886
+    ELSE
+:0887
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:088E
+    {"You wisssh to unite tribes, in ssspite of aall odds? Make fffriends of enemies? Sssoo. Veeery well, Sysskarr will give you chaaaance."
+}
+:0916
+    PAUSE
+:0917
+    {
+He leans forward, and his warm, dank breath washes over you as he begins speaking more quietly and conspiratorially:
+}
+:098D
+    PAUSE
+:098E
+    {
+"We haave griefff, do we Sssaakkhra.
+North and easst of hheere, in ssecluded canyon, are plants that bear the green fruit."
+}
+:0A0B
+    PAUSE
+:0A0C
+    {
+"Many, many generations, sssince time begins, we use this fruit. Good medicine for Sssaakkhra."
+}
+:0A6D
+    PAUSE
+:0A6E
+    {
+"Not long ago, He comes. @Thunderer. Ssstrides into canyon, roooars like thunder-sstorm. With ravenous hunger, eatss Sssaakkhra who quest for the medicine of the green fruit."
+}
+:0B1F
+    PAUSE
+:0B20
+    {
+"You wisssh Sssaakkhra to help you with Myrrrmidex? Go and ssslay @Thunderer. Ressstore to Sssaakkhra a safe way to our ancesssstral grove. Do ssso, and our aid we give you."
+}
+:0BD0
+    PAUSE
+:0BD1
+    {
+}
+:0BD2
+    ENDIF
+:0BD3
+    JUMP 0x1630
+    KEYWORDS gree,frui,medi
+    ANSWER
+:0BE8
+    {"Green fruit growsss only on the trees in the north part of thisss valley. Sssstrong medicine for the Ssakkhra. Does nothing for other triibes."
+}
+:0C79
+    JUMP 0x00d2
+    KEYWORDS kotl
+    ANSWER
+:0C84
+    {"Kotl. Name of our kind whheen we live in ciiity under ground. Have sssome @power which protectssss them."
+}
+:0CEF
+    JUMP 0x00d2
+    KEYWORDS spec,glow,powe
+    ANSWER
+:0D04
+    {"Yesss, Sysskarr has heard of Zipactriotl aand glow which proteeects him and Azzztec king. Sssaakkhra tales ssspeak of glow. Our ancessstors from long, long ago had glow. They were called Kotl."
+}
+:0DC7
+    PAUSE
+:0DC8
+    {
+"In aaancient times, ssstory says, Sssaakkhra ancestors, called Kotl, ruule all world, keep huumans as petss. Live in miighty city beneath earth. Have powerful glow, protectss them."
+}
+:0E80
+    PAUSE
+:0E81
+    {
+"But @Myrmidexxx come and ssscatter them. We now live above grouund, in smaaall caves."
+}
+:0EDA
+    PAUSE
+:0EDB
+    {
+"Leegend say, go to top of Great Mesa. Isss northeassst of usss. Find aaancient relic of thoose times. Wiill say where aaancient Sssaakkhra lived. Theere you may fffind sssecret of glow."
+}
+:0F98
+    JUMP 0x00d2
+    KEYWORDS lotu,flow
+    ANSWER
+:0FA8
+    {"Yesss, there isss such a flower near heere. Go top of Greeeat Mesa, northeassst of us. There find floower."
+}
+:1015
+    JUMP 0x00d2
+    KEYWORDS blue,ston
+    ANSWER
+:1025
+    {"Blue sstone iss very nice. @Barrab shaman came to loook once. Ssstruck stone with hammer, made smaller blue stones."
+}
+:109B
+    PAUSE
+:109C
+    {
+"Sysskarr did not care... isss much blue sstone."
+}
+:10CF
+    JUMP 0x00d2
+    KEYWORDS barr
+    ANSWER
+:10DA
+    {"Barrab live on tall mesa farther eassst. Whole villlage on top. Chief is called Balakai. @Balakai also shaman."
+}
+:114B
+    JUMP 0x00d2
+    KEYWORDS bala
+    ANSWER
+:1156
+    {"Balakai is tribe chief and ssshaman for Barrab. Fought him once, did Sysskarr, when Sysskarr very old and Balakai very young. Sysskar won. Sssurprised Balakai lived."
+}
+:11FE
+    JUMP 0x00d2
+    KEYWORDS drum
+    ANSWER
+:1209
+    JUMP 0x1466
+    KEYWORDS bye
+    ANSWER
+:1213
+    {"Yesss, go. Too much talk make Sysskarr weary."
+}
+:1243
+    BYE
+:1244
+    KEYWORDS *
+    ANSWER
+:1247
+    {"Sysskarr knows noothing of thisss."
+}
+:126C
+    JUMP 0x00d2
+    END_ANSWER
+:1271
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:1278
+    JUMP 0x1284
+:127D
+    ELSE
+:127E
+    JUMP 0x12fe
+:1283
+    ENDIF
+:1284
+    {"$P, you hhaave hhelped Sssakkhra already. Ssslew Thunderer, did you. Welcome are you hhere. Whhaat is your wisssh?"
+}
+:12F9
+    JUMP 0x00d2
+:12FE
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:1305
+    {"Sysskarr is ssorry to ssee you returned, o mighty $P. Ffor Sysskarr knows your tasssk is yet not accomplisshed. @Thunderer ssstill lives. We hear his earth-ssshaking footssteps even in our sssleep. Why are you hheere?"
+}
+:13E1
+    ELSE
+:13E2
+    {"Sysskarr is hhaappy to see friend $P again. Our lassst talk wasss too ssssoon over. Whhhat will we ssspeak of today, oh $P."
+}
+:1460
+    ENDIF
+:1461
+    JUMP 0x00d2
+:1466
+    {"Yesssss, Great Drum of huuumans. In aaancient past, huuumans live in peace, ssstory sssay. Every year, chiefs beat great drum and sssummon tribes for talk, dance."
+}
+:150B
+    PAUSE
+:150C
+    {
+"Then war break out. Huuumans war on ssselves. Ssstupid huuumans."
+}
+:1550
+    PAUSE
+:1551
+    {
+"You want to unite tribes? Mussst get help from all chiefss. Mussst also have sssomeone build new Great Drum on Drum Hill."
+}
+:15CE
+    PAUSE
+:15CF
+    {
+"Drum Hill is near Nahuatla city, near where river ffaalls off cliff."
+}
+:1617
+    SET_FLAG [N8(0x04) ], [N8(0x05) ]
+:161E
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:1625
+    JUMP 0x00d2
+:162A
+    ENDIF
+:162B
+    JUMP 0x1692
+:1630
+    {"You need drum to unite humaaan tribes. You know ssstory of @drum?"
+}
+:1674
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:167A
+    {"Gooood."
+}
+:1684
+    JUMP 0x1692
+    KEYWORDS n
+    ANSWER
+:168C
+    JUMP 0x1466
+    END_ANSWER
+:1692
+    IF [N8(0x04) INPARTY ]
+:1697
+    JUMP 0x16b1
+:169C
+    ELSE
+:169D
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:16A4
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:16AB
+    JUMP 0x00d2
+:16B0
+    ENDIF
+:16B1
+    PAUSE
+:16B2
+    {
+}
+:16B3
+    IF [N8(0x04) N8(0x06) FLAG ]
+:16BA
+    PORTRAIT [N8(0x04) ]
+:16BE
+    {Jimmy whips out his notebook. "Don't strain your brain to remember that, $P-old-pal. I'll just jot it down in my @notebook here."
+}
+:1740
+    PAUSE
+:1741
+    {
+}
+:1742
+    PORTRAIT [N8(0xeb) ]
+:1746
+    JUMP 0x00d2
+:174B
+    ELSE
+:174C
+    PORTRAIT [N8(0x04) ]
+:1750
+    {Jimmy speaks up. "Tell you what, boss. It could be that we're going to have a lot of these little chores ahead of us. I'll note down what each chief wants."
+}
+:17ED
+    PAUSE
+:17EE
+    {
+"Any time you want to check out what we've got in store for us, ask me about my @notebook. It never forgets."
+}
+:185D
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:1864
+    SET_FLAG [N8(0x04) ], [N8(0x03) ]
+:186B
+    PAUSE
+:186C
+    {
+}
+:186D
+    PORTRAIT [N8(0xeb) ]
+:1871
+    JUMP 0x00d2
+:1876
+    ENDIF

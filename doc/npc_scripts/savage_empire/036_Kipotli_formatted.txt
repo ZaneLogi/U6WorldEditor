@@ -1,0 +1,213 @@
+:0000
+    NPC_ID: npc id: 36, npc name: Kipotli
+:0009
+    NPC_LOOK: a hulking, brutish copper-skinned man.
+*
+:0032
+    START CONVERSION
+:0033
+    IF [N8(0xeb) 0x00 FLAG ]
+:0039
+    JUMP 0x010f
+:003E
+    ELSE
+:003F
+    {"You. You. I wish to speak to you. Do not turn away. I am a prisoner here. You are an intruder here. We have something in common. Both ignore the laws of Huitlapacti and Zipactriotl. What do you want?"
+}
+:0109
+    JUMP 0x019e
+:010E
+    ENDIF
+:010F
+    {"You again! You did not free me. You SHOULD NOT have betrayed me!"
+}
+:0152
+    PAUSE
+:0153
+    {
+"Guards! Guards! Guards!" He shrieks at the top of his lungs.
+}
+:0192
+    U6OP_FUNC [N8(0x03) ]
+:0196
+    WORKTYPE [N8(0xeb) ], [N8(0x9b) ]
+:019D
+    BYE
+:019E
+    {
+}
+:019F
+    ASK
+    KEYWORDS name
+    ANSWER
+:01A6
+    {"I am Kipotli. Kipotli the Fierce. Kipotli the Red. Kipotli the Slayer. Kipotli the Untamed."
+}
+:0204
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:020A
+    PORTRAIT [N8(0xeb) ]
+:020E
+    IF [N8(0x04) INPARTY ]
+:0213
+    PAUSE
+:0214
+    {
+}
+:0215
+    PORTRAIT [N8(0x04) ]
+:0219
+    {Jimmy whispers in your ear: "Kipotli the Redundant."
+}
+:024E
+    PAUSE
+:024F
+    {
+}
+:0250
+    PORTRAIT [N8(0xeb) ]
+:0254
+    {Kipotli snarls. "What does he say?"
+}
+:0278
+    ENDIF
+:0279
+    JUMP 0x019e
+    KEYWORDS kipo,red,slay,unta
+    ANSWER
+:0292
+    {"Bow when you speak my name!"
+}
+:02B0
+    JUMP 0x019e
+    KEYWORDS job
+    ANSWER
+:02BA
+    {"I am a warrior. I slay the savages. I slay the giant lizards. I slay Nahuatla officers. I slay anyone. But now I am a @prisoner. So is @Oaxtepac."
+}
+:034E
+    JUMP 0x019e
+    KEYWORDS trib
+    ANSWER
+:0359
+    {"I am of the Nahuatla."
+}
+:0371
+    JUMP 0x019e
+    KEYWORDS pris
+    ANSWER
+:037C
+    {"They told me that I should stop killing my own officers. I told them, 'Nobody tells me that!' and killed THEM."
+}
+:03ED
+    PAUSE
+:03EE
+    {
+"Then more came and said, 'Why did you do this?' And I said, 'I don't answer questions!' and killed THEM."
+}
+:045A
+    PAUSE
+:045B
+    {
+"Then more came, with nets, and I couldn't kill all of them. So I am here. But now you are here, you will have to @free me."
+}
+:04D9
+    JUMP 0x019e
+    KEYWORDS no
+    ANSWER
+:04E2
+    {"Don't say 'No' to me. I might have to kill you, too. Instead, you should @free me."
+}
+:0537
+    JUMP 0x019e
+    KEYWORDS free
+    ANSWER
+:0542
+    {"Yes, free me. I will @join you. I will kill all your enemies, and mine too. Just leave the door open. I'll be your friend forever. Yes, yes. Will you free me?"
+}
+:05E3
+    JUMP 0x0833
+    KEYWORDS oaxt,sham
+    ANSWER
+:05F3
+    {"Oaxtepac, the Shaman? Yes, he is here, near me. Behind a solid door, a door with no window. You don't want him. He is weak."
+}
+:0671
+    JUMP 0x019e
+    KEYWORDS join
+    ANSWER
+:067C
+    {"Join!? With one so pathetic as you? I only said that to get you to set me free. You must pay for your arrogance! Kipotli will kill everyone!"
+}
+:070B
+    WORKTYPE [N8(0xeb) ], [N8(0x9b) ]
+:0712
+    BYE
+:0713
+    KEYWORDS bye
+    ANSWER
+:0718
+    {"No, you can't go away. You must free me. You must tell me now whether you will free me. If you do not, I will call the guards. I can scream so loudly they will hear me, and come. Now, will you free me or not?"
+}
+:07EB
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:07F1
+    JUMP 0x0923
+    KEYWORDS *
+    ANSWER
+:07F9
+    {"I do not care about that. I want you to @free me."
+}
+:082D
+    JUMP 0x019e
+    END_ANSWER
+:0832
+    BYE
+:0833
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0839
+    {"Good! Just slide the door bolt. Yes, yes."
+}
+:0865
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:086B
+    BYE
+:086C
+    KEYWORDS n
+    ANSWER
+:086F
+    {"No? No? Then I cannot kill you myself. I suppose I will just have to watch the guards doing it." He begins screaming at the top of his lungs. "Guards! Guards!"
+}
+:0910
+    U6OP_FUNC [N8(0x03) ]
+:0914
+    WORKTYPE [N8(0xeb) ], [N8(0x9b) ]
+:091B
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0921
+    BYE
+:0922
+    END_ANSWER
+:0923
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0929
+    {"Good. Open the door. Hurry up." He steps back, feverish anticipation in his eyes.
+}
+:097C
+    BYE
+:097D
+    KEYWORDS n
+    ANSWER
+:0980
+    {He flushes very red, very angry. "Then I do not get to kill you myself. But the guards will." He begins screaming: "Guards! Guards!"
+}
+:0A05
+    U6OP_FUNC [N8(0x03) ]
+:0A09
+    BYE
+:0A0A
+    END_ANSWER

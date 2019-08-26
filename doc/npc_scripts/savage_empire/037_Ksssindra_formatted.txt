@@ -1,0 +1,147 @@
+:0000
+    NPC_ID: npc id: 37, npc name: Ksssindra
+:000B
+    NPC_LOOK: a stooped, aged female reptile with cunning eyes.
+*
+:003F
+    START CONVERSION
+:0040
+    IF [N8(0xeb) 0x00 FLAG ]
+:0046
+    JUMP 0x00a0
+:004B
+    ELSE
+:004C
+    {"Sssoo. Ssstrange huuman here, beloonging to no tribe. Mussst be cautiousss.&
+}
+:009A
+    JUMP 0x00d4
+:009F
+    ENDIF
+:00A0
+    {"Sssoo. Ssstrange warrior $P isss here again.&
+}
+:00CF
+    JUMP 0x00d4
+:00D4
+    {
+}
+:00D5
+    ASK
+    KEYWORDS name,ksss
+    ANSWER
+:00E1
+    {"Ksssindra is name.&
+}
+:00F6
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:00FC
+    PORTRAIT [N8(0xeb) ]
+:0100
+    JUMP 0x00d4
+    KEYWORDS job
+    ANSWER
+:010A
+    {"Ksssindra haas no tasssks now. Ksssindra wasss once traaveler and waarrior. Tooo oold now. @Teachesss young oness.&
+}
+:017F
+    JUMP 0x00d4
+    KEYWORDS trib
+    ANSWER
+:018A
+    {"Ksssindra is of Sssakkhra tribe. We aare fiercer than liizard, smaarter than huuman.&
+}
+:01E1
+    JUMP 0x00d4
+    KEYWORDS teac
+    ANSWER
+:01EC
+    {"Yeeesss. Ksssindra teachesss. Shoows young oness @landmarkss of the Sssakkhra. Teells of @legendss.&
+}
+:0252
+    JUMP 0x00d4
+    KEYWORDS land
+    ANSWER
+:025D
+    {"Maaany landmarksss for young Sssakkhra to learn. @Medicine trees, @Mesas.&
+}
+:02A9
+    JUMP 0x00d4
+    KEYWORDS lege
+    ANSWER
+:02B4
+    {"Maaany legends for young Sssakkhra to learn. @City under the earth is one.&
+}
+:0301
+    JUMP 0x00d4
+    KEYWORDS blue,ston,rock
+    ANSWER
+:0316
+    {"Yeeess. In Sssakkhra caves is big blue rock. Sssakkhra hit it with hammer, make sssmall blue rocks. Maake jewelry of sssmall blue rocks.&
+}
+:03A1
+    JUMP 0x00d4
+    KEYWORDS medi
+    ANSWER
+:03AC
+    {"Green fruit grows on trees in north part of this valley. Many would travel to them, before the @Thunderer caame.&
+}
+:041F
+    JUMP 0x00d4
+    KEYWORDS city
+    ANSWER
+:042A
+    {"Leegend say that Sakkhra once liived uunder ground, in huuge ciity. Near great @mesa. Lossst now.&
+}
+:048E
+    JUMP 0x00d4
+    KEYWORDS mesa
+    ANSWER
+:0499
+    {"Three mesas in thiis land. Great mesa and small mesa nearesst Sakkhra caves. No oone lives on theese mesas. Barrab mesa farther aaway. @Barrab tribe lives on.&
+}
+:053A
+    JUMP 0x00d4
+    KEYWORDS thun
+    ANSWER
+:0545
+    {"Thunderer. Biig lizard. }
+:055E
+    IF [N8(0x30) N8(0x07) FLAG ]
+:0565
+    {Ksssindra hass heard that $P hasss killed the Thunderer.  Thiss is goood.&
+}
+:05B0
+    ELSE
+:05B1
+    {Eats Sssakkhra who go near.&
+}
+:05CE
+    ENDIF
+:05CF
+    JUMP 0x00d4
+    KEYWORDS barr
+    ANSWER
+:05DA
+    {"Huumans, like you. Liive on eassternmosst @mesa.&
+}
+:060D
+    JUMP 0x00d4
+    KEYWORDS bye
+    ANSWER
+:0617
+    {The lizard nods and turns away from you.
+}
+:0640
+    BYE
+:0641
+    KEYWORDS *
+    ANSWER
+:0644
+    {"Ksssindra not understandss.&
+}
+:0662
+    JUMP 0x00d4
+    END_ANSWER
+:0667
+    BYE

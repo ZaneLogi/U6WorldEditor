@@ -1,0 +1,210 @@
+:0000
+    NPC_ID: npc id: 45, npc name: Pever
+:0007
+    NPC_LOOK: a strong-looking warrior with a lost look in his eyes.
+*
+:0040
+    START CONVERSION
+:0041
+    IF [N8(0xeb) 0x00 FLAG ]
+:0047
+    JUMP 0x0077
+:004C
+    ELSE
+:004D
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0053
+    PORTRAIT [N8(0xeb) ]
+:0057
+    {"Pever doesn't know you.&
+}
+:0071
+    JUMP 0x009c
+:0076
+    ENDIF
+:0077
+    {"Pever still doesn't know you.&
+}
+:0097
+    JUMP 0x009c
+:009C
+    {
+}
+:009D
+    ASK
+    KEYWORDS name
+    ANSWER
+:00A4
+    {"Pever doesn't know his name.&
+}
+:00C3
+    IF [N8(0x02) INPARTY ]
+:00C8
+    PAUSE
+:00C9
+    {
+}
+:00CA
+    PORTRAIT [N8(0x02) ]
+:00CE
+    {Aiela speaks up, her voice sad. "Aiela has heard of the great Pever. Pever and Dokray of the Pindiro were great friends. They sought out and hunted Myrmidex.&
+}
+:016D
+    PAUSE
+:016E
+    {
+"One time, Pever was hurt by the Myrmidex. Pever's mind is not his any more. Pever has not wit enough to be a warrior or to hunt the Myrmidex.&
+}
+:01FF
+    PAUSE
+:0200
+    {
+"Aiela has heard that Pever does not wish to be reminded of the @Myrmidex.&
+}
+:024D
+    PAUSE
+:024E
+    PORTRAIT [N8(0xeb) ]
+:0252
+    JUMP 0x009c
+:0257
+    ENDIF
+:0258
+    IF [N8(0x03) INPARTY ]
+:025D
+    PAUSE
+:025E
+    {
+}
+:025F
+    PORTRAIT [N8(0x03) ]
+:0263
+    {Dokray leans over and speaks, his tone sad: "Pever was once a great warrior of the Jukari. One day, he and Dokray went out to kill some Myrmidex.&
+}
+:02F6
+    PAUSE
+:02F7
+    {
+"Pever was injured in the head. Pever did not come back whole. Please, do not speak to Pever of the @Myrmidex.&
+}
+:0368
+    PAUSE
+:0369
+    PORTRAIT [N8(0xeb) ]
+:036D
+    JUMP 0x009c
+:0372
+    ENDIF
+:0373
+    IF [N8(0x09) INPARTY ]
+:0378
+    PAUSE
+:0379
+    {
+}
+:037A
+    PORTRAIT [N8(0x09) ]
+:037E
+    {Triolo speaks up: "Pever was once the greatest warrior of the Jukari. The songs speak of Pever and his friend Dokray fighting the Myrmidex. Pever's mind was taken by the @Myrmidex.&
+}
+:0434
+    PAUSE
+:0435
+    {
+}
+:0436
+    PORTRAIT [N8(0xeb) ]
+:043A
+    JUMP 0x009c
+:043F
+    ENDIF
+:0440
+    JUMP 0x009c
+    KEYWORDS peve
+    ANSWER
+:044B
+    {He looks at you, obviously quite puzzled.
+}
+:0475
+    JUMP 0x009c
+    KEYWORDS job
+    ANSWER
+:047F
+    {"Pever has important task. Pever must...& His eyes wander a bit. "Pever does not remember.&
+}
+:04DB
+    JUMP 0x009c
+    KEYWORDS myrm
+    ANSWER
+:04E6
+    {"Myrmidex. Myrmidex? MYRMIDEX!& His eyes grow wide.
+}
+:051A
+    PAUSE
+:051B
+    {
+"Pever hates Myrmidex! Pever kills Myrmidex!&
+}
+:054A
+    PAUSE
+:054B
+    {
+His eyes roll around and then focus on you. "Pever sees a Myrmidex!&
+}
+:0591
+    PAUSE
+:0592
+    {
+}
+:0593
+    WORKTYPE [N8(0xeb) ], [N8(0x9b) ]
+:059A
+    BYE
+:059B
+    KEYWORDS bye
+    ANSWER
+:05A0
+    IF [N8(0x03) INPARTY ]
+:05A5
+    {"Talk to Pever later. Soon?&
+}
+:05C2
+    PAUSE
+:05C3
+    {
+}
+:05C4
+    PORTRAIT [N8(0x03) ]
+:05C8
+    {Dokray nods. "Soon, Pever.& Tears fill his eyes as he turns to follow you.
+}
+:0613
+    PAUSE
+:0614
+    {
+}
+:0615
+    PORTRAIT [N8(0xeb) ]
+:0619
+    {"Slay Myrmidex for Pever, Dokray.&
+}
+:063C
+    BYE
+:063D
+    ELSE
+:063E
+    {"Talk to Pever later. Soon?&
+}
+:065B
+    BYE
+:065C
+    ENDIF
+:065D
+    KEYWORDS *
+    ANSWER
+:0660
+    {"Pever used to fight $Z. Pever has killed many $Z.&
+}
+:0694
+    JUMP 0x009c
+    END_ANSWER

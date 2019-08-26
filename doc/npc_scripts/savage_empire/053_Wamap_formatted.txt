@@ -1,0 +1,650 @@
+:0000
+    NPC_ID: npc id: 53, npc name: Wamap
+:0007
+    NPC_LOOK: a pudgy, sly-eyed native with sallow skin.
+*
+:0034
+    START CONVERSION
+:0035
+    IF [N8(0xeb) 0x00 FLAG ]
+:003B
+    JUMP 0x013c
+:0040
+    ELSE
+:0041
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0047
+    {"What? Why, you are no Urali." He thinks about it. "Which means that you are an outsider clever enough to have found your way to our swamp."
+}
+:00D4
+    PAUSE
+:00D5
+    {
+He thinks about it again, then twists his face into a smile. "I should wish to be YOUR friend."
+}
+:0136
+    JUMP 0x01a6
+:013B
+    ENDIF
+:013C
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0143
+    {"Why, it is my friend, $P. You are ALWAYS welcome here." He smiles like a happy shark.
+}
+:019A
+    JUMP 0x01a6
+:019F
+    ELSE
+:01A0
+    JUMP 0x16f2
+:01A5
+    ENDIF
+:01A6
+    {
+}
+:01A7
+    ASK
+    KEYWORDS name
+    ANSWER
+:01AE
+    {"I am @Wamap, son of Wamash. That is my true name. You see, I have given you power over me by telling you my true name. I MUST be your friend."
+}
+:023E
+    JUMP 0x01a6
+    KEYWORDS wama
+    ANSWER
+:0249
+    {"Ah, strange warrior learns quickly."
+}
+:026F
+    JUMP 0x01a6
+    KEYWORDS job
+    ANSWER
+:0279
+    {"I am shaman to the Urali. I listen to the spirits, especially the spirit @Fabozz, and interpret their will for the people."
+}
+:02F6
+    PAUSE
+:02F7
+    {
+"In my youth, I was captured and raised among the Nahuatla. It is for this reason I am so much more educated than the other Urali, and better suited to lead them."
+}
+:039C
+    JUMP 0x01a6
+    KEYWORDS resc
+    ANSWER
+:03A7
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:03AE
+    {"But I have already told you all about that. Rescuing the statue of the Great @Fabozz, that is."
+}
+:040F
+    JUMP 0x01a6
+:0414
+    ELSE
+:0415
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:041C
+    JUMP 0x10f5
+:0421
+    ENDIF
+:0422
+    KEYWORDS fabo
+    ANSWER
+:0428
+    {"Fabozz is the greatest of the spirits. He speaks to us through his statue. He is the master of animals. It is his spirit that commands the Mighty @Lizard which guards the crossing to our village."
+}
+:04EE
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:04F5
+    PAUSE
+:04F6
+    {
+"And we are all so grateful to YOU for rescuing the Fabozz."
+}
+:0534
+    JUMP 0x01a6
+:0539
+    ELSE
+:053A
+    PAUSE
+:053B
+    {
+"Or... he WOULD... if he were not @held by @Darden the Huge."
+}
+:057A
+    JUMP 0x01a6
+:057F
+    ENDIF
+    KEYWORDS heal
+    ANSWER
+:0586
+    {"Ehhh. I wish I could. But I have performed many, many healings already today, and my energies are depleted."
+}
+:05F4
+    JUMP 0x01a6
+    KEYWORDS dard,huge
+    ANSWER
+:0604
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:060B
+    {"But you already know all about Darden. You slew him."
+}
+:0642
+    JUMP 0x01a6
+:0647
+    ELSE
+:0648
+    {"Yes, Darden. He became chief by force. He stole the @statue of @Fabozz and declared himself chief."
+}
+:06AD
+    PAUSE
+:06AE
+    {
+"He said that he could force the Great Fabozz to send the Mighty Lizard to eat our own people! He forced his warriors to raid other tribes, killing and looting."
+}
+:0751
+    JUMP 0x0d86
+:0756
+    ENDIF
+:0757
+    KEYWORDS held
+    ANSWER
+:075D
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0764
+    {"I do not know of what you speak, my dear, dear friend."
+}
+:079D
+    JUMP 0x01a6
+:07A2
+    ELSE
+:07A3
+    {"Yes, held. The @statue of the Great Fabozz is held."}
+:07D8
+    JUMP 0x01a6
+:07DD
+    ENDIF
+    KEYWORDS pris,aiel
+    ANSWER
+:07E9
+    IF [N8(0x10) N8(0x07) FLAG ]
+:07F0
+    {"Darden's only prisoner... recently... was the Kurak princess, Aiela. But you rescued her. And were amply rewarded for it, too, I am sure." He smirks.
+}
+:0887
+    JUMP 0x1862
+:088C
+    ELSE
+:088D
+    {"Yes, @Darden has a prisoner, Aiela. Princess of the Kurak tribe. Delightful little thing. She would be quite an ornamental mate for him."
+}
+:0918
+    PAUSE
+:0919
+    {
+He gives you a calculating look. "Or do you have similar designs yourself, hmmm? Well, no matter. If you wish to find your princess, you must do this:"
+}
+:09B2
+    PAUSE
+:09B3
+    {
+"Travel south from the Urali village, keeping to the cliffside. Eventually you will find a guarded cave opening. Within you will find your princess... somewhere within."
+}
+:0A5E
+    JUMP 0x01a6
+:0A63
+    ENDIF
+:0A64
+    KEYWORDS stat
+    ANSWER
+:0A6A
+    {"Yes, the statue. The statue of the Great @Fabozz."
+}
+:0A9E
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0AA5
+    PAUSE
+:0AA6
+    {
+"You have already rescued it for us."
+}
+:0ACD
+    JUMP 0x01a6
+:0AD2
+    ELSE
+:0AD3
+    JUMP 0x10f5
+:0AD8
+    ENDIF
+:0AD9
+    KEYWORDS ural,trib
+    ANSWER
+:0AE4
+    {"We are the Urali. We are the most cunning of all the tribes of the Valley of Eodon. That is why we live in the swamp."
+}
+:0B5C
+    JUMP 0x01a6
+    KEYWORDS ques
+    ANSWER
+:0B67
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:0B6E
+    {"I do not know of what you speak, my dear, dear friend."
+}
+:0BA7
+    JUMP 0x01a6
+:0BAC
+    ELSE
+:0BAD
+    {"Yes, a quest. You look like a man who does not shirk from quests, am I not correct? Yes. You could do me... and ALL the Urali... a great favor with a simple quest."
+}
+:0C53
+    PAUSE
+:0C54
+    {
+}
+:0C55
+    JUMP 0x0e27
+:0C5A
+    ENDIF
+:0C5B
+    KEYWORDS unit,ally,alli
+    ANSWER
+:0C6B
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:0C72
+    JUMP 0x1a87
+:0C77
+    ELSE
+:0C78
+    JUMP 0x1c49
+:0C7D
+    ENDIF
+:0C7E
+    KEYWORDS migh,liza
+    ANSWER
+:0C89
+    {"A Mighty Lizard, taller than the tallest hut, guards the only path from the Urali village to the outer swamplands... and the Valley of Eodon, beyond."
+}
+:0D21
+    JUMP 0x01a6
+    KEYWORDS bye
+    ANSWER
+:0D2B
+    {"Oh. Well, if you must."
+}
+:0D44
+    BYE
+:0D45
+    KEYWORDS *
+    ANSWER
+:0D48
+    {"I do not know of what you speak, my dear, dear friend."
+}
+:0D81
+    JUMP 0x01a6
+    END_ANSWER
+:0D86
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0D8D
+    PAUSE
+:0D8E
+    {
+"Of course, you have broken his power by rescuing the great Fabozz. Now I am chief, as well as shaman. We have nothing to fear from him."
+}
+:0E19
+    JUMP 0x01a6
+:0E1E
+    ELSE
+:0E1F
+    PAUSE
+:0E20
+    {
+}
+:0E21
+    JUMP 0x0e27
+:0E26
+    ENDIF
+:0E27
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:0E2E
+    {"Now... you see... @Darden became chief by taking the @statue of the Great @Fabozz. He placed it in a cave and used a beast from the swamp to guard it."
+}
+:0EC7
+    PAUSE
+:0EC8
+    {
+"The Great Fabozz controls the Mighty Lizard which guards the land crossing to the Urali village. Darden says he can make the Lizard come and eat the Urali."
+}
+:0F67
+    PAUSE
+:0F68
+    {
+"So all the warriors are frightened and obey Darden. Not me, of course, for I have no fear." He licks his lips and looks around for Darden.
+}
+:0FF5
+    PAUSE
+:0FF6
+    {
+"Now, if someone not so afraid, possessed of the kind of cunning it takes to enter Urali lands without being captured... someone like you..."
+}
+:1085
+    PAUSE
+:1086
+    {
+"If you were to free the @Fabozz, restoring it to its rightful place, then no one would follow @Darden."
+}
+:10F0
+    JUMP 0x14f8
+:10F5
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:10FC
+    {"Though Darden is dead, we are still a people without a leader."
+}
+:113D
+    PAUSE
+:113E
+    {
+"Darden became chief by taking the statue of the Great Fabozz.
+}
+:117E
+    PAUSE
+:117F
+    {
+"With his huge riding beast, he took it from its place in the sun and placed it far back in a cave, leaving the beast there to guard it."
+}
+:120A
+    PAUSE
+:120B
+    {
+"Other giant lizards have been gathered in the cave, and none have dared enter it in many days."
+}
+:126D
+    PAUSE
+:126E
+    {
+"Darden can no longer threaten us; he used to say that he would use the Great Fabozz to set the Mighty Lizard upon us. Now he can no more."
+}
+:12FB
+    PAUSE
+:12FC
+    {
+"But still we Urali cannot free the Fabozz from darkness. Darden's creature will not obey us, and many strong warriors together cannot move Fabozz."
+}
+:1392
+    PAUSE
+:1393
+    {
+"We have brought torches and built bonfires for Fabozz, but it is not enough."
+}
+:13E3
+    PAUSE
+:13E4
+    {
+"In the darkness, Fabozz cannot help us. We cannot gain its guidance. Therefore the people have no spirit, no goals, no leadership."
+}
+:146A
+    PAUSE
+:146B
+    {
+"Now, a warrior great enough to slay Darden is also great enough to @rescue the statue of the Great Fabozz, don't you think?"
+}
+:14EA
+    JUMP 0x14f8
+:14EF
+    ELSE
+:14F0
+    PAUSE
+:14F1
+    {
+}
+:14F2
+    JUMP 0x0e27
+:14F7
+    ENDIF
+:14F8
+    PAUSE
+:14F9
+    {
+"What you would have to do is this: Go to the cave where the Fabozz is held. To find it, go north of the Urali village until you reach the northern cliffs."
+}
+:1597
+    PAUSE
+:1598
+    {
+"There you will find a cave opening. Deep within that cave is where Fabozz is held."
+}
+:15EE
+    PAUSE
+:15EF
+    {
+"All you need do is to somehow move the Fabozz from the darkness of the inner cave and place him in the ring of fire in the center of the village."
+}
+:1684
+    PAUSE
+:1685
+    {
+"That way we may all speak with him again. Darden's power will be broken. We will all be SO grateful."
+}
+:16ED
+    JUMP 0x1f54
+:16F2
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:16F9
+    {"Why, it is my dear, dear friend $P. Or," he arches an eyebrow and looks at you suspiciously, "ARE you my friend?"
+}
+:176C
+    PAUSE
+:176D
+    {
+"I've TOLD you what needs to be done to free the poor, poor Urali. And yet you return here with your task unaccomplished."
+}
+:17E9
+    JUMP 0x01a6
+:17EE
+    ELSE
+:17EF
+    {"Why, it is my favorite friend, the mighty $P. The brave, brave $P, a true hero in need of a true @quest..."
+}
+:185C
+    JUMP 0x01a6
+:1861
+    ENDIF
+:1862
+    IF [N8(0x02) INPARTY ]
+:1867
+    PORTRAIT [N8(0x02) ]
+:186B
+    {The princess cuts in, coldly: "Perhaps, leech of the Urali, you should say what you mean. Or shall Aiela give you a lesson in the use of the spear?"
+}
+:1900
+    PAUSE
+:1901
+    {
+}
+:1902
+    PORTRAIT [N8(0xeb) ]
+:1906
+    {The shaman goes pale. "Of course, my dear, dear princess, I meant nothing but... uhm..."
+}
+:195F
+    PAUSE
+:1960
+    {
+"uh..."
+}
+:1969
+    PAUSE
+:196A
+    {
+"That with your renowned sense of generosity you would have bestowed upon $P some sort of token of your appreciation." He begins sweating.
+}
+:19F6
+    PAUSE
+:19F7
+    {
+}
+:19F8
+    PORTRAIT [N8(0x02) ]
+:19FC
+    {The princess offers him a tight, cold smile. "Very well."
+}
+:1A36
+    PAUSE
+:1A37
+    {
+}
+:1A38
+    PORTRAIT [N8(0xeb) ]
+:1A3C
+    {The shaman turns back to you and mops the sweat from his brow.
+}
+:1A7B
+    JUMP 0x01a6
+:1A80
+    ELSE
+:1A81
+    JUMP 0x01a6
+:1A86
+    ENDIF
+:1A87
+    {"Now that Darden is gone, I am ruler of the Urali." He smiles like a cat sitting atop a mouse. "And I would be willing to commit the Urali to such a union."
+}
+:1B24
+    PAUSE
+:1B25
+    {
+}
+:1B26
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:1B2D
+    {"And since you have restored the Great Fabozz to his rightful position, and me to mine of course, I will pledge to help you."
+}
+:1BAB
+    PAUSE
+:1BAC
+    {
+}
+:1BAD
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:1BB4
+    {"You need do nothing more for me: I am with you."
+}
+:1BE6
+    JUMP 0x01a6
+:1BEB
+    ELSE
+:1BEC
+    {"But if you want the support of the Urali, you will need to @rescue the Great Fabozz."
+}
+:1C43
+    JUMP 0x01a6
+:1C48
+    ENDIF
+:1C49
+    {"A union of tribes. What an idea. One could unite them, and then later, much later... become ruler of them all. I like this idea. If you choose to unite the tribes, I would aid you."
+}
+:1D00
+    PAUSE
+:1D01
+    {
+"Now... Darden the Huge will NEVER join with you to unite the tribes. Never. Never. But I would be willing... if I were chief as well as shaman."
+}
+:1D94
+    PAUSE
+:1D95
+    {
+"That is a simple matter to arrange... all you have to do is... kill Darden." His voice and expression become more intense. "Find him and kill him! I will be chief then, and I will join your alliance."
+}
+:1E60
+    PAUSE
+:1E61
+    {
+}
+:1E62
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:1E69
+    {"You have already rescued the Great Fabozz from his dreary prison. With that already done, once Darden is dead I will commit the Urali to your union."
+}
+:1F00
+    JUMP 0x01a6
+:1F05
+    ELSE
+:1F06
+    {"Then, once Darden is done, the Great Fabozz will have to be @rescued."
+}
+:1F4E
+    JUMP 0x01a6
+:1F53
+    ENDIF
+:1F54
+    IF [N8(0x04) INPARTY ]
+:1F59
+    JUMP 0x1f73
+:1F5E
+    ELSE
+:1F5F
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1F66
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:1F6D
+    JUMP 0x01a6
+:1F72
+    ENDIF
+:1F73
+    IF [N8(0x04) N8(0x06) FLAG ]
+:1F7A
+    PAUSE
+:1F7B
+    {
+}
+:1F7C
+    PORTRAIT [N8(0x04) ]
+:1F80
+    {Jimmy whips out his notebook. "I'll get all that in my notebook, boss. Hope my descriptive powers are up to explaining how oily this guy is."
+}
+:200E
+    PAUSE
+:200F
+    {
+}
+:2010
+    PORTRAIT [N8(0xeb) ]
+:2014
+    JUMP 0x01a6
+:2019
+    ELSE
+:201A
+    PAUSE
+:201B
+    {
+}
+:201C
+    PORTRAIT [N8(0x04) ]
+:2020
+    {Jimmy speaks up. "Tell you what, boss. It could be that we're going to have a lot of these little chores ahead of us. I'll note down what each chief wants."
+}
+:20BD
+    PAUSE
+:20BE
+    {
+"Any time you want to check out what we've got in store for us, ask me about my notebook. It never forgets."
+}
+:212C
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:2133
+    SET_FLAG [N8(0x04) ], [N8(0x03) ]
+:213A
+    PAUSE
+:213B
+    {
+}
+:213C
+    PORTRAIT [N8(0xeb) ]
+:2140
+    JUMP 0x01a6
+:2145
+    ENDIF
+:2146
+    BYE

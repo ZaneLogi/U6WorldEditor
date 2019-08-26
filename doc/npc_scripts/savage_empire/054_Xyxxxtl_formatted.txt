@@ -1,0 +1,37 @@
+:0000
+    NPC_ID: npc id: 54, npc name: Xyxxxtl
+:0009
+    NPC_LOOK: the pale, bloated, grotesque queen of the Myrmidex.
+*
+:003F
+    START CONVERSION
+:0040
+    IF [N8(0xeb) 0x00 FLAG ]
+:0046
+    JUMP 0x0138
+:004B
+    ELSE
+:004C
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0052
+    ENDIF
+:0053
+    {The white thing looks at you. Its mandibles clack in a semblance of human speech, obviously difficult for it. "Human-thing here!" it clacks.
+}
+:00E0
+    PAUSE
+:00E1
+    {
+"Not-good not-good! Enemy warrior in nest! Chew up, chew up! Soldiers, destroy!"
+}
+:0133
+    U6OP_FUNC [N8(0x05) ]
+:0137
+    BYE
+:0138
+    {It looks at you again. "Meat-thing still here!" it clacks. "Save eggs! Save nest! Chew up meat-thing!"
+}
+:019F
+    U6OP_FUNC [N8(0x05) ]
+:01A3
+    BYE

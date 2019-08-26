@@ -1,0 +1,197 @@
+:0000
+    NPC_ID: npc id: 42, npc name: Nakai
+:0007
+    NPC_LOOK: a thin, frail-looking youth.
+*
+:0026
+    START CONVERSION
+:0027
+    IF [N8(0x13) N8(0x07) FLAG ]
+:002E
+    JUMP 0x0068
+:0033
+    ELSE
+:0034
+    JUMP 0x003a
+:0039
+    ENDIF
+:003A
+    {The boy just lies there and moans piteously.
+}
+:0067
+    BYE
+:0068
+    IF [N8(0xeb) 0x00 FLAG ]
+:006E
+    JUMP 0x0136
+:0073
+    ELSE
+:0074
+    {"You may speak to Nakai. Nakai is to be chief someday but @Father says Nakai must be humble anyway.&
+}
+:00D9
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:00DF
+    PORTRAIT [N8(0xeb) ]
+:00E3
+    PAUSE
+:00E4
+    {
+"This one is told that it is $P who made him well. $P has Nakai's thanks.&
+}
+:0130
+    JUMP 0x01a8
+:0135
+    ENDIF
+:0136
+    {"It is $P, who made Nakai well! Ask anything of Nakai. Nakai is to be @chief someday, so Nakai knows a lot.&
+}
+:01A3
+    JUMP 0x01a8
+:01A8
+    {
+}
+:01A9
+    ASK
+    KEYWORDS name,naka
+    ANSWER
+:01B5
+    {"This one is Nakai, son of @Balakai.& He indicates himself. "Nakai has a @sister, Nakola.&
+}
+:0210
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0216
+    PORTRAIT [N8(0xeb) ]
+:021A
+    JUMP 0x01a8
+    KEYWORDS job
+    ANSWER
+:0224
+    {"This one is to be Chief of the Barrab, when he is of age. So this one trains in weapons and with the words of wisdom of his @ancestors.&
+}
+:02AE
+    JUMP 0x01a8
+    KEYWORDS ance
+    ANSWER
+:02B9
+    {"$P knows of ancestors. Long-dead parents of parents, and aunts and uncles of parents, and THEIR parents and aunts and uncles, back to the beginning of time.&
+}
+:0358
+    JUMP 0x01a8
+    KEYWORDS blue,ston
+    ANSWER
+:0368
+    {"Nakai's father @Balakai knows all about blue stones. $P will have to ask him.&
+}
+:03B8
+    JUMP 0x01a8
+    KEYWORDS thun
+    ANSWER
+:03C3
+    {"The Thunderer is what the @Sakkhra call a giant lizard which is eating them up.&
+}
+:0415
+    JUMP 0x01a8
+    KEYWORDS sakk
+    ANSWER
+:0420
+    {"The Sakkhra are man-shaped lizards. They look fierce but they are much like people. Nakai used to play with a Sakkhra hatchling when Nakai was a boy.&
+}
+:04B8
+    PAUSE
+:04B9
+    {
+"The Sakkhra now have problems with a lizard, the @Thunderer.&
+}
+:04F9
+    JUMP 0x01a8
+    KEYWORDS bala,fath,sham,chie
+    ANSWER
+:0513
+    {"Balakai is Nakai's father. He is so wise that he is not only the chief of the Barrab, he is their shaman, too. Nakai doesn't want to be shaman. Too much to learn.&
+}
+:05B8
+    JUMP 0x01a8
+    KEYWORDS tuom,drum
+    ANSWER
+:05C8
+    {"Nakai once met a @Disquiqui man named Tuomaxx. He made drums. He was strange. Balakai made him go away. Ask @Balakai about him.&
+}
+:064A
+    JUMP 0x01a8
+    KEYWORDS nawl
+    ANSWER
+:0655
+    {"Nakai knows all about Nawl. Nawl is such a big liar. Nakai's little @sister Nakola beat him up once. If $P ever sees Nawl, ask him about Nakola.&
+}
+:06E8
+    JUMP 0x01a8
+    KEYWORDS trib,barr
+    ANSWER
+:06F8
+    {"Nakai does not know about many tribes. We are the Barrab, who live atop the mesa.&
+}
+:074C
+    PAUSE
+:074D
+    {
+"West are the @Sakkhra, who are very interesting.&
+}
+:0781
+    PAUSE
+:0782
+    {
+"East, through a gap in the cliffs, $P will find many other tribes.&
+}
+:07C8
+    PAUSE
+:07C9
+    {
+"Nakai has met several of the @Disquiqui, including @Tuomaxx.&
+}
+:0809
+    JUMP 0x01a8
+    KEYWORDS disq
+    ANSWER
+:0814
+    {"They live just beyond the gap in the cliffs to the east. Go through the gap and turn north, and you will find them. They are very friendly.&
+}
+:08A2
+    PAUSE
+:08A3
+    {
+"They are not very fierce. Nakai can defeat their mightiest warrior. So can his @sister.&
+}
+:08FE
+    JUMP 0x01a8
+    KEYWORDS litt,sis
+    ANSWER
+:090D
+    {"Nakai has a little sister, her name is Nakola. She is hiding because $P is a stranger. Nakai does not think she will come out while $P is here.&
+}
+:099F
+    PAUSE
+:09A0
+    {
+"She used to like to leap out from behind trees at Disquiqui warriors, and scare them. But our father told her to stop. She also beat up a warrior named @Nawl once.&
+}
+:0A47
+    JUMP 0x01a8
+    KEYWORDS bye
+    ANSWER
+:0A51
+    {"Oh. Nakai is sorry $P must go. Come back and we will talk more. Nakai must learn all there is if Nakai is to be chief someday.&
+}
+:0AD2
+    BYE
+:0AD3
+    KEYWORDS *
+    ANSWER
+:0AD6
+    {"$P will have to ask @Balakai about that.&
+}
+:0B01
+    JUMP 0x01a8
+    END_ANSWER
+:0B06
+    BYE

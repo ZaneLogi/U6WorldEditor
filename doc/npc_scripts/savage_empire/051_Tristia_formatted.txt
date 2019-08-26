@@ -1,0 +1,404 @@
+:0000
+    NPC_ID: npc id: 51, npc name: Tristia
+:0009
+    NPC_LOOK: a beautiful but brooding woman in jaguar furs.
+*
+:003A
+    START CONVERSION
+:003B
+    IF [N8(0xeb) 0x00 FLAG ]
+:0041
+    JUMP 0x0158
+:0046
+    ELSE
+:0047
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:004D
+    {"Why, it is a man. A tall, strange man wearing furs unlike any I have ever seen."
+}
+:009F
+    PAUSE
+:00A0
+    {
+She thinks about it a moment. "He must be $P. The @schweitzer of the Yolaru has told me of him."
+}
+:0102
+    PAUSE
+:0103
+    {
+"What wants $P of Tristia?" Her question is half an invitation, half mockery.
+}
+:0152
+    JUMP 0x0382
+:0157
+    ENDIF
+:0158
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:015F
+    {"It is $P, Tristia's mate." She spreads herself over you and kisses you passionately. "Tristia knew you would return. $P can never leave Tristia for long."
+}
+:01FB
+    JUMP 0x028a
+:0200
+    ELSE
+:0201
+    JUMP 0x0207
+:0206
+    ENDIF
+:0207
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:020E
+    {"It is $P, who has cruelly spurned Tristia." She gives you an ugly look. "Do not speak to Tristia. She spurns YOU."
+}
+:0282
+    BYE
+:0283
+    ELSE
+:0284
+    JUMP 0x028f
+:0289
+    ENDIF
+:028A
+    JUMP 0x0382
+:028F
+    IF [N8(0x02) N8(0x05) FLAG ]
+:0296
+    {"Why, what does Tristia see here? It is Aiela's favorite pet, $P." She gives you a haughty look. "What does @Aiela's pet want of Tristia?"
+}
+:0321
+    JUMP 0x0382
+:0326
+    ELSE
+:0327
+    {"Once again $P confronts Tristia. Whatever could he want of her?" She laughs at you.
+}
+:037C
+    JUMP 0x0382
+:0381
+    ENDIF
+:0382
+    {
+}
+:0383
+    ASK
+    KEYWORDS name,tris
+    ANSWER
+:038F
+    {"Tristia is the name this one bears."
+}
+:03B5
+    JUMP 0x0382
+    KEYWORDS job
+    ANSWER
+:03BF
+    {"Tristia is daughter of the @chief. Tristia does no work. Work is for lesser ones, not for a princess."
+}
+:0427
+    JUMP 0x0382
+    KEYWORDS schw
+    ANSWER
+:0432
+    IF [N8(0x07) INPARTY ]
+:0437
+    {"$P knows the schweitzer. $P walks with him." She points at Prof. Rafkin. "That is the schweitzer."
+}
+:049B
+    JUMP 0x0382
+:04A0
+    ELSE
+:04A1
+    {"The Yolaru have a stranger among them, strange like $P. He is called their schweitzer."
+}
+:04FA
+    PAUSE
+:04FB
+    {
+"He talks and talks and knows many things. But he is short and old. Tristia does not want him."
+}
+:055C
+    JUMP 0x0382
+:0561
+    ENDIF
+    KEYWORDS alor,chie
+    ANSWER
+:056D
+    {"Aloron is chief of the Kuraks and father of @Aiela. Aloron raised Tristia. Tristia's hut @burned and her mother and father died." She shrugs, unconcerned by that fact.
+}
+:0616
+    IF [N8(0x02) INPARTY ]
+:061B
+    PAUSE
+:061C
+    {
+}
+:061D
+    PORTRAIT [N8(0x02) ]
+:0621
+    {Aiela leans over and whispers in your ear: "Aiela thinks Tristia set the fire herself. Tristia is a viper."
+}
+:068D
+    PAUSE
+:068E
+    PORTRAIT [N8(0xeb) ]
+:0692
+    JUMP 0x0382
+:0697
+    ELSE
+:0698
+    JUMP 0x0382
+:069D
+    ENDIF
+    KEYWORDS aiel,sist
+    ANSWER
+:06A9
+    {"Aiela is Tristia's sister. @Aloron raised both Aiela and Tristia."
+}
+:06ED
+    PAUSE
+:06EE
+    {
+"Of course, Aloron likes Tristia MUCH more than Aiela."
+}
+:0727
+    IF [N8(0x01) N8(0x00) FLAG ]
+:072E
+    ELSE
+:072F
+    PAUSE
+:0730
+    {
+"Fortunately, Aiela has found a fitting mate in Darden the Huge. Tristia is sure the Urali tribe is a much better place for Aiela."
+}
+:07B5
+    JUMP 0x0382
+:07BA
+    ENDIF
+:07BB
+    IF [N8(0x02) INPARTY ]
+:07C0
+    PAUSE
+:07C1
+    {
+}
+:07C2
+    PORTRAIT [N8(0x02) ]
+:07C6
+    {Aiela speaks up, haughtily: "Aloron has more pity for Tristia, it is true. Pity wasted on an ungrateful snake."
+}
+:0836
+    PAUSE
+:0837
+    {
+}
+:0838
+    PORTRAIT [N8(0xeb) ]
+:083C
+    {The woman's eyes flash, but then she puts on a very broad but artificial smile and turns back to you. "$P was saying?"
+}
+:08B3
+    JUMP 0x0382
+:08B8
+    ELSE
+:08B9
+    JUMP 0x0382
+:08BE
+    ENDIF
+    KEYWORDS sex,,lust,love
+    ANSWER
+:08CF
+    IF [N8(0x02) INPARTY ]
+:08D4
+    {"Speak to Tristia of such things when Aiela is far away."
+}
+:090E
+    JUMP 0x0382
+:0913
+    ELSE
+:0914
+    {She smiles broadly. "Is it so? Is $P saying that he wants Tristia, that he loves her?"
+}
+:096B
+    JUMP 0x0bb2
+:0970
+    ENDIF
+:0971
+    KEYWORDS trib
+    ANSWER
+:0977
+    {"This is the village of the Kurak tribe. Tristia is a princess of the Kuraks."
+}
+:09C6
+    JUMP 0x0382
+    KEYWORDS unit,ally,alli
+    ANSWER
+:09DB
+    {"$P must speak to Aloron about such things."
+}
+:0A08
+    JUMP 0x0382
+    KEYWORDS burn
+    ANSWER
+:0A13
+    {"Burn? Does $P like to burn things, too? Tristia loves to burn things."
+}
+:0A5B
+    JUMP 0x0382
+    KEYWORDS join
+    ANSWER
+:0A66
+    {"No, no, no. Travel with $P?" She laughs. "Tristia must stay here where it is safe. It is for others to travel and bring things back to Tristia."
+}
+:0AF8
+    JUMP 0x0382
+    KEYWORDS bye
+    ANSWER
+:0B02
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:0B09
+    {"We will speak later, my mate."
+}
+:0B29
+    BYE
+:0B2A
+    ELSE
+:0B2B
+    {"$P must speak to Tristia again when he has something interesting to say."
+}
+:0B76
+    BYE
+:0B77
+    ENDIF
+:0B78
+    KEYWORDS *
+    ANSWER
+:0B7B
+    {She just shakes her head, looking disinterested.
+}
+:0BAC
+    JUMP 0x0382
+    END_ANSWER
+:0BB1
+    BYE
+:0BB2
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0BB8
+    JUMP 0x0c90
+    KEYWORDS n
+    ANSWER
+:0BC0
+    {She looks offended. "I have offered you Tristia, all that is Tristia. Do not refuse me, oh $P. Tristia is more beautiful than all others!"
+}
+:0C4B
+    PAUSE
+:0C4C
+    {
+"Tristia asks again: Will $P love Tristia above all others?"
+}
+:0C8A
+    JUMP 0x0e49
+    END_ANSWER
+:0C90
+    IF [N8(0x02) N8(0x05) FLAG ]
+:0C97
+    {"But Aiela says that $P is her mate." She smiles cunningly. "Does $P prefer Tristia to Aiela? Will $P spurn Aiela for lovely Tristia?"
+}
+:0D1E
+    JUMP 0x0f7c
+:0D23
+    ELSE
+:0D24
+    {Her smile becomes victorious. She flows up to you, embraces you, and kisses you passionately.
+}
+:0D82
+    PAUSE
+:0D83
+    {
+"$P is Tristia's mate now, and forever. Go and act as a mighty warrior, and always return to Tristia. Tristia's hut is next to the chief's. $P will never be cold there."
+}
+:0E2E
+    CLEAR_FLAG [N8(0x02) ], [N8(0x05) ]
+:0E35
+    SET_FLAG [N8(0x02) ], [N8(0x06) ]
+:0E3C
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:0E43
+    JUMP 0x0382
+:0E48
+    ENDIF
+:0E49
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0E4F
+    {Her smile becomes victorious. She flows up to you, embraces you, and kisses you passionately.
+}
+:0EAD
+    PAUSE
+:0EAE
+    {
+"$P is Tristia's mate now, and forever. Go and act as a mighty warrior, and always return to Tristia. Tristia's hut is next to the chief's. $P will never be cold there."
+}
+:0F59
+    CLEAR_FLAG [N8(0x02) ], [N8(0x05) ]
+:0F60
+    SET_FLAG [N8(0x02) ], [N8(0x06) ]
+:0F67
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:0F6E
+    JUMP 0x0382
+    KEYWORDS n
+    ANSWER
+:0F76
+    JUMP 0x113f
+    END_ANSWER
+:0F7C
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0F82
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:0F89
+    SET_FLAG [N8(0x02) ], [N8(0x06) ]
+:0F90
+    CLEAR_FLAG [N8(0x02) ], [N8(0x05) ]
+:0F97
+    {Her sigh is one of pure malice and victory. "Yes, mighty $P. Tristia is a much better mate than poor Aiela. She is full of fire."
+}
+:1019
+    PAUSE
+:101A
+    {
+She struts up to you, pulls your head down to hers, and kisses you passionately, demonstrating that fire.
+}
+:1085
+    PAUSE
+:1086
+    {
+"$P is Tristia's mate now, and forever. Go and act as a mighty warrior, and always return to Tristia. Tristia's hut is next to the chief's. $P will never be cold there."
+}
+:1131
+    JUMP 0x0382
+    KEYWORDS n
+    ANSWER
+:1139
+    JUMP 0x113f
+    END_ANSWER
+:113F
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x05) ]
+:1146
+    SET_FLAG [N8(0xeb) ], [N8(0x07) ]
+:114D
+    {Her expression turns to one of rage. "$P is a fool! $P does not deserve one as beautiful as Tristia. Go away, $P, and never speak to Tristia again!"
+}
+:11E2
+    PAUSE
+:11E3
+    {
+She slaps you as hard as she can. Then she shakes, and her eyes roll up in her head... and she faints dead away.
+}
+:1255
+    WORKTYPE [N8(0xeb) ], [N8(0x91) ]
+:125C
+    BYE

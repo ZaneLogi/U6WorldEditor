@@ -1,0 +1,479 @@
+:0000
+    NPC_ID: npc id: 49, npc name: Tlapatla
+:000A
+    NPC_LOOK: an unhappy-looking woman wearing Aztec-like clothes.
+*
+:0041
+    START CONVERSION
+:0042
+    IF [N8(0xeb) 0x00 FLAG ]
+:0048
+    JUMP 0x005a
+:004D
+    ELSE
+:004E
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0054
+    JUMP 0x010a
+:0059
+    ENDIF
+:005A
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:0061
+    JUMP 0x0226
+:0066
+    ELSE
+:0067
+    {She looks at you wearily. "Oh, it's that $P again." She sighs. "Why have you returned? Nothing ever changes here. No, do not answer that. What do you want?"
+}
+:0104
+    JUMP 0x07cc
+:0109
+    ENDIF
+:010A
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:0111
+    JUMP 0x03e7
+:0116
+    ENDIF
+:0117
+    {She looks at you suspiciously. "Stay back! Do you mean me harm?"
+}
+:0158
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:015E
+    {She screams, "Guards! I am attacked! Your queen is attacked! Guards!"
+}
+:01A4
+    PAUSE
+:01A5
+    {
+Then she faints.
+}
+:01B7
+    WORKTYPE [N8(0xeb) ], [N8(0x91) ]
+:01BE
+    U6OP_FUNC [N8(0x04) ]
+:01C2
+    BYE
+:01C3
+    KEYWORDS n
+    ANSWER
+:01C6
+    {She relaxes, then looks disinterested. "Oh, very well. I am bored. I will talk with you."
+}
+:0220
+    JUMP 0x07cc
+    END_ANSWER
+:0226
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:022D
+    JUMP 0x06f7
+:0232
+    ELSE
+:0233
+    {Her eyes are very wide. "It is you, $P. Somehow you and your friends are responsible for my husband's blue glow dissapearing. The people murdered him when that happened. A bloody deed, caused by your actions!"
+}
+:0305
+    PAUSE
+:0306
+    {
+Abruptly, her expression changes to one of inexpressible relief and gratitude. "Thank you. You have the gratitude of the Queen of all the Nahuatla. Now I can live again, free from fear. What do you want of me?"
+}
+:03DA
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:03E1
+    JUMP 0x07cc
+:03E6
+    ENDIF
+:03E7
+    {The woman's eyes are very wide. "I heard the noise from elsewhere in the palace when the people killed Huitlapacti, my husband. I know you somehow made that that possible. Do you mean me harm, as well?"
+}
+:04B2
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:04B8
+    {She begins shouting: "Guards! Murderers have found me! Guards!"
+}
+:04F8
+    PAUSE
+:04F9
+    {
+A few moments pass.
+}
+:050E
+    PAUSE
+:050F
+    {
+No guards come.
+}
+:0520
+    PAUSE
+:0521
+    {
+She visibly shrinks. "It seems I am undefended. If you choose to kill me, I cannot stop you."
+}
+:0580
+    PAUSE
+:0581
+    {
+"But perhaps I can persuade you not to. I know many things. I would prefer to be your ally, for I loathed my husband. Perhaps I know things you wish to know."
+}
+:0621
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:0628
+    JUMP 0x07cc
+    KEYWORDS n
+    ANSWER
+:0630
+    {She relaxes. "If you have helped to kill my husband, whom I have feared and loathed all these many years, and do not intend to kill me, then you are my friend. Ask of me what you will."
+}
+:06EA
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:06F1
+    JUMP 0x07cc
+    END_ANSWER
+:06F7
+    {"Ah, it is my friend $P. Welcome back to the palace of Tichticatl. What is your wish?"
+}
+:074E
+    JUMP 0x07cc
+:0753
+    {"I am a princess of the Nahuatla. This palace is my responsibility; I am in charge of the servants and their work."
+}
+:07C7
+    JUMP 0x07cc
+:07CC
+    {
+}
+:07CD
+    ASK
+    KEYWORDS name
+    ANSWER
+:07D4
+    {"I am Tlapatla.
+}
+:07E4
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:07EA
+    PORTRAIT [N8(0xeb) ]
+:07EE
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:07F5
+    {My cousin is @Moctapotl, the king."
+}
+:0819
+    JUMP 0x07cc
+:081E
+    ELSE
+:081F
+    {My husband is Huitlapacti, and my cousin is @Moctapotl, the former king."
+}
+:0869
+    JUMP 0x07cc
+:086E
+    ENDIF
+    KEYWORDS tlap
+    ANSWER
+:0875
+    {"Yes?"
+}
+:087C
+    JUMP 0x07cc
+    KEYWORDS job
+    ANSWER
+:0886
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:088D
+    JUMP 0x0753
+:0892
+    ELSE
+:0893
+    {"I am Queen of all the @Nahuatla. I used to be in charge of all the palace, back when I was a lowly princess, cousin of the king. But since my mad husband took the @throne, I am not allowed to do even that. I sit here, allowed to do nothing."
+}
+:0986
+    JUMP 0x07cc
+:098B
+    ENDIF
+:098C
+    KEYWORDS zipa,spec
+    ANSWER
+:0997
+    IF [N8(0x05) INPARTY ]
+:099C
+    {She starts to speak and then notices that Johann Spector is among you! Her eyes narrow and her fists clench. But before she can speak...
+}
+:0A25
+    PAUSE
+:0A26
+    {
+}
+:0A27
+    PORTRAIT [N8(0x05) ]
+:0A2B
+    {... Johann addresses her. "I know you do not remember me fondly, oh Queen," he says. "I was responsible for much evil. But I was insane at the time. Today, I accompany $P in an effort to undo the damage I have done."
+}
+:0B04
+    PAUSE
+:0B05
+    {
+}
+:0B06
+    PORTRAIT [N8(0xeb) ]
+:0B0A
+    {Her fists relax, but she does not exactly turn friendly. "We will see," she hisses. "But stay well away of me when not in the company of your noble friends."
+}
+:0BA8
+    JUMP 0x07cc
+:0BAD
+    ELSE
+:0BAE
+    {"You want to know of Zipactriotl? He came, a stranger like yourself, from far away. He had magical powers to protect him from all harm."
+}
+:0C37
+    PAUSE
+:0C38
+    {
+"He cast down my cousin, the wise king @Moctapotl, and imprisoned the good shaman @Oaxtepac. He is an evil man."
+}
+:0CAA
+    JUMP 0x07cc
+:0CAF
+    ENDIF
+:0CB0
+    JUMP 0x07cc
+:0CB5
+    KEYWORDS sham
+    ANSWER
+:0CBB
+    {"Do you mean the old shaman, @Oaxtepac, or the evil one who imprisoned him, @Zipactriotl?"
+}
+:0D16
+    JUMP 0x07cc
+    KEYWORDS mad,husb,huit
+    ANSWER
+:0D2A
+    {"When I was young, I was married to Huitlapacti, a noble member of a noble family. But he became crueler as he grew older. Soon he could find his only pleasure in killing people and watching them killed."
+}
+:0DF7
+    PAUSE
+:0DF8
+    {
+"Moctapotl was usually able to keep him locked away so that others would remain safe."
+}
+:0E50
+    PAUSE
+:0E51
+    {
+"But when @Zipactriotl came, that evil shaman released him and persuaded many disloyal warriors to make Huitlapacti the king and Zipactriotl the new shaman."
+}
+:0EF0
+    PAUSE
+:0EF1
+    {
+"@Zipactriotl gave Huitlapacti a belt which surrounds him with a glow... a glow so strong that no weapon could pierce it. He said he drew his power from a mysterious @hidden city."
+}
+:0FA7
+    PAUSE
+:0FA8
+    {
+}
+:0FA9
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:0FB0
+    {"But all that is in the past. You have slain Huitlapacti and his evil no longer blights the Nahuatla."
+}
+:1017
+    ELSE
+:1018
+    {"Now all the Nahuatla work and sleep in the fear that Huitlapacti might someday turn his attention to them. Do not speak to my husband, for he will simply have you killed."
+}
+:10C5
+    ENDIF
+:10C6
+    JUMP 0x07cc
+    KEYWORDS moct
+    ANSWER
+:10D1
+    {"Moctapotl is my cousin, rightful king of the Nahuatla."
+}
+:110A
+    PAUSE
+:110B
+    {
+}
+:110C
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:1113
+    {"I am glad you have helped restore him to the throne."
+}
+:114A
+    JUMP 0x07cc
+:114F
+    ELSE
+:1150
+    {"Huitlapacti and @Zipactriotl have driven him into exile. He wanders the wilderness, waiting for his chance to return and @reclaim his throne."
+}
+:11E0
+    PAUSE
+:11E1
+    {
+"I have heard talk that he may have taken refuge with the @Disquiqui."
+}
+:1229
+    JUMP 0x07cc
+:122E
+    ENDIF
+    KEYWORDS disq
+    ANSWER
+:1235
+    {"The Disquiqui are a harmless tribe of revelers. Their village is in the lowlands to the west of Tichticatl."
+}
+:12A3
+    JUMP 0x07cc
+    KEYWORDS head,gold
+    ANSWER
+:12B3
+    {"Are you speaking of that strange gold head of @Oaxtepac's? I think it is in the treasury room. It looks as though it came from a large gold statue of a man."
+}
+:1352
+    JUMP 0x07cc
+    KEYWORDS oaxt
+    ANSWER
+:135D
+    {"Oaxtepac was the shaman before @Zipactriotl imprisoned him."
+}
+:139B
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:13A2
+    PAUSE
+:13A3
+    {
+"Now he can return to his duties as shaman, since Zipactriotl and Huitlapacti no longer rule."
+}
+:1403
+    JUMP 0x07cc
+:1408
+    ELSE
+:1409
+    PAUSE
+:140A
+    {
+"He is a very clever man. He knows many things. I wish he were free."
+}
+:1451
+    JUMP 0x07cc
+:1456
+    ENDIF
+    KEYWORDS myrm
+    ANSWER
+:145D
+    {"The Myrmidex are huge ant-creatures from the northwest. Oh, how I despise them." She shudders. "No matter how much the Nahuatla do, we cannot @destroy them."
+}
+:14FC
+    JUMP 0x07cc
+    KEYWORDS pyra
+    ANSWER
+:1507
+    {"Wander the city of Tichticatl and you cannot help but find the great pyramid of the sun. It and this palace are the greatest buildings here."
+}
+:1596
+    JUMP 0x07cc
+    KEYWORDS recl,thro
+    ANSWER
+:15A6
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:15AD
+    {"Why worry about that now? With Huitlapacti dead, Moctapotl has already reclaimed his throne."
+}
+:160C
+    ELSE
+:160D
+    {"Moctapotl cannot reclaim the throne while @Huitlapacti remains protected by @Zipactriotl and his belt."
+}
+:1676
+    ENDIF
+:1677
+    JUMP 0x07cc
+    KEYWORDS belt
+    ANSWER
+:1682
+    {"It is a strange belt, of a metal I do not recognize."
+}
+:16B9
+    JUMP 0x07cc
+    KEYWORDS city
+    ANSWER
+:16C4
+    {"Do you mean the city of @Tichticatl, where you are now, or the legendary @Hidden City?"
+}
+:171D
+    JUMP 0x07cc
+    KEYWORDS ural
+    ANSWER
+:1728
+    {"The Urali are smelly savages. They invade our city from the northeast. They have only recently become ravagers, since they took a new king, named Darden."
+}
+:17C4
+    JUMP 0x07cc
+    KEYWORDS dest
+    ANSWER
+:17CF
+    {"I think perhaps we COULD destroy them if all the tribes of the Valley of Eodon -- both the Nahuatla and the smelly ones -- were to @unite."
+}
+:185C
+    JUMP 0x07cc
+    KEYWORDS unit,ally,alli
+    ANSWER
+:1871
+    {"Uniting the tribes would be nearly impossible. All the chiefs would have to agree to help."
+}
+:18CE
+    JUMP 0x07cc
+    KEYWORDS hidd
+    ANSWER
+:18D9
+    {"@Zipactriotl claims to draw his magical power from an ancient, hidden city. The shaman @Oaxtepac knows many stories; perhaps he knows about this legend."
+}
+:1974
+    JUMP 0x07cc
+    KEYWORDS tich
+    ANSWER
+:197F
+    {"This is the city of Tichticatl, home of the Nahuatla. That is where you are now."
+}
+:19D2
+    JUMP 0x07cc
+    KEYWORDS nahu
+    ANSWER
+:19DD
+    {"The Nahuatla are the most cultured, intelligent race of all the races in the Valley of Eodon... and the least smelly."
+}
+:1A55
+    JUMP 0x07cc
+    KEYWORDS smel
+    ANSWER
+:1A60
+    {"Oh, let us NOT talk about smelly things." Furiously, she waves a perfumed cloth in front of her nose. "And how long has it been since YOU have taken a plunge in the river, oh barbarian? Too long, I think."
+}
+:1B2F
+    JUMP 0x07cc
+    KEYWORDS bye
+    ANSWER
+:1B39
+    {"Very well. Leave me." She languidly waves her hand in dismissal.
+}
+:1B7B
+    BYE
+:1B7C
+    KEYWORDS *
+    ANSWER
+:1B7F
+    {"Oh, that's far too boring to talk about. Choose something else."
+}
+:1BC1
+    JUMP 0x07cc
+    END_ANSWER

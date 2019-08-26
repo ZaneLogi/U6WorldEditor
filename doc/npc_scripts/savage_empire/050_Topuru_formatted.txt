@@ -1,0 +1,445 @@
+:0000
+    NPC_ID: npc id: 50, npc name: Topuru
+:0008
+    NPC_LOOK: a skinny, white-haired, wide-eyed old native man.
+*
+:003C
+    START CONVERSION
+:003D
+    IF [N8(0xeb) 0x00 FLAG ]
+:0043
+    JUMP 0x0149
+:0048
+    ELSE
+:0049
+    {"Ha! It is a pale spirit from the water." He peers at you, looking you over. "Not a tribesman. Not a Sakkhra. Must be a spirit."
+}
+:00CA
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:00D0
+    PORTRAIT [N8(0xeb) ]
+:00D4
+    PAUSE
+:00D5
+    {
+He shoves out his hand, obviously expecting it to go right through you. It doesn't. He draws back, confused.
+}
+:0143
+    JUMP 0x052b
+:0148
+    ENDIF
+:0149
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0150
+    {"It is the spirit-stranger, the mind finder, the @turtle feeder, come back to see Topuru."
+}
+:01AB
+    JUMP 0x052b
+:01B0
+    ENDIF
+:01B1
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:01B8
+    {"Has the spirit-stranger found Topuru's mind?"
+}
+:01E7
+    JUMP 0x0256
+:01EC
+    ELSE
+:01ED
+    {"It is the spirit-stranger, come to smash Topuru's skull, or give him food and call him 'friend.'"
+}
+:0250
+    JUMP 0x052b
+:0255
+    ENDIF
+:0256
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:025C
+    {"What! Let Topuru see."
+}
+:0274
+    JUMP 0x02a8
+    KEYWORDS n
+    ANSWER
+:027C
+    {"Ah, the spirit-stranger is useless."
+}
+:02A2
+    JUMP 0x052b
+    END_ANSWER
+:02A8
+    DECLARE [0x00, 0xb2] = [N8(0x3a) N8(0x00) OBJINPARTY ]
+:02B2
+    IF [0x00 B2 N16(0x8001) == ]
+:02BA
+    JUMP 0x04a5
+:02BF
+    ENDIF
+:02C0
+    SET_$Y [0x00 B2 ]
+:02C4
+    {He looks around through your goods, and then snatches the small blue stone from }
+:0314
+    IF [0x00 B2 N8(0x00) > ]
+:031B
+    {$Y.}
+:031E
+    ELSE
+:031F
+    {you.}
+:0323
+    ENDIF
+:0324
+    { Before you can stop him, he pops it into his mouth.
+}
+:0359
+    SET_FLAG [N8(0xeb) ], [N8(0x07) ]
+:0360
+    DELETE npc [0x00 B2 ], obj [N8(0x3a) ], quality [N8(0x00) ], quantity [N8(0x01) ]
+:036D
+    PAUSE
+:036E
+    {
+He looks thrilled. "Topuru has his mind back! Topuru is very different man." (He doesn't look any different.)
+}
+:03DD
+    PAUSE
+:03DE
+    {
+"Topuru has earned the spirit-stranger's gratitude. Topuru should give spirit-stranger something." He closes his eyes and twists his face in thought.
+}
+:0475
+    PAUSE
+:0476
+    {
+"Topuru knows!  Have some @turtle food!" }
+:04A0
+    JUMP 0x052b
+:04A5
+    {"Liar!" He raises his hand to strike you, but then becomes distracted by the aerial antics of a pterodactyl and wanders away.
+}
+:0523
+    WORKTYPE [N8(0xeb) ], [N8(0x11) ]
+:052A
+    BYE
+:052B
+    {
+}
+:052C
+    ASK
+    KEYWORDS name
+    ANSWER
+:0533
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:053A
+    {"Topuru has lost his name. No, that is wrong. Topuru has his name. It is Topuru. Topuru has lost his @mind."
+}
+:05A7
+    JUMP 0x052b
+:05AC
+    ELSE
+:05AD
+    {"Spirit-stranger knows Topuru's name.  It is... it is..." he stops and thinks for several moments, then wanders away, completely forgetting about you.
+}
+:0644
+    BYE
+:0645
+    ENDIF
+:0646
+    JUMP 0x052b
+    KEYWORDS job
+    ANSWER
+:0650
+    {"Topuru was once shaman of the @Urali tribe. Now Topuru tends this small island and keeps it from floating away."
+}
+:06C2
+    JUMP 0x052b
+    KEYWORDS trib
+    ANSWER
+:06CD
+    {"Topuru was of the @Urali tribe, which is @hidden away from the other tribes. Now he is an @exile."
+}
+:0731
+    JUMP 0x052b
+    KEYWORDS turt,food
+    ANSWER
+:0741
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0748
+    {"Turtles are nice.  Turtles have always been Topuru's friends.  Except when they bit him.  But they were hungry."  He thinks for a moment.
+}
+:07D3
+    PAUSE
+:07D4
+    {
+"Want some turtle food?"
+}
+:07EE
+    JUMP 0x129c
+:07F3
+    ELSE
+:07F4
+    {"Yes, that is true."
+}
+:0809
+    JUMP 0x052b
+:080E
+    ENDIF
+:080F
+    KEYWORDS than
+    ANSWER
+:0815
+    {"You are welcome."
+}
+:0828
+    JUMP 0x052b
+    KEYWORDS mind
+    ANSWER
+:0833
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:083A
+    {"Yes!  Topuru has his mind now!"  He eagerly holds up the small blue stone you gave him earlier, then snatches it away and peers at it closely.  Satisfied, he puts it away again.
+}
+:08ED
+    JUMP 0x052b
+:08F2
+    ELSE
+:08F3
+    {"Topuru has no mind. Topuru lost his mind."
+}
+:091F
+    PAUSE
+:0920
+    {
+Suddenly, he grabs your head and tries to pry it open. Failing that, he draws back. "The spirit-stranger has a strong grasp on his own mind."
+}
+:09AF
+    PAUSE
+:09B0
+    {
+"Does the spirit-stranger want to know how Topuru lost his mind?"
+}
+:09F3
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:09FA
+    JUMP 0x0fc0
+:09FF
+    ENDIF
+:0A00
+    KEYWORDS blue,rock,ston
+    ANSWER
+:0A10
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0A17
+    {"Topuru no longer cares about stones."
+}
+:0A3E
+    JUMP 0x052b
+:0A43
+    ELSE
+:0A44
+    {"Yes, Topuru's mind is in a small blue stone. Balakai of the Barrab tribe has it."
+}
+:0A97
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:0A9E
+    JUMP 0x052b
+:0AA3
+    ENDIF
+    KEYWORDS ural
+    ANSWER
+:0AAA
+    {"Topuru was of the Urali tribe. But when Topuru lost his mind, young @Wamap, his apprentice, banished him. The Urali are the @hidden tribe."
+}
+:0B37
+    JUMP 0x052b
+    KEYWORDS hidd
+    ANSWER
+:0B42
+    {"Yes, hidden."
+}
+:0B51
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0B58
+    PAUSE
+:0B59
+    {
+"It is easy to find them unless you know where to look. Find the stone city of the Nahuatla. Go northeast to where the cliffs are riddled with caves."
+}
+:0BF1
+    PAUSE
+:0BF2
+    {
+"The second cave from the north is a tunnel. It leads to the Urali lands. Without my mind, Topuru could not tell you that. Yes he could. No, he couldn't."
+}
+:0C8E
+    JUMP 0x052b
+:0C93
+    ELSE
+:0C94
+    PAUSE
+:0C95
+    {
+"Topuru will gladly tell the spirit-stranger where the Urali hide! All members of the Urali tell strangers where the tribe hides." He snorts, contemptuously.
+}
+:0D34
+    PAUSE
+:0D35
+    {
+"Now... if the spirit-stranger were to find Topuru's @mind and bring it to Topuru... Topuru would decide that the stranger was a very very very good man who deserves to know where the Urali hide."}
+:0DFA
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:0E01
+    JUMP 0x052b
+:0E06
+    ENDIF
+    KEYWORDS exil
+    ANSWER
+:0E0D
+    {"No! Not an exile... Well, yes, an exile. From the @Urali."
+}
+:0E49
+    JUMP 0x052b
+    KEYWORDS wama
+    ANSWER
+:0E54
+    {"WAMAP!" he screams. "Where? Topuru will kill -- why, Wamap is not here."
+}
+:0E9E
+    JUMP 0x052b
+    KEYWORDS aiel
+    ANSWER
+:0EA9
+    {"@Darden wants Aiela."
+}
+:0EC0
+    JUMP 0x052b
+    KEYWORDS dard
+    ANSWER
+:0ECB
+    {"Darden is a young warrior of no worth. Topuru may have lost his mind, but Darden grew up without one."
+}
+:0F33
+    JUMP 0x052b
+    KEYWORDS bye
+    ANSWER
+:0F3D
+    {"No, do not leave! Topuru will be lonely. Wait, Topuru is lonely even with others here. Yes, leave."
+}
+:0FA2
+    BYE
+:0FA3
+    KEYWORDS *
+    ANSWER
+:0FA6
+    {"Yes, that is true."
+}
+:0FBB
+    JUMP 0x052b
+    END_ANSWER
+:0FC0
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0FC6
+    {"Topuru was once a great shaman, filled with the power of the spirits. But Topuru wanted to know more."
+}
+:102E
+    PAUSE
+:102F
+    {
+"Topuru challenged other shamans to battles of magic. Topuru always won, except when he lost."
+}
+:108F
+    PAUSE
+:1090
+    {
+He picks a small spider off your shoulder and absently eats it. "Topuru once challenged the great shaman Balakai, of the Barrab tribe. They live far to the southwest."
+}
+:1139
+    PAUSE
+:113A
+    {
+"Balakai had strange magics. Balakai called Topuru's mind out of Topuru's very head and placed it in a small rock. Balakai kept the rock."
+}
+:11C6
+    PAUSE
+:11C7
+    {
+"Balakai said that he would destroy the rock if Topuru did not go away forever. So Topuru lives here, hoping his mind is not destroyed."
+}
+:1251
+    JUMP 0x052b
+    KEYWORDS n
+    ANSWER
+:1259
+    {"The spirit-stranger is a frog." Miffed, he turns away from you.
+}
+:129A
+    BYE
+:129B
+    END_ANSWER
+:129C
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:12A2
+    JUMP 0x130e
+    KEYWORDS n
+    ANSWER
+:12AA
+    {"Just as well.  Leaves more for Topuru."  He eats the turtle bait he had planned to give you.
+}
+:1308
+    JUMP 0x052b
+    END_ANSWER
+:130E
+    NEW npc [N8(0x01) ], obj [N8(0x2f) ], quality [N8(0x00) ], quantity [N8(0x08) ]
+:131B
+    IF [0x1d B2 ]
+:131F
+    {"Swamp-turtles like this best," he says as he hands you some rancid hunks of turtle food. "Lots of swamp-turtles near old home."
+}
+:13A0
+    JUMP 0x052b
+:13A5
+    ELSE
+:13A6
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:13AD
+    JUMP 0x13b8
+:13B2
+    ENDIF
+:13B3
+    JUMP 0x052b
+:13B8
+    IF [0x00 B2 0x18 B2 > ]
+:13BF
+    NEW npc [0x00 B2 ], obj [N8(0x2f) ], quality [N8(0x00) ], quantity [N8(0x08) ]
+:13CC
+    ELSE
+:13CD
+    {"Spirit-stranger has too much stuff! Just as well. Leaves more for Topuru." He eats the turtle bait he had planned to give you.
+}
+:144D
+    JUMP 0x052b
+:1452
+    ENDIF
+:1453
+    IF [0x1d B2 ]
+:1457
+    {"Swamp-turtles like this best," he says as he hands someone in your party some rancid hunks of turtle food. "Lots of swamp-turtles near old home."
+}
+:14EA
+    JUMP 0x052b
+:14EF
+    ELSE
+:14F0
+    DECLARE [0x00, 0xb2] = [0x00 B2 N8(0x01) + ]
+:14FA
+    JUMP 0x13b8
+:14FF
+    ENDIF

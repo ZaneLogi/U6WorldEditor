@@ -1,0 +1,511 @@
+:0000
+    NPC_ID: npc id: 40, npc name: Moctapotl
+:000B
+    NPC_LOOK: a hard-eyed man in Aztec-like clothes.
+*
+:0034
+    START CONVERSION
+:0035
+    IF [N8(0xeb) 0x00 FLAG ]
+:003B
+    JUMP 0x0088
+:0040
+    ELSE
+:0041
+    {"Beware, stranger, if you mean me harm. I am a mighty @fighter.&
+}
+:0082
+    JUMP 0x019d
+:0087
+    ENDIF
+:0088
+    IF [N8(0x01) N8(0x02) FLAG ]
+:008F
+    {"I am pleased to see the warrior $P, who restored me to my throne.&
+}
+:00D3
+    JUMP 0x019d
+:00D8
+    ENDIF
+:00D9
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:00E0
+    {"It is $P, who has promised to set me on my throne again. Yet here I am, still an exile among the Disquiqui.&
+}
+:014E
+    JUMP 0x019d
+:0153
+    ELSE
+:0154
+    {"Ah. It is the strange warrior from beyond. I greet you in peace.&
+}
+:0197
+    JUMP 0x019d
+:019C
+    ENDIF
+:019D
+    {
+}
+:019E
+    ASK
+    KEYWORDS name,moct
+    ANSWER
+:01AA
+    {"My name is Moctapotl.&
+}
+:01C2
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:01C8
+    PORTRAIT [N8(0xeb) ]
+:01CC
+    JUMP 0x019d
+    KEYWORDS job,king
+    ANSWER
+:01DB
+    {"I am the true king of the Nahuatla.&
+}
+:0201
+    PAUSE
+:0202
+    {
+}
+:0203
+    IF [N8(0x01) N8(0x02) FLAG ]
+:020A
+    {"For a time, I was merely an exile... but with your help, I have become king once again.&
+}
+:0264
+    JUMP 0x019d
+:0269
+    ELSE
+:026A
+    {He gestures around himself. "This does not seem much like the trappings of a king, I admit. I am in @exile.&
+}
+:02D7
+    JUMP 0x019d
+:02DC
+    ENDIF
+    KEYWORDS trib
+    ANSWER
+:02E3
+    {"I belong to the @Nahuatla race, far more civilized than all the @others in the valley.&
+}
+:033C
+    JUMP 0x019d
+    KEYWORDS figh
+    ANSWER
+:0347
+    {"I am a fighter of fame and prowess. I have fought the warlike Yolaru and Kurak @tribes and the deadly @Myrmidex.&
+}
+:03BA
+    JUMP 0x019d
+    KEYWORDS exil
+    ANSWER
+:03C5
+    IF [N8(0x01) N8(0x02) FLAG ]
+:03CC
+    {"I am no longer an exile, thanks to you.&
+}
+:03F6
+    JUMP 0x019d
+:03FB
+    ELSE
+:03FC
+    {"My cousin by marriage, Huitlapacti, has usurped my throne. He was made invulnerable to harm by a most foreign shaman, whose name is @Zipactriotl.&
+}
+:0490
+    JUMP 0x019d
+:0495
+    ENDIF
+    KEYWORDS zipa
+    ANSWER
+:049C
+    {"Zipactriotl came from nowhere, surrounded by a glow which no weapon could pierce. He gave a similar glow to @Huitlapacti, and suddenly no warrior... not even I... could harm Huitlapacti.&
+}
+:0559
+    PAUSE
+:055A
+    {
+"Between them, Zipactriotl and Huitlapacti captured the old shaman @Oaxtepac, and nearly captured me. I escaped.&
+}
+:05CD
+    PAUSE
+:05CE
+    {
+}
+:05CF
+    IF [N8(0x01) N8(0x02) FLAG ]
+:05D6
+    {"Fortunately, those dark days are over.&
+}
+:05FF
+    ELSE
+:0600
+    {"And so I stay here, among the Disquiqui, and hope to find some way of regaining my throne.&
+}
+:065D
+    ENDIF
+:065E
+    JUMP 0x019d
+    KEYWORDS huit
+    ANSWER
+:0669
+    IF [N8(0x01) N8(0x02) FLAG ]
+:0670
+    {"Huitlapacti was a madman. How fortunate that he is dead.&
+}
+:06AB
+    JUMP 0x019d
+:06B0
+    ELSE
+:06B1
+    {"Huitlapacti is a madman. He kills and kills. And there is nothing I or anyone can do to stop him.&
+}
+:0715
+    JUMP 0x019d
+:071A
+    ENDIF
+    KEYWORDS oaxt
+    ANSWER
+:0721
+    IF [N8(0x01) N8(0x02) FLAG ]
+:0728
+    {"Oaxtepac is shaman of the Nahuatla.&
+}
+:074E
+    JUMP 0x019d
+:0753
+    ELSE
+:0754
+    {"Oaxtepac was shaman in the city, but Zipactriotl imprisoned him.&
+}
+:0797
+    PAUSE
+:0798
+    {
+"I suspect that Oaxtepac knows something of Zipactriotl's origin and powers. Oaxtepac started to say something about that before he was captured and I was forced to flee.&
+}
+:0845
+    JUMP 0x019d
+:084A
+    ENDIF
+    KEYWORDS tlap
+    ANSWER
+:0851
+    {"Tlapatla is my cousin. Unfortunate for her that she was married to that madman Huitlapacti.&
+}
+:08AF
+    IF [N8(0x01) N8(0x02) FLAG ]
+:08B6
+    PAUSE
+:08B7
+    {
+"... but fortunate for her that you came to depose Huitlapacti and separate him from his life.&
+}
+:0918
+    ENDIF
+:0919
+    JUMP 0x019d
+    KEYWORDS myrm
+    ANSWER
+:0924
+    {"The Myrmidex. Yes, they are fierce.&
+}
+:094A
+    IF [N8(0xeb) N8(0x06) FLAG N8(0xeb) N8(0x07) FLAG & ]
+:0957
+    PAUSE
+:0958
+    {
+"We have spoken on them in the past, and I have already agreed to help you against them.&
+}
+:09B3
+    ENDIF
+:09B4
+    PAUSE
+:09B5
+    {
+}
+:09B6
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:09BD
+    {"We have spoken on them in the past, and I have agreed to help you against them... once Huitlapacti is cast down, and I am once again on the throne of Tichticatl.&
+}
+:0A61
+    ELSE
+:0A62
+    {"No single tribe can stand against them... and no one, not even I, can seem to @unite the tribes against them.&
+}
+:0AD2
+    ENDIF
+:0AD3
+    JUMP 0x019d
+    KEYWORDS othe
+    ANSWER
+:0ADE
+    {"There are many other tribes in the valley. @Barrab, @Disquiqui, @Haakur, @Jukari, @Kurak, @Pindiro, @Sakkhra, @Yolaru, and @Urali. Which do you wish to learn of?&
+}
+:0B82
+    JUMP 0x019d
+    KEYWORDS kura
+    ANSWER
+:0B8D
+    {"The Kurak are good fighters. They live to the northwest."
+}
+:0BC8
+    JUMP 0x019d
+    KEYWORDS yola
+    ANSWER
+:0BD3
+    {"Dark-skinned, fierce fighters, the Yolaru live north of Tichticatl.&
+}
+:0C19
+    JUMP 0x019d
+    KEYWORDS disq
+    ANSWER
+:0C24
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:0C2B
+    {"The Disquiqui tribe is in the lowlands to the west of Tichticatl. They are a merry tribe, but nearly worthless in war.&
+}
+:0CA4
+    ELSE
+:0CA5
+    {With a sigh, he gestures around him. "These foolish people are the Disquiqui. They have been kind enough to shelter me during my exile.&
+}
+:0D2E
+    ENDIF
+:0D2F
+    JUMP 0x019d
+    KEYWORDS barr
+    ANSWER
+:0D3A
+    {"Out to the west, through a narrow defile, are the Barrab, dwellers in the clouds -- atop a high mesa.&
+}
+:0DA2
+    JUMP 0x019d
+    KEYWORDS sakk
+    ANSWER
+:0DAD
+    {"To the far west, near the Barrab, are the Sakkhra. They are reptile men, and fierce fighters.&
+}
+:0E0D
+    JUMP 0x019d
+    KEYWORDS juka
+    ANSWER
+:0E18
+    {"Southeast, in the land of the volcanoes, are the Jukari, who are stupid enough to live among the mountains that spit lava.&
+}
+:0E95
+    JUMP 0x019d
+    KEYWORDS haak
+    ANSWER
+:0EA0
+    {"Ugly and slow, but very strong. The Haakur live to the southeast, near the Jukari.&
+}
+:0EF5
+    JUMP 0x019d
+    KEYWORDS pind,bara,nort
+    ANSWER
+:0F0A
+    {"North, in the distance, are the Pindiro and the Barako. I do not know much of them.&
+}
+:0F60
+    JUMP 0x019d
+    KEYWORDS ural
+    ANSWER
+:0F6B
+    {"Somewhere east are the Urali. I do not know where they live. For centuries, they have kept themselves apart.&
+}
+:0FDA
+    PAUSE
+:0FDB
+    {
+"Recently, a new chief has sent them out against the Nahuatla; they may turn out to be a worthwhile enemy.&
+}
+:1048
+    JUMP 0x019d
+    KEYWORDS nahu,tich
+    ANSWER
+:1058
+    {"I am of the Nahuatla people. Our city is called Tichticatl. It is a great city, all made of stone.&
+}
+:10BD
+    JUMP 0x019d
+    KEYWORDS unit,ally,alli
+    ANSWER
+:10D2
+    IF [N8(0xeb) N8(0x07) FLAG N8(0xeb) N8(0x06) FLAG & ]
+:10DF
+    {"I have already agreed to aid you when you bring the tribes together. This is the debt I owe you. This, and nothing more.&
+}
+:115A
+    JUMP 0x019d
+:115F
+    ENDIF
+:1160
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:1167
+    {"I have already agreed to aid you when you bring the tribes together... provided you managed to cast down Huitlapacti, who has usurped my throne.&
+}
+:11FA
+    JUMP 0x019d
+:11FF
+    ELSE
+:1200
+    JUMP 0x127f
+:1205
+    ENDIF
+:1206
+    KEYWORDS bye
+    ANSWER
+:120B
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:1211
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:1218
+    {"Goodbye, friend $P.&
+}
+:122E
+    BYE
+:122F
+    ELSE
+:1230
+    {"Goodbye. May the spirits protect you.&
+}
+:1258
+    BYE
+:1259
+    ENDIF
+:125A
+    KEYWORDS *
+    ANSWER
+:125D
+    {"I know nothing about that.&
+}
+:127A
+    JUMP 0x019d
+    END_ANSWER
+:127F
+    {"You wish to try to unite the tribes? I, Moctapotl, do not think even I could do it.&
+}
+:12D5
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:12DB
+    PORTRAIT [N8(0xeb) ]
+:12DF
+    PAUSE
+:12E0
+    {
+He gives you a long, appraising look.
+}
+:1307
+    PAUSE
+:1308
+    {
+"Perhaps you might succeed where others could not. You are strange, alien. The lesser tribes might not suspect you of favoring one tribe above others, as any other chief would.&
+}
+:13BB
+    PAUSE
+:13BC
+    {
+}
+:13BD
+    IF [N8(0x01) N8(0x02) FLAG ]
+:13C4
+    {"Very well. I owe you much for killing Huitlapacti; you served to restore me to my throne. When you choose to bring the tribes together, I will be there, with my warriors.&
+}
+:1471
+    PAUSE
+:1472
+    {
+"But be sure the enemy is worthy of me!&
+}
+:149C
+    JUMP 0x019d
+:14A1
+    ELSE
+:14A2
+    {"I would be willing to help you. But I am not in command of my own warriors! Huitlapacti is.&
+}
+:1500
+    PAUSE
+:1501
+    {
+"@Huitlapacti is protected by a magical glow given him by @Zipactriotl... and while he possesses it, I cannot defeat him.&
+}
+:157D
+    PAUSE
+:157E
+    {
+"If you can deprive him of his glow, and then drive Huitlapacti from the city, I will gladly aid you in your mission to unite the tribes.&
+}
+:160A
+    JUMP 0x1610
+:160F
+    ENDIF
+:1610
+    IF [N8(0x04) INPARTY ]
+:1615
+    JUMP 0x162f
+:161A
+    ELSE
+:161B
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1622
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:1629
+    JUMP 0x019d
+:162E
+    ENDIF
+:162F
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1636
+    PAUSE
+:1637
+    {
+}
+:1638
+    IF [N8(0x04) N8(0x06) FLAG ]
+:163F
+    PORTRAIT [N8(0x04) ]
+:1643
+    {Jimmy whips out his notebook. "Now we're meddling in foreign politics. You know, boss, you ought to be working for the government. But I've got it written down in my @notebook.&
+}
+:16F5
+    PAUSE
+:16F6
+    {
+}
+:16F7
+    PORTRAIT [N8(0xeb) ]
+:16FB
+    JUMP 0x019d
+:1700
+    ELSE
+:1701
+    PORTRAIT [N8(0x04) ]
+:1705
+    {Jimmy speaks up. "Tell you what, boss. It could be that we're going to have a lot of these little chores ahead of us. I'll note down what each chief wants.&
+}
+:17A2
+    PAUSE
+:17A3
+    {
+"Any time you want to check out what we've got in store for us, ask me about my @notebook. It never forgets.&
+}
+:1812
+    SET_FLAG [N8(0x04) ], [N8(0x06) ]
+:1819
+    SET_FLAG [N8(0x04) ], [N8(0x03) ]
+:1820
+    PAUSE
+:1821
+    {
+}
+:1822
+    PORTRAIT [N8(0xeb) ]
+:1826
+    JUMP 0x019d
+:182B
+    ENDIF

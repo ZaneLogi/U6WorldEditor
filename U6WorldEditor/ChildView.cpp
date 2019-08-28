@@ -88,6 +88,13 @@ CChildView::CChildView()
     gMapManager.obj_manager.save_actors("d:\\test\\test\\OBJLIST");
     */
 
+    // EXPERIMENT:
+    /*auto script = gMapManager.script.get_script(2);
+    std::ofstream file("d:\\script002.bin", std::ios_base::out | std::ios_base::binary);
+    file.write((const char*)script.data(), script.size());
+    file.close();
+    */
+
     for (int i = 0; i < 256; i++)
     {
         auto name = gMapManager.script.get_npc_name(i);
@@ -695,12 +702,6 @@ void CChildView::OnViewZ(UINT id)
 
 void CChildView::OnHackConverse()
 {
-    // EXPERIMENT:
-    auto script = gMapManager.script.get_script(2);
-    //std::ofstream file("d:\\script.bin", std::ios_base::out | std::ios_base::binary);
-    //file.write(script.data(), script.length());
-    //file.close();
-
     CConverseDlg dlg(&gMapManager);
     if (IDC_FIND_NPC == dlg.DoModal() && dlg.m_selected_npc_id != -1)
     {

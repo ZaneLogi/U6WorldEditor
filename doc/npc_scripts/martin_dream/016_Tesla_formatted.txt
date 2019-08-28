@@ -1,0 +1,1160 @@
+:0000
+    NPC_ID: npc id: 16, npc name: Tesla
+:0007
+    NPC_LOOK: a good-looking, dark young man with an intense stare.
+*
+:003F
+    START CONVERSION
+:0040
+    IF [N8(0xeb) N8(0x05) FLAG ]
+:0047
+    JUMP 0x19a4
+:004C
+    ENDIF
+:004D
+    IF [N8(0x46) N8(0x03) FLAG ]
+:0054
+    {"Friend $P! I am glad to see you!
+}
+:0076
+    PAUSE
+:0077
+    {
+"I am quite concerned about these seismic tremors that began approximately upon the death of Raxachk. By my calculations, they are growing progressively stronger.
+}
+:011B
+    PAUSE
+:011C
+    {
+"Soon they will be strong enough to warp the space cannon and render our return to Earth impossible!
+}
+:0182
+    PAUSE
+:0183
+    {
+"You must get the phlogistonite to Mr. Carnegie immediately, so we may flee this planet!&
+}
+:01DE
+    BYE
+:01DF
+    ENDIF
+:01E0
+    IF [N8(0x10) N8(0x02) FLAG ]
+:01E7
+    JUMP 0x0403
+:01EC
+    ELSE
+:01ED
+    JUMP 0x01f3
+:01F2
+    ENDIF
+:01F3
+    IF [N8(0xeb) 0x00 FLAG ]
+:01F9
+    JUMP 0x0205
+:01FE
+    ELSE
+:01FF
+    JUMP 0x027b
+:0204
+    ENDIF
+:0205
+    IF [N8(0x10) N8(0x05) FLAG N8(0x00) == N8(0x10) N8(0x04) FLAG N8(0x01) == & ]
+:0218
+    {"Go ahead, my friend. Pry open the door.
+Let us begin the grand adventure!&
+}
+:0264
+    BYE
+:0265
+    ELSE
+:0266
+    JUMP 0x026c
+:026B
+    ENDIF
+:026C
+    {"Ah, $P.&
+}
+:0276
+    JUMP 0x05f7
+:027B
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0281
+    PORTRAIT [N8(0xeb) ]
+:0285
+    {"Come, my friend. We have landed!
+"Let us see how close my calculations were for our landing site.&
+
+}
+:02EA
+    PAUSE
+:02EB
+    {He strides to the window and stares out for a few seconds.
+
+}
+:0327
+    PAUSE
+:0328
+    {He moves toward the door of the capsule.
+"Good, good! My calculations were precise, as usual.
+}
+:0386
+    PAUSE
+:0387
+    {
+"We are not far from the site of the @1893 landing.
+}
+:03BC
+    PAUSE
+:03BD
+    {
+"It should be just east of here, within easy walking distance.&
+}
+:03FE
+    JUMP 0x05f7
+:0403
+    IF [N8(0xeb) 0x00 FLAG N8(0x01) == ]
+:040C
+    JUMP 0x046b
+:0411
+    ELSE
+:0412
+    JUMP 0x0418
+:0417
+    ENDIF
+:0418
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:041E
+    PORTRAIT [N8(0xeb) ]
+:0422
+    {"I am sorry, $G, but I cannot yet allow you to exit the capsule.&
+
+}
+:0465
+    PAUSE
+:0466
+    JUMP 0x048a
+:046B
+    IF [N8(0x10) N8(0x03) FLAG N8(0x01) == N8(0x10) N8(0x04) FLAG N8(0x00) == & ]
+:047E
+    JUMP 0x04f7
+:0483
+    ELSE
+:0484
+    JUMP 0x048a
+:0489
+    ENDIF
+:048A
+    {"No, my friend, I must first know that you are adequately prepared to face the dangers that lie ahead.&
+}
+:04F2
+    JUMP 0x05f7
+:04F7
+    {"Alas, my friend, we have run this charade before.
+}
+:052A
+    PAUSE
+:052B
+    {
+"I do hope that you have studied the information I have given you to better prepare yourself for the hardships ahead.&
+}
+:05A3
+    PAUSE
+:05A4
+    {
+He glares at you sternly.
+"We do not have time for foolishness here. Now...&
+}
+:05F2
+    JUMP 0x05f7
+:05F7
+    IF [N8(0x13) N8(0x00) FLAG N8(0x11) N8(0x00) FLAG & N8(0x12) N8(0x00) FLAG & ]
+:060A
+    ELSE
+:060B
+    {"The others may have important information you can use on your journey.
+}
+:0653
+    PAUSE
+:0654
+    {
+"It would be wise to speak with everyone before exiting the capsule.&
+}
+:069B
+    ENDIF
+:069C
+    IF [N8(0x10) N8(0x02) FLAG N8(0x01) == ]
+:06A6
+    JUMP 0x2f19
+:06AB
+    ELSE
+:06AC
+    JUMP 0x06b2
+:06B1
+    ENDIF
+:06B2
+    IF [N8(0x13) N8(0x07) FLAG N8(0x00) == ]
+:06BC
+    PAUSE
+:06BD
+    {
+"I would also check with Mr. Garrett for some @utensil with which to pry open the @door of the @capsule. It seems to be jammed closed.&
+}
+:0746
+    ENDIF
+:0747
+    {
+}
+:0748
+    ASK
+    KEYWORDS name
+    ANSWER
+:074F
+    {"Tesla. Nikola Tesla. Fine Serbian name.&
+He smiles companionably.
+}
+:0792
+    JUMP 0x0747
+    KEYWORDS job
+    ANSWER
+:079C
+    {"It will be my job to monitor the @communications from Earth through the giant @reflectors.&
+}
+:07F9
+    JUMP 0x0747
+    KEYWORDS tesl,niko
+    ANSWER
+:0809
+    {"Yes, my friend?&
+}
+:081B
+    JUMP 0x0747
+    KEYWORDS 1893,firs
+    ANSWER
+:082B
+    {"Indeed, it is of paramount importance that you find the landing site of the earlier expedition. The @sextant we brought should help immensely.&
+}
+:08BC
+    JUMP 0x0747
+    KEYWORDS Bly,nell,eliz,coch
+    ANSWER
+:08D5
+    {"A fine young woman. Good adventurous spirit. Strong, too.&
+}
+:0911
+    JUMP 0x0747
+    KEYWORDS Spec,joha
+    ANSWER
+:0921
+    {"Certainly an adequate scientist for our purposes. He will be a help to you in your travels.&
+}
+:097F
+    JUMP 0x0747
+    KEYWORDS Bloo,doct,c.l.
+    ANSWER
+:0994
+    {"As fine a doctor as you could find. Knows a lot about @oxygen.
+}
+:09D4
+    PAUSE
+:09D5
+    {
+"If you are ill or @injured, you should locate him immediately.&
+}
+:0A17
+    JUMP 0x0747
+    KEYWORDS Garr,dall
+    ANSWER
+:0A27
+    {"A bit rough, perhaps, but a handy man to have around. Good with @tools, he is.&
+}
+:0A78
+    JUMP 0x0747
+    KEYWORDS Freu,sigm
+    ANSWER
+:0A88
+    {"An interesting man. He has some very exciting theories about @dreams and the workings of men's minds which are of great interest to me.
+}
+:0B11
+    PAUSE
+:0B12
+    {
+"I must speak with him soon...&
+His attention seems to drift from you for a moment.
+}
+:0B67
+    JUMP 0x0747
+    KEYWORDS Mars
+    ANSWER
+:0B72
+    {"A fascinating planet. There have been audio signals received from here, you know.
+}
+:0BC5
+    PAUSE
+:0BC6
+    {
+"I've heard them myself. And now we are here! Fascinating world.&
+}
+:0C09
+    JUMP 0x0747
+    KEYWORDS elec,magn
+    ANSWER
+:0C19
+    {"I have done many experiments using the powers of electricity and magnetism. They are powerful forces.
+}
+:0C80
+    PAUSE
+:0C81
+    {
+"No one completely understands them yet.&
+}
+:0CAC
+    PAUSE
+:0CAD
+    {
+He snaps his fingers, and a small ball of flame appears in his hand. He moves it from hand to hand, watching it intently.
+}
+:0D28
+    PAUSE
+:0D29
+    {
+"But I have come closer to understanding than most.&
+Smiling, he snaps his fingers again and the flame disappears.
+}
+:0D9D
+    JUMP 0x0747
+    KEYWORDS oxyg
+    ANSWER
+:0DA8
+    {"Indeed. We all, as you undoubtedly know, require oxygen to live.
+}
+:0DEA
+    PAUSE
+:0DEB
+    {
+"The Martian atmosphere should have less oxygen than on Earth.
+}
+:0E2B
+    PAUSE
+:0E2C
+    {
+"Actually, if you are truly interested, you should speak to Dr. Blood. He is the expert on oxygen and air.&
+}
+:0E99
+    JUMP 0x0747
+    KEYWORDS cann,spac
+    ANSWER
+:0EA9
+    {"Yes, my space cannon must be finished in order to return us safely to the Earth.&
+}
+:0EFC
+    JUMP 0x0747
+    KEYWORDS inju,sick,ill,hurt
+    ANSWER
+:0F15
+    {"If you're not feeling well, my man, be sure to speak to Dr. Blood. He'll soon have you fit as a fiddle.
+}
+:0F7E
+    PAUSE
+:0F7F
+    {
+"And don't report to me again until you're well. My health is of the utmost importance to our mission.&
+}
+:0FE8
+    JUMP 0x0747
+    KEYWORDS comm
+    ANSWER
+:0FF3
+    {"Communication must be maintained with the Earth to prove that my mission is a success.
+}
+:104B
+    PAUSE
+:104C
+    {
+"I will take care of it personally to guarantee its accuracy.&
+}
+:108C
+    JUMP 0x0747
+    KEYWORDS tool,uten
+    ANSWER
+:109C
+    {"Yes, we may have need of some during our travels. You should ask Mr. Garrett what we have available.&
+}
+:1103
+    JUMP 0x0747
+    KEYWORDS door,hatc,jamm,stuc,clos,brok
+    ANSWER
+:1127
+    IF [N8(0x13) N8(0x07) FLAG N8(0x00) == ]
+:1131
+    {"I have tried the door, yes. It seems to be jammed. Please do ask Mr. Garrett specifically for something with which to open the hatch.&
+}
+:11B9
+    ELSE
+:11BA
+    {"I'm afraid it's truly broken now, my friend.&
+}
+:11E9
+    ENDIF
+:11EA
+    JUMP 0x0747
+    KEYWORDS caps,ship
+    ANSWER
+:11FA
+    {"Indeed, it has worked even better than I expected. It is rewarding to see my theories proven correct.&
+}
+:1262
+    JUMP 0x0747
+    KEYWORDS mirr,refl
+    ANSWER
+:1272
+    {"Communications are achieved through the means of light reflection by huge mirrored surfaces.
+}
+:12D0
+    PAUSE
+:12D1
+    {
+"We will set them up if they are needed and I will monitor them personally to insure emergency communications.&
+}
+:1342
+    JUMP 0x0747
+    KEYWORDS drea
+    ANSWER
+:134D
+    {"Your mind can deliver some amazing revelations while you sleep.
+}
+:138E
+    PAUSE
+:138F
+    {
+"I understand that Dr. Freud is interested in discovering exactly what these revelations may mean and how to interpret them.
+}
+:140D
+    PAUSE
+:140E
+    {
+"I must speak to him. I have had many dreams...&
+}
+:1440
+    JUMP 0x0747
+    KEYWORDS Lowe,perc
+    ANSWER
+:1450
+    {"Mr. Lowell is a gifted scientist. Or was. He must have erred in his calculations, however. Something has surely gone awry.
+}
+:14CC
+    PAUSE
+:14CD
+    {
+"It is a good thing I have taken charge of this expedition personally. Our success is thus assured.&
+}
+:1533
+    JUMP 0x0747
+    KEYWORDS sext
+    ANSWER
+:153E
+    {"There should be a sextant in the hold. If you learn the @coordinates of a place you wish to go to, the sextant will lead you there.&
+}
+:15C4
+    JUMP 0x0747
+    KEYWORDS coor
+    ANSWER
+:15CF
+    {"The location for a place should be calculatable using the sextant. It will give you a set of two numbers which you can then use to find the spot again later.
+}
+:166E
+    PAUSE
+:166F
+    {
+"The coordinates for the earlier landing site, for example, are 28S, 153W.&
+}
+:16BC
+    JUMP 0x0747
+    KEYWORDS join,acom,acco
+    ANSWER
+:16D1
+    {"No, no, my friend. Thank you for the honor, but I am the only one able to complete the preparations for our departure.
+}
+:1749
+    PAUSE
+:174A
+    {
+"I must remain here.&
+He smiles regretfully, shaking his head.
+}
+:178A
+    JUMP 0x0747
+    KEYWORDS wait,leav
+    ANSWER
+:179A
+    {"I don't think we have a choice until we get this door open, friend.&
+}
+:17E0
+    JUMP 0x0747
+    KEYWORDS bye
+    ANSWER
+:17EA
+    {"Certainly, my friend. We are both busy.
+We will speak again later.&
+}
+:182F
+    BYE
+:1830
+    KEYWORDS *
+    ANSWER
+:1833
+    {"I apologize, my friend. Could you rephrase that?&
+}
+:1866
+    JUMP 0x0747
+    END_ANSWER
+:186B
+    BYE
+:186C
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:1872
+    DECLARE [0x1d, 0xb2] = [N8(0x01) ]
+:1879
+    NEW npc [N8(0x01) ], obj [N8(0x26) ], quality [N8(0x00) ], quantity [N8(0x01) ]
+:1886
+    IF [0x1d B2 ]
+:188A
+    DECLARE [0x1d, 0xb2] = [N8(0x00) ]
+:1891
+    {"It looks like you've overloaded yourself there. Why don't you put some of that back in the ship? I'll give you the gloves when you come back.&
+}
+:1921
+    JUMP 0x19a4
+:1926
+    ELSE
+:1927
+    {"Certainly. Here you are.&
+He hands you a pair of rubber gloves.
+}
+:1968
+    JUMP 0x19a4
+:196D
+    ENDIF
+:196E
+    KEYWORDS n
+    ANSWER
+:1971
+    {"Alright. If you need them later, just ask.&
+}
+:199E
+    JUMP 0x19a4
+    END_ANSWER
+:19A4
+    {
+}
+:19A5
+    ASK
+    KEYWORDS name
+    ANSWER
+:19AC
+    {"Tesla. Nikola Tesla. Fine Serbian name.&
+He smiles companionably.
+}
+:19EF
+    JUMP 0x19a4
+    KEYWORDS job
+    ANSWER
+:19F9
+    {"It is my job to monitor the @communications from Earth through the giant @reflectors. They will be set up if I feel that emergency communications are necessary.&
+}
+:1A9C
+    JUMP 0x19a4
+    KEYWORDS tesl,niko
+    ANSWER
+:1AAC
+    {"Yes, my friend?&
+}
+:1ABE
+    JUMP 0x19a4
+    KEYWORDS 1893,firs
+    ANSWER
+:1ACE
+    IF [N8(0x04) NPCNEARBY ]
+:1AD3
+    {"Yes, I see you have found the landing site. Good, good.&
+}
+:1B0D
+    ELSE
+:1B0E
+    {"Indeed, it is of paramount importance that you find the landing site of the earlier expedition. The @sextant we brought should help immensely.&
+}
+:1B9F
+    ENDIF
+:1BA0
+    JUMP 0x19a4
+    KEYWORDS Bly,nell,eliz,coch
+    ANSWER
+:1BB9
+    {"A fine young woman. Good adventurous spirit. Strong, too.&
+}
+:1BF5
+    JUMP 0x19a4
+    KEYWORDS Spec,joha
+    ANSWER
+:1C05
+    {"Certainly an adequate scientist for our purposes. He should be a help to you in your travels.&
+}
+:1C65
+    JUMP 0x19a4
+    KEYWORDS Bloo,doct,c.l.
+    ANSWER
+:1C7A
+    {"As fine a doctor as you could find. Knows a lot about @oxygen.
+}
+:1CBA
+    PAUSE
+:1CBB
+    {
+"If you are ill or @injured, you should locate him immediately.&
+}
+:1CFD
+    JUMP 0x19a4
+    KEYWORDS Garr,dall
+    ANSWER
+:1D0D
+    {"A bit rough, perhaps, but a handy man to have around. Good with @tools, he is.&
+}
+:1D5E
+    JUMP 0x19a4
+    KEYWORDS Freu,sigm
+    ANSWER
+:1D6E
+    {"An interesting man. He has some very exciting theories about @dreams and the workings of men's minds which are of great interest to me.
+}
+:1DF7
+    PAUSE
+:1DF8
+    {
+"I must speak with him soon...&
+His attention seems to drift from you for a moment.
+}
+:1E4D
+    JUMP 0x19a4
+    KEYWORDS Mars
+    ANSWER
+:1E58
+    {"A fascinating planet. There have been audio signals received from here, you know.
+}
+:1EAB
+    PAUSE
+:1EAC
+    {
+"I've heard them myself. And now we are here! Fascinating world.&
+}
+:1EEF
+    JUMP 0x19a4
+    KEYWORDS rubb,glov
+    ANSWER
+:1EFF
+    {"Well, certainly, I have a stock of them for prevention of the spread of disease. Would you like a pair?&
+@Y or @N
+}
+:1F72
+    JUMP 0x186c
+    KEYWORDS drea,mach
+    ANSWER
+:1F82
+    {"I have heard much of the Dream Machines from Dr. Freud. He is fascinated by them.
+}
+:1FD5
+    PAUSE
+:1FD6
+    {
+"I really hate to suggest it, but if you're wondering about the workings of any of the Martian machines, you would probably be better off asking that old curmudgeon, Edison.
+}
+:2085
+    PAUSE
+:2086
+    {
+"He has been here for quite a while. Surely he has learned something by now.&
+}
+:20D5
+    JUMP 0x19a4
+    KEYWORDS elec,magn
+    ANSWER
+:20E5
+    {"I have done many experiments using the powers of electricity and magnetism. They are powerful forces.
+}
+:214C
+    PAUSE
+:214D
+    {
+"No one completely understands them yet.&
+}
+:2178
+    PAUSE
+:2179
+    {
+He snaps his fingers, and a small ball of flame appears in his hand. He moves it from hand to hand, watching it intently.
+}
+:21F4
+    PAUSE
+:21F5
+    {
+"But I have come closer to understanding than most.&
+Smiling, he snaps his fingers again and the flame disappears.
+}
+:2269
+    JUMP 0x19a4
+    KEYWORDS powe
+    ANSWER
+:2274
+    IF [N8(0x73) N8(0x04) FLAG ]
+:227B
+    {"Yes, isn't it marvelous? My theories have been proven! The towers work!&
+}
+:22C5
+    ELSE
+:22C6
+    {"Certainly, $P, it would be an improvement to have power available. All we would need is some structures to broadcast the power after we made sure the source was working correctly.&
+}
+:237C
+    ENDIF
+:237D
+    JUMP 0x19a4
+    KEYWORDS towe
+    ANSWER
+:2388
+    IF [N8(0x73) N8(0x04) FLAG ]
+:238F
+    {"I knew they would work all along. That fool, Edison, has no vision.&
+}
+:23D5
+    ELSE
+:23D6
+    {"If there are towers here, $P, they will work. Of that I am certain. Broadcast power is the wave of the future.&
+}
+:2447
+    ENDIF
+:2448
+    JUMP 0x19a4
+    KEYWORDS oxyg
+    ANSWER
+:2453
+    {"Indeed. We all, as you undoubtedly know, require oxygen to live.
+}
+:2495
+    PAUSE
+:2496
+    {
+"The Martian atmosphere has less oxygen than on Earth.
+}
+:24CE
+    PAUSE
+:24CF
+    {
+"Actually, if you are truly interested, you should speak to Dr. Blood. He is the expert on oxygen and air.&
+}
+:253C
+    JUMP 0x19a4
+    KEYWORDS cann,spac
+    ANSWER
+:254C
+    {"Yes, my space cannon must be finished in order to return us safely to the Earth.&
+}
+:259F
+    JUMP 0x19a4
+    KEYWORDS inju,sick,ill,hurt
+    ANSWER
+:25B8
+    {"If you're not feeling well, my man, be sure to speak to Dr. Blood. He'll soon have you fit as a fiddle.
+}
+:2621
+    PAUSE
+:2622
+    {
+"And don't report to me again until you're well. My health is of the utmost importance to our mission.&
+}
+:268B
+    JUMP 0x19a4
+    KEYWORDS comm
+    ANSWER
+:2696
+    {"Communication must be maintained with the Earth to prove that my mission is a success.
+}
+:26EE
+    PAUSE
+:26EF
+    {
+"I will take care of it personally to guarantee its accuracy.&
+}
+:272F
+    JUMP 0x19a4
+    KEYWORDS tool,uten
+    ANSWER
+:273F
+    {"Yes, we may have need of some during our travels. You should ask Mr. Garrett what we have available.&
+}
+:27A6
+    JUMP 0x19a4
+    KEYWORDS door,hatc,jamm,stuc,clos,brok
+    ANSWER
+:27CA
+    IF [N8(0x13) N8(0x07) FLAG N8(0x00) == ]
+:27D4
+    {"I have tried the door, yes. It seems to be jammed. Please do ask Mr. Garrett specifically for something with which to open the hatch.&
+}
+:285C
+    ELSE
+:285D
+    {"I'm afraid it's truly broken now, my friend.&
+}
+:288C
+    ENDIF
+:288D
+    JUMP 0x19a4
+    KEYWORDS caps,ship
+    ANSWER
+:289D
+    {"Indeed, it has worked even better than I expected. It is rewarding to see my theories proven correct.&
+}
+:2905
+    JUMP 0x19a4
+    KEYWORDS mirr,refl
+    ANSWER
+:2915
+    {"Communications are achieved through the means of light reflection by huge mirrored surfaces.
+}
+:2973
+    PAUSE
+:2974
+    {
+"They will be set up in case of emergency and I will monitor them personally.
+}
+:29C3
+    PAUSE
+:29C4
+    {
+"It is unknown at this time what happened to the mirrors of the @first expedition.&
+}
+:2A19
+    JUMP 0x19a4
+    KEYWORDS drea
+    ANSWER
+:2A24
+    {"Your mind can deliver some amazing revelations while you sleep.
+}
+:2A65
+    PAUSE
+:2A66
+    {
+"I understand that Dr. Freud is interested in discovering exactly what these revelations may mean and how to interpret them.
+}
+:2AE4
+    PAUSE
+:2AE5
+    {
+"I must speak to him. I have had many dreams...&
+}
+:2B17
+    JUMP 0x19a4
+    KEYWORDS Lowe,perc
+    ANSWER
+:2B27
+    {"Mr. Lowell is a gifted scientist. Or was. He must have erred in his calculations, however. The earlier mission has certainly not achieved its purpose.
+}
+:2BBF
+    PAUSE
+:2BC0
+    {
+"It is a good thing I have taken charge of this expedition personally. Our success is thus assured.&
+}
+:2C26
+    JUMP 0x19a4
+    KEYWORDS sext
+    ANSWER
+:2C31
+    {"There should be a sextant in the hold. If you learn the @coordinates of a place you wish to go to, the sextant will lead you there.&
+}
+:2CB7
+    JUMP 0x19a4
+    KEYWORDS coor
+    ANSWER
+:2CC2
+    {"The location for a place should be calculatable using the sextant. It will give you a set of two numbers which you can then use to find the spot again later.
+}
+:2D61
+    PAUSE
+:2D62
+    {
+"The coordinates for the earlier landing site are 28S, 153W.&
+}
+:2DA1
+    JUMP 0x19a4
+    KEYWORDS join
+    ANSWER
+:2DAC
+    {"No, no, my friend. Thank you for the honor, but I am the only one able to complete the preparations for our departure.
+}
+:2E24
+    PAUSE
+:2E25
+    {
+"I must remain here with my capsule.&
+He smiles regretfully, shaking his head.
+}
+:2E75
+    JUMP 0x19a4
+    KEYWORDS bye
+    ANSWER
+:2E7F
+    {"Certainly, my friend. We are both busy persons, but please feel free to speak again later.&
+}
+:2EDC
+    BYE
+:2EDD
+    KEYWORDS *
+    ANSWER
+:2EE0
+    {"I apologize, my friend. Could you rephrase that?&
+}
+:2F13
+    JUMP 0x19a4
+    END_ANSWER
+:2F18
+    BYE
+:2F19
+    {"And now, I must test your knowledge of the world outside this portal.&
+}
+:2F61
+    DECLARE [0x09, 0xb2] = [N8(0x01) N8(0x09) RAND ]
+:2F6B
+    IF [0x09 B2 N8(0x01) == ]
+:2F72
+    {The Martian year is how many Earth days long?&
+@(Mysteries @page @2):}
+:2FB7
+    JUMP 0x32a3
+:2FBC
+    ENDIF
+:2FBD
+    IF [0x09 B2 N8(0x02) == ]
+:2FC4
+    {What gas keeps the Martian airsquid aloft?&
+@(Mysteries @page @9):}
+:3006
+    JUMP 0x32b6
+:300B
+    ENDIF
+:300C
+    IF [0x09 B2 N8(0x03) == ]
+:3013
+    {Which creature fills the Martian ecological niche of Earth's wolves?&
+@(Mysteries @page @12):}
+:3070
+    JUMP 0x32ca
+:3075
+    ENDIF
+:3076
+    IF [0x09 B2 N8(0x04) == ]
+:307D
+    {Which plantimal uses crude weapons?&
+@(Mysteries @page @14):}
+:30B9
+    JUMP 0x32de
+:30BE
+    ENDIF
+:30BF
+    IF [0x09 B2 N8(0x05) == ]
+:30C6
+    {What type of Martian tends a birthing plot?&
+@(Mysteries @page @20) :}
+:310B
+    JUMP 0x32f2
+:3110
+    ENDIF
+:3111
+    IF [0x09 B2 N8(0x06) == ]
+:3118
+    {What type of lens topped the towers discovered by Peary?&
+@(Mysteries @page @23) :}
+:316A
+    JUMP 0x3306
+:316F
+    ENDIF
+:3170
+    IF [0x09 B2 N8(0x07) == ]
+:3177
+    {Buffalo Bill killed how many buffalo?&
+@(Time @Travel @page @10) :}
+:31B9
+    JUMP 0x331e
+:31BE
+    ENDIF
+:31BF
+    IF [0x09 B2 N8(0x08) == ]
+:31C6
+    {Marie Curie discovered the radioactive properties of radium and what other substance?&
+@(Time @Travel @page @13) :}
+:3238
+    JUMP 0x3332
+:323D
+    ENDIF
+:323E
+    IF [0x09 B2 N8(0x09) 0x09 B2 | == N8(0x00) == ]
+:324B
+    {Percival Lowell built his observatory in which state?&
+@(Time @Travel @page @17) :}
+:329D
+    JUMP 0x3346
+:32A2
+    ENDIF
+:32A3
+    ASK
+    KEYWORDS 687
+    ANSWER
+:32A9
+    JUMP 0x335a
+    KEYWORDS *
+    ANSWER
+:32B1
+    JUMP 0x3464
+    END_ANSWER
+:32B6
+    ASK
+    KEYWORDS hydr
+    ANSWER
+:32BD
+    JUMP 0x335a
+    KEYWORDS *
+    ANSWER
+:32C5
+    JUMP 0x3464
+    END_ANSWER
+:32CA
+    ASK
+    KEYWORDS hedg
+    ANSWER
+:32D1
+    JUMP 0x335a
+    KEYWORDS *
+    ANSWER
+:32D9
+    JUMP 0x3464
+    END_ANSWER
+:32DE
+    ASK
+    KEYWORDS prot
+    ANSWER
+:32E5
+    JUMP 0x335a
+    KEYWORDS *
+    ANSWER
+:32ED
+    JUMP 0x3464
+    END_ANSWER
+:32F2
+    ASK
+    KEYWORDS Cult
+    ANSWER
+:32F9
+    JUMP 0x335a
+    KEYWORDS *
+    ANSWER
+:3301
+    JUMP 0x3464
+    END_ANSWER
+:3306
+    ASK
+    KEYWORDS ruby,red
+    ANSWER
+:3311
+    JUMP 0x335a
+    KEYWORDS *
+    ANSWER
+:3319
+    JUMP 0x3464
+    END_ANSWER
+:331E
+    ASK
+    KEYWORDS 4000
+    ANSWER
+:3325
+    JUMP 0x335a
+    KEYWORDS *
+    ANSWER
+:332D
+    JUMP 0x3464
+    END_ANSWER
+:3332
+    ASK
+    KEYWORDS polo
+    ANSWER
+:3339
+    JUMP 0x335a
+    KEYWORDS *
+    ANSWER
+:3341
+    JUMP 0x3464
+    END_ANSWER
+:3346
+    ASK
+    KEYWORDS Ariz
+    ANSWER
+:334D
+    JUMP 0x335a
+    KEYWORDS *
+    ANSWER
+:3355
+    JUMP 0x3464
+    END_ANSWER
+:335A
+    {Tesla smiles, pleased with your answers. "It is obvious that you have been studying your materials. Excellent.
+}
+:33C9
+    PAUSE
+:33CA
+    {
+"You are indeed well prepared to venture forth on the planet's surface. You may proceed with your prybar on the hatch, my friend.&
+}
+:344E
+    SET_FLAG [N8(0x10) ], [N8(0x04) ]
+:3455
+    CLEAR_FLAG [N8(0x10) ], [N8(0x03) ]
+:345C
+    CLEAR_FLAG [N8(0x10) ], [N8(0x02) ]
+:3463
+    BYE
+:3464
+    {Tesla looks disappointed. He sags visibly, and sighs.
+}
+:349A
+    PAUSE
+:349B
+    {
+"I am sorry, friend. It disturbs me to know that you have not adequately prepared for the ordeals you will face.
+}
+:350D
+    PAUSE
+:350E
+    {
+"You must return to the reading materials you have been given.
+}
+:354E
+    PAUSE
+:354F
+    {
+"When I know that you are knowledgeable enough to meet the challenge that lies beyond this door, I will allow you to depart.
+}
+:35CD
+    PAUSE
+:35CE
+    {
+"And not before.&
+He turns and walks away, shaking his head sadly.
+}
+:3612
+    SET_FLAG [N8(0x10) ], [N8(0x03) ]
+:3619
+    CLEAR_FLAG [N8(0x10) ], [N8(0x02) ]
+:3620
+    BYE
+:3621
+    BYE

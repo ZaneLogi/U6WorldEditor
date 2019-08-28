@@ -1,0 +1,35 @@
+:0000
+    NPC_ID: npc id: 21, npc name: Plashef_
+:000A
+    NPC_LOOK: a peculiar red-haired youth.
+*
+:0029
+    START CONVERSION
+:002A
+    IF [N8(0xeb) 0x00 FLAG N8(0x00) == ]
+:0033
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0039
+    PORTRAIT [N8(0xeb) ]
+:003D
+    {"I am Plashef. Perhaps you recall my name, shell-less one?Well, no matter now. You must get the fuel cannisters to Mr. Carnegie, friend.
+}
+:00C6
+    PAUSE
+:00C7
+    {
+"The tremors are closer together now. We do not have much longer before our home is destroyed. We must go.&
+}
+:0134
+    BYE
+:0135
+    ELSE
+:0136
+    {"You must hurry, my friend. Mr. Carnegie is waiting for the fuel.&
+}
+:0179
+    BYE
+:017A
+    ENDIF
+:017B
+    BYE

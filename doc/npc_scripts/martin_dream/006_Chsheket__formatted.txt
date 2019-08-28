@@ -1,0 +1,584 @@
+:0000
+    NPC_ID: npc id: 6, npc name: Chsheket_
+:000B
+    NPC_LOOK: a woman,
+:0014
+    START CONVERSION
+:0015
+    IF [N8(0xeb) N8(0x01) FLAG ]
+:001C
+    { now a shapely, beautiful redhead.
+}
+:003F
+    ELSE
+:0040
+    { golden and shining.
+}
+:0055
+    ENDIF
+:0056
+    IF [N8(0x46) N8(0x03) FLAG ]
+:005D
+    {"Quickly, $P, we must take the phlogistonite to Mr. Carnegie. It is time to leave!&
+}
+:00B1
+    JUMP 0x0aa7
+:00B6
+    ENDIF
+:00B7
+    IF [N8(0xeb) N8(0x01) FLAG ]
+:00BE
+    JUMP 0x0395
+:00C3
+    ENDIF
+:00C4
+    PAUSE
+:00C5
+    {
+}
+:00C6
+    IF [N8(0xeb) N8(0x02) FLAG ]
+:00CD
+    JUMP 0x0120
+:00D2
+    ENDIF
+:00D3
+    IF [N8(0xeb) 0x00 FLAG N8(0x00) == ]
+:00DC
+    JUMP 0x0207
+:00E1
+    ENDIF
+:00E2
+    {"Hello, $P. How may Chsheket be of assistance to Earth?&
+}
+:011B
+    JUMP 0x0aa7
+:0120
+    IF [N8(0x3e) N8(0x05) FLAG N8(0x01) == ]
+:012A
+    {"The rubber sealant has no dye in it yet, $P. We need rouge berries processed into @dye.&
+}
+:0184
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x02) ]
+:018B
+    JUMP 0x0aa7
+:0190
+    ELSE
+:0191
+    {"I believe the sealant must have some coloring substance in it for the sprayer to operate properly, $P.&
+}
+:01FA
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x02) ]
+:0201
+    JUMP 0x0aa7
+:0206
+    ENDIF
+:0207
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:020D
+    PORTRAIT [N8(0x06) ]
+:0211
+    {"Greetings, person of Earth.&
+
+}
+:0230
+    PAUSE
+:0231
+    {The Martian intelligence looks in wonder at its @metal body.
+}
+:026E
+    IF [N8(0x02) NPCNEARBY ]
+:0273
+    PAUSE
+:0274
+    {
+}
+:0275
+    PORTRAIT [N8(0x02) ]
+:0279
+    {"I do suggest, $P, that we spend some time testing this solution to make sure it is a viable one before we try any more transfers.&
+}
+:02FD
+    PAUSE
+:02FE
+    {
+}
+:02FF
+    PORTRAIT [N8(0xeb) ]
+:0303
+    {"I must agree wholecormedly, doctor. I would not presume to endanger any of my plantals without being sure of this plan's success.&
+}
+:0387
+    ENDIF
+:0388
+    DECLARE [0x09, 0xb2] = [N8(0xeb) JOIN ]
+:0390
+    JUMP 0x0aa7
+:0395
+    IF [N8(0xeb) N8(0x05) FLAG N8(0x00) == ]
+:039F
+    {"Hello, $P. How may Chsheket be of assistance to Earth?&
+}
+:03D8
+    JUMP 0x0aa7
+:03DD
+    ENDIF
+:03DE
+    {Chsheket tips her head and smiles. She seems happy.
+
+}
+:0413
+    PAUSE
+:0414
+    IF [N8(0x02) NPCNEARBY ]
+:0419
+    {"Thank you, Dr. Spector, for giving me this - what is it called again? Oh, yes, clothing.
+}
+:0473
+    PAUSE
+:0474
+    {
+"I gather that I should wrap myself in it at all times?&
+}
+:04AE
+    PAUSE
+:04AF
+    {
+}
+:04B0
+    PORTRAIT [N8(0x02) ]
+:04B4
+    {Johann blushes slightly.
+"Ah. Yes, well. Most times. Perhaps you should speak with one of the ladies about that.&
+}
+:0526
+    PAUSE
+:0527
+    {
+}
+:0528
+    PORTRAIT [N8(0xeb) ]
+:052C
+    {"Thank you, doctor. I will do that.&
+She smiles and dimples, and Johann blushes a little deeper.
+}
+:058D
+    PAUSE
+:058E
+    {
+}
+:058F
+    ELSE
+:0590
+    {"I must thank you all for giving me this - what is it called again? Oh, yes, clothing.
+}
+:05E7
+    PAUSE
+:05E8
+    {
+"It is a strange custom, but one I understand I must adhere to.
+}
+:0629
+    PAUSE
+:062A
+    {
+}
+:062B
+    ENDIF
+:062C
+    {As you look at the woman Chsheket has become, you realize that you recognize her. A century from now, she will appear at your door with an envelope for you and Dr. Spector...
+}
+:06DB
+    PAUSE
+:06DC
+    {
+"We must speak to your fellow humans at Olympus Mons. They are the largest concentrated group. They have a greater number to help us.
+}
+:0763
+    PAUSE
+:0764
+    {
+"Our next move depends upon their leader, the one called Segal.
+
+}
+:07A6
+    PAUSE
+:07A7
+    {"I do not believe we can liberate those Martians still in the Dream World without his assistance.&
+}
+:080A
+    PAUSE
+:080B
+    {
+}
+:080C
+    IF [N8(0x02) NPCNEARBY N8(0x33) N8(0x03) FLAG N8(0x00) == & ]
+:081A
+    PORTRAIT [N8(0x02) ]
+:081E
+    {Dr. Spector adds, "We must speak to Segal about the phlogistonite, as well.
+}
+:086A
+    PAUSE
+:086B
+    {
+"We have plans to make. Let's be off!&
+He strides quickly away, gesturing for you all to follow.
+}
+:08CD
+    ENDIF
+:08CE
+    IF [N8(0x02) NPCNEARBY N8(0x33) N8(0x03) FLAG N8(0x01) == & ]
+:08DC
+    PORTRAIT [N8(0x02) ]
+:08E0
+    {"We have plans to make. Let's be off!&
+He strides quickly away, gesturing for you all to follow.
+}
+:0941
+    ENDIF
+:0942
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x05) ]
+:0949
+    BYE
+:094A
+    {The Martian looks up at you shyly.
+}
+:096D
+    IF [N8(0x03) NPCNEARBY ]
+:0972
+    {Then it looks at Nellie.
+}
+:098B
+    ENDIF
+:098C
+    {
+}
+:098D
+    PAUSE
+:098E
+    {"I believe I have a little understanding of your life cycle. I would be pleased if you would consider me 'female.'
+}
+:0A01
+    PAUSE
+:0A02
+    {
+"Of course, this body shall never reproduce. But perhaps I will carry some seeds with me...
+
+}
+:0A60
+    PAUSE
+:0A61
+    {"I will not age. I am durable, too; practically indestructible.&
+}
+:0AA2
+    JUMP 0x0aa7
+:0AA7
+    {
+}
+:0AA8
+    ASK
+    KEYWORDS name
+    ANSWER
+:0AAF
+    {"I believe it would be best for me to use my own name for now. Call me Chsheket, please.&
+}
+:0B09
+    JUMP 0x0aa7
+    KEYWORDS chsh
+    ANSWER
+:0B14
+    {"What can I do for you, $P?&
+}
+:0B31
+    JUMP 0x0aa7
+    KEYWORDS job
+    ANSWER
+:0B3B
+    {"I am the @Ambassador of the Martians of Hellas Grove.
+
+}
+:0B73
+    PAUSE
+:0B74
+    {"I must test this body to be sure that it is safe for my grovemates.&
+}
+:0BBA
+    JUMP 0x0aa7
+    KEYWORDS body,meta
+    ANSWER
+:0BCA
+    IF [N8(0xeb) N8(0x01) FLAG ]
+:0BD1
+    JUMP 0x094a
+:0BD6
+    ENDIF
+:0BD7
+    IF [N8(0x3e) N8(0x05) FLAG N8(0x01) == ]
+:0BE1
+    {"Yes, we must change this body. We should act upon Miss Bernhardt's suggestion as soon as possible.&
+}
+:0C46
+    JUMP 0x0aa7
+:0C4B
+    ENDIF
+:0C4C
+    {"If only there were some way to make a body such as this more passably human in appearance...&
+}
+:0CAB
+    IF [N8(0x03) INPARTY ]
+:0CB0
+    PAUSE
+:0CB1
+    {
+}
+:0CB2
+    PORTRAIT [N8(0x03) ]
+:0CB6
+    {Nellie Bly says,
+"Sarah Bernhardt would know quite a bit about makeup and disguise. We could ask her, $P.&
+}
+:0D21
+    PAUSE
+:0D22
+    {
+}
+:0D23
+    PORTRAIT [N8(0xeb) ]
+:0D27
+    {"I believe we must try, then. Please, $P, for the sake of my Grovemates.
+}
+:0D70
+    PAUSE
+:0D71
+    {
+"We should also check with the leader of your people at Olympus.&
+}
+:0DB4
+    ENDIF
+:0DB5
+    JUMP 0x0aa7
+    KEYWORDS amba
+    ANSWER
+:0DC0
+    {"In @Prektesh's absence, I must speak for the plantals of my Grove.&
+}
+:0E05
+    JUMP 0x0aa7
+    KEYWORDS prek
+    ANSWER
+:0E10
+    {"Prektesh was @Agrarian for our Grove.&
+}
+:0E38
+    JUMP 0x0aa7
+    KEYWORDS agra
+    ANSWER
+:0E43
+    {"The title has connotations of being our governor and our grandparent, as well as being in charge of the future of the Grove.&
+}
+:0EC2
+    JUMP 0x0aa7
+    KEYWORDS stea
+    ANSWER
+:0ECD
+    {"No, steam cannot hurt me. All my joints are well-sealed.&
+}
+:0F08
+    JUMP 0x0aa7
+    KEYWORDS valv
+    ANSWER
+:0F13
+    IF [N8(0x76) N8(0x07) FLAG N8(0x00) == ]
+:0F1D
+    {"That would be easy! I am glad to help you, $P. I believe this body to be much better suited to that task than yours would be.&
+}
+:0F9D
+    ELSE
+:0F9E
+    {"That was a simple task, $P. No thanks are necessary.&
+}
+:0FD5
+    ENDIF
+:0FD6
+    JUMP 0x0aa7
+    KEYWORDS rubb,coat
+    ANSWER
+:0FE6
+    IF [N8(0xeb) N8(0x01) FLAG ]
+:0FED
+    {"My integument is holding its color well, thank you.&
+}
+:1023
+    JUMP 0x0aa7
+:1028
+    ENDIF
+:1029
+    {"That is an excellent sealant. My people often used it to protect our mechanical servants.&
+}
+:1085
+    IF [N8(0x3e) N8(0x05) FLAG ]
+:108C
+    {"It might also prove an excellent simulation of human flesh!&
+}
+:10CA
+    ENDIF
+:10CB
+    JUMP 0x0aa7
+    KEYWORDS roug,dye
+    ANSWER
+:10DA
+    IF [N8(0x3e) N8(0x05) FLAG ]
+:10E1
+    {"The berries suitable for rouge grow solely at @Argyre.
+}
+:1119
+    PAUSE
+:111A
+    {
+"Miss Bernhardt could make the berries into dye for us.&
+}
+:1154
+    JUMP 0x0aa7
+:1159
+    ENDIF
+:115A
+    {"There must be something that would work. Perhaps if one of your people were familiar with changing their appearance.&
+}
+:11D1
+    JUMP 0x0aa7
+    KEYWORDS berr
+    ANSWER
+:11DC
+    {"There are, of course, several kinds used for various functions.
+}
+:121D
+    PAUSE
+:121E
+    {
+"We use berries for moving heavy objects, seeing through walls and in dark areas, and communicating with objects.&
+}
+:1292
+    IF [N8(0x3e) N8(0x05) FLAG ]
+:1299
+    {"And, now, we have learned of the berries which are used for coloration of substances.&
+}
+:12F1
+    ENDIF
+:12F2
+    JUMP 0x0aa7
+    KEYWORDS argy
+    ANSWER
+:12FD
+    IF [N8(0x46) N8(0x03) FLAG N8(0x00) == ]
+:1307
+    {"It is still the home base for that weed, Raxachk. I wish there were something we could do about that.&
+}
+:136F
+    ELSE
+:1370
+    {"It is a shame. It was such a beautiful city. As were they all.&
+}
+:13B1
+    ENDIF
+:13B2
+    JUMP 0x0aa7
+    KEYWORDS tran
+    ANSWER
+:13BD
+    {"We had two major transportation systems at the time of Raxachk's plague.  The canal barges carried heavy loads, and the transport @tubes carried Martians from city to city.&
+}
+:146C
+    IF [N8(0x76) N8(0x07) FLAG N8(0x00) == ]
+:1476
+    PAUSE
+:1477
+    {
+The canals are still empty, but the tubes should be functioning.&
+}
+:14BA
+    ENDIF
+:14BB
+    JUMP 0x0aa7
+    KEYWORDS tube
+    ANSWER
+:14C6
+    {"The tubes connect the major groves together. As an ambassador, I was one of the primary users of the tube system.&
+}
+:153A
+    PAUSE
+:153B
+    {
+"Each tube station contains one incoming tube and three outgoing tubes, one for each of the other stations. I don't know the details of their function beyond the fact that the tubes run deep underground.&
+}
+:1609
+    PAUSE
+:160A
+    {
+"The stations locations are: in Hellas, south of the grove on the eastern side of the canal; at Argyre, east of the grove; at Elysium, northeast of the grove; and at Olympus, south of the grove.&
+}
+:16CF
+    JUMP 0x0aa7
+    KEYWORDS sega,jack
+    ANSWER
+:16DF
+    {"He is your leader at Olympus, is he not? He seems fairly capable...&
+}
+:1725
+    JUMP 0x0aa7
+    KEYWORDS join
+    ANSWER
+:1730
+    {"I will follow you wherever you go, $P. I must learn how to operate this body efficiently.&
+}
+:178C
+    JUMP 0x0aa7
+    KEYWORDS wait
+    ANSWER
+:1797
+    {"No, no, $P. I must not miss any opportunity to experience life in the Real-World. It has been so long!&
+}
+:1800
+    JUMP 0x0aa7
+    KEYWORDS leav
+    ANSWER
+:180B
+    {"No, $P. I am with you until we leave this planet.
+}
+:183E
+    PAUSE
+:183F
+    {
+"I am saddened if this does not agree with your wishes, but I will not change my mind.&
+}
+:1898
+    JUMP 0x0aa7
+    KEYWORDS bye
+    ANSWER
+:18A2
+    {"I look forward to conversing again later. Of course, I look forward to everything now that I am alive again!&
+}
+:1911
+    IF [N8(0xeb) N8(0x01) FLAG N8(0x00) == ]
+:191B
+    {She smiles. It is a strange sight with her golden face!
+}
+:1953
+    ELSE
+:1954
+    {She smiles, complete with sexy dimples.
+}
+:197C
+    ENDIF
+:197D
+    BYE
+    KEYWORDS *
+    ANSWER
+:1981
+    {"Obviously, I must study your dialect more diligently. I do not understand.&
+}
+:19CE
+    JUMP 0x0aa7
+    END_ANSWER
+:19D3
+    BYE

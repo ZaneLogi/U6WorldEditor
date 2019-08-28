@@ -1,0 +1,333 @@
+:0000
+    NPC_ID: npc id: 19, npc name: Garrett
+:0009
+    NPC_LOOK: a weathered man in his 30's.
+*
+:0028
+    START CONVERSION
+:0029
+    IF [N8(0xeb) 0x00 FLAG ]
+:002F
+    JUMP 0x0045
+:0034
+    ELSE
+:0035
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:003B
+    PORTRAIT [N8(0xeb) ]
+:003F
+    JUMP 0x0045
+:0044
+    ENDIF
+:0045
+    IF [N8(0x46) N8(0x03) FLAG ]
+:004C
+    {"Mr. Carnegie will be right happy to see that phlogistonite! We need to git ourselves back to Earth before Mars blows up!&
+}
+:00C7
+    BYE
+:00C8
+    ENDIF
+:00C9
+    {"Howdy, $P. Anythin' I can help you with?&
+}
+:00F4
+    JUMP 0x0391
+:00F9
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:00FF
+    IF [N8(0x13) N8(0x07) FLAG ]
+:0106
+    {"I already gave you my prybar, $G. Givin' you another one isn't in the budget.&
+}
+:0156
+    JUMP 0x0391
+:015B
+    ENDIF
+:015C
+    JUMP 0x01d3
+    KEYWORDS n
+    ANSWER
+:0164
+    {"If you think you can find somethin' that'll work better, you go right ahead. You'll be back.&
+He grins.
+}
+:01CD
+    JUMP 0x0391
+    END_ANSWER
+:01D3
+    DECLARE [0x1d, 0xb2] = [N8(0x01) ]
+:01DA
+    NEW npc [N8(0x01) ], obj [N8(0x66) ], quality [N8(0x00) ], quantity [N8(0x01) ]
+:01E7
+    IF [0x1d B2 ]
+:01EB
+    DECLARE [0x1d, 0xb2] = [N8(0x00) ]
+:01F2
+    {"Looks like you've already got a heap of stuff, there, friend.
+}
+:0231
+    PAUSE
+:0232
+    {
+"Why don't you come back when you put somethin' else down?&
+}
+:026F
+    JUMP 0x0391
+:0274
+    ELSE
+:0275
+    SET_FLAG [N8(0x13) ], [N8(0x07) ]
+:027C
+    {"Right. Here you go. You just put that at the edge of the door and pull.
+}
+:02C5
+    PAUSE
+:02C6
+    {
+"She'll come off real easy with this.&
+}
+:02EE
+    ENDIF
+:02EF
+    IF [N8(0x13) N8(0x04) FLAG N8(0x00) == ]
+:02F9
+    {"Before you use that, I'd check that hold for some warm clothes and @gear.
+}
+:0344
+    PAUSE
+:0345
+    {
+"I'm bettin' you're gonna need it when that door busts open.&
+}
+:0384
+    SET_FLAG [N8(0x13) ], [N8(0x04) ]
+:038B
+    ENDIF
+:038C
+    JUMP 0x0391
+:0391
+    {
+}
+:0392
+    ASK
+    KEYWORDS name
+    ANSWER
+:0399
+    {"My name's Dallas Garrett. You just holler if you need anythin'.&
+}
+:03DB
+    JUMP 0x0391
+    KEYWORDS dall,garr
+    ANSWER
+:03EB
+    {"Yep, $G, that's my name.&
+}
+:0406
+    JUMP 0x0391
+    KEYWORDS job
+    ANSWER
+:0410
+    {"Well, now that we're here, I reckon I'm gonna be keepin' an eye on the home fires here.
+}
+:0469
+    PAUSE
+:046A
+    {
+"I'm a pretty good shot, if need be.&
+}
+:0491
+    PAUSE
+:0492
+    {
+He pulls out a six-shooter and twirls it expertly, slamming it back in the holster with a confident grin.
+}
+:04FD
+    JUMP 0x0391
+    KEYWORDS heal,inju,sick,ill,hurt
+    ANSWER
+:051B
+    {"If you're ever hurtin', you make sure to talk to Doc Blood. He'll fix you up good.&
+}
+:0570
+    JUMP 0x0391
+    KEYWORDS tool,uten
+    ANSWER
+:0580
+    {"Yes, $G, I do carry a lot of different tools with me, and I know how to use 'em. Got me a @prybar and some other doodads.&
+}
+:05FC
+    IF [N8(0x13) N8(0x04) FLAG N8(0x00) == ]
+:0606
+    PAUSE
+:0607
+    {
+"Speakin' of equipment, one thing you might oughta do is check out the hold over there to see what we have in the way of @gear.
+}
+:0688
+    PAUSE
+:0689
+    {
+"I hear tell they've got everthin' we need in there.&
+}
+:06C0
+    SET_FLAG [N8(0x13) ], [N8(0x04) ]
+:06C7
+    ENDIF
+:06C8
+    JUMP 0x0391
+    KEYWORDS gear
+    ANSWER
+:06D3
+    IF [N8(0x13) N8(0x04) FLAG N8(0x00) == ]
+:06DD
+    {"I believe they've got us some warm clothes and some equipment they thought we might be needin' out on the planet.
+}
+:0750
+    PAUSE
+:0751
+    {
+"Might be worth your while to take a look-see and see what's there.&
+}
+:0797
+    SET_FLAG [N8(0x13) ], [N8(0x04) ]
+:079E
+    ELSE
+:079F
+    {"If you got everthin' out of the hold you think you'll be needin', you've got everthin' we brought along for ya.
+}
+:0810
+    PAUSE
+:0811
+    {
+"You might be specially sure to check for that there @sextant. Could be purty useful.&
+}
+:0869
+    ENDIF
+:086A
+    JUMP 0x0391
+    KEYWORDS sext
+    ANSWER
+:0875
+    {"Yep, that should be in that there crate over by yonder wall. Purty good for findin' your way around.&
+}
+:08DC
+    JUMP 0x0391
+    KEYWORDS pry,pryb,crow,leve
+    ANSWER
+:08F5
+    {"This here prybar works like a charm on anythin' what's stuck together. You @need this for anythin', jest ask.&
+}
+:0965
+    JUMP 0x0391
+    KEYWORDS door,hatc
+    ANSWER
+:0975
+    {"What about the door, $G?&
+}
+:0990
+    JUMP 0x0391
+    KEYWORDS ship,caps
+    ANSWER
+:09A0
+    {"Yes, $G, she's a beauty, ain't she? Quite a lady we got here.&
+}
+:09E0
+    JUMP 0x0391
+    KEYWORDS need,jamm,stuc,clos,brok
+    ANSWER
+:09FF
+    {"Well, $G, I have this here prybar that should fix the problem. Would you like to give her a try?&
+@Y or @N
+}
+:0A6B
+    JUMP 0x00f9
+    KEYWORDS tesl,niko
+    ANSWER
+:0A7B
+    {"Mr. Tesla's a fine man. A fine man. I don't mind takin' orders from him none at all.&
+}
+:0AD2
+    JUMP 0x0391
+    KEYWORDS freu,sigm
+    ANSWER
+:0AE2
+    {"I don't know much about him.&
+He looks edgy.
+}
+:0B10
+    PAUSE
+:0B11
+    {
+"I aim to keep an eye on our Mr. Freud. He sure asks some funny questions.&
+}
+:0B5E
+    JUMP 0x0391
+    KEYWORDS bly,nell,eliz,coch
+    ANSWER
+:0B77
+    {"She's sure a sweet little filly, ain't she? Asks a lot of questions, though.&
+}
+:0BC6
+    JUMP 0x0391
+    KEYWORDS bloo,doct,c.l.
+    ANSWER
+:0BDB
+    {"Ol' Doc Blood seems like a fine enough leech to me. Course, I don't reckon I know much about medicine. But I'd trust him to fix me if'n I was broke.&
+}
+:0C72
+    JUMP 0x0391
+    KEYWORDS spec,joha
+    ANSWER
+:0C82
+    {"Specs? He seems like a fine enough feller. He seems awful nervous about this expedition, though.
+}
+:0CE4
+    PAUSE
+:0CE5
+    {
+"I keep tellin' him we'll do just fine. We'll get everthin' done on time.&
+He grins and winks.
+}
+:0D45
+    JUMP 0x0391
+    KEYWORDS join
+    ANSWER
+:0D50
+    {"Well, thank you kindly, $G, but I reckon I'd be most useful keepin' an eye on things here. These here scientist types need some takin' care of, you know?&
+}
+:0DEC
+    PAUSE
+:0DED
+    {
+He winks at you and grins.
+}
+:0E09
+    JUMP 0x0391
+    KEYWORDS wait,leav
+    ANSWER
+:0E19
+    {"I really think I'd be best used stayin' right here until y'all give us the go-ahead to head on home. You just let us know when y'all are ready.&
+}
+:0EAB
+    JUMP 0x0391
+    KEYWORDS bye
+    ANSWER
+:0EB5
+    {"Shore nuff. Y'all come back any time.&
+}
+:0EDD
+    BYE
+:0EDE
+    KEYWORDS *
+    ANSWER
+:0EE1
+    {"Beg yer pardon?&
+}
+:0EF3
+    JUMP 0x0391
+    END_ANSWER
+:0EF8
+    BYE

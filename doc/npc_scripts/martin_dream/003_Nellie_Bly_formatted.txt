@@ -1,0 +1,502 @@
+:0000
+    NPC_ID: npc id: 3, npc name: Nellie_Bly
+:000C
+    NPC_LOOK: a comely, well-mannered woman in her late 20's.
+*
+:003E
+    START CONVERSION
+:003F
+    IF [N8(0x02) N8(0x04) FLAG ]
+:0046
+    CLEAR_FLAG [N8(0x02) ], [N8(0x04) ]
+:004D
+    {"You expect me to do what?! I may be adventurous, $P, but really! Climbing that in skirts is unthinkable!
+}
+:00B7
+    PAUSE
+:00B8
+    {
+"Besides, I may have a reputation for doing almost anything for a story, but that is simply too dangerous. You'll have to do it yourself if you want it done.&
+}
+:0158
+    PAUSE
+:0159
+    {
+She smiles, her dimples flashing.
+"After all, how would I write the story if I never lived to return home?&
+}
+:01C6
+    BYE
+:01C7
+    ENDIF
+:01C8
+    IF [N8(0x46) N8(0x03) FLAG ]
+:01CF
+    {"This will be quite a story, but only if we live to tell it. We must get the phlogistonite back to Mr. Carnegie as quickly as we can so we can leave Mars before these earthquakes destroy the space cannon!&
+}
+:029D
+    BYE
+:029E
+    ENDIF
+:029F
+    IF [N8(0xeb) 0x00 FLAG N8(0x00) == ]
+:02A8
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:02AE
+    ENDIF
+:02AF
+    {"My dear $P, so nice to speak to you again.&
+}
+:02DC
+    JUMP 0x107f
+:02E1
+    {Miss Bly begins paging through her notebook. She reads:
+}
+:0319
+    DECLARE [0x00, 0xb2] = [N8(0x00) ]
+:0320
+    IF [N8(0x12) N8(0x06) FLAG N8(0x12) N8(0x04) FLAG N8(0x00) == & ]
+:0330
+    {"According to Dr. Blood, it was vital that we find a reliable source of oxygen, to allow us to function normally in the rarified atmosphere of Mars...&
+}
+:03C8
+    PAUSE
+:03C9
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:03D0
+    ENDIF
+:03D1
+    IF [N8(0x71) N8(0x02) FLAG N8(0x72) N8(0x02) FLAG N8(0x00) == & ]
+:03E1
+    {"It became apparent that to restore the power, we must take the torn conveyor belt to Captain Trippet at Olympus. He could repair it so that we could reinstall it on the conveyor at the power station...&
+}
+:04AD
+    PAUSE
+:04AE
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:04B5
+    ENDIF
+:04B6
+    IF [N8(0x04) N8(0x05) FLAG N8(0x20) N8(0x03) FLAG N8(0x00) == & ]
+:04C6
+    {"Lt. Dibbs described strange Martian relics called Dream Machines, which were somehow tied to strange behaviour among the members of Lowell's expedition.&
+}
+:0561
+    PAUSE
+:0562
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:0569
+    ENDIF
+:056A
+    IF [N8(0x20) N8(0x03) FLAG N8(0x60) N8(0x02) FLAG N8(0x00) == & ]
+:057A
+    {"If Mr. Lowell and his companions were actually trapped in this Dream World, it was essential that we gain access to a working Dream Machine or repair a broken one.&
+}
+:0620
+    PAUSE
+:0621
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:0628
+    ENDIF
+:0629
+    IF [N8(0x60) N8(0x03) FLAG N8(0x60) N8(0x04) FLAG N8(0x00) == & ]
+:0639
+    {"...entering the Dream World, $P discovered four Obelisks, apparently leading to dreams in which four of our missing fellows were trapped. The others must be trapped within another Dream Machine...&
+}
+:0700
+    PAUSE
+:0701
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:0708
+    ENDIF
+:0709
+    IF [N8(0x61) N8(0x05) FLAG N8(0x21) 0x00 FLAG N8(0x00) == & ]
+:0718
+    {"Upon the advice of the friendly Martian, Prektesh, we determined to gain the trust of Tekapesh and the other Martians at Elysium by helping them to plant and nurture a new Martian body.&
+}
+:07D4
+    PAUSE
+:07D5
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:07DC
+    ENDIF
+:07DD
+    IF [N8(0x20) N8(0x02) FLAG N8(0x20) N8(0x04) FLAG N8(0x00) == & ]
+:07ED
+    {"...having earned the trust of the Martian leader Tekapesh, we were given access to the Dream Machine at Elysium, allowing us to rescue the humans trapped within.&
+}
+:0891
+    PAUSE
+:0892
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:0899
+    ENDIF
+:089A
+    IF [N8(0x21) N8(0x02) FLAG N8(0x06) 0x00 FLAG N8(0x00) == & ]
+:08A9
+    {...the dying Martian, Prektesh, implored us to pursue the plan formulated by the scientist Kaxishek, by which mechanical bodies might be constructed to house the Martians.&
+}
+:0956
+    PAUSE
+:0957
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:095E
+    ENDIF
+:095F
+    IF [N8(0x3a) N8(0x06) FLAG N8(0x3a) N8(0x02) FLAG N8(0x00) == & ]
+:096F
+    {"We were sent by Mr. Carnegie to gather iron ore for the completion of the Space Cannon. He mentioned that Major Duprey described iron ore deposits in the mines at Syrtis Major.
+"Unfortunately, the canals must be filled before the ore can be moved from Syrtis to Olympus.&
+}
+:0A80
+    PAUSE
+:0A81
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:0A88
+    ENDIF
+:0A89
+    IF [N8(0x3d) N8(0x03) FLAG N8(0x76) N8(0x07) FLAG N8(0x00) == & ]
+:0A99
+    {"...in order to fill the canals, we must first repair the Lens Towers described by Admiral Peary. These lie along the edge of the northern ice cap of the planet.&
+}
+:0B3C
+    PAUSE
+:0B3D
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:0B44
+    ENDIF
+:0B45
+    IF [N8(0x3a) N8(0x07) FLAG N8(0x38) N8(0x02) FLAG N8(0x00) == & ]
+:0B55
+    {"...supplied with the iron ore he required, Mr. Carnegie directed us to recover the phlogistonite fuel which had been left in the cargo hold of Mr. Lowell's ship.&
+}
+:0BF9
+    PAUSE
+:0BFA
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:0C01
+    ENDIF
+:0C02
+    IF [N8(0x38) N8(0x02) FLAG N8(0x40) 0x00 FLAG N8(0x00) == & ]
+:0C11
+    {"...based upon Commissioner Roosevelt's conclusions, we determined to enter Argyre and confront the Russian, Rasputin, regarding the disappearance of the phlogistonite.&
+}
+:0CBB
+    PAUSE
+:0CBC
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:0CC3
+    ENDIF
+:0CC4
+    IF [N8(0x40) N8(0x05) FLAG N8(0x33) N8(0x03) FLAG N8(0x00) == & ]
+:0CD4
+    {"Since recovering the phlogistonite from the Dream World would destroy that dimension, we had to find some method by which the Martians there could be brought to Earth without attracting attention...&
+}
+:0D9D
+    PAUSE
+:0D9E
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:0DA5
+    ENDIF
+:0DA6
+    IF [N8(0x33) N8(0x03) FLAG N8(0x00) == N8(0x46) N8(0x03) FLAG | ]
+:0DB6
+    JUMP 0x0e96
+:0DBB
+    ENDIF
+:0DBC
+    {"...while Mr. Segal oversaw the transferral of the remaining Martians into the disguised metal bodies, $P and }
+:0E2A
+    IF [0x10 B2 ]
+:0E2E
+    {her}
+:0E31
+    ELSE
+:0E32
+    {his}
+:0E35
+    ENDIF
+:0E36
+    { fellows returned to Argyre to enter the Dream Machine and retrieve the phlogistonite.&
+}
+:0E8E
+    PAUSE
+:0E8F
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:0E96
+    IF [N8(0x46) N8(0x03) FLAG ]
+:0E9D
+    {"As the world collapsed around us, we rushed to bring the phlogistonite back to Olympus, so all the humans and Martians on the planet could escape the cataclysm...&
+}
+:0F42
+    PAUSE
+:0F43
+    DECLARE [0x00, 0xb2] = [N8(0x01) ]
+:0F4A
+    ENDIF
+:0F4B
+    {
+}
+:0F4C
+    IF [0x00 B2 N8(0x00) == ]
+:0F53
+    {"At the moment, I have no record of a task you or we have been asked to perform but have not finished! Perhaps we should ask someone what can be done to help us all return to Earth...&
+}
+:100C
+    ELSE
+:100D
+    {"I believe that comprises all of the information that has been laid before us.&
+Nellie closes her notebook.
+}
+:1079
+    ENDIF
+:107A
+    JUMP 0x107f
+:107F
+    {
+}
+:1080
+    ASK
+    KEYWORDS name
+    ANSWER
+:1087
+    {She puts aside her @notebook and offers her hand.
+"I am currently using my nom de plume of Nellie Bly, although my given name is @Elizabeth Cochrane.&
+}
+:111E
+    JUMP 0x107f
+    KEYWORDS bly,nell
+    ANSWER
+:112D
+    {"Yes?&
+}
+:1134
+    JUMP 0x107f
+    KEYWORDS eliz,coch
+    ANSWER
+:1144
+    {"Although I believe Elizabeth Cochrane to be a fine name, I decided to adopt the name Nellie Bly after hearing my editor at the 'Dispatch' hum the Stephen @Foster tune of the same name.
+}
+:11FE
+    PAUSE
+:11FF
+    {
+"I believe it fits me well.&
+}
+:121D
+    JUMP 0x107f
+    KEYWORDS job,repo
+    ANSWER
+:122C
+    {"I work for Mr. Joseph @Pulitzer as a reporter for the 'World', which I feel to be the finest paper in print.
+}
+:129A
+    PAUSE
+:129B
+    {
+"Perhaps you have read some of my writings. I have written of the horrible conditions of the inmates of @Blackwell's Island.
+}
+:1319
+    PAUSE
+:131A
+    {
+"I even had myself committed in order to gain firsthand experience of the poor souls' wretched existence.&
+}
+:1386
+    JUMP 0x107f
+    KEYWORDS Puli,puli,jose
+    ANSWER
+:139B
+    {"I do feel for Mr. Pulitzer, for he suffers terribly with his failing eyesight and insomnia.
+}
+:13F8
+    PAUSE
+:13F9
+    {
+"He has a heart for a good story and shares my enthusiasm for a fiery, revealing form of journalism.&
+}
+:1460
+    JUMP 0x107f
+    KEYWORDS fost,step
+    ANSWER
+:1470
+    {"Oh, Stephen Foster is one of the most talented composers that I know. His works are very popular in Pittsburgh.&
+}
+:14E2
+    JUMP 0x107f
+    KEYWORDS worl
+    ANSWER
+:14ED
+    {"The 'World' is a wonderful paper to work for. I am thankful that Mr. Pulitzer and Mr. Cockerill agreed to give me an opportunity to express my observations on our society.&
+}
+:159B
+    JUMP 0x107f
+    KEYWORDS blac
+    ANSWER
+:15A6
+    {"Blackwell's Island Asylum for Women. It is a despicable place, where the inmates are cruelly treated and many women who are as sane as you or I must remain, judged by incompetent doctors.&
+}
+:1664
+    JUMP 0x107f
+    KEYWORDS acco,acom,join
+    ANSWER
+:1679
+    {"I've already agreed to accompany you to record our travels.&
+}
+:16B7
+    JUMP 0x107f
+    KEYWORDS wait
+    ANSWER
+:16C2
+    IF [N8(0xeb) INPARTY N8(0x00) == ]
+:16CA
+    {"Wait around, indeed! I would much rather accompany you on your explorations.&
+}
+:1719
+    JUMP 0x107f
+:171E
+    ENDIF
+:171F
+    {"No, I think it best if I stay with you to help record the events of our expedition. After all, you may find yourself needing my assistance.&
+}
+:17AD
+    JUMP 0x107f
+    KEYWORDS leav
+    ANSWER
+:17B8
+    {"Leave? I refuse! You will have to get used to having me around.&
+}
+:17FA
+    JUMP 0x107f
+    KEYWORDS tesl,niko
+    ANSWER
+:180A
+    {"Mr. Tesla is a very interesting man. He seems to be quite adept in many physical sciences, especially the study of power and electricity.
+}
+:1895
+    PAUSE
+:1896
+    {
+"Mr. Pulitzer felt that he would be an excellent choice for an expedition leader.&
+}
+:18EA
+    JUMP 0x107f
+    KEYWORDS freu,sigm
+    ANSWER
+:18FA
+    {"Dr. Freud is a psychologist. He has been asking us the most unusual questions to further his research.
+}
+:1962
+    PAUSE
+:1963
+    {
+"He strikes me as a bit odd, though, and reminds me very much of the doctors in New York that I was able to dupe into believing that I was insane.&
+}
+:19F8
+    JUMP 0x107f
+    KEYWORDS dall,garr
+    ANSWER
+:1A08
+    {"Mr. Garrett is quite a charmer! He was our guard and provisioner while working at the laboratory in Colorado.
+}
+:1A77
+    PAUSE
+:1A78
+    {
+"Unfortunately, I didn't get to speak to him much before we began our journey.&
+}
+:1AC9
+    JUMP 0x107f
+    KEYWORDS bloo,doct,c.l.
+    ANSWER
+:1ADE
+    {"Dr. Blood has had a difficult career of late. His theories concerning oxygen are interesting, but I can't determine if he has truly made any important discoveries.
+}
+:1B83
+    PAUSE
+:1B84
+    {
+"Nonetheless, I am glad to have his services on this expedition.&
+}
+:1BC7
+    JUMP 0x107f
+    KEYWORDS bye
+    ANSWER
+:1BD1
+    {"Very well, $P. We can continue our conversation at a later time.&
+}
+:1C14
+    BYE
+:1C15
+    KEYWORDS note,book,ques,task
+    ANSWER
+:1C2A
+    {"I have been dutifully recording any details of our journey up to this point.
+}
+:1C78
+    PAUSE
+:1C79
+    {
+"I am certain that this will make an intriguing article for publication in the 'World'. That is, assuming we are able to return safely.&
+}
+:1D03
+    PAUSE
+:1D04
+    {
+Nellie takes out her notebook, opens it and pages through it for a moment.
+}
+:1D50
+    PAUSE
+:1D51
+    {
+}
+:1D52
+    IF [N8(0xeb) N8(0x03) FLAG ]
+:1D59
+    {"We have received information that I thought might be useful in furthering our progress. I believe that following up on these notes will be critical in securing our return to Earth.
+}
+:1E0F
+    PAUSE
+:1E10
+    {
+"If I may, here is what I have written down so far.&
+}
+:1E46
+    JUMP 0x02e1
+:1E4B
+    ELSE
+:1E4C
+    {"I would wager that information you've learned is vital to secure our safe return to Earth, and could become the basis for any articles I wished to write.
+}
+:1EE7
+    PAUSE
+:1EE8
+    {
+"Please tell me what you have learned.&
+}
+:1F11
+    PAUSE
+:1F12
+    {
+Nellie writes quietly in her notebook as you take time to relay the information that you have learned during your travels.
+}
+:1F8E
+    PAUSE
+:1F8F
+    {
+"Thank you, $P... This is wonderful material and it will prove useful, I feel.&
+}
+:1FE0
+    ENDIF
+:1FE1
+    JUMP 0x107f
+    KEYWORDS *
+    ANSWER
+:1FE9
+    {"Oh dear, I'm afraid that I can't help you with that. Perhaps the kind Dr. Spector or Mr. Tesla can be of assistance.&
+}
+:2060
+    JUMP 0x107f
+    END_ANSWER
+:2065
+    BYE

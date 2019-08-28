@@ -1,0 +1,414 @@
+:0000
+    NPC_ID: npc id: 17, npc name: Freud
+:0007
+    NPC_LOOK: a distinguished man with a probing stare.
+*
+:0033
+    START CONVERSION
+:0034
+    IF [N8(0xeb) 0x00 FLAG N8(0x00) == ]
+:003D
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0043
+    PORTRAIT [N8(0xeb) ]
+:0047
+    ENDIF
+:0048
+    IF [N8(0x46) N8(0x03) FLAG ]
+:004F
+    {"Machen sie schnell, $P! To pardon beg for such haste, but we must the phlogistonite give to Herr Carnegie immediately!&
+}
+:00C8
+    BYE
+:00C9
+    ENDIF
+:00CA
+    {"Guten Tag, $P. What may I do for you?&
+}
+:00F2
+    JUMP 0x00f7
+:00F7
+    {
+}
+:00F8
+    ASK
+    KEYWORDS name
+    ANSWER
+:00FF
+    {"I am Sigmund Freud.&
+}
+:0115
+    JUMP 0x00f7
+    KEYWORDS sigm
+    ANSWER
+:0120
+    {"Ja, that is my name. I prefer to be addressed as Dr. Freud.&
+}
+:015E
+    JUMP 0x00f7
+    KEYWORDS herr,freu,doct,dr.
+    ANSWER
+:0177
+    {"What may I do for you, }
+:018F
+    IF [0x10 B2 ]
+:0193
+    {mein Fraulein}
+:01A0
+    ELSE
+:01A1
+    {mein Herr}
+:01AA
+    ENDIF
+:01AB
+    {?&
+}
+:01AE
+    JUMP 0x00f7
+    KEYWORDS psyc
+    ANSWER
+:01B9
+    {"That is my chosen profession. It is psychology which has been the @goal beckoning me from afar.
+}
+:021A
+    PAUSE
+:021B
+    {
+"I have begun work on theories of the structure of @personalities.&
+}
+:0260
+    JUMP 0x00f7
+    KEYWORDS goal
+    ANSWER
+:026B
+    {"Ja, my goal is to infer or to guess how the mental apparatus is constructed and what forces interplay and counteract in it.&
+}
+:02E9
+    JUMP 0x00f7
+    KEYWORDS pers
+    ANSWER
+:02F4
+    {"I believe that it is comprised of three components: the @Id,the @Ego, and the @Superego.&
+}
+:034F
+    JUMP 0x00f7
+    KEYWORDS id
+    ANSWER
+:0358
+    {"It is the mechanism for the release of tension that is brought about by a stimulus.&
+}
+:03AE
+    JUMP 0x00f7
+    KEYWORDS ego
+    ANSWER
+:03B8
+    {"It is the means by which one deals with reality and one's external environment.&
+}
+:040A
+    JUMP 0x00f7
+    KEYWORDS supe
+    ANSWER
+:0415
+    {"This is the portion of the personality that defines one's morals.&
+}
+:0459
+    JUMP 0x00f7
+    KEYWORDS door,outs
+    ANSWER
+:0469
+    {"I would confer with Herr @Tesla about that.&
+}
+:0497
+    JUMP 0x00f7
+    KEYWORDS tesl,niko
+    ANSWER
+:04A7
+    {"Herr Tesla is much more knowing than I about Mars.
+}
+:04DB
+    PAUSE
+:04DC
+    {
+"You must confer with him if you wish to be learning more of the land.
+}
+:0524
+    PAUSE
+:0525
+    {
+"Hmm. A desire to leave the enclosed safety of the capsule. Yes, very interesting...&
+He mumbles and stares intently at his notes.
+}
+:05A9
+    JUMP 0x00f7
+    KEYWORDS bloo,doct,c.l.
+    ANSWER
+:05BE
+    {"I have spoken briefly with Herr Doktor, and I am curious about his repressed anger.
+}
+:0613
+    PAUSE
+:0614
+    {
+"He seems to be suffering from feelings of inferiority...I will have to delve deeper into his problems before I can determine what to recommend to relieve his dilemma.&
+}
+:06BE
+    JUMP 0x00f7
+    KEYWORDS dall,garr
+    ANSWER
+:06CE
+    {"Herr Garrett is a humorous case...he is clearly continuing to associate with his childhood even into adulthood.
+}
+:073F
+    PAUSE
+:0740
+    {
+"Perhaps this is the reason he feels he must act so possessively with the equipment that we brought with us.&
+}
+:07AF
+    JUMP 0x00f7
+    KEYWORDS spec,joha
+    ANSWER
+:07BF
+    {"Herr Doktor Spector seems like a fine gentleman, although a touch nervous at all times. It would be interesting to learn more about his parents and his home situation when he was young.
+}
+:087A
+    PAUSE
+:087B
+    {
+"This would possibly give us some insight into his compulsively protective tendencies.&
+}
+:08D4
+    JUMP 0x00f7
+    KEYWORDS bly,nell,eliz,coch
+    ANSWER
+:08ED
+    {"Miss Bly is all too outgoing for a member of the fairer sex. I surmise that she was raised in an environment where her parents were overly strict.
+}
+:0981
+    PAUSE
+:0982
+    {
+"Thus, she developed very aggressive and proactive tendencies.&
+}
+:09C3
+    JUMP 0x00f7
+    KEYWORDS job
+    ANSWER
+:09CD
+    {He smiles and fishes a notebook from his pocket.
+}
+:09FE
+    PAUSE
+:09FF
+    {
+"I am currently studying @dreams, for they are a good indication of the @psychological structure and personality of the dreamer.&
+}
+:0A82
+    JUMP 0x00f7
+    KEYWORDS drea
+    ANSWER
+:0A8D
+    IF [N8(0x60) N8(0x02) FLAG ]
+:0A94
+    JUMP 0x10a4
+:0A99
+    ELSE
+:0A9A
+    JUMP 0x1297
+:0A9F
+    ENDIF
+:0AA0
+    KEYWORDS join
+    ANSWER
+:0AA6
+    {"Nein, I cannot. I have too many @notes to transcribe.&
+}
+:0ADE
+    JUMP 0x00f7
+    KEYWORDS note
+    ANSWER
+:0AE9
+    {"I am working on a @book and do not wish to forget details that may be relevant.&
+}
+:0B3B
+    JUMP 0x00f7
+    KEYWORDS mach
+    ANSWER
+:0B46
+    IF [N8(0x60) N8(0x02) FLAG ]
+:0B4D
+    JUMP 0x10fd
+:0B52
+    ELSE
+:0B53
+    {"I'm sorry, $P, but I know little about the workings of machines. Perhaps you should speak with Herr Tesla or Herr Spector about this.&
+}
+:0BDB
+    JUMP 0x00f7
+:0BE0
+    ENDIF
+:0BE1
+    KEYWORDS book
+    ANSWER
+:0BE7
+    {"Ja, I will call it 'The Interpretation of Dreams'.&
+}
+:0C1C
+    JUMP 0x00f7
+    KEYWORDS hear,vale
+    ANSWER
+:0C2C
+    {"You haf dreamt of a heart? It means that you are a warm und giving person.
+
+}
+:0C79
+    PAUSE
+:0C7A
+    {"You should play more sports. That will both supply the companionship you hunger for and build your body'scoordination.&
+}
+:0CF3
+    JUMP 0x00f7
+    KEYWORDS swor,knif,dagg
+    ANSWER
+:0D08
+    {"You haf dreamt of a weapon. No, I do not believe it is a sign of impending collapse.
+
+}
+:0D5F
+    PAUSE
+:0D60
+    {"It simply means that you long to be physically stronger.&
+}
+:0D9B
+    JUMP 0x00f7
+    KEYWORDS book
+    ANSWER
+:0DA6
+    {"From the papyrus scroll to the parchment to the book, the book is the symbol of wisdom and knowledge.
+
+}
+:0E0E
+    PAUSE
+:0E0F
+    {"Tell me, was this book open, or closed?&
+@O or @C
+}
+:0E42
+    PAUSE
+:0E43
+    {
+He scrawls something on his notepad.
+
+}
+:0E6A
+    PAUSE
+:0E6B
+    {"I see...&
+}
+:0E76
+    JUMP 0x00f7
+    KEYWORDS mars
+    ANSWER
+:0E81
+    {"Who would have believed it, travelling to Mars?
+}
+:0EB2
+    PAUSE
+:0EB3
+    {
+"This is a good time to study reactions from everyone.
+}
+:0EEB
+    PAUSE
+:0EEC
+    {
+"We may get to know one another well.&
+}
+:0F14
+    JUMP 0x00f7
+    KEYWORDS moth
+    ANSWER
+:0F1F
+    {"Interesting. Why do you feel the need to talk about your mother?
+}
+:0F61
+    PAUSE
+:0F62
+    {
+"Perhaps you are feeling insecure and are longing to return to your home?&
+}
+:0FAE
+    JUMP 0x00f7
+    KEYWORDS wait,leav
+    ANSWER
+:0FBE
+    {"Ja, I will wait right here until we are ready to leave.&
+}
+:0FF8
+    JUMP 0x00f7
+    KEYWORDS bye
+    ANSWER
+:1002
+    {"Goodbye, $P. Feel free to discuss your concerns or your @dreams with me at any time.&
+}
+:1059
+    BYE
+:105A
+    KEYWORDS *
+    ANSWER
+:105D
+    {"I'm sorry, I did not understand you. Could you rephrase that?&
+ }
+:109E
+    JUMP 0x00f7
+    END_ANSWER
+:10A3
+    BYE
+:10A4
+    {"Are you referring to those machines like the one at the city of Hellas?&
+@Y or @N
+}
+:10F7
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:10FD
+    {"Ach! They are quite a mystery. I am unsure how a machine could transport a man's consciousness to an alternate reality.
+
+}
+:1177
+    PAUSE
+:1178
+    {"I surmise, in fact, they are only a means of tapping into one's own subconscious, which is the portion of the mind that controls dreams.
+
+}
+:1203
+    PAUSE
+:1204
+    {"If the dreams are particularly unpleasant, then the subject may claim to be possessed, especially if unable to interrupt these reveries.&
+}
+:128F
+    JUMP 0x00f7
+    KEYWORDS n
+    ANSWER
+:1297
+    {He makes a note, then says,
+"Ja, they tell much about the person involved.
+}
+:12E2
+    PAUSE
+:12E3
+    {
+"For example, many people dream that they are being chased by something they cannot see.
+}
+:133D
+    PAUSE
+:133E
+    {
+"This usually indicates the individual is feeling oppressed by something, or has a duty to perform that is in some way unpleasant to them.&
+}
+:13CB
+    JUMP 0x00f7
+    END_ANSWER
+:13D1
+    BYE

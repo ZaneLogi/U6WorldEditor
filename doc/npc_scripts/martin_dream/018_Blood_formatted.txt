@@ -1,0 +1,716 @@
+:0000
+    NPC_ID: npc id: 18, npc name: Blood
+:0007
+    NPC_LOOK: a middle-aged man dressed in black.
+
+:002C
+    START CONVERSION
+:002D
+    IF [N8(0xeb) 0x00 FLAG N8(0x00) == ]
+:0036
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:003C
+    PORTRAIT [N8(0xeb) ]
+:0040
+    ENDIF
+:0041
+    IF [N8(0x12) N8(0x05) FLAG ]
+:0048
+    JUMP 0x0631
+:004D
+    ENDIF
+:004E
+    IF [N8(0x46) N8(0x03) FLAG ]
+:0055
+    {"You are still safe! This is good. I was worried when we had not heard from you for a while.
+}
+:00B2
+    PAUSE
+:00B3
+    {
+"You must get the phlogistonite to Mr. Carnegie as quickly as possible. I don't want any more patients to deal with on the return trip!&
+}
+:013D
+    PAUSE
+:013E
+    {
+He smiles and waves you in Carnegie's direction.
+}
+:0170
+    BYE
+:0171
+    ENDIF
+:0172
+    IF [N8(0xeb) N8(0x03) FLAG ]
+:0179
+    JUMP 0x0323
+:017E
+    ENDIF
+:017F
+    IF [0x17 B2 N8(0x00) == ]
+:0186
+    {"Good $T, $P!&
+}
+:0195
+    ELSE
+:0196
+    {"Greetings, my friends!&
+}
+:01AF
+    ENDIF
+:01B0
+    JUMP 0x01b5
+:01B5
+    DECLARE [0x00, 0xb2] = [N8(0x00) ]
+:01BC
+    {"Let me check you over while you're here. Can't be too careful, you know.&
+}
+:0207
+    IF [0x00 B2 0x17 B2 >= ]
+:020E
+    DECLARE [0x00, 0xb2] = [N8(0x00) ]
+:0215
+    JUMP 0x0238
+:021A
+    ENDIF
+:021B
+    IF [0x00 B2 N8(0x00) NPC WOUNDED ]
+:0223
+    JUMP 0x02df
+:0228
+    ENDIF
+:0229
+    DECLARE [0x00, 0xb2] = [0x00 B2 N8(0x01) + ]
+:0233
+    JUMP 0x0207
+:0238
+    IF [0x00 B2 0x17 B2 >= ]
+:023F
+    JUMP 0x0262
+:0244
+    ENDIF
+:0245
+    IF [0x00 B2 N8(0x00) NPC POISONED ]
+:024D
+    JUMP 0x02df
+:0252
+    ENDIF
+:0253
+    DECLARE [0x00, 0xb2] = [0x00 B2 N8(0x01) + ]
+:025D
+    JUMP 0x0238
+:0262
+    DECLARE [0x06, 0xb2] = [N16(0x0155) N8(0x00) OBJINPARTY ]
+:026D
+    IF [0x06 B2 N16(0x8001) == ]
+:0275
+    PAUSE
+:0276
+    {
+After completing his examination, Blood proclaims,
+"No one here is in need of my services.&
+}
+:02D3
+    JUMP 0x127c
+:02D8
+    ELSE
+:02D9
+    JUMP 0x0a7d
+:02DE
+    ENDIF
+:02DF
+    PAUSE
+:02E0
+    {
+"I can tell by your demeanor that someone has been injured.&
+}
+:031E
+    JUMP 0x07d7
+:0323
+    {"$P, this air is too rarefied for good health! I am sure that should anything happen to you, your friends can help you get back here.&
+}
+:03AA
+    PAUSE
+:03AB
+    {
+Dr. Blood reaches for your pulse. After he listens to your heartbeat and breathing, you see that he is concerned.
+}
+:041E
+    PAUSE
+:041F
+    {
+"Best that you acquire some kind of @oxygen supply, so that you will be in top form in case of trouble.
+}
+:0488
+    PAUSE
+:0489
+    {
+"I will prepare some of my Oxygenated Air canisters for you. Use one on anyone who is injured or has fallen.
+}
+:04F7
+    PAUSE
+:04F8
+    {
+"Each canister will only work once. I will continue to manufacture them so that you may occasionally return for more.
+}
+:056F
+    PAUSE
+:0570
+    {
+"I will remain here to help if needed.&
+}
+:0599
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:05A0
+    SET_FLAG [N8(0x03) ], [N8(0x03) ]
+:05A7
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x03) ]
+:05AE
+    IF [N8(0x02) INPARTY ]
+:05B3
+    BYE
+:05B4
+    ENDIF
+:05B5
+    IF [N8(0x03) INPARTY ]
+:05BA
+    BYE
+:05BB
+    ENDIF
+:05BC
+    {
+}
+:05BD
+    PAUSE
+:05BE
+    {He frowns a moment.
+"Good heavens, $P; you weren't going out alone, were you? Better have someone accompany you!&
+}
+:0630
+    BYE
+:0631
+    IF [N8(0x46) N8(0x03) FLAG ]
+:0638
+    {"Heavens, $P! We were certain we'd lost you! We sent Yellin out to find you, but weren't sure he would.
+}
+:06A0
+    PAUSE
+:06A1
+    {
+"Too bad he had to leave the the Phlogistonite behind. I believe you're healthy enough to go fetch it back now, though.&}
+:071A
+    ELSE
+:071B
+    {"I say, you're decidedly lucky that Dr. Yellin came across you when he did.
+}
+:0767
+    PAUSE
+:0768
+    {
+"If I had not been able to start treatment as early as I did, well, you wouldn't have survived.&
+}
+:07CA
+    ENDIF
+:07CB
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x05) ]
+:07D2
+    JUMP 0x127c
+:07D7
+    {
+Methodically, Dr. Blood sets out his instruments and wipes his hands clean.
+"Very well, what have we here?&
+he says as he examines you.
+}
+:0860
+    PAUSE
+:0861
+    {
+}
+:0862
+    DECLARE [0x00, 0xb2] = [N8(0x00) ]
+:0869
+    DECLARE [0x02, 0xb2] = [N8(0x00) ]
+:0870
+    IF [0x00 B2 0x17 B2 >= ]
+:0877
+    JUMP 0x0891
+:087C
+    ENDIF
+:087D
+    JUMP 0x08b0
+:0882
+    DECLARE [0x00, 0xb2] = [0x00 B2 N8(0x01) + ]
+:088C
+    JUMP 0x0870
+:0891
+    DECLARE [0x06, 0xb2] = [N16(0x0155) N8(0x00) OBJINPARTY ]
+:089C
+    IF [0x06 B2 N16(0x8001) == ]
+:08A4
+    JUMP 0x0d1c
+:08A9
+    ELSE
+:08AA
+    JUMP 0x0a7d
+:08AF
+    ENDIF
+:08B0
+    DECLARE [0x03, 0xb2] = [0x00 B2 N8(0x00) NPC ]
+:08BA
+    IF [0x03 B2 WOUNDED 0x03 B2 POISONED | ]
+:08C3
+    DF [0x03 B2 ]
+:08C7
+    {He turns toward $Y.
+}
+:08DB
+    ENDIF
+:08DC
+    IF [0x03 B2 N8(0x06) == ]
+:08E3
+    JUMP 0x0ddd
+:08E8
+    ENDIF
+:08E9
+    IF [0x03 B2 WOUNDED ]
+:08EE
+    PAUSE
+:08EF
+    {"Ahh, this should not present a problem. The wounds are superficial in nature.&
+}
+:093F
+    PAUSE
+:0940
+    {
+Blood applies the necessary ointments and bandages.
+}
+:0975
+    HEAL [0x03 B2 ]
+:0979
+    ENDIF
+:097A
+    IF [0x03 B2 POISONED ]
+:097F
+    PAUSE
+:0980
+    {"This is a little more serious--some kind of burns on the fingers.&
+}
+:09C4
+    PAUSE
+:09C5
+    {
+Dr. Blood pours a carefully measured portion of medicines into a small phial, which he insists be drunk at once. He then applies some pungent ointment from an airtight jar.
+}
+:0A73
+    CURE [0x03 B2 ]
+:0A77
+    ENDIF
+:0A78
+    JUMP 0x0882
+:0A7D
+    DECLARE [0x01, 0xb2] = [N16(0x0155) N8(0x00) OBJINPARTY ]
+:0A88
+    IF [0x01 B2 N16(0x8001) == ]
+:0A90
+    JUMP 0x0d1c
+:0A95
+    ENDIF
+:0A96
+    DF [0x01 B2 ]
+:0A9A
+    PAUSE
+:0A9B
+    {
+Dr. Blood's brows furrow as he turns to the body $Y carr}
+:0AD4
+    IF [0x01 B2 N8(0x01) == ]
+:0ADB
+    {y}
+:0ADC
+    ELSE
+:0ADD
+    {ies}
+:0AE0
+    ENDIF
+:0AE1
+    {.
+"This case is quite serious!&
+}
+:0B01
+    PAUSE
+:0B02
+    {
+}
+:0B03
+    RESURRECT [0x01 B2 ]
+:0B07
+    IF [0x01 B2 N8(0x06) == ]
+:0B0E
+    JUMP 0x0fbe
+:0B13
+    ENDIF
+:0B14
+    IF [0x1b B2 N8(0x00) > 0x1b B2 N8(0x10) < & ]
+:0B21
+    {Blood quickly uses a small canister of his Oxygenated Air and sets to work treating the most serious wounds.
+}
+:0B8E
+    PAUSE
+:0B8F
+    {
+After he has completed his work, he reaches for a bottle of ammonia.
+}
+:0BD5
+    PAUSE
+:0BD6
+    {
+"Very well. With luck, $Y should respond...&
+Miraculously, color returns to $Y's face.
+}
+:0C2E
+    JUMP 0x0a7d
+:0C33
+    ELSE
+:0C34
+    {Dr. Blood examines the body for a few moments, then shakes his head sadly.
+"I am afraid that there is nothing that I can do here.&
+}
+:0CB7
+    PAUSE
+:0CB8
+    {
+Drawing a cover over the face of the body, he says,
+"I shall see to a proper burial.&
+}
+:0D0F
+    DECLARE [0x02, 0xb2] = [N8(0x01) ]
+:0D16
+    JUMP 0x0a7d
+:0D1B
+    ENDIF
+:0D1C
+    PAUSE
+:0D1D
+    {
+After a few moments, Blood looks up from his treatments, and addresses you.
+}
+:0D6A
+    PAUSE
+:0D6B
+    {
+}
+:0D6C
+    IF [0x02 B2 N8(0x00) == ]
+:0D73
+    {"It seems that Lady Luck has favoured us,&
+he says.
+}
+:0DA7
+    ENDIF
+:0DA8
+    IF [0x17 B2 N8(0x01) < ]
+:0DAF
+    {"You }
+:0DB4
+    ELSE
+:0DB5
+    {"All in your party }
+:0DC8
+    ENDIF
+:0DC9
+    {are now well.&
+}
+:0DD8
+    JUMP 0x127c
+:0DDD
+    {Dr. Blood looks at Chsheket and calls Dr. Tesla over to help.
+"Dr. Tesla, I require your assistance to treat this patient.&
+}
+:0E59
+    PAUSE
+:0E5A
+    {
+}
+:0E5B
+    PORTRAIT [N8(0x10) ]
+:0E5F
+    {Sounding impatient,
+"A moment, Dr. Blood.&
+}
+:0E8A
+    PAUSE
+:0E8B
+    {
+After a short time Dr. Tesla walks over to Chsheket and examines her.}
+:0ED1
+    PAUSE
+:0ED2
+    {
+"The damage is actually quite simple to repair.&
+}
+:0F04
+    HEAL [0x03 B2 ]
+:0F08
+    PAUSE
+:0F09
+    {
+"I'm sure anyone could do it if they just took the time to learn.&
+}
+:0F4D
+    PAUSE
+:0F4E
+    {
+}
+:0F4F
+    PORTRAIT [N8(0xeb) ]
+:0F53
+    {Dr. Blood responds,
+"Many thanks, Dr. Tesla,&
+and then under his breath,
+"Arrogant man, is he not?&
+}
+:0FB7
+    PAUSE
+:0FB8
+    {
+}
+:0FB9
+    JUMP 0x0882
+:0FBE
+    {Dr Blood looks at the still body of Chsheket and sighs.
+"This will require the aid of Dr. Tesla,&
+then turning toward him,
+"Dr. Tesla! Please assist me with this case!&
+}
+:1067
+    PAUSE
+:1068
+    {
+Seeing the condition of Chsheket, Dr. Tesla gathers some instruments and hurries over.
+}
+:10C0
+    PAUSE
+:10C1
+    {
+}
+:10C2
+    PORTRAIT [N8(0x10) ]
+:10C6
+    {"How could this happen!&
+He begins working immediately, his hands moving quickly between his tools and Chsheket's damaged body.
+}
+:1146
+    PAUSE
+:1147
+    {
+After a time, Chsheket is repaired. Dr. Tesla wipes his brow and turns to you and says,
+"You cannot treat a precision piece of machinery like this. I am sure you will take my advice to heart.&
+}
+:1209
+    PAUSE
+:120A
+    {
+}
+:120B
+    PORTRAIT [N8(0xeb) ]
+:120F
+    {That being said, Dr. Tesla walks away. Dr. Blood calls after him,
+"Thank you for your help, Dr. Tesla.&
+}
+:1277
+    JUMP 0x0a7d
+:127C
+    {
+}
+:127D
+    ASK
+    KEYWORDS name
+    ANSWER
+:1284
+    {"Dr. C.L. Blood, at your service.&
+}
+:12A7
+    JUMP 0x127c
+    KEYWORDS job,doct
+    ANSWER
+:12B6
+    {"I am a @physician by profession. I @heal those who are @injured and I specialize in diseases of the @lungs.&
+}
+:1324
+    JUMP 0x127c
+    KEYWORDS bloo,c.l.
+    ANSWER
+:1334
+    {"You called?&
+}
+:1342
+    JUMP 0x127c
+    KEYWORDS inju,sick,ill,hurt
+    ANSWER
+:135B
+    {"Indeed, if anyone is not well, they should come to me immediately. I will heal them as best I can.&
+}
+:13C0
+    JUMP 0x127c
+    KEYWORDS lung,inno
+    ANSWER
+:13D0
+    {"I have promoted the use of @Oxygenized Air, which I feel is critical in the treatment of ailments of the respiratory system.&
+}
+:144F
+    JUMP 0x127c
+    KEYWORDS oxyg
+    ANSWER
+:145A
+    {"Yes, it is imperative for survival that one have sufficient oxygen. Without such, the brain ceases to function properly.
+}
+:14D4
+    PAUSE
+:14D5
+    {
+"I fear that while on Mars, we shall suffer from oxygen @deprivation.&
+}
+:151D
+    JUMP 0x127c
+    KEYWORDS door
+    ANSWER
+:1528
+    IF [N8(0x10) N8(0x05) FLAG ]
+:152F
+    {"Why, my dear friend $P, the door is already open.&
+}
+:1563
+    ELSE
+:1564
+    {"What, are you mad? If you open the door to the capsule, we will be exposed to the Martian atmosphere. We cannot be certain it will support us.&
+}
+:15F5
+    ENDIF
+:15F6
+    JUMP 0x127c
+    KEYWORDS tesl,niko
+    ANSWER
+:1606
+    {"Very curious, Mr. Tesla. He seems to have many interesting habits. However, I am grateful that he chose to include me on this expedition.&
+}
+:1692
+    JUMP 0x127c
+    KEYWORDS freu,sigm
+    ANSWER
+:16A2
+    {"He claims to be some sort of doctor, although I am certain that his background in not in physical medicine.&
+}
+:1710
+    JUMP 0x127c
+    KEYWORDS bly,nell,eliz,coch
+    ANSWER
+:1729
+    {"A very outspoken woman, indeed. I am certain that her spirit and determination will be quite an asset to our company.&
+}
+:17A1
+    JUMP 0x127c
+    KEYWORDS dall,garr
+    ANSWER
+:17B1
+    {"Ah yes, Mr. Tesla felt it necessary to include a guard of some sort. I must admit that I do not know him very well.&
+}
+:1827
+    JUMP 0x127c
+    KEYWORDS depr
+    ANSWER
+:1832
+    {"If you carry on in an oxygen-poor environment, you will notice a marked reduction in your physical strength and agility.
+}
+:18AC
+    PAUSE
+:18AD
+    {
+"Furthermore, the lack of oxygen flow to the brain will most certainly cause you to suffer a reduction of your mental faculties.
+}
+:192F
+    PAUSE
+:1930
+    {
+"Certainly, $P, this is not a manner in which you should operate for any length of time.&
+}
+:198B
+    JUMP 0x127c
+    KEYWORDS phys
+    ANSWER
+:1996
+    {"You know, a doctor. Admittedly, I have fallen from favor in the medical community, as my @innovations are too 'modern' for those who favor the status quo.
+}
+:1A32
+    PAUSE
+:1A33
+    {
+"At any rate, I still maintain my practice and operate an office at 27 Bond Street in New York.&
+}
+:1A95
+    JUMP 0x127c
+    KEYWORDS oxiu,geod
+    ANSWER
+:1AA5
+    IF [N8(0x04) N8(0x07) FLAG N8(0x1c) N8(0x02) FLAG | ]
+:1AB2
+    {"Yes, I have been curious to examine this unique substance.
+}
+:1AEE
+    PAUSE
+:1AEF
+    {
+"I surmise that with proper use, it would counteract the lack of oxygen in the Martian atmosphere.&
+}
+:1B54
+    ELSE
+:1B55
+    {"I am afraid that I have no idea what you are talking about, $P. Are you certain that you do not mean @oxygen, instead?&
+}
+:1BCE
+    ENDIF
+:1BCF
+    JUMP 0x127c
+    KEYWORDS heal
+    ANSWER
+:1BDA
+    JUMP 0x07d7
+    KEYWORDS join
+    ANSWER
+:1BE5
+    {"I'm afraid that would not be wise, $P. I shall remain here with my instruments and medicines. Should anyone require healing, bring them here.&
+}
+:1C75
+    JUMP 0x127c
+    KEYWORDS wait
+    ANSWER
+:1C80
+    {"I fully intend to remain here with Mr. Tesla and the others.&
+}
+:1CBF
+    JUMP 0x127c
+    KEYWORDS leav
+    ANSWER
+:1CCA
+    {"Are you implying that I should leave the camp? I think not, $P.&
+}
+:1D0C
+    JUMP 0x127c
+    KEYWORDS bye
+    ANSWER
+:1D16
+    {"Safe journeys, $P.&
+}
+:1D2B
+    BYE
+:1D2C
+    KEYWORDS *
+    ANSWER
+:1D2F
+    {He thinks for a moment and frowns.
+"I'm afraid I can't help you with that.&
+}
+:1D7B
+    JUMP 0x127c
+    END_ANSWER
+:1D80
+    BYE

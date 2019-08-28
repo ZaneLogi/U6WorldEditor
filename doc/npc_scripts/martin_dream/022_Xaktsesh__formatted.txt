@@ -1,0 +1,42 @@
+:0000
+    NPC_ID: npc id: 22, npc name: Xaktsesh_
+:000B
+    NPC_LOOK: a lady kneeling before you.
+*
+:0029
+    START CONVERSION
+:002A
+    IF [N8(0xeb) 0x00 FLAG N8(0x00) == ]
+:0033
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0039
+    PORTRAIT [N8(0xeb) ]
+:003D
+    {"You would not know, but I am Xaktsesh.We have spoken before, in the world of Dreams.&
+
+}
+:0095
+    PAUSE
+:0096
+    {She seems terribly calm despite the tremors.
+
+}
+:00C4
+    PAUSE
+:00C5
+    {"You are busy bringing the phlogistonite to Mr. Carnegie now, $P, but perhaps later I shall recite some poetry to you.&
+}
+:013D
+    BYE
+:013E
+    ELSE
+:013F
+    {"You have not taken the fuel to Mr. Carnegie yet, $P. You may not hear my poetry until our journey is begun.&
+She smiles softly, but with a trace of censure.
+}
+:01DD
+    BYE
+:01DE
+    ENDIF
+:01DF
+    BYE

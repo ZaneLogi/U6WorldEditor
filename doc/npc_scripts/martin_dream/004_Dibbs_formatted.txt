@@ -1,0 +1,989 @@
+:0000
+    NPC_ID: npc id: 4, npc name: Dibbs
+:0007
+    NPC_LOOK: a young British cavalry officer.
+*
+:002A
+    START CONVERSION
+:002B
+    IF [N8(0x38) N8(0x02) FLAG N8(0xeb) N8(0x06) FLAG N8(0x00) == & ]
+:003B
+    JUMP 0x03ae
+:0040
+    ENDIF
+:0041
+    IF [N8(0x02) N8(0x04) FLAG ]
+:0048
+    {"Oh, no, $G! I mean, begging your pardon, and all that, $G, but I know nothing of such scientific matters.
+}
+:00B3
+    PAUSE
+:00B4
+    {
+"This would be better handled by someone such as yourself, $G.&
+He hands you the tools, salutes, and steps back a pace. Or two.
+}
+:0135
+    BYE
+:0136
+    CLEAR_FLAG [N8(0x02) ], [N8(0x04) ]
+:013D
+    ENDIF
+:013E
+    IF [N8(0x46) N8(0x03) FLAG ]
+:0145
+    {"Begging your pardon, $G, but we must get the phlogistonite to Mr Carnegie on the double!&
+}
+:01A0
+    BYE
+:01A1
+    ENDIF
+:01A2
+    IF [N8(0xeb) 0x00 FLAG N8(0x01) == ]
+:01AB
+    {"$G! Jolly good to see you again, $G. May I be of assistance?&
+}
+:01EA
+    ELSE
+:01EB
+    {The man in blue leaps to his feet and salutes smartly.
+"Thank God you've made it, $G! I moved my camp here in anticipation of your arrival.
+}
+:0277
+    PAUSE
+:0278
+    {
+"I had begun to worry, though, that a second expedition might not be sent.&
+}
+:02C5
+    PAUSE
+:02C6
+    {
+He begins collecting equipment and seems truly overjoyed to see you!
+}
+:030C
+    PAUSE
+:030D
+    {
+"It will be wonderful @exploring with you, $G. Let's go to the @traders' outpost at Arsia Mons and get you outfitted for survival on Mars!&
+}
+:039A
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:03A0
+    DECLARE [0x09, 0xb2] = [N8(0xeb) JOIN ]
+:03A8
+    ENDIF
+:03A9
+    JUMP 0x0524
+:03AE
+    DECLARE [0x05, 0xb2] = [N16(0x01cc) N8(0x00) OBJINPARTY ]
+:03B9
+    IF [0x05 B2 N16(0x8001) != ]
+:03C1
+    {"Yes, $G? Oh! I say! Those metal bands you've got from that propellant shipment? What say we take those to Mr. Roosevelt?
+}
+:043B
+    PAUSE
+:043C
+    {
+"I'm quite sure he could do something to help us find out who it is that took the propellant.
+}
+:049B
+    PAUSE
+:049C
+    {
+"Yes, indeed, capital idea! Glad I thought of it. Yes.&
+He straightens his uniform and throws back his shoulders proudly.
+}
+:0517
+    SET_FLAG [N8(0xeb) ], [N8(0x06) ]
+:051E
+    JUMP 0x0524
+:0523
+    ENDIF
+:0524
+    {
+}
+:0525
+    ASK
+    KEYWORDS name
+    ANSWER
+:052C
+    {"Dibbs, $G. Leftenant, Her Majesty's Black Horse Guard.&
+}
+:0565
+    PORTRAIT [N8(0xeb) ]
+:0569
+    JUMP 0x0524
+    KEYWORDS job
+    ANSWER
+:0573
+    {"Well, $G, I was commander of the ceremonial guard at the British exposition at the time we left.
+}
+:05D5
+    PAUSE
+:05D6
+    {
+"Now, I've been waiting a long @time to contact the second expedition. You, $G.
+}
+:0627
+    PAUSE
+:0628
+    {
+"Mr. Lowell said we could expect another landing. I've been camped out here for a month or so, waiting.&
+}
+:0692
+    JUMP 0x0524
+    KEYWORDS Dibb,Nevi,Lt.,Lieu,Left
+    ANSWER
+:06B0
+    {"$G! How may I assist you, $G?&
+}
+:06D0
+    JUMP 0x0524
+    KEYWORDS long,time
+    ANSWER
+:06E0
+    {"I've been here several weeks, $G. I've learned quite a lot about @surviving in this area.&
+}
+:073C
+    JUMP 0x0524
+    KEYWORDS Mart,nati
+    ANSWER
+:074C
+    {"All dead, $G, from what we've found. Apparently gone quite a while.
+}
+:0791
+    PAUSE
+:0792
+    {
+"We did some @exploration of the area and could find no one.&
+}
+:07D1
+    JUMP 0x0524
+    KEYWORDS brea,oxyg
+    ANSWER
+:07E1
+    {"If you have @oxium, $G, you and your companions will breathe much easier.&
+}
+:082D
+    JUMP 0x0524
+    KEYWORDS expl
+    ANSWER
+:0838
+    {"After the first few months of working on the space @cannon, $G, our expedition separated into four groups to reconnoiter.
+}
+:08B3
+    PAUSE
+:08B4
+    {
+"You see, we had run out of iron ore for Mr. Carnegie to make into steel.
+}
+:08FF
+    PAUSE
+:0900
+    {
+"Production of the @space cannon depends upon acquiring more steel. We haven't found it yet, you know.
+}
+:0968
+    PAUSE
+:0969
+    {
+"One group became @traders.
+
+}
+:0987
+    PAUSE
+:0988
+    {"The other groups were led by Mr. Jack @Segal, Mr. Percival @Lowell, and a Mr. Grigor @Rasputin. There were some interesting @findings.&
+}
+:0A11
+    JUMP 0x0524
+    KEYWORDS find,foun,disc
+    ANSWER
+:0A26
+    {"Yes, $G, we found deserted @cities and some interesting evidence of advanced @technology.
+}
+:0A81
+    PAUSE
+:0A82
+    {
+"Some of it is rather dangerous, I believe, $G.&
+}
+:0AB4
+    JUMP 0x0524
+    KEYWORDS citi,civi,dese
+    ANSWER
+:0AC9
+    {"We discovered the remains of four centres of civilisation, $G.
+}
+:0B09
+    PAUSE
+:0B0A
+    {
+"We referred to them as @Elysium, @Hellas, @Olympus and @Argyre.&
+}
+:0B4D
+    JUMP 0x0524
+    KEYWORDS tech,adva
+    ANSWER
+:0B5D
+    {"Greenhouses for growing young plants, $G, and transport @tubes for swift travel. Canals with @bridges. There is also a Dream @Machine...&
+}
+:0BE8
+    PAUSE
+:0BE9
+    {
+He looks grim and unyielding.
+"A most dangerous @machine, $G. I will have nothing to do with it.&
+}
+:0C4C
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:0C53
+    JUMP 0x0524
+    KEYWORDS tran,tube
+    ANSWER
+:0C63
+    IF [N8(0x73) N8(0x04) FLAG ]
+:0C6A
+    {"They are deuced convenient for moving around the planet, eh wot?&
+}
+:0CAD
+    ELSE
+:0CAE
+    {"At least, that's what they seem to have been. Looks like the doors and possibly the devices themselves were powered by electricity. Which we haven't discovered how to turn on.&
+}
+:0D60
+    ENDIF
+:0D61
+    JUMP 0x0524
+    KEYWORDS brid
+    ANSWER
+:0D6C
+    {"I only know about the ones which were already extended when we arrived.
+}
+:0DB5
+    PAUSE
+:0DB6
+    {
+"Those would be at:
+18N 111W north of Olympus;
+4S 121W north of the trading outpost;
+25N 121E just north of Elysium;
+and 36N 163W northwest of Olympus Mons.&
+}
+:0E55
+    JUMP 0x0524
+    KEYWORDS mach,drea
+    ANSWER
+:0E65
+    {"Most @dangerous technology, $G. I wouldn't get involved with them if I were you. Most @dangerous.&
+}
+:0EC9
+    JUMP 0x0524
+    KEYWORDS dang
+    ANSWER
+:0ED4
+    {He scowls and sighs.
+"If you must know...
+}
+:0EFE
+    PAUSE
+:0EFF
+    {
+"There seems to be one in each of the major @Martian @cities. They are in various states of repair.
+}
+:0F64
+    PAUSE
+:0F65
+    {
+"The one in @Elysium is in fine working order, dash it all.&
+}
+:0FA3
+    JUMP 0x0524
+    KEYWORDS Elys
+    ANSWER
+:0FAE
+    {"Mr. @Lowell's party. Or what's left of it. The location is 20N 114E.
+}
+:0FF4
+    PAUSE
+:0FF5
+    {
+"Mr. Lowell was signalling Earth for all of us until the big reflector was destroyed.
+
+}
+:104D
+    PAUSE
+:104E
+    {"There's definitely trouble up there, $G...They have one of those blasted Dream @Machines working.
+}
+:10B1
+    PAUSE
+:10B2
+    {
+"They attempted to utilize it. It drove them all @mad, $G. Absolutely raving.
+}
+:1101
+    PAUSE
+:1102
+    {
+"They believe they are Martians!&
+}
+:1125
+    JUMP 0x0524
+    KEYWORDS refl,mirr
+    ANSWER
+:1135
+    {"Shortly before they went loony, someone smashed the reflector. No one knows who.&
+}
+:1188
+    JUMP 0x0524
+    KEYWORDS mad,ravi
+    ANSWER
+:1197
+    {"Most of those who have gone insane are still in the @Martian city of @Elysium. Some wander about the countryside.
+}
+:120A
+    PAUSE
+:120B
+    {
+"But all believe they are now reincarnations, or some such, of the original Martians. Tripe, I say, $G.
+}
+:1274
+    PAUSE
+:1275
+    {
+"Utter nonsense. Stark raving, they are, $G.&
+}
+:12A4
+    JUMP 0x0524
+    KEYWORDS Hell
+    ANSWER
+:12AF
+    {"Hellas is to the west of the landing site, $G, at 27S 77E. Originally, none of the parties were based there.
+}
+:131D
+    PAUSE
+:131E
+    {
+"After the blokes in @Elysium starting showing signs of being a bit balmy, if you know what I mean, $G, one of their members, Marcus, took up residence in Hellas.&
+}
+:13C3
+    JUMP 0x0524
+    KEYWORDS Marc,Chan
+    ANSWER
+:13D3
+    {"Actually, I call him @Crazy Marcus, $G. He lives down at Hellas, all by himself. Claims to have gotten out of the Dream Machine safely, but I have my doubts.&
+}
+:1473
+    JUMP 0x0524
+    KEYWORDS craz
+    ANSWER
+:147E
+    {"Well, $G, @Marcus claims to be sane, but I've heard him, $G. Talks to things, he does, $G. Objects.
+}
+:14E3
+    PAUSE
+:14E4
+    {
+"He says he knows secrets about the Dream Machine, $G, but I certainly wouldn't count him as trustworthy.&
+}
+:1550
+    JUMP 0x0524
+    KEYWORDS Sega,Jack
+    ANSWER
+:1560
+    {"Mr. Segal's group travelled northward. They are now settled in at @Olympus.&
+}
+:15AE
+    JUMP 0x0524
+    KEYWORDS Lowe,Perc,lead,expe,firs
+    ANSWER
+:15CD
+    {"Ah, $G, a sad tale, indeed. The distinguished Mr. Lowell was, at the outset of the adventure, a fine commander.
+}
+:163E
+    PAUSE
+:163F
+    {
+"His exploration team travelled northward to @Elysium. What's left of them is still there, $G.
+}
+:169F
+    PAUSE
+:16A0
+    {
+"When they found the Dream Machines, they thought that they could be the key to our rescue. Communication, and all that, you know.
+}
+:1724
+    PAUSE
+:1725
+    {
+"Those that used them were never the same again.
+}
+:1757
+    PAUSE
+:1758
+    {
+"Sad, indeed. Damned Dream Machines!&
+}
+:177F
+    JUMP 0x0524
+    KEYWORDS Rasp,Grig
+    ANSWER
+:178F
+    {"Yes, $G. A Russian monk, I believe. He led the third party to explore.
+}
+:17D7
+    PAUSE
+:17D8
+    {
+"They traversed the area to the east, where they found the abandoned city of @Argyre.
+}
+:182F
+    PAUSE
+:1830
+    {
+"Secretive now, $G. I don't trust that lot! Queer sort.&
+}
+:186A
+    JUMP 0x0524
+    KEYWORDS Argy
+    ANSWER
+:1875
+    {"It's in an ancient crater to the east of here. The coordinates would be about 30S 107W.
+}
+:18CE
+    PAUSE
+:18CF
+    {
+"The party there has occasionally supplied me with provisions, but I don't truly trust them.
+}
+:192D
+    PAUSE
+:192E
+    {
+"They're keeping too much to themselves, if you ask me, $G.
+}
+:196B
+    PAUSE
+:196C
+    {
+"They are led by that @Russian chap, @Rasputin. Supposedly investigating Martian technology.
+}
+:19CA
+    PAUSE
+:19CB
+    {
+"Deuced strange, if you ask me, $G. Hmph.&
+}
+:19F7
+    JUMP 0x0524
+    KEYWORDS Russ
+    ANSWER
+:1A02
+    {"Queer chap, $G. He's leading the @Argyrians in researching the Martian @technology.
+}
+:1A57
+    PAUSE
+:1A58
+    {
+"Doesn't seem to be very interested in sharing the findings with anyone else, though, if you know what I mean, $G.
+}
+:1ACC
+    PAUSE
+:1ACD
+    {
+"He uses the excuse of the 'dangerous nature of Martian technology' and 'avoiding the disaster at Elysium'. Horsefeathers. Load of tripe.
+}
+:1B58
+    PAUSE
+:1B59
+    {
+"Doing something dangerous he is, $G, I'd wager my commission on it.&
+He looks as though he's smelled something noxious.
+}
+:1BD3
+    JUMP 0x0524
+    KEYWORDS spac,cann
+    ANSWER
+:1BE3
+    {"Indeed, $G, work had already begun on the return vehicle. We dug the shaft at @Olympus and placed the lining.
+}
+:1C52
+    JUMP 0x0524
+    KEYWORDS Olym
+    ANSWER
+:1C5D
+    {"Olympus is Jack Segal's settlement to the north. The coordinates are 10N 110W.
+}
+:1CAD
+    PAUSE
+:1CAE
+    {
+"It's where we originally began construction of the space @cannon.
+}
+:1CF2
+    PAUSE
+:1CF3
+    {
+"After Mr. Segal's group took over the cannon site, however, not much work could be done. They're a bit @cautious of others, $G.&
+}
+:1D76
+    JUMP 0x0524
+    KEYWORDS caut,grou
+    ANSWER
+:1D86
+    {"Some of the expedition saw the dangers of the Dream @Machine as did I, $G. I stayed with them for a while.
+}
+:1DF2
+    PAUSE
+:1DF3
+    {
+"Their reactions have been a bit extreme, though, $G.
+}
+:1E2A
+    PAUSE
+:1E2B
+    {
+"They have fortified the site of the space @cannon and defend against anyone they consider @contaminated.&
+}
+:1E97
+    JUMP 0x0524
+    KEYWORDS cont
+    ANSWER
+:1EA2
+    {"Yes, $G, contaminated by the Dream @Machine. They will no longer allow me access to their camp, for example, because they consider me a threat.
+}
+:1F33
+    PAUSE
+:1F34
+    {
+"I have had contact with the others and may be tainted, you see.&
+}
+:1F77
+    PAUSE
+:1F78
+    {
+He smiles apologetically.
+"I'm not sure I blame them, $G.&
+}
+:1FB4
+    JUMP 0x0524
+    KEYWORDS surv
+    ANSWER
+:1FBF
+    {"The two main things you'll need to prepare for, $G, are extreme @cold and the different @atmosphere.&
+}
+:2026
+    JUMP 0x0524
+    KEYWORDS cold
+    ANSWER
+:2031
+    {"It will drop far below freezing at night, $G. We must either bundle and sleep, or prepare warm clothing to travel.
+}
+:20A5
+    PAUSE
+:20A6
+    {
+"Just like the Arctic, eh, wot?&
+He grins jovially.
+}
+:20DB
+    JUMP 0x0524
+    KEYWORDS atmo
+    ANSWER
+:20E6
+    {"There is less oxygen here than on Earth. Thankfully, Mr. @McGee has found a vast supply of @oxium.&
+}
+:214B
+    JUMP 0x0524
+    KEYWORDS oxiu
+    ANSWER
+:2156
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:215D
+    {"If we need more, perhaps we'll go to the @traders.&
+}
+:2192
+    JUMP 0x0524
+:2197
+    ENDIF
+:2198
+    SET_FLAG [N8(0xeb) ], [N8(0x07) ]
+:219F
+    {"An odd substance, $G. It's precious, so we tend to use it like money.
+
+}
+:21E7
+    PAUSE
+:21E8
+    {"It seems to be a naturally-occurring mineral. When chewed, it releases oxygen. Damned convenient for us, $G.&
+}
+:2257
+    PAUSE
+:2258
+    {
+}
+:2259
+    IF [N8(0x03) INPARTY ]
+:225E
+    {He blushes slightly.
+"My apologies, Miss Bly. Such language should never be used around lovely ladies such as yourself.&
+}
+:22D7
+    ENDIF
+:22D8
+    IF [N8(0x03) INPARTY 0x10 B2 & ]
+:22E0
+    {"And yourself, also, of course, miss. Ahem.&
+}
+:230D
+    JUMP 0x0524
+:2312
+    ENDIF
+:2313
+    IF [0x10 B2 ]
+:2317
+    {He blushes slightly.
+"My apologies, miss. Such language should never be used around lovely ladies such as yourself.&
+}
+:238C
+    ENDIF
+:238D
+    {"Although my supply is almost gone, I am willing to share it. Just take some of mine when you need it.&
+}
+:23F5
+    PAUSE
+:23F6
+    {
+"We're running low, $G, we should pay a visit to the @traders.&
+}
+:2437
+    JUMP 0x0524
+    KEYWORDS mcge,coot
+    ANSWER
+:2447
+    {"Odd man, $G. Thoroughly delightful. He supplies most of the @oxium for the colonies. He prospects it in the mountains to the east.&
+}
+:24CC
+    JUMP 0x0524
+    KEYWORDS Bly,nell,eliz,coch
+    ANSWER
+:24E5
+    IF [N8(0x03) INPARTY ]
+:24EA
+    {"She's right over there, $G.&
+}
+:2508
+    ELSE
+:2509
+    {"Who, $G?&
+}
+:2514
+    ENDIF
+:2515
+    JUMP 0x0524
+    KEYWORDS Spec,joha
+    ANSWER
+:2525
+    IF [N8(0x02) INPARTY ]
+:252A
+    {"He's right over there, $G.&
+}
+:2547
+    ELSE
+:2548
+    {"Who, $G?&
+}
+:2553
+    ENDIF
+:2554
+    JUMP 0x0524
+    KEYWORDS Bloo,doct,c.l.
+    ANSWER
+:2569
+    {"Bloody smart, wot? Should be a great help getting us home.
+}
+:25A5
+    PAUSE
+:25A6
+    {
+"Knows a lot about air and oxygen and all that.&
+}
+:25D8
+    JUMP 0x0524
+    KEYWORDS Sher,rich
+    ANSWER
+:25E8
+    IF [N8(0x05) INPARTY N8(0x00) == ]
+:25F0
+    {"Yes, $G, he was with us on the first expedition. He, Duprey, and Yellin went off to explore on their own.
+}
+:265B
+    PAUSE
+:265C
+    {
+"Well-known explorer, you know. Haven't seen him of late.&
+}
+:2698
+    ELSE
+:2699
+    {"He's right there, $G.&
+}
+:26B1
+    ENDIF
+:26B2
+    JUMP 0x0524
+    KEYWORDS Dupr,majo,greg
+    ANSWER
+:26C7
+    IF [N8(0x19) NPCNEARBY N8(0x00) == ]
+:26CF
+    {"Yes, $G, he was with us on the first expedition. He, Sherman, and Yellin went off to explore on their own.
+}
+:273B
+    PAUSE
+:273C
+    {
+"Marvelous fighter. Military man. Haven't seen him of late.&
+}
+:277A
+    ELSE
+:277B
+    {"He's right there, $G.&
+}
+:2793
+    ENDIF
+:2794
+    JUMP 0x0524
+    KEYWORDS yell,davi
+    ANSWER
+:27A4
+    IF [N8(0x1a) NPCNEARBY N8(0x00) == ]
+:27AC
+    {"Yes, $G, he was with us on the first expedition. He, Sherman, and Duprey went off to explore on their own.
+}
+:2818
+    PAUSE
+:2819
+    {
+"Talented anthropologist. Bit eccentric, but good around a campfire. Haven't seen him of late.&
+}
+:287A
+    ELSE
+:287B
+    {"He's right there, $G.&
+}
+:2893
+    ENDIF
+:2894
+    JUMP 0x0524
+    KEYWORDS $P
+    ANSWER
+:289D
+    {"Yes, $G, that's your name, $G.&
+}
+:28BE
+    PAUSE
+:28BF
+    {
+He looks respectfully confused.
+}
+:28E0
+    JUMP 0x0524
+    KEYWORDS Tesl,niko
+    ANSWER
+:28F0
+    {"A brilliant chap. I do hope he can return us to Earth...&
+}
+:292B
+    JUMP 0x0524
+    KEYWORDS capt,trip
+    ANSWER
+:293B
+    {"You mean Captain Trippet? Nice bloke. One of the group in seclusion at @Olympus. Used to be a seaman.&
+}
+:29A3
+    JUMP 0x0524
+    KEYWORDS belt
+    ANSWER
+:29AE
+    {"Yes, $G, some of the machinery seems to be belt-driven. There's an old sea captain or some such up at Olympus who could probably @fix anything like that.&
+}
+:2A4A
+    JUMP 0x0524
+    KEYWORDS fix,brok,torn,ripp,sew
+    ANSWER
+:2A67
+    {"If you wish something fixed, $G, you might check with the folks up at Olympus. They're resourceful if nothing else, $G.&
+}
+:2AE1
+    JUMP 0x0524
+    KEYWORDS cala,jane
+    ANSWER
+:2AF1
+    {"Rather odd female, $G, if you don't mind my saying. Intriguing, though. Useful to have around, too.
+}
+:2B56
+    PAUSE
+:2B57
+    {
+"Has just about anything you can imagine for sale. Pretty shrewd @trader, $G.&
+}
+:2BA7
+    JUMP 0x0524
+    KEYWORDS buff,bill
+    ANSWER
+:2BB7
+    {"Fascinating man, $G. Spends most of his time with that Calamity Jane woman.
+}
+:2C04
+    PAUSE
+:2C05
+    {
+"Helps her with supplies and such for all the rest of us. Wild west and all that, you know, $G.&
+}
+:2C67
+    PAUSE
+:2C68
+    {
+He grins and fakes the quickdraw of a six-shooter in your direction, then quickly recovers his normal dignity.
+"Ahem. Sorry, $G.&
+}
+:2CEB
+    JUMP 0x0524
+    KEYWORDS trad
+    ANSWER
+:2CF6
+    {"Yes, $G, if you wish to trade anything, you should check with Buffalo Bill or Calamity Jane. They would have most anything you could want at the @outpost.&
+}
+:2D93
+    JUMP 0x0524
+    KEYWORDS outp
+    ANSWER
+:2D9E
+    {"The @trading outpost is to the east, $G, at Arsia Mons. I believe the approximate coordinates are 12S 129W.&
+}
+:2E0C
+    JUMP 0x0524
+    KEYWORDS join
+    ANSWER
+:2E17
+    IF [N8(0xeb) INPARTY ]
+:2E1C
+    {"Yes, $G. Right with you, $G.&
+}
+:2E3B
+    PAUSE
+:2E3C
+    {
+He looks confused.
+}
+:2E50
+    ELSE
+:2E51
+    {"I would be honored to accompany you, $G.&
+}
+:2E7C
+    PAUSE
+:2E7D
+    {
+He excitedly begins collecting equipment, and is soon ready to depart.
+}
+:2EC5
+    DECLARE [0x09, 0xb2] = [N8(0xeb) JOIN ]
+:2ECD
+    ENDIF
+:2ECE
+    JUMP 0x0524
+    KEYWORDS wait
+    ANSWER
+:2ED9
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:2EE1
+    IF [0x00 B2 N8(0x02) == ]
+:2EE8
+    {"Begging your pardon, $G, but I might be of more use scouting around, either by myself or with you, $G. With your permission, of course, $G.&
+}
+:2F76
+    JUMP 0x0524
+:2F7B
+    ENDIF
+:2F7C
+    IF [0x00 B2 N8(0x01) == ]
+:2F83
+    {"I would prefer, $G, to stay with you until we are on land. If that is all right with you, $G.&
+}
+:2FE3
+    JUMP 0x0524
+:2FE8
+    ENDIF
+:2FE9
+    {"Certainly, $G. If you wish to maintain a guard here until you return, I will remain here for now.&
+}
+:304D
+    SET_FLAG [N8(0xeb) ], [0x08 N8(0x07) + ]
+:3056
+    JUMP 0x32b3
+    KEYWORDS leav
+    ANSWER
+:3061
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:3069
+    IF [0x00 B2 N8(0x01) == ]
+:3070
+    {He clears his throat, clearly embarrassed.
+}
+:309B
+    PAUSE
+:309C
+    {
+"Begging your pardon, $G, but I cannot swim all that well.
+}
+:30D8
+    PAUSE
+:30D9
+    {
+"I would rather remain with you for now, $G. With your permission. $G.&
+}
+:3122
+    JUMP 0x0524
+:3127
+    ENDIF
+:3128
+    {"Begging your pardon, $G, but I believe you'll be needing several people to complete what must be done to enable us to return to Earth. I would prefer to stay with you for now. $G.&
+}
+:31DE
+    JUMP 0x0524
+    KEYWORDS bye
+    ANSWER
+:31E8
+    {"Yes, $G. I look forward to further conversations, $G.&
+}
+:3220
+    JUMP 0x329c
+    KEYWORDS *
+    ANSWER
+:3228
+    {He looks embarrassed and confused.
+}
+:324B
+    PAUSE
+:324C
+    {
+"I'm sorry, $G. I don't believe I have any information on that subject.&
+}
+:3296
+    JUMP 0x0524
+    END_ANSWER
+:329B
+    BYE
+:329C
+    IF [N8(0xeb) INPARTY N8(0x00) == 0x17 B2 N8(0x05) < & ]
+:32AA
+    DECLARE [0x09, 0xb2] = [N8(0xeb) JOIN ]
+:32B2
+    ENDIF
+:32B3
+    BYE

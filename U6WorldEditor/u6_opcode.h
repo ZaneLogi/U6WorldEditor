@@ -79,14 +79,16 @@ $X : the value of string variable X
 #define U6OP_NUM8       0xd3
 #define U6OP_NUM16      0xd4
 
-#define U6OP_REVIVE     0xd6
-
-#define U6OP_SET_Y      0xd8        // set NPC name for $Y in the text
+#define U6OP_RESURRECT  0xd6
+#define U6OP_NPCNEARBY  0xd7
+#define U6OP_SETNAME    0xd8        // set NPC name for $Y in the text
 #define U6OP_HEAL       0xd9
 #define U6OP_WOUNDED    0xda
 #define U6OP_CURE       0xdb
 #define U6OP_POISONED   0xdc
 #define U6OP_NPC        0xdd        // return NPC id based on the index
+
+#define U6OP_DF         0xdf        // unknown code in 018_Blood (MD), something like U6OP_SETNAME
 
 #define U6OP_EXP        0xe0
 #define U6OP_LVL        0xe1

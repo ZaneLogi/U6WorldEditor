@@ -54,10 +54,15 @@ std::string Script::get_npc_name(uint32_t npc_index)
         index -= 2;
     }
 
+    if (m_game_type == "md" && npc_index < 2)
+    {
+        return std::string(); // for martin dream, index 0, 1 is not npc script.
+    }
+
     auto context = get_context(index);
     if (!context.empty())
     {
-        assert(context[0] == 0xff && (uint8_t)context[1] == npc_index);
+        assert(context[0] == 0xff);// && (uint8_t)context[1] == npc_index); <= for martin dream, it looks like this is not true.
         auto p = &context[2];
         while (1)
         {
@@ -760,6 +765,7 @@ void ScriptInterpreter::collect_eval(std::string& result, const uint8_t* &p, con
         case U6OP_LEAVE:        result += "LEAVE "; break;
         case U6OP_WOUNDED:      result += "WOUNDED "; break;
         case U6OP_POISONED:     result += "POISONED "; break;
+        case U6OP_NPCNEARBY:    result += "NPCNEARBY "; break;
         case U6OP_NPC:          result += "NPC "; break;
         case U6OP_EXP:          result += "EXP. "; break;
         case U6OP_LVL:          result += "LVL. "; break;
@@ -1101,7 +1107,7 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
                 result += "\r\n";
                 break;
             }
-            case U6OP_SET_Y:
+            case U6OP_SETNAME:
             {
                 result += "    SET_$Y ";
                 collect_eval(result, p, script_start, script_end);
@@ -1118,6 +1124,18 @@ void ScriptInterpreter::collect_format(std::string& result, const uint8_t* &p, c
             case U6OP_CURE:
             {
                 result += "    CURE ";
+                collect_eval(result, p, script_start, script_end);
+                result += "\r\n";
+                break;
+            }
+            case U6OP_RESURRECT:
+            {
+                // something related to revive people
+                // op code for Balakai (SE), Intanya (SE)
+                // it needs to remove the dead body from the evaluation, npc_id who has the dead body
+                // the npc id of the dead body will be assigned to [0x1b B2],
+                // also set $Y as the npc name who is revived.
+                result += "    RESURRECT ";
                 collect_eval(result, p, script_start, script_end);
                 result += "\r\n";
                 break;
@@ -1142,6 +1160,13 @@ bool ScriptInterpreter::collect_unknown(std::string& result, const uint8_t* &p, 
     auto script_offset = p - script_start;
 
     switch (unknown_code) {
+    case U6OP_DF:
+    {
+        result += "    DF ";
+        collect_eval(result, p, script_start, script_end);
+        result += "\r\n";
+        return true;
+    }
     case U6OP_FUNC:
     {
         // unknown op code for Yunapotli (SE)
@@ -1184,22 +1209,6 @@ bool ScriptInterpreter::collect_unknown(std::string& result, const uint8_t* &p, 
             result += "\r\n";
             return true;
         }
-    }
-
-    case U6OP_REVIVE:
-    {
-        // something related to revive people
-        // op code for Balakai (SE), Intanya (SE)
-        // it needs to remove the dead body from the evaluation, npc_id who has the dead body
-        // the npc id of the dead body will be assigned to [0x1b B2],
-        // also set $Y as the npc name who is revived.
-        assert(m_npc_name == "Balakai" ||
-               m_npc_name == "Intanya" ||
-               m_npc_name == "Kunawo");
-        result += "    REVIVE ";
-        collect_eval(result, p, script_start, script_end);
-        result += "\r\n";
-        return true;
     }
 
     }

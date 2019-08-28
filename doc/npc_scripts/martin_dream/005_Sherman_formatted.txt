@@ -1,0 +1,717 @@
+:0000
+    NPC_ID: npc id: 5, npc name: Sherman
+:0009
+    NPC_LOOK: a blond, sharp-eyed man in his early 30's.
+*
+:0036
+    START CONVERSION
+:0037
+    IF [N8(0xeb) N8(0x02) FLAG ]
+:003E
+    JUMP 0x20b2
+:0043
+    ENDIF
+:0044
+    IF [N8(0x46) N8(0x03) FLAG ]
+:004B
+    {"Now that you have recovered the phlogistonite, you must rush it to Mr. Carnegie so we can load the space cannon.
+
+}
+:00BE
+    PAUSE
+:00BF
+    {"I only hope we can be away from Mars before one of these shocks damages the cannon!&
+}
+:0115
+    BYE
+:0116
+    ENDIF
+:0117
+    IF [N8(0xeb) N8(0x04) FLAG ]
+:011E
+    {"You know, now that we have these lens towers fixed, the icecap should begin melting.
+}
+:0174
+    PAUSE
+:0175
+    {
+"We should check the pumping station to be sure that everything is working properly. It's down around 18N 167W.&
+}
+:01E7
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x04) ]
+:01EE
+    BYE
+:01EF
+    ENDIF
+:01F0
+    IF [N8(0x02) N8(0x04) FLAG ]
+:01F7
+    {He looks toward the sparking towers and back to you.
+
+}
+:022D
+    PAUSE
+:022E
+    {"I believe that you would be a much better candidate for this endeavour, $P. I apologize, but I'm a bit afraid of heights.&
+}
+:02AA
+    BYE
+:02AB
+    ENDIF
+:02AC
+    IF [N8(0xeb) 0x00 FLAG ]
+:02B2
+    JUMP 0x03b7
+:02B7
+    ELSE
+:02B8
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:02BE
+    PORTRAIT [N8(0xeb) ]
+:02C2
+    {He brushes off some dirt from his clothes.
+
+}
+:02EE
+    PAUSE
+:02EF
+    {"I say, I am certainly glad that Yellin was able to find someone to free us from that damned cave-in.
+
+}
+:0356
+    PAUSE
+:0357
+    {He looks at you closely, then says,
+"Pardon my staring, but your face is quite familiar.&
+}
+:03B1
+    JUMP 0x1bf4
+:03B6
+    ENDIF
+:03B7
+    {Sherman looks at you and says,
+"Yes, $P? What is it?&
+
+}
+:03EE
+    ASK
+    KEYWORDS name
+    ANSWER
+:03F5
+    {"Richard Sherman, from Philadelphia.&
+}
+:041B
+    JUMP 0x03ed
+    KEYWORDS rich,sher
+    ANSWER
+:042B
+    {"Yes, $P. What can I do for you?&
+}
+:044D
+    JUMP 0x03ed
+    KEYWORDS sham
+    ANSWER
+:0458
+    {"No, no, Sherman, S H E... Wait a minute, that does sound familiar... No, it's gone. Sorry. Don't know him.&
+}
+:04C5
+    JUMP 0x03ed
+    KEYWORDS job
+    ANSWER
+:04CF
+    {"Since our arrival on Mars, I have been exploring with my companions, Dr. @Yellin and Major @Duprey.
+
+}
+:0535
+    PAUSE
+:0536
+    {"Most recently, we were searching for another source of @iron ore for Mr. Carnegie, so that his steel-making efforts can continue.&
+}
+:05BA
+    JUMP 0x03ed
+    KEYWORDS yell,davi
+    ANSWER
+:05CA
+    IF [N8(0x1a) NPCNEARBY ]
+:05CF
+    {He gestures towards Yellin.
+
+}
+:05EC
+    ENDIF
+:05ED
+    {"David is a noted anthropologist back on Earth. He and I met in Philadelphia when he was on holiday. Since then, we've travelled together on many @expeditions.&
+}
+:068E
+    JUMP 0x03ed
+    KEYWORDS dupr,majo,greg
+    ANSWER
+:06A3
+    IF [N8(0x19) NPCNEARBY ]
+:06A8
+    {He points to Duprey.
+
+}
+:06BE
+    ENDIF
+:06BF
+    {"Greg, or should I say, Major Duprey was attached to the 7th regiment, 3rd Calvary. We became friends during an @expedition into Apache territory.&
+}
+:0753
+    JUMP 0x03ed
+    KEYWORDS expe
+    ANSWER
+:075E
+    {"We've travelled a great many places together. Before our unexpected trip to Mars, we three were @exploring the Congo and Orinoco.&
+}
+:07E2
+    JUMP 0x03ed
+    KEYWORDS expl
+    ANSWER
+:07ED
+    {"It's in the blood, you know.
+}
+:080B
+    PAUSE
+:080C
+    {
+"We've been exploring Mars for the last two years fairly thoroughly.
+
+"There are some very interesting @locations we've discovered.&
+}
+:0892
+    JUMP 0x03ed
+    KEYWORDS loca
+    ANSWER
+:089D
+    {Sherman strokes his beard, and says,
+"Yes, many. We placed markers near them as we passed, for topographic reference.
+
+}
+:0914
+    PAUSE
+:0915
+    {"If you ever have a question about a particular location, ask me.&
+}
+:0958
+    JUMP 0x03ed
+    KEYWORDS brid
+    ANSWER
+:0963
+    IF [N8(0x73) N8(0x04) FLAG N8(0x00) == ]
+:096D
+    {"There are a few bridges we can use. Most of them are not extended, and we would apparently have to turn on the surface power for them to work.
+}
+:09FD
+    PAUSE
+:09FE
+    {
+"In the meantime, the ones which are already extended are at:
+18N 111W north of Olympus;
+4S 121W north of the trading outpost;
+25N 121E just north of Elysium;
+and 36N 163W northwest of Olympus Mons.
+}
+:0AC6
+    PAUSE
+:0AC7
+    {
+"These should be enough for us to get around fairly well for now. They're all we've had for the past two years!&
+}
+:0B39
+    JUMP 0x03ed
+:0B3E
+    ELSE
+:0B3F
+    {"With all the bridges working now, there are quite a few we can use.
+}
+:0B84
+    PAUSE
+:0B85
+    {
+"There are the ones we already had extended:
+18N 111W north of Olympus;
+4S 121W north of the trading outpost;
+25N 121E just north of Elysium;
+and 36N 163W northwest of Olympus Mons.
+}
+:0C3C
+    PAUSE
+:0C3D
+    {
+"And there are the others which weren't working before:
+23S 120W southeast of Arsia Mons;
+41S 157W south of the 1893 space-ship;
+30S 65E in Hellas;
+and 13N 111E south of Elysium.&
+}
+:0CF2
+    JUMP 0x03ed
+:0CF7
+    ENDIF
+    KEYWORDS elys
+    ANSWER
+:0CFE
+    {"Strange lot there. It looked to be an abandoned Martian city when Mr. Lowell and those who followed him established a settlement.
+
+}
+:0D82
+    PAUSE
+:0D83
+    {"They're all insane now, claiming to be Martians.
+}
+:0DB5
+    PAUSE
+:0DB6
+    {
+"The city is at 20N 114E.&
+}
+:0DD2
+    JUMP 0x03ed
+    KEYWORDS hell
+    ANSWER
+:0DDD
+    {"An abandoned city, but there were signs of human habitation.
+
+"When we passed through, however, we saw no one.
+}
+:0E4D
+    PAUSE
+:0E4E
+    {
+"It should be down around 27S 77E.&
+}
+:0E73
+    JUMP 0x03ed
+    KEYWORDS argy
+    ANSWER
+:0E7E
+    {"We were unable to explore there.
+
+"The Russian, Rasputin, @barred the gates, and they're only accessible by the @canals.
+}
+:0EF8
+    PAUSE
+:0EF9
+    {
+"It's located at about 30S 107W.&
+}
+:0F1C
+    JUMP 0x03ed
+    KEYWORDS barr,gate
+    ANSWER
+:0F2C
+    {"I'm no engineer, but I would guess that it would require something that packs quite a solid punch. Perhaps a @cannon blast could blow the doors down.&
+}
+:0FC4
+    JUMP 0x03ed
+    KEYWORDS cann
+    ANSWER
+:0FCF
+    {"I've seen some of the canal barges with cannon mounted on them.&
+}
+:1011
+    JUMP 0x03ed
+    KEYWORDS olym
+    ANSWER
+:101C
+    {"That settlement is where Jack Segal and his people are located.
+}
+:105D
+    PAUSE
+:105E
+    {
+"They're a bit isolationist, but otherwise a pleasure to visit.
+
+}
+:10A0
+    PAUSE
+:10A1
+    {"In fact, we were searching for @iron ore for them when you found us at @Syrtis Major.
+}
+:10F8
+    PAUSE
+:10F9
+    {
+"Olympus is at 10N 110W.&
+}
+:1114
+    JUMP 0x03ed
+    KEYWORDS iron,ore
+    ANSWER
+:1123
+    {"Mr. Carnegie needs ore to manufacture steel, which they are using to construct a space cannon to return us to Earth.
+}
+:1199
+    PAUSE
+:119A
+    {
+"Unfortunately, the mines have run dry. We left to search elsewhere.&
+}
+:11E1
+    JUMP 0x03ed
+    KEYWORDS syrt
+    ANSWER
+:11EC
+    {"We had hoped to find a supply of iron ore there, but the mines are too unstable and prone to @cave-ins.&
+}
+:1256
+    JUMP 0x03ed
+    KEYWORDS deut
+    ANSWER
+:1261
+    {"There is a ruined Martian city there, apparently abandoned well before the disappearance of the Martians.&
+}
+:12CD
+    JUMP 0x03ed
+    KEYWORDS cave
+    ANSWER
+:12D8
+    {"Indeed, my thanks for rescuing me and Major Duprey.&
+}
+:130E
+    JUMP 0x03ed
+    KEYWORDS arsi
+    ANSWER
+:1319
+    {"There are a pair of cowboys there that have set up a sort of 'Trading Post', if you will. Still, it's a convenient place to trade for @oxium.&
+}
+:13A9
+    JUMP 0x03ed
+    KEYWORDS oxiu
+    ANSWER
+:13B4
+    {"It's absolutely vital for travellers upon Mars. If you don't already have a good supply, let's go and speak with the pair on @Arsia Mons.&
+}
+:1440
+    JUMP 0x03ed
+    KEYWORDS cana
+    ANSWER
+:144B
+    {"My guess is that they were used as a system of transportation.
+}
+:148B
+    PAUSE
+:148C
+    {
+"Yellin seems to concur as well.&
+}
+:14AF
+    IF [N8(0x76) N8(0x06) FLAG N8(0x00) == ]
+:14B9
+    {"There must be some means of restoring them to their proper function.
+}
+:14FF
+    PAUSE
+:1500
+    {
+"Perhaps we should inquire with the people at the @Olympus settlement.&
+}
+:1549
+    ELSE
+:154A
+    {"Canal barges are quite slow, however. I suspect that the Martians had some other form of transportation for themselves. Perhaps it was related to the buildings with the @tubes in them.&
+}
+:1605
+    ENDIF
+:1606
+    JUMP 0x03ed
+    KEYWORDS tube
+    ANSWER
+:1611
+    {"There are buildings near each of the Martian cities which seem nearly identical. Each has four large tubes protruding up from the floor. Our guess is that they were a second transportation system used by the Martians.
+}
+:16EC
+    PAUSE
+:16ED
+    {
+"The canal barges }
+:1700
+    IF [N8(0x76) N8(0x06) FLAG ]
+:1707
+    {are}
+:170A
+    ELSE
+:170B
+    {seemed to be}
+:1717
+    ENDIF
+:1718
+    { capable of carrying heavy loads, but not quickly.
+}
+:174B
+    PAUSE
+:174C
+    {
+He searches through his pockets and retrieves a scrap of paper.
+"The tube buildings are east of @Argyre, south of @Hellas on the east side, northeast of @Elysium, and south of @Olympus. The ruins in the @Deuteronilus Mensae don't have one.&
+}
+:183E
+    JUMP 0x03ed
+    KEYWORDS sign,vouc,note
+    ANSWER
+:1853
+    IF [N8(0xeb) N8(0x03) FLAG ]
+:185A
+    {"I have signed a voucher for you once, $P. Wasn't that sufficient?&
+}
+:189E
+    JUMP 0x03ed
+:18A3
+    ENDIF
+:18A4
+    DECLARE [0x03, 0xb2] = [N8(0x97) N8(0x00) OBJINPARTY ]
+:18AE
+    IF [0x03 B2 N16(0x8001) == ]
+:18B6
+    {"You don't have anything for me to sign. Did you leave it somewhere?&
+}
+:18FC
+    ELSE
+:18FD
+    {He takes the voucher from you and examines it.
+}
+:192C
+    PAUSE
+:192D
+    {
+"Of course, I should have known. Segal can be so paranoid at times.&
+
+}
+:1974
+    PAUSE
+:1975
+    {He signs the paper and hands it back to you.
+"There you are, my friend.&
+}
+:19BE
+    SET_FLAG [N8(0xeb) ], [N8(0x03) ]
+:19C5
+    JUMP 0x2045
+:19CA
+    ENDIF
+:19CB
+    JUMP 0x03ed
+    KEYWORDS join
+    ANSWER
+:19D6
+    DECLARE [0x09, 0xb2] = [N8(0xeb) JOIN ]
+:19DE
+    IF [0x09 B2 N8(0x03) == ]
+:19E5
+    {He looks at you cock-eyed and says,
+"I have already agreed to accompany you, $P.&
+}
+:1A37
+    JUMP 0x03ed
+:1A3C
+    ENDIF
+:1A3D
+    IF [0x09 B2 N8(0x00) == ]
+:1A44
+    {"I would be honored to join you in your adventures!&
+}
+:1A79
+    JUMP 0x03ed
+:1A7E
+    ENDIF
+:1A7F
+    IF [0x09 B2 N8(0x02) == ]
+:1A86
+    {"There seems to be an adequate number of people in your group already.&
+}
+:1ACE
+    ENDIF
+:1ACF
+    JUMP 0x03ed
+    KEYWORDS wait
+    ANSWER
+:1ADA
+    {"Wait? Wait for what?&
+}
+:1AF1
+    JUMP 0x03ed
+    KEYWORDS leav
+    ANSWER
+:1AFC
+    {"We can leave whenever you like.&
+}
+:1B1E
+    JUMP 0x03ed
+    KEYWORDS wher
+    ANSWER
+:1B29
+    {"Sorry, I'm not sure. Perhaps if you used a sextant...&
+}
+:1B61
+    JUMP 0x03ed
+    KEYWORDS bye
+    ANSWER
+:1B6B
+    {"Certainly, $P. Just let me know if you wish to converse further.&
+}
+:1BAE
+    BYE
+:1BAF
+    KEYWORDS *
+    ANSWER
+:1BB2
+    {He shrugs casually and says,
+"I don't know about that, $P.&
+}
+:1BEE
+    JUMP 0x03ed
+    END_ANSWER
+:1BF3
+    BYE
+:1BF4
+    IF [N8(0x19) NPCNEARBY ]
+:1BF9
+    {
+"Wouldn't you say so, Duprey?&
+}
+:1C19
+    PAUSE
+:1C1A
+    {
+}
+:1C1B
+    PORTRAIT [N8(0x19) ]
+:1C1F
+    {
+Duprey looks at you and says,
+"Yes, indeed. Quite a match for the }
+:1C62
+    JUMP 0x1e1c
+:1C67
+    ELSE
+:1C68
+    {
+"I'm certain that we have met before.&
+}
+:1C90
+    ENDIF
+:1C91
+    {
+}
+:1C92
+    PAUSE
+:1C93
+    {"Nevertheless, I owe you my life. Please, allow me to accompany you on your explorations. I've been many places on the planet, and my knowledge might prove beneficial.&
+
+He gathers his gear and readies himself to follow you.
+}
+:1D74
+    DECLARE [0x09, 0xb2] = [N8(0xeb) JOIN ]
+:1D7C
+    IF [0x09 B2 N8(0x02) == ]
+:1D83
+    {
+}
+:1D84
+    PAUSE
+:1D85
+    {He pauses after seeing the size of your party.
+
+}
+:1DB5
+    PAUSE
+:1DB6
+    {"I would join you in your adventures, but I can see that my help is not required at this time.&
+}
+:1E16
+    ENDIF
+:1E17
+    JUMP 0x03ed
+:1E1C
+    IF [0x10 B2 ]
+:1E20
+    {pretty schoolmarm out in Wichita.&
+}
+:1E43
+    ELSE
+:1E44
+    {bartender of the Lucky Lady Saloon in Kansas City.&
+}
+:1E78
+    ENDIF
+:1E79
+    PAUSE
+:1E7A
+    {
+}
+:1E7B
+    PORTRAIT [N8(0xeb) ]
+:1E7F
+    {Sherman glares at his companion.
+"That's not what I meant!
+
+}
+:1EBB
+    PAUSE
+:1EBC
+    {"Nevertheless, I owe you my life. Please, allow me to accompany you on your explorations. I've been many places on the planet, and my knowledge might prove beneficial.&
+
+He gathers his gear and readies himself to follow you.
+}
+:1F9D
+    DECLARE [0x09, 0xb2] = [N8(0xeb) JOIN ]
+:1FA5
+    IF [0x09 B2 N8(0x02) == ]
+:1FAC
+    {
+}
+:1FAD
+    PAUSE
+:1FAE
+    {He pauses after seeing the size of your party.
+
+}
+:1FDE
+    PAUSE
+:1FDF
+    {"I would join you in your adventures, but I can see that my help is not required at this time.&
+}
+:203F
+    ENDIF
+:2040
+    JUMP 0x03ed
+:2045
+    IF [N8(0x1a) N8(0x03) FLAG N8(0x00) == ]
+:204F
+    {"You should get Yellin to sign this voucher as well. I'm sure Segal holds him in his trust.&
+}
+:20AC
+    ENDIF
+:20AD
+    JUMP 0x03ed
+:20B2
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:20BA
+    IF [N8(0xeb) NPCNEARBY N8(0x00) == ]
+:20C2
+    {You hear Sherman yell, }
+:20D9
+    ENDIF
+:20DA
+    SET_FLAG [N8(0xeb) ], [N8(0x02) ]
+:20E1
+    {"I can see that my services are no longer required. This lady should know as much, or more, about Mars than I do.
+
+}
+:2154
+    PAUSE
+:2155
+    {"I will not take any arguments, $P. I must withdraw from the party so that you may continue on with this lovely lady.
+}
+:21CB
+    PAUSE
+:21CC
+    {
+"Besides, I should get back to my companions to see what trouble they've gotten themselves into while I've been away.&
+He smiles and winks, bows, and walks away.
+}
+:226F
+    BYE
+:2270
+    BYE

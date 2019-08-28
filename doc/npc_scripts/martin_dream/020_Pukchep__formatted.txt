@@ -1,0 +1,61 @@
+:0000
+    NPC_ID: npc id: 20, npc name: Pukchep_
+:000A
+    NPC_LOOK: a strange-looking man.
+*
+:0023
+    START CONVERSION
+:0024
+    IF [N8(0xeb) 0x00 FLAG N8(0x00) == ]
+:002D
+    {You recognize the speech of Pukchep, the Gatherer.
+}
+:0060
+    PORTRAIT [N8(0xeb) ]
+:0064
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:006A
+    {
+}
+:006B
+    PAUSE
+:006C
+    {"Greetings once more. I must give you thanks for your sacrifice, soft one.
+}
+:00B7
+    PAUSE
+:00B8
+    {
+"You have done as you have promised, and new life is possible for myself and for all of my podfriends.
+}
+:0120
+    PAUSE
+:0121
+    {
+"Now we must ask you to save us all once again, now that Raxachk has been vanquished.
+
+}
+:0179
+    PAUSE
+:017A
+    {"Once Mr. Carnegie has all three of the precious cannisters, we may leave our old home and go to the homeland of the worms, to learn your ways and your seasons.
+
+}
+:021C
+    PAUSE
+:021D
+    {"I will miss Mars, my home... I shall dream often of this place!&
+}
+:025F
+    BYE
+:0260
+    ELSE
+:0261
+    {"You must take the fuel to Mr. Carnegie with all haste, $P. The ground shakes with more urgency, and we must be away.&
+}
+:02D8
+    BYE
+:02D9
+    ENDIF
+:02DA
+    BYE

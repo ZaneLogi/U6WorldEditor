@@ -1,0 +1,598 @@
+:0000
+    NPC_ID: npc id: 2, npc name: Spector
+:0009
+    NPC_LOOK: a lean, dark-bearded man with kindly eyes.
+*
+:0036
+    START CONVERSION
+:0037
+    IF [N8(0xeb) N8(0x04) FLAG ]
+:003E
+    {"Absolutely not, $P. You must do the rewiring yourself.&
+He glares at you and hands you the tools.
+}
+:00A1
+    PAUSE
+:00A2
+    {
+"I'm not stupid, I'm not expendable, and I'm not going.&
+He steps back and crosses his arms, tapping his foot in annoyance.
+}
+:011F
+    BYE
+:0120
+    ENDIF
+:0121
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:0128
+    {"Oh dear, $P! The phlogistonite must have been @stolen!&
+}
+:0161
+    JUMP 0x0669
+:0166
+    ENDIF
+:0167
+    IF [N8(0xeb) N8(0x02) FLAG ]
+:016E
+    JUMP 0x0311
+:0173
+    ENDIF
+:0174
+    IF [N8(0x46) N8(0x03) FLAG ]
+:017B
+    {"These tremors indicate that Raxachk's threats were not idle boasts.
+}
+:01C0
+    PAUSE
+:01C1
+    {
+"This must be why the Mariner and Viking probes found no sign of Martian civilization: the entire surface of the planet will be reshaped by the middle of next century, and it is certainly no place to remain now.
+}
+:0296
+    PAUSE
+:0297
+    {
+"We must get the phlogistonite back to Carnegie and leave as quickly as possible!&
+}
+:02EB
+    BYE
+:02EC
+    ENDIF
+:02ED
+    IF [N8(0xeb) 0x00 FLAG N8(0x00) == ]
+:02F6
+    PORTRAIT [N8(0xeb) ]
+:02FA
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0300
+    ENDIF
+:0301
+    {"Yes, $P?&
+}
+:030C
+    JUMP 0x0669
+:0311
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x02) ]
+:0318
+    IF [N8(0xeb) N8(0x03) FLAG ]
+:031F
+    {"You really are a glutton for punishment. If you use rubber gloves, as I believe I already told you, you would not get shocked.&
+}
+:03A0
+    JUMP 0x03ef
+:03A5
+    ELSE
+:03A6
+    {"If you use rubber gloves, you won't get shocked so badly.&
+}
+:03E2
+    SET_FLAG [N8(0xeb) ], [N8(0x03) ]
+:03E9
+    JUMP 0x03ef
+:03EE
+    ENDIF
+:03EF
+    IF [N8(0x02) N8(0x26) OBJCOUNT N16(0x8001) == ]
+:03FA
+    JUMP 0x054a
+:03FF
+    ELSE
+:0400
+    PAUSE
+:0401
+    {
+"Here, $P. Use this pair of mine.&
+}
+:0425
+    JUMP 0x042b
+:042A
+    ENDIF
+:042B
+    DECLARE [0x1d, 0xb2] = [N8(0x01) ]
+:0432
+    NEW npc [N8(0x01) ], obj [N8(0x26) ], quality [N8(0x00) ], quantity [N8(0x01) ]
+:043F
+    IF [0x1d B2 ]
+:0443
+    DECLARE [0x1d, 0xb2] = [N8(0x00) ]
+:044A
+    PAUSE
+:044B
+    {
+"Well, you could take them if you hadn't loaded yourself down so. Put something down and I'll give you these to protect you.&
+}
+:04CA
+    BYE
+:04CB
+    ELSE
+:04CC
+    PAUSE
+:04CD
+    {
+He hands you a pair of rubber gloves.
+"Now use these and try it again!&
+He shakes his head, frustrated by your behaviour.
+}
+:0548
+    BYE
+:0549
+    ENDIF
+:054A
+    DECLARE [0x02, 0xb2] = [N8(0x26) N8(0x00) OBJINPARTY ]
+:0554
+    IF [0x02 B2 N16(0x8001) != ]
+:055C
+    SET_$Y [0x02 B2 ]
+:0560
+    PAUSE
+:0561
+    {
+}
+:0562
+    PORTRAIT [0x02 B2 ]
+:0566
+    {"I have some, Dr. Spector. They can use mine.&
+}
+:0595
+    PAUSE
+:0596
+    {
+}
+:0597
+    PORTRAIT [N8(0xeb) ]
+:059B
+    {"Thank you, $Y. Now, $P, take those and let's get this done.&
+}
+:05D9
+    BYE
+:05DA
+    ELSE
+:05DB
+    {"We'll probably have to go back to Dr. Tesla to see if he has a pair. I seem to have left mine somewhere.&
+}
+:0646
+    PAUSE
+:0647
+    {
+He looks slightly embarrassed.
+}
+:0667
+    BYE
+:0668
+    ENDIF
+:0669
+    {
+}
+:066A
+    ASK
+    KEYWORDS name
+    ANSWER
+:0671
+    {"I am Dr. Johann Spector, of course.&
+}
+:0697
+    IF [N8(0x10) N8(0x05) FLAG ]
+:069E
+    {"Are you feeling well, $P? You know, oxygen deprivation can cause a temporary loss of memory...&
+}
+:06FF
+    ENDIF
+:0700
+    JUMP 0x0669
+    KEYWORDS spec,doct
+    ANSWER
+:0710
+    {"No, please, just call me Johann.&
+}
+:0733
+    JUMP 0x0669
+    KEYWORDS joha
+    ANSWER
+:073E
+    {"Yes, $P, how may I help you?&
+}
+:075D
+    JUMP 0x0669
+    KEYWORDS job
+    ANSWER
+:0767
+    {He grins.
+"To keep you out of trouble, $P.
+}
+:0792
+    PAUSE
+:0793
+    {
+"No, really, for now, I'll be content to be your assistant in your explorations.&
+}
+:07E6
+    JUMP 0x0669
+    KEYWORDS $P,avat
+    ANSWER
+:07F4
+    {"Yes, that's how we refer to you. Are you sure you're feeling well?&
+}
+:0839
+    JUMP 0x0669
+    KEYWORDS freu,sigm
+    ANSWER
+:0849
+    {"Definitely an interesting man. Highly intelligent. He has yet to do most of his influential studies, you know.&
+}
+:08BA
+    JUMP 0x0669
+    KEYWORDS bloo,c.l.
+    ANSWER
+:08CA
+    {"Actually, I don't know too much about his work. I know he worked... sorry, works... primarily with the use of oxygenated air on patients.&
+}
+:0956
+    JUMP 0x0669
+    KEYWORDS bly,nell,eliz,coch
+    ANSWER
+:096F
+    {"A fascinating woman. Did you know she travelled around the world alone?
+}
+:09B8
+    PAUSE
+:09B9
+    {
+"And made it in less than the 80 days hypothesized in Jules Verne's book. She's pretty unique in this day and age.&
+}
+:0A2E
+    JUMP 0x0669
+    KEYWORDS garr,dall
+    ANSWER
+:0A3E
+    {"I'm afraid I don't know much about Mr. Garrett. He certainly seems like a classic cowboy, doesn't he?
+}
+:0AA5
+    PAUSE
+:0AA6
+    {
+"I'm sure he'll be useful to have along.&
+}
+:0AD1
+    JUMP 0x0669
+    KEYWORDS tesl,niko
+    ANSWER
+:0AE1
+    {"Tesla is a first-class scientist. Definitely unorthodox in his approach, but he achieved some miraculous breakthroughs in his career with electricity and magnetism.
+}
+:0B87
+    PAUSE
+:0B88
+    {
+"I'm glad he's on our side!&
+He grins.
+}
+:0BB0
+    JUMP 0x0669
+    KEYWORDS lowe,perc
+    ANSWER
+:0BC0
+    {"The reports of Lowell's odd behaviour have me worried, $P. He's one of the premier scientists of the day.
+}
+:0C2B
+    PAUSE
+:0C2C
+    {
+"I do hope nothing serious has gone wrong.&
+}
+:0C59
+    JUMP 0x0669
+    KEYWORDS carn
+    ANSWER
+:0C64
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:0C6B
+    {"He must be told about the theft immediately! If only we had a @clue about the identity of the thief...&
+}
+:0CD4
+    ELSE
+:0CD5
+    {"He was, or rather is, an industrialist. Of the various men who made fortunes during the industrial revolution, he was the one who first turned to philanthropy.&
+}
+:0D77
+    ENDIF
+:0D78
+    JUMP 0x0669
+    KEYWORDS mars
+    ANSWER
+:0D83
+    {"The hypotheses of the Victorian age don't seem to correlate with our modern discoveries about the red planet, $P.
+}
+:0DF6
+    PAUSE
+:0DF7
+    {
+"We'll have to see if our science or their intelligent guesswork is more reliable.&
+}
+:0E4C
+    IF [N8(0x10) N8(0x05) FLAG N8(0x00) == ]
+:0E56
+    {He grins and gestures you closer.
+}
+:0E78
+    PAUSE
+:0E79
+    {
+"Considering your history of travels to worlds with fantastic creatures and scientific mysteries, would you care to bet on the scientific reality of this particular Mars?
+}
+:0F25
+    PAUSE
+:0F26
+    {
+"I thought not.&
+He chuckles.
+}
+:0F45
+    ENDIF
+:0F46
+    JUMP 0x0669
+    KEYWORDS game
+    ANSWER
+:0F51
+    {"Sorry, $P. You'd know a lot more about that than I would.&
+}
+:0F8D
+    JUMP 0x0669
+    KEYWORDS sava,empi
+    ANSWER
+:0F9D
+    {"Yes, indeed, a grand adventure in it's own way. I'm certainly glad you were there to help me with that one.
+}
+:100A
+    PAUSE
+:100B
+    {
+"I don't know where I would have been without you.&
+}
+:1040
+    PAUSE
+:1041
+    {
+}
+:1042
+    IF [0x10 B2 N8(0x00) == ]
+:1049
+    {"I am sorry you had to leave the princess behind. Maybe next time, lad.&
+}
+:1092
+    ENDIF
+:1093
+    {He sighs and shakes his head.
+}
+:10B1
+    JUMP 0x0669
+    KEYWORDS worl,ulti
+    ANSWER
+:10C1
+    {"As a name for our adventures? Yes, perhaps. Maybe I could write out a journal, or present articles to the society. Yes, yes, possibilities,...&
+}
+:1152
+    JUMP 0x0669
+    KEYWORDS brit,lord
+    ANSWER
+:1162
+    {"Isn't that something from one of your other travels? I'm sure you mentioned it, yes?
+}
+:11B8
+    PAUSE
+:11B9
+    {
+"Not that I would know anything about it. The king sounds like a unique man, just and wise.
+}
+:1216
+    PAUSE
+:1217
+    {
+"Of course, appearances can be deceiving. But then, I don't know the man.&
+}
+:1263
+    JUMP 0x0669
+    KEYWORDS glov
+    ANSWER
+:126E
+    IF [N8(0xeb) N8(0x03) FLAG ]
+:1275
+    {"Yes, they are indispensable when working with high voltage electricity.&
+}
+:12BF
+    JUMP 0x03ef
+:12C4
+    ENDIF
+:12C5
+    {"I tend to wear rubber gloves because I work with electricity and chemicals so often. They aren't as warm as some hand coverings, but they'll ward off a nasty shock or chemical burn.&
+}
+:137D
+    JUMP 0x0669
+    KEYWORDS stol
+    ANSWER
+:1388
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:138F
+    {"Perhaps we should return with this news to Mr. @Carnegie and see what he thinks.&
+}
+:13E2
+    ELSE
+:13E3
+    {"Could you state that a different way?&
+}
+:140B
+    ENDIF
+:140C
+    JUMP 0x0669
+    KEYWORDS clue
+    ANSWER
+:1417
+    IF [N8(0xeb) N8(0x06) FLAG ]
+:141E
+    {Spector spends a moment in thought.
+}
+:1442
+    PAUSE
+:1443
+    {
+"Most modern forensic techniques haven't been invented yet, but perhaps this metal band could provide some information nonetheless.&
+}
+:14C9
+    ELSE
+:14CA
+    {Spector grins.
+"I'm afraid I'm as clueless as yourself, $P.&
+}
+:1507
+    ENDIF
+:1508
+    JUMP 0x0669
+    KEYWORDS join,acco,acom
+    ANSWER
+:151D
+    IF [N8(0xeb) INPARTY ]
+:1522
+    {"I'm right with you, $P. Are you feeling OK?&
+}
+:1550
+    JUMP 0x0669
+:1555
+    ELSE
+:1556
+    {"Of course, $P. I was hoping you would ask.&
+}
+:1583
+    DECLARE [0x09, 0xb2] = [N8(0xeb) JOIN ]
+:158B
+    JUMP 0x0669
+:1590
+    ENDIF
+    KEYWORDS wait
+    ANSWER
+:1597
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:159F
+    IF [0x00 B2 N8(0x02) == ]
+:15A6
+    {"I'm not going anywhere anyway, $P. Unless you ask me to come with you. And you should. Ask me, that is.&
+}
+:1610
+    PAUSE
+:1611
+    {
+He raises an eyebrow and taps his foot impatiently.
+}
+:1646
+    JUMP 0x0669
+:164B
+    ENDIF
+:164C
+    DECLARE [0x09, 0xb2] = [N8(0xeb) JOIN ]
+:1654
+    {"I'd rather not separate, $P. We can certainly accomplish our goals faster if we stay together.&
+}
+:16B5
+    JUMP 0x0669
+    KEYWORDS leav
+    ANSWER
+:16C0
+    IF [N8(0xeb) INPARTY N8(0x00) == ]
+:16C8
+    {"No, you needn't worry about me abandoning you after you had asked me to @join.&
+}
+:1719
+    JUMP 0x0669
+:171E
+    ENDIF
+:171F
+    {He shakes his head firmly. "No, $P. I realize that you are a seasoned warrior, and an intelligent person,
+}
+:1789
+    PAUSE
+:178A
+    {
+but you are not a trained scientist, and you are in a very unusual situation.&
+}
+:17DA
+    PAUSE
+:17DB
+    {
+He smiles.
+"Besides, you must allow me my delusion of being needed.
+}
+:1820
+    PAUSE
+:1821
+    {
+"It's important to my self-image. Just ask Dr. Freud.&
+}
+:1859
+    JUMP 0x0669
+    KEYWORDS self
+    ANSWER
+:1864
+    {"As a scientific man, I am eminently qualified to witness and document these current events.
+
+}
+:18C2
+    PAUSE
+:18C3
+    {"My objective judgment and excellent capacity for reasoning shall be indispensable, my friend.&
+}
+:1923
+    JUMP 0x0669
+    KEYWORDS chea,help
+    ANSWER
+:1933
+    {"Nonsense. I'm sure we'll get through this on our own if we just keep our heads.&
+}
+:1985
+    JUMP 0x0669
+    KEYWORDS spam
+    ANSWER
+:1990
+    {"Never liked it myself. I guess canned rations are popular with military logistics officers and fantasy characters, but not with troops or scientists.&
+
+Spector grins at you.
+}
+:1A3F
+    JUMP 0x0669
+    KEYWORDS bye
+    ANSWER
+:1A49
+    CLEAR_FLAG [N8(0xeb) ], [N8(0x06) ]
+:1A50
+    {"Yes, yes. We'll talk later.&
+}
+:1A6E
+    BYE
+:1A6F
+    KEYWORDS *
+    ANSWER
+:1A72
+    {"Could you state that a different way?&
+}
+:1A9A
+    JUMP 0x0669
+    END_ANSWER
+:1A9F
+    BYE

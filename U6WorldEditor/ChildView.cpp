@@ -121,6 +121,12 @@ CChildView::CChildView()
 CChildView::~CChildView()
 {
     DrawDibClose(gDD);
+
+    if (ghDosBox)
+    {
+        CloseHandle(ghDosBox);
+        ghDosBox = nullptr;
+    }
 }
 
 
@@ -140,6 +146,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
     ON_COMMAND(ID_HACK_CONVERSE, &CChildView::OnHackConverse)
     ON_COMMAND(ID_HACK_TILEMANAGER, &CChildView::OnHackTilemanager)
     ON_COMMAND(ID_HACK_HOOKDOSBOX, &CChildView::OnHackHookdosbox)
+    ON_UPDATE_COMMAND_UI(ID_HACK_HOOKDOSBOX, &CChildView::OnUpdateHackHookdosbox)
 END_MESSAGE_MAP()
 
 
@@ -191,6 +198,40 @@ void CChildView::Update()
     auto bitmap_info = gScreen.bitmap_info();
     int width = bitmap_info->bmiHeader.biWidth;
     int height = bitmap_info->bmiHeader.biHeight;
+
+    {
+        //
+        // dosbox hack
+        //
+        if (ghDosBox != nullptr && gPosPtr != nullptr)
+        {
+            std::vector<uint8_t> buffer;
+            buffer.resize(3 * 256);
+            SIZE_T bytes_read;
+            ReadProcessMemory(ghDosBox, gPosPtr, buffer.data(), buffer.size(), &bytes_read);
+            if (bytes_read == buffer.size())
+            {
+                auto p = buffer.data();
+                for (int i = 0; i < 256; i++)
+                {
+                    int b1 = *p;
+                    int b2 = *(p + 1);
+                    int b3 = *(p + 2);
+                    int x = (((b2 & 0x03) << 8) | b1);                  // 10bits = 0 - 1023
+                    int y = (((b3 & 0x0f) << 6) | ((b2 & 0xfc) >> 2));  // 10bits = 0 - 1023
+                    int z = ((b3 & 0xf0) >> 4);                         // 4bits = 0 - 15
+                    if (z >= 0 && z <= 5)
+                    {
+                        gMapManager.obj_manager.set_actor_position(i, p);
+                    }
+                    p += 3;
+                }
+
+                auto main_actor = gMapManager.obj_manager.get_actor(1);
+                MoveToTile(main_actor.x, main_actor.y, main_actor.z);
+            }
+        }
+    }
 
     gMapManager.update(gScreen);
 
@@ -913,6 +954,12 @@ void CChildView::OnHackHookdosbox()
     std::vector<uint8_t> buffer;
     SIZE_T bytes_read;
 
+    if (ghDosBox != nullptr)
+    {
+        // close the handle which opend
+        goto exit;
+    }
+
     auto dosbox_pid = FindProcessId("dosbox.exe");
     if (dosbox_pid == 0)
     {
@@ -976,12 +1023,23 @@ void CChildView::OnHackHookdosbox()
     auto p = buffer.data();
     for (int i = 0; i < 256; i++)
     {
-        gMapManager.obj_manager.set_actor_position(i, p);
+        int b1 = *p;
+        int b2 = *(p + 1);
+        int b3 = *(p + 2);
+        int x = (((b2 & 0x03) << 8) | b1);                  // 10bits = 0 - 1023
+        int y = (((b3 & 0x0f) << 6) | ((b2 & 0xfc) >> 2));  // 10bits = 0 - 1023
+        int z = ((b3 & 0xf0) >> 4);                         // 4bits = 0 - 15
+        if (z >= 0 && z <= 5)
+        {
+            gMapManager.obj_manager.set_actor_position(i, p);
+        }
         p += 3;
     }
 
     main_actor = gMapManager.obj_manager.get_actor(1);
     MoveToTile(main_actor.x, main_actor.y, main_actor.z);
+
+    return;
 
 exit:
     if (ghDosBox != nullptr)
@@ -989,4 +1047,10 @@ exit:
         CloseHandle(ghDosBox);
     }
     ghDosBox = nullptr;
+}
+
+
+void CChildView::OnUpdateHackHookdosbox(CCmdUI *pCmdUI)
+{
+    pCmdUI->SetCheck(ghDosBox != nullptr);
 }

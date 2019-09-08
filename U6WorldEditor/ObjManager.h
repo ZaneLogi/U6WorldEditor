@@ -128,6 +128,7 @@ public:
     void draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z);
 
     Actor get_actor(int index) const { return m_actors[index]; }
+    void set_actor_position(int index, const uint8_t* data);
     Obj*  get_obj(uint16_t xtile, uint16_t ytile, uint8_t z);
 
     bool move_obj_to(const Obj& obj, uint16_t xtile, uint16_t ytile, uint8_t z);
@@ -153,7 +154,7 @@ private:
     std::list<Obj>          m_dungeon_objs[5];
     std::vector<uint8_t>    m_objlist;
     Actor                   m_actors[256];
-    int                     m_party_member_count;
+    std::vector<Actor*>     m_party_members;
 
     int                     m_obj_z_order[1536]; // this is used for the big flat object drawing, especially at Ultima6 (52,172,1) and the mat in SE
 

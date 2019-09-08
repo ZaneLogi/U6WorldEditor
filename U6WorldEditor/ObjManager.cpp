@@ -148,6 +148,17 @@ void ObjManager::draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile
     }
 }
 
+void ObjManager::set_actor_position(int index, const uint8_t* data)
+{
+    auto actor = &m_actors[index];
+    int b1 = *data++;
+    int b2 = *data++;
+    int b3 = *data++;
+    actor->x = (((b2 & 0x03) << 8) | b1);                  // 10bits = 0 - 1023
+    actor->y = (((b3 & 0x0f) << 6) | ((b2 & 0xfc) >> 2));  // 10bits = 0 - 1023
+    actor->z = ((b3 & 0xf0) >> 4);                         // 4bits = 0 - 15
+}
+
 Obj*  ObjManager::get_obj(uint16_t xtile, uint16_t ytile, uint8_t z)
 {
     // check actors first
@@ -669,13 +680,15 @@ bool ObjManager::load_objlist(Configuration& config)
     }
 
     // party
-    m_party_member_count = *(m_objlist.data() + 0xff0);
+    auto party_member_count = *(m_objlist.data() + 0xff0);
+    m_party_members.resize(party_member_count);
     auto member_name = m_objlist.data() + 0xf00;
     auto member_index = m_objlist.data() + 0xfe0;
-    for (int i = 0; i < m_party_member_count; i++)
+    for (int i = 0; i < party_member_count; i++)
     {
         int actor_index = *(member_index + i);
         m_actors[actor_index].name = std::string((char*)(member_name + i * 14));
+        m_party_members[i] = &m_actors[actor_index];
     }
 
     return true;

@@ -60,5 +60,6 @@ private:
 
 public:
     afx_msg void OnHackTilemanager();
+    afx_msg void OnHackHookdosbox();
 };
 

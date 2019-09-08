@@ -181,6 +181,7 @@ BEGIN
     BEGIN
         MENUITEM "&Converse",                   ID_HACK_CONVERSE
         MENUITEM "&Tile Manager",               ID_HACK_TILEMANAGER
+        MENUITEM "Hook &DosBox",                ID_HACK_HOOKDOSBOX
     END
 END
 

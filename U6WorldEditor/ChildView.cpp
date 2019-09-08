@@ -48,6 +48,11 @@ DibSection      gScreen;
 MapManager      gMapManager;
 Obj*            gSelectedObj = nullptr;
 
+HANDLE          ghDosBox = nullptr;
+const uint8_t*  gNamePtr = nullptr;
+const uint8_t*  gPosPtr = nullptr;
+
+
 inline int normalize(int value, int boundary)
 {
     value %= boundary;
@@ -134,6 +139,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
     ON_COMMAND_RANGE(ID_VIEW_SURFACE, ID_VIEW_DUNGEON5, CChildView::OnViewZ)
     ON_COMMAND(ID_HACK_CONVERSE, &CChildView::OnHackConverse)
     ON_COMMAND(ID_HACK_TILEMANAGER, &CChildView::OnHackTilemanager)
+    ON_COMMAND(ID_HACK_HOOKDOSBOX, &CChildView::OnHackHookdosbox)
 END_MESSAGE_MAP()
 
 
@@ -714,4 +720,273 @@ void CChildView::OnHackTilemanager()
 {
     CTileManagerDlg dlg(&gMapManager);
     dlg.DoModal();
+}
+
+
+
+
+
+
+
+
+#include <psapi.h>
+
+DWORD FindProcessId(const std::string& process_name)
+{
+    int nCurIndex = 0;
+    DWORD aProcesses[1024];
+    DWORD cbNeeded;
+
+    // Get the list of process identifiers.
+    if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded))
+    {
+        return 0;
+    }
+
+    // Calculate how many process identifiers were returned.
+    DWORD cProcesses = cbNeeded / sizeof(DWORD);
+
+    DWORD found_pid = 0;
+    for (DWORD pi = 0; pi < cProcesses && found_pid == 0; pi++)
+    {
+        HANDLE hProcess;
+
+        auto pid = aProcesses[pi];
+        if (pid == 0)
+            continue;
+
+        // Get a handle to the process.
+        hProcess = OpenProcess(PROCESS_QUERY_INFORMATION |
+            PROCESS_VM_READ,
+            FALSE, pid);
+        if (NULL == hProcess)
+        {
+            continue;
+        }
+
+        char path[MAX_PATH];
+        DWORD path_length = MAX_PATH;
+        if (QueryFullProcessImageNameA(hProcess, 0, path, &path_length) && path_length >= process_name.length())
+        {
+            if (0 == _stricmp(process_name.c_str(), &path[path_length - process_name.length()]))
+            {
+                found_pid = pid;
+            }
+        }
+
+        // Release the handle to the process.
+        CloseHandle(hProcess);
+    }
+
+    return found_pid;
+}
+
+std::vector<uint8_t> get_pattern(const std::string& data, const std::string& type)
+{
+    char* endptr;
+    std::vector<uint8_t> pattern;
+    if (type == "int8")
+    {
+        int8_t value = (int8_t)strtol(data.c_str(), &endptr, 0);
+        pattern.push_back(*(uint8_t*)&value);
+    }
+    else if (type == "uint8")
+    {
+        uint8_t value = (uint8_t)strtoul(data.c_str(), &endptr, 0);
+        pattern.push_back(value);
+    }
+    else if (type == "int16")
+    {
+        int16_t value = (int16_t)strtol(data.c_str(), &endptr, 0);
+        pattern.push_back(((uint8_t*)&value)[0]);
+        pattern.push_back(((uint8_t*)&value)[1]);
+    }
+    else if (type == "uint16")
+    {
+        uint16_t value = (uint16_t)strtoul(data.c_str(), &endptr, 0);
+        pattern.push_back(((uint8_t*)&value)[0]);
+        pattern.push_back(((uint8_t*)&value)[1]);
+    }
+    else if (type == "int32")
+    {
+        int32_t value = (int32_t)strtol(data.c_str(), &endptr, 0);
+        pattern.push_back(((uint8_t*)&value)[0]);
+        pattern.push_back(((uint8_t*)&value)[1]);
+        pattern.push_back(((uint8_t*)&value)[2]);
+        pattern.push_back(((uint8_t*)&value)[3]);
+    }
+    else if (type == "uint32")
+    {
+        uint32_t value = (uint32_t)strtoul(data.c_str(), &endptr, 0);
+        pattern.push_back(((uint8_t*)&value)[0]);
+        pattern.push_back(((uint8_t*)&value)[1]);
+        pattern.push_back(((uint8_t*)&value)[2]);
+        pattern.push_back(((uint8_t*)&value)[3]);
+    }
+    else if (type == "data")
+    {
+        for (int i = 0; i < data.length(); i += 2)
+        {
+            uint8_t value = (uint8_t)strtoul(data.substr(i, 2).c_str(), &endptr, 16);
+            pattern.push_back(value);
+        }
+    }
+    else
+    {
+        // treat it as string
+        std::for_each(data.begin(), data.end(), [&pattern](auto c) { pattern.push_back(*(uint8_t*)&c); });
+    }
+
+    return pattern;
+}
+
+template <class InIter1, class InIter2>
+std::vector<uint8_t*> find_all(uint8_t *base, InIter1 buf_start, InIter1 buf_end, InIter2 pat_start, InIter2 pat_end)
+{
+    std::vector<uint8_t*> out;
+
+    for (InIter1 pos = buf_start;
+        buf_end != (pos = std::search(pos, buf_end, pat_start, pat_end));
+        ++pos)
+    {
+        out.push_back(base + (pos - buf_start));
+    }
+
+    return out;
+}
+
+std::vector<uint8_t*> InitSearch(HANDLE hProcess, const std::string& init_value, const std::string& type)
+{
+    std::vector<uint8_t*> ret;
+
+    auto pattern = get_pattern(init_value, type);
+
+    SYSTEM_INFO sys_info;
+    GetSystemInfo(&sys_info);
+
+    auto proc_cur_address = (uint8_t*)sys_info.lpMinimumApplicationAddress;
+    auto proc_max_address = (uint8_t*)sys_info.lpMaximumApplicationAddress;
+
+    std::vector<uint8_t> buffer;
+
+    while (proc_cur_address < proc_max_address)
+    {
+        MEMORY_BASIC_INFORMATION mbi;
+        SIZE_T size = VirtualQueryEx(hProcess, proc_cur_address, &mbi, sizeof(mbi));
+        if (size == 0)
+        {
+            break;
+        }
+
+        if (mbi.Protect == PAGE_READWRITE &&
+            mbi.State == MEM_COMMIT &&
+            (mbi.Type == MEM_MAPPED || mbi.Type == MEM_PRIVATE))
+        {
+            SIZE_T bytes_read;
+            buffer.resize(mbi.RegionSize);
+            ReadProcessMemory(hProcess, proc_cur_address, buffer.data(), mbi.RegionSize, &bytes_read);
+            buffer.resize(bytes_read);
+
+            auto results = find_all(proc_cur_address, buffer.begin(), buffer.end(), pattern.begin(), pattern.end());
+            uint32_t count = (uint32_t)results.size();
+            if (count > 0)
+            {
+                std::for_each(results.begin(), results.end(), [&ret](auto d) {
+                    ret.push_back(d);
+                });
+            }
+        }
+
+        proc_cur_address += mbi.RegionSize;
+    }
+
+    return ret;
+}
+
+
+
+
+void CChildView::OnHackHookdosbox()
+{
+    Actor main_actor;
+    std::vector<PBYTE> r;
+    std::vector<uint8_t> buffer;
+    SIZE_T bytes_read;
+
+    auto dosbox_pid = FindProcessId("dosbox.exe");
+    if (dosbox_pid == 0)
+    {
+        AfxMessageBox(_T("Can't find dosbox.exe is running!!!"), MB_OK);
+        goto exit;
+    }
+
+    DWORD dwDesiredAccess = PROCESS_VM_READ | PROCESS_QUERY_INFORMATION;
+    ghDosBox = OpenProcess(
+        dwDesiredAccess,
+        false,
+        dosbox_pid);
+
+    if (ghDosBox == NULL)
+    {
+        AfxMessageBox(_T("Can't open the process dosbox.exe!!!"), MB_OK);
+        goto exit;
+    }
+
+    main_actor = gMapManager.obj_manager.get_actor(1);
+
+    if (gNamePtr == nullptr)
+    {
+        r = InitSearch(ghDosBox, main_actor.name, "string");
+        if (r.size() == 0)
+        {
+            AfxMessageBox(_T("Can't find the main actor name in the memory!!!"), MB_OK);
+            goto exit;
+        }
+
+        gNamePtr = r[0];
+
+        const uint8_t* name_ptr = (uint8_t*)0x000000000E50D5A4;
+        const uint8_t* pos_ptr = (uint8_t*)0x000000000E50FD84;
+        gPosPtr = r[0] + (pos_ptr - name_ptr);
+    }
+
+    // check if the actor name is correct
+    buffer.resize(16);
+    ReadProcessMemory(ghDosBox, gNamePtr, buffer.data(), buffer.size(), &bytes_read);
+    if (bytes_read != buffer.size())
+    {
+        AfxMessageBox(_T("Can't get the correct name data!!!"), MB_OK);
+        goto exit;
+    }
+    if (main_actor.name != (const char*)buffer.data())
+    {
+        AfxMessageBox(_T("Name is not same!!! data corrupted!!!"), MB_OK);
+        goto exit;
+    }
+
+    buffer.resize(3 * 256);
+    ReadProcessMemory(ghDosBox, gPosPtr, buffer.data(), buffer.size(), &bytes_read);
+    if (bytes_read != buffer.size())
+    {
+        AfxMessageBox(_T("Can't get the correct position data!!!"), MB_OK);
+        goto exit;
+    }
+
+    // we got what we want
+    auto p = buffer.data();
+    for (int i = 0; i < 256; i++)
+    {
+        gMapManager.obj_manager.set_actor_position(i, p);
+        p += 3;
+    }
+
+    main_actor = gMapManager.obj_manager.get_actor(1);
+    MoveToTile(main_actor.x, main_actor.y, main_actor.z);
+
+exit:
+    if (ghDosBox != nullptr)
+    {
+        CloseHandle(ghDosBox);
+    }
+    ghDosBox = nullptr;
 }

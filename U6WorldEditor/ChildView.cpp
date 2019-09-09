@@ -753,7 +753,14 @@ void CChildView::OnHackConverse()
     if (IDC_FIND_NPC == dlg.DoModal() && dlg.m_selected_npc_id != -1)
     {
         auto actor = gMapManager.obj_manager.get_actor(dlg.m_selected_npc_id);
-        MoveToTile(actor.x, actor.y, actor.z);
+        if (actor.z <= 5)
+        {
+            MoveToTile(actor.x, actor.y, actor.z);
+        }
+        else
+        {
+            AfxMessageBox(_T("NPC is not on the map!!!"), MB_OK);
+        }
     }
 }
 

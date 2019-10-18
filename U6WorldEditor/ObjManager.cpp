@@ -510,7 +510,11 @@ void ObjManager::load_superchunk(std::istream& is, std::list<Obj>& objlist)
 {
     objlist.clear();
 
-    int obj_count = is.get() | (is.get() << 8);
+    //int obj_count = is.get() | (is.get() << 8); <= the result is wrong when in the release mode, code optimization issue.
+    int low_part = is.get();
+    int high_part = is.get();
+    int obj_count = low_part | (high_part << 8);
+
     std::vector<Obj*> objrefs(obj_count);
 
     FileObjInfo info;
@@ -746,9 +750,38 @@ void ObjManager::cache_objs_in_superchunks(
         world_tiles = DUNGEON_TILES;
     }
 
+    if (xend <= world_tiles)
+    {
+        if (xstart >= right || xend < left)
+            return; // out of range, no overlap
+    }
+    else
+    {
+        if (xstart >= right)
+        {
+            if (xend - world_tiles < left)
+                return; // out of range, no overlap
+        }
+    }
+
+    if (yend <= world_tiles)
+    {
+        if (ystart >= bottom || yend < top)
+            return; // out of range, no overlap
+    }
+    else
+    {
+        if (ystart >= bottom)
+        {
+            if (yend - world_tiles < top)
+                return; // out of range, no overlap
+        }
+    }
+    /*
     if (xstart >= right || xend < left ||
         ystart >= bottom || yend < top)
         return; // out of range, no overlap
+        */
 
     auto obj_itr = objs.begin();
     auto obj_end = objs.end();

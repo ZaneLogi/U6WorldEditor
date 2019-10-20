@@ -228,7 +228,14 @@ void CChildView::Update()
                 }
 
                 auto main_actor = gMapManager.obj_manager.get_actor(1);
-                MoveToTile(main_actor.x, main_actor.y, main_actor.z);
+                if (main_actor.z == 0)
+                {
+                    MoveToTile(main_actor.x % 1024, main_actor.y % 1024, main_actor.z);
+                }
+                else
+                {
+                    MoveToTile(main_actor.x %256, main_actor.y % 256, main_actor.z);
+                }
             }
         }
     }
@@ -710,13 +717,24 @@ static JUMPTO jmp_to_tbl[] =
     { ID_JUMPTO_SAVAGE_URALI,           996, 338, 0 },
     { ID_JUMPTO_SAVAGE_YOLARU,          587, 323, 0 },
 
-    { ID_JUMPTO_SAVAGE_PLATE_BARRAB,    206, 619, 0 }, // 182, 456, 0 - (0,4)
+    { ID_JUMPTO_SAVAGE_PLATE_BARRAB,    206, 619, 0 }, // 182, 456, 0 - (0,4) in the big plate
     { ID_JUMPTO_SAVAGE_PLATE_DISQUIQUI, 369, 604, 0 }, // 184, 457, 0 - (2,5)
     { ID_JUMPTO_SAVAGE_PLATE_JUKARI,    689, 775, 0 }, // 186, 457, 0 - (4,5)
     { ID_JUMPTO_SAVAGE_PLATE_TICHTICATL,619, 602, 0 }, // 187, 455, 0 - (5,3)
     { ID_JUMPTO_SAVAGE_PLATE_SAKKHRA,   103, 615, 0 }, // 182, 454, 0 - (0,2)
     { ID_JUMPTO_SAVAGE_PLATE_YOLARU,    534, 286, 0 }, // 187, 453, 0 - (5,1)
     { ID_JUMPTO_SAVAGE_PLATE_BARAKO,    376, 173, 0 }, // 183, 452, 0 - (1,0)
+
+    { ID_CITY_ELYSIUM20N114E,           0, 0, 0 }, // 20N 114E
+    { ID_CITY_HELLAS27S77E,             0, 0, 0 }, // 27S 77E
+    { ID_CITY_OLYMPUS10N110W,           707, 500, 0 }, // 10N 110W
+    { ID_CITY_ARGYRE30S107W,            0, 0, 0 }, // 30S 107W
+    { ID_MARTIAN_LANDINGSITE27S146E,    413, 628, 0 },
+    { ID_MARTIAN_EARLIERLANDING28S153W, 597, 636, 0 },
+    { ID_MARTIAN_ARSIAMONS,             658, 565, 0 },
+    { ID_MARTIAN_NOCTIS,                722, 597, 0 },
+    { ID_MARTIAN_COOTER,                795, 563, 0 },
+    { ID_MARTIAN_SYRTISMAJOR10N71E,     0, 0, 0},
 };
 
 void CChildView::OnJumpTo(UINT id)

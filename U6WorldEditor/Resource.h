@@ -60,6 +60,16 @@
 #define ID_JUMPTO_SAVAGE_PLATE_YOLARU   10057
 #define ID_JUMPTO_SAVAGE_PLATE_BARAKO   10058
 #define ID_MARTIAN_CITY                 10070
+#define ID_CITY_ELYSIUM20N114E          10071
+#define ID_CITY_HELLAS27S77E            10072
+#define ID_CITY_OLYMPUS10N110W          10073
+#define ID_CITY_ARGYRE30S107W           10074
+#define ID_MARTIAN_LANDINGSITE27S146E   10080
+#define ID_MARTIAN_EARLIERLANDING28S153W 10081
+#define ID_MARTIAN_ARSIAMONS            10082
+#define ID_MARTIAN_NOCTIS               10083
+#define ID_MARTIAN_COOTER               10084
+#define ID_MARTIAN_SYRTISMAJOR10N71E    10085
 #define ID_JUMPTO_END                   10100
 #define ID_VIEW_SURFACE                 10200
 #define ID_VIEW_DUNGEON1                10201
@@ -72,11 +82,11 @@
 #define ID_HACK_HOOKDOSBOX              32816
 
 // Next default values for new objects
-// 
+//
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        314
-#define _APS_NEXT_COMMAND_VALUE         32817
+#define _APS_NEXT_COMMAND_VALUE         32828
 #define _APS_NEXT_CONTROL_VALUE         1005
 #define _APS_NEXT_SYMED_VALUE           310
 #endif

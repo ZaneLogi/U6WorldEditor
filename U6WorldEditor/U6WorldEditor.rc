@@ -166,7 +166,19 @@ BEGIN
             END
             POPUP "Martian"
             BEGIN
-                MENUITEM "City",                        ID_MARTIAN_CITY
+                POPUP "City"
+                BEGIN
+                    MENUITEM "Elysium 20N 114E",            ID_CITY_ELYSIUM20N114E
+                    MENUITEM "Hellas 27S 77E",              ID_CITY_HELLAS27S77E
+                    MENUITEM "Olympus 10N 110W",            ID_CITY_OLYMPUS10N110W
+                    MENUITEM "Argyre 30S 107W",             ID_CITY_ARGYRE30S107W
+                END
+                MENUITEM "Landing site 27S 146E ",      ID_MARTIAN_LANDINGSITE27S146E
+                MENUITEM "Earlier landing site 28S 153W ", ID_MARTIAN_EARLIERLANDING28S153W
+                MENUITEM "Arsia Mons (trading outpost) 12S 129W", ID_MARTIAN_ARSIAMONS
+                MENUITEM "Noctis (entrance 20S 113W)",  ID_MARTIAN_NOCTIS
+                MENUITEM "Cooter's place 12S 81W",      ID_MARTIAN_COOTER
+                MENUITEM "Syrtis Major 10N 71E",        ID_MARTIAN_SYRTISMAJOR10N71E
             END
         END
         MENUITEM SEPARATOR

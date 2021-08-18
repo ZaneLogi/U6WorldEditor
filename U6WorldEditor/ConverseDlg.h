@@ -30,6 +30,7 @@ public:
     afx_msg void OnBnClickedCancel();
     CEdit m_input;
     CEdit m_output;
+    CFont m_font;
 
     int m_selected_npc_id;
 
@@ -39,4 +40,5 @@ public:
     CListBox m_lbNPCs;
     afx_msg void OnSelchangeNpc();
     afx_msg void OnBnClickedFindNpc();
+    afx_msg LRESULT OnDpiChanged(WPARAM wParam, LPARAM lParam);
 };

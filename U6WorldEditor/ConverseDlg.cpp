@@ -35,6 +35,7 @@ BEGIN_MESSAGE_MAP(CConverseDlg, CDialogEx)
     ON_BN_CLICKED(IDCANCEL, &CConverseDlg::OnBnClickedCancel)
     ON_LBN_SELCHANGE(IDC_NPC, &CConverseDlg::OnSelchangeNpc)
     ON_BN_CLICKED(IDC_FIND_NPC, &CConverseDlg::OnBnClickedFindNpc)
+    ON_MESSAGE(WM_DPICHANGED, &CConverseDlg::OnDpiChanged)
 END_MESSAGE_MAP()
 
 
@@ -107,10 +108,29 @@ BOOL CConverseDlg::OnInitDialog()
         m_lbNPCs.AddString(s);
     }
 
-    auto ansi_fixed_font = CFont::FromHandle((HFONT)::GetStockObject(ANSI_FIXED_FONT));
+    int iDpi = GetDpiForWindow(GetSafeHwnd());
 
-    m_lbNPCs.SetFont(ansi_fixed_font);
-    m_output.SetFont(ansi_fixed_font);
+    CClientDC dc(this);
+
+    static const int points_per_inch = 72;
+    int points = 10;
+    int pixels_per_inch = GetDeviceCaps(dc.GetSafeHdc(), LOGPIXELSY);
+    int pixels_height = -MulDiv(points, pixels_per_inch, points_per_inch);
+
+    m_font.CreateFont(
+        pixels_height, 0, // size
+        0, 0, // normal orientation
+        FW_NORMAL,   // normal weight--e.g., bold would be FW_BOLD
+        false, false, false, // not italic, underlined or strike out
+        DEFAULT_CHARSET,
+        OUT_OUTLINE_PRECIS, // select only outline (not bitmap) fonts
+        CLIP_DEFAULT_PRECIS,
+        CLEARTYPE_QUALITY,
+        VARIABLE_PITCH | FF_SWISS,
+        _T("Courier"));
+
+    m_lbNPCs.SetFont(&m_font);
+    m_output.SetFont(&m_font);
 
     m_input.SetFocus();
     return FALSE;  // return TRUE unless you set the focus to a control
@@ -166,4 +186,9 @@ void CConverseDlg::OnSelchangeNpc()
 void CConverseDlg::OnBnClickedFindNpc()
 {
     EndDialog(IDC_FIND_NPC);
+}
+
+LRESULT CConverseDlg::OnDpiChanged(WPARAM wParam, LPARAM lParam)
+{
+    return 0;
 }

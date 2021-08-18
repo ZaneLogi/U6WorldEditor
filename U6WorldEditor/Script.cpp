@@ -325,6 +325,8 @@ ScriptInterpreter::status ScriptInterpreter::run(const std::string& input, std::
                 }
                 break;
             case U6OP_ELSE:
+                skip_code_block(m_current, m_script_end, U6OP_ELSE);
+                break;
             case U6OP_ENDIF:
                 break;
             case U6OP_SETF:
@@ -552,7 +554,11 @@ int32_t ScriptInterpreter::evaluate()
             // 1: NOT ON LAND
             // 0: SUCCESS
             break;
-
+        case U6OP_RAND: // random
+            arg1 = rstk.top(); rstk.pop(); // val1
+            arg2 = rstk.top(); rstk.pop(); // val2
+            rstk.push(rand() % (arg1 - arg2 + 1) + arg2);
+            break;
         default:
             assert(value < 0x80);
             rstk.push(value);

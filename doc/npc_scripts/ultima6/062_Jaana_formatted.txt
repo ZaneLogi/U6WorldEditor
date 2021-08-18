@@ -1,0 +1,293 @@
+:0000
+    NPC_ID: npc id: 62, npc name: Jaana
+:0007
+    NPC_LOOK: the druidess Jaana.
+:001B
+    START CONVERSION
+:001C
+    PAUSE
+:001D
+    {
+}
+:001E
+    IF [N8(0xeb) INPARTY ]
+:0023
+    {"I fear I know little that would help in this situation, $G."}
+:0060
+    JUMP 0x0311
+:0065
+    ENDIF
+:0066
+    IF [N8(0xeb) N8(0x02) FLAG ]
+:006D
+    {"Good $T, $G. Hast thou need of my services again?" }
+:00A1
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:00A7
+    {"Ask me to @join and I will, gladly, $G!"}
+:00D0
+    JUMP 0x0311
+    KEYWORDS n
+    ANSWER
+:00D8
+    {"Very well. Thou needst but ask..."}
+:00FB
+    JUMP 0x0311
+    END_ANSWER
+:0101
+    ENDIF
+:0102
+    IF [N8(0xeb) 0x00 FLAG ]
+:0108
+    {"Good $T, $G! Hast thou fared well in thy travels?" }
+:013C
+    ASKC [yn]
+    KEYWORDS y
+    ANSWER
+:0142
+    {"Joyous news! Thou must tell me of it sometime."}
+:0172
+    JUMP 0x0311
+    KEYWORDS n
+    ANSWER
+:017A
+    {"Mayhap I could help. Ask me to @join thy band, $G, and gladly I will!"}
+:01C1
+    JUMP 0x0311
+    END_ANSWER
+:01C7
+    ENDIF
+:01C8
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:01CE
+    {"$P! 'Tis a great joy and relief to see thou hast returned to Britannia, $G!"}
+:021B
+    PAUSE
+:021C
+    {
+
+}
+:021E
+    IF [0x17 B2 ]
+:0222
+    {She greets your other traveling companions.}
+:024D
+    PAUSE
+:024E
+    {
+
+Everyone seems pleased to be reunited, albeit under tense circumstances.}
+:0298
+    PAUSE
+:0299
+    {
+
+}
+:029B
+    ENDIF
+:029C
+    {"Mayhap I can help thee in thy struggle against the @gargoyles."}
+:02DC
+    PAUSE
+:02DD
+    {
+
+"Thou needst but ask and I will gladly @join, $G."
+}
+:0312
+    ASK
+    KEYWORDS name
+    ANSWER
+:0319
+    {"Why, my name's Jaana, $G."}
+:0334
+    PAUSE
+:0335
+    {
+
+"Surely my help in thy previous quests was not so insignificant that thou hast forgotten it!"}
+:0394
+    JUMP 0x0311
+    KEYWORDS job
+    ANSWER
+:039E
+    {"Since thy last visit to Britannia, I have lived in Yew, blessing crops and tending to sick animals."}
+:0403
+    PAUSE
+:0404
+    {
+
+"Though I know 'tis unbecoming of a simple druid to do so, I miss the excitement of our quests together!"}
+:046F
+    IF [N8(0xeb) INPARTY ]
+:0474
+    JUMP 0x0311
+:0479
+    ENDIF
+:047A
+    PAUSE
+:047B
+    {
+
+"I would gladly @join thee, $G, if thou had a use for my skills."}
+:04BE
+    JUMP 0x0311
+    KEYWORDS join
+    ANSWER
+:04C9
+    IF [N8(0xeb) INPARTY ]
+:04CE
+    {"Surely I misunderstand thee, $G."}
+:04F0
+    PAUSE
+:04F1
+    {
+
+"Am I not already a member of thy band?"}
+:051B
+    JUMP 0x0311
+:0520
+    ENDIF
+:0521
+    DECLARE [0x00, 0xb2] = [N8(0xeb) JOIN ]
+:0529
+    IF [0x00 B2 N8(0x00) == ]
+:0530
+    {"Gladly, $G!"
+}
+:053E
+    SET_FLAG [N8(0xeb) ], [N8(0x02) ]
+:0545
+    BYE
+:0546
+    ENDIF
+:0547
+    IF [0x00 B2 N8(0x02) == ]
+:054E
+    {"Nay, $G, thou seemst to have enough companions as it is."}
+:0588
+    PAUSE
+:0589
+    {
+
+"Mayhap if one of them left your band, thou might have more need of me."}
+:05D3
+    JUMP 0x0311
+:05D8
+    ELSE
+:05D9
+    {"Let us discuss such matters ashore."}
+:05FE
+    PAUSE
+:05FF
+    {
+
+"I can barely think out here a'sea!"}
+:0625
+    PAUSE
+:0626
+    {
+
+For the first time, you notice that Jaana seems definitely seasick!}
+:066B
+    JUMP 0x0311
+:0670
+    ENDIF
+    KEYWORDS leav
+    ANSWER
+:0677
+    DECLARE [0x00, 0xb2] = [N8(0xeb) LEAVE ]
+:067F
+    IF [0x00 B2 N8(0x00) == ]
+:0686
+    {"Whatever thou thinkest best, $G."
+*
+"Thou mayst keep my supplies."
+}
+:06CA
+    BYE
+:06CB
+    ENDIF
+:06CC
+    IF [0x00 B2 N8(0x02) == ]
+:06D3
+    {"Perhaps I misunderstand, $G."}
+:06F1
+    PAUSE
+:06F2
+    {
+
+"I cannot leave thy party since I am not in it!"}
+:0724
+    JUMP 0x0311
+:0729
+    ELSE
+:072A
+    {"Let us discuss such matters ashore."}
+:074F
+    PAUSE
+:0750
+    {
+
+"I can barely think out here a'sea!"}
+:0776
+    PAUSE
+:0777
+    {
+
+For the first time, you notice that Jaana seems definitely seasick!}
+:07BC
+    JUMP 0x0311
+:07C1
+    ENDIF
+    KEYWORDS garg
+    ANSWER
+:07C8
+    {"I know little of the gargoyles, $G, save what rumors I hear."}
+:0806
+    PAUSE
+:0807
+    {
+
+"But I know that the gargoyles are fierce fighters, and a great threat to the land!"}
+:085D
+    JUMP 0x0311
+    KEYWORDS ench,nico
+    ANSWER
+:086D
+    {"I've heard that Nicodemus the enchanter lives between two rivers."}
+:08B0
+    JUMP 0x0311
+    KEYWORDS bye
+    ANSWER
+:08BA
+    IF [N8(0xeb) INPARTY ]
+:08BF
+    {"May the virtues guide us in our quest!"
+}
+:08E8
+    ELSE
+:08E9
+    {"Farewell! Return when thou hast more news of thy quest!"
+}
+:0923
+    ENDIF
+:0924
+    BYE
+    KEYWORDS *
+    ANSWER
+:0928
+    IF [N8(0x00) N8(0x01) RAND ]
+:092F
+    {"Alas, I know nothing of $Z, $G."}
+:0950
+    ELSE
+:0951
+    {"Beg pardon?"}
+:095E
+    ENDIF
+:095F
+    JUMP 0x0311
+    END_ANSWER

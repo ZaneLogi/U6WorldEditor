@@ -12,7 +12,7 @@
 IMPLEMENT_DYNAMIC(CConverseDlg, CDialogEx)
 
 CConverseDlg::CConverseDlg(MapManager* mm, CWnd* pParent /*=NULL*/)
-	: CDialogEx(IDD_CONVERSE, pParent), m_map_manager(*mm)
+    : CDialogEx(IDD_CONVERSE, pParent), m_map_manager(*mm)
 {
     m_selected_npc_id = -1;
 }
@@ -108,29 +108,43 @@ BOOL CConverseDlg::OnInitDialog()
         m_lbNPCs.AddString(s);
     }
 
-    int iDpi = GetDpiForWindow(GetSafeHwnd());
 
-    CClientDC dc(this);
+    using fnGetDpiForWindow = UINT (WINAPI*)(HWND);
 
-    static const int points_per_inch = 72;
-    int points = 10;
-    int pixels_per_inch = GetDeviceCaps(dc.GetSafeHdc(), LOGPIXELSY);
-    int pixels_height = -MulDiv(points, pixels_per_inch, points_per_inch);
+    fnGetDpiForWindow myGetDpiForWindow = nullptr;
 
-    m_font.CreateFont(
-        pixels_height, 0, // size
-        0, 0, // normal orientation
-        FW_NORMAL,   // normal weight--e.g., bold would be FW_BOLD
-        false, false, false, // not italic, underlined or strike out
-        DEFAULT_CHARSET,
-        OUT_OUTLINE_PRECIS, // select only outline (not bitmap) fonts
-        CLIP_DEFAULT_PRECIS,
-        CLEARTYPE_QUALITY,
-        VARIABLE_PITCH | FF_SWISS,
-        _T("Courier"));
+    auto hinstLib = LoadLibrary(TEXT("user32.dll"));
+    if (hinstLib != nullptr)
+    {
+        myGetDpiForWindow = (fnGetDpiForWindow)GetProcAddress(hinstLib, "GetDpiForWindow");
+    }
 
-    m_lbNPCs.SetFont(&m_font);
-    m_output.SetFont(&m_font);
+    if (myGetDpiForWindow != nullptr)
+    {
+        int iDpi = myGetDpiForWindow(GetSafeHwnd());
+
+        CClientDC dc(this);
+
+        static const int points_per_inch = 72;
+        int points = 10;
+        int pixels_per_inch = GetDeviceCaps(dc.GetSafeHdc(), LOGPIXELSY);
+        int pixels_height = -MulDiv(points, pixels_per_inch, points_per_inch);
+
+        m_font.CreateFont(
+            pixels_height, 0, // size
+            0, 0, // normal orientation
+            FW_NORMAL,   // normal weight--e.g., bold would be FW_BOLD
+            false, false, false, // not italic, underlined or strike out
+            DEFAULT_CHARSET,
+            OUT_OUTLINE_PRECIS, // select only outline (not bitmap) fonts
+            CLIP_DEFAULT_PRECIS,
+            CLEARTYPE_QUALITY,
+            VARIABLE_PITCH | FF_SWISS,
+            _T("Courier"));
+
+        m_lbNPCs.SetFont(&m_font);
+        m_output.SetFont(&m_font);
+    }
 
     m_input.SetFocus();
     return FALSE;  // return TRUE unless you set the focus to a control

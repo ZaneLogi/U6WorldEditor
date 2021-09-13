@@ -51,7 +51,31 @@ Obj*            gSelectedObj = nullptr;
 HANDLE          ghDosBox = nullptr;
 const uint8_t*  gNamePtr = nullptr;
 const uint8_t*  gPosPtr = nullptr;
+const uint8_t*  gHpPtr = nullptr;
+const uint8_t*  gLvlPtr = nullptr;
+const uint8_t*  gStrPtr = nullptr;
 
+BOOL EnablePrivilege(BOOL enable)
+{
+    HANDLE hToken = NULL;
+    if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY | TOKEN_READ, &hToken))
+        return FALSE;
+
+    LUID luid;
+    if (!LookupPrivilegeValue(NULL, SE_DEBUG_NAME, &luid))
+        return FALSE;
+
+    TOKEN_PRIVILEGES tp = {};
+    tp.PrivilegeCount = 1;
+    tp.Privileges[0].Luid = luid;
+    tp.Privileges[0].Attributes = enable ? SE_PRIVILEGE_ENABLED : 0;
+    if (!AdjustTokenPrivileges(hToken, FALSE, &tp, 0, NULL, NULL))
+        return FALSE;
+
+    CloseHandle(hToken);
+
+    return TRUE;
+}
 
 inline int normalize(int value, int boundary)
 {
@@ -66,6 +90,9 @@ inline int normalize(int value, int boundary)
 
 CChildView::CChildView()
 {
+    // if needed, uncomment the line below
+    //EnablePrivilege(true);
+
     gConfig.load("init.cfg");
     gMapManager.init(gConfig);
 
@@ -235,6 +262,34 @@ void CChildView::Update()
                 else
                 {
                     MoveToTile(main_actor.x %256, main_actor.y % 256, main_actor.z);
+                }
+            }
+        }
+
+        if (ghDosBox != nullptr && gLvlPtr != nullptr && gStrPtr != nullptr)
+        {
+            auto game_type = gConfig.get_property("game_type");
+            if (game_type == "u6")
+            {
+                uint8_t hp;
+                uint8_t level;
+                SIZE_T bytes_read, bytes_written;
+                ReadProcessMemory(ghDosBox, gHpPtr, &hp, 1, &bytes_read);
+                ReadProcessMemory(ghDosBox, gLvlPtr, &level, 1, &bytes_read);
+                int max_hp = level * 30;
+                if (max_hp > 255)
+                    max_hp = 255;
+                if (hp < max_hp)
+                {
+                    hp = (uint8_t)max_hp;
+
+                    BOOL b;
+                    unsigned long oldProtect;
+                    // need PROCESS_VM_OPERATION
+                    b = VirtualProtectEx(ghDosBox, (void*)gHpPtr, 1, PAGE_EXECUTE_READWRITE, &oldProtect);
+                    // need PROCESS_VM_WRITE
+                    b = WriteProcessMemory(ghDosBox, (void*)gHpPtr, &hp, 1, &bytes_written);
+                    b = VirtualProtectEx(ghDosBox, (void*)gHpPtr, 1, oldProtect, &oldProtect);
                 }
             }
         }
@@ -985,6 +1040,13 @@ void CChildView::OnHackHookdosbox()
         goto exit;
     }
 
+    // reset
+    gNamePtr = nullptr;
+    gPosPtr = nullptr;
+    gHpPtr = nullptr;
+    gLvlPtr = nullptr;
+    gStrPtr = nullptr;
+
     auto dosbox_pid = FindProcessId("dosbox.exe");
     if (dosbox_pid == 0)
     {
@@ -992,7 +1054,7 @@ void CChildView::OnHackHookdosbox()
         goto exit;
     }
 
-    DWORD dwDesiredAccess = PROCESS_VM_READ | PROCESS_QUERY_INFORMATION;
+    DWORD dwDesiredAccess = PROCESS_VM_READ | PROCESS_QUERY_INFORMATION | PROCESS_VM_OPERATION | PROCESS_VM_WRITE;
     ghDosBox = OpenProcess(
         dwDesiredAccess,
         false,
@@ -1024,27 +1086,98 @@ void CChildView::OnHackHookdosbox()
         //const uint8_t* pos_ptr = (uint8_t*)0x000000000E50FD84;
         //gPosPtr = r[0] + (pos_ptr - name_ptr);
 
-        uint8_t a1_b1 = (main_actor.x & 0x0ff); // x: bit 0 - 7
-        uint8_t a1_b2 = ((main_actor.x & 0x300) >> 8) | ((main_actor.y & 0x03f) << 2); // x: bit 8, 9 | y: bit 0 - 5
-        uint8_t a1_b3 = ((main_actor.y & 0x3c0) >> 6) | ((main_actor.z & 0x0f) << 4); // y: bit 6 - 9 | z: bit 0 - 3
-
-        uint8_t a2_b1 = (actor2.x & 0x0ff); // x: bit 0 - 7
-        uint8_t a2_b2 = ((actor2.x & 0x300) >> 8) | ((actor2.y & 0x03f) << 2); // x: bit 8, 9 | y: bit 0 - 5
-        uint8_t a2_b3 = ((actor2.y & 0x3c0) >> 6) | ((actor2.z & 0x0f) << 4); // y: bit 6 - 9 | z: bit 0 - 3
-
-        uint8_t a3_b1 = (actor3.x & 0x0ff); // x: bit 0 - 7
-        uint8_t a3_b2 = ((actor3.x & 0x300) >> 8) | ((actor3.y & 0x03f) << 2); // x: bit 8, 9 | y: bit 0 - 5
-        uint8_t a3_b3 = ((actor3.y & 0x3c0) >> 6) | ((actor3.z & 0x0f) << 4); // y: bit 6 - 9 | z: bit 0 - 3
-
-        char buf[32];
-        sprintf_s(buf, "%02x%02x%02x%02x%02x%02x%02x%02x%02x", a1_b1, a1_b2, a1_b3, a2_b1, a2_b2, a2_b3, a3_b1, a3_b2, a3_b3);
-        auto s = InitSearch(ghDosBox, buf, "data");
-        if (s.size() == 0)
+        // find Position
         {
-            goto exit;
+            uint8_t a1_b1 = (main_actor.x & 0x0ff); // x: bit 0 - 7
+            uint8_t a1_b2 = ((main_actor.x & 0x300) >> 8) | ((main_actor.y & 0x03f) << 2); // x: bit 8, 9 | y: bit 0 - 5
+            uint8_t a1_b3 = ((main_actor.y & 0x3c0) >> 6) | ((main_actor.z & 0x0f) << 4); // y: bit 6 - 9 | z: bit 0 - 3
+
+            uint8_t a2_b1 = (actor2.x & 0x0ff); // x: bit 0 - 7
+            uint8_t a2_b2 = ((actor2.x & 0x300) >> 8) | ((actor2.y & 0x03f) << 2); // x: bit 8, 9 | y: bit 0 - 5
+            uint8_t a2_b3 = ((actor2.y & 0x3c0) >> 6) | ((actor2.z & 0x0f) << 4); // y: bit 6 - 9 | z: bit 0 - 3
+
+            uint8_t a3_b1 = (actor3.x & 0x0ff); // x: bit 0 - 7
+            uint8_t a3_b2 = ((actor3.x & 0x300) >> 8) | ((actor3.y & 0x03f) << 2); // x: bit 8, 9 | y: bit 0 - 5
+            uint8_t a3_b3 = ((actor3.y & 0x3c0) >> 6) | ((actor3.z & 0x0f) << 4); // y: bit 6 - 9 | z: bit 0 - 3
+
+            char buf[32];
+            sprintf_s(buf, "%02x%02x%02x%02x%02x%02x%02x%02x%02x", a1_b1, a1_b2, a1_b3, a2_b1, a2_b2, a2_b3, a3_b1, a3_b2, a3_b3);
+            auto s = InitSearch(ghDosBox, buf, "data");
+            if (s.size() == 1)
+            {
+                gPosPtr = s[0];
+            }
+            else
+            {
+                AfxMessageBox(_T("Can't find the positioin list in the memory!!!"), MB_OK);
+            }
         }
 
-        gPosPtr = s[0];
+        // find HP
+        {
+            char buf[32];
+            std::string test;
+            for (int i = 1; i <= 16; i++)
+            {
+                auto a = gMapManager.obj_manager.get_actor(i);
+                sprintf_s(buf, "%02x", *a.hp);
+                test += buf;
+            }
+
+            auto t = InitSearch(ghDosBox, test, "data");
+            if (t.size() == 1)
+            {
+                gHpPtr = t[0];
+            }
+            else
+            {
+                AfxMessageBox(_T("Can't find HP list!!!"), MB_OK);
+            }
+        }
+
+        // find Level
+        {
+            char buf[32];
+            std::string test;
+            for (int i = 1; i <= 16; i++)
+            {
+                auto a = gMapManager.obj_manager.get_actor(i);
+                sprintf_s(buf, "%02x", *a.level);
+                test += buf;
+            }
+
+            auto u = InitSearch(ghDosBox, test, "data");
+            if (u.size() == 1)
+            {
+                gLvlPtr = u[0];
+            }
+            else
+            {
+                AfxMessageBox(_T("Can't find Level list!!!"), MB_OK);
+            }
+        }
+
+        // find Strength
+        {
+            char buf[32];
+            std::string test;
+            for (int i = 1; i <= 16; i++)
+            {
+                auto a = gMapManager.obj_manager.get_actor(i);
+                sprintf_s(buf, "%02x", *a.strength);
+                test += buf;
+            }
+
+            auto v = InitSearch(ghDosBox, test, "data");
+            if (v.size() == 1)
+            {
+                gStrPtr = v[0];
+            }
+            else
+            {
+                AfxMessageBox(_T("Can't find Strength list!!!"), MB_OK);
+            }
+        }
     }
 
     // check if the actor name is correct

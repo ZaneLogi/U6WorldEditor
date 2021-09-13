@@ -974,7 +974,7 @@ std::vector<uint8_t*> InitSearch(HANDLE hProcess, const std::string& init_value,
 
 void CChildView::OnHackHookdosbox()
 {
-    Actor main_actor;
+    Actor main_actor, actor2, actor3;
     std::vector<PBYTE> r;
     std::vector<uint8_t> buffer;
     SIZE_T bytes_read;
@@ -1005,6 +1005,8 @@ void CChildView::OnHackHookdosbox()
     }
 
     main_actor = gMapManager.obj_manager.get_actor(1);
+    actor2 = gMapManager.obj_manager.get_actor(2);
+    actor3 = gMapManager.obj_manager.get_actor(3);
 
     if (gNamePtr == nullptr)
     {
@@ -1017,9 +1019,32 @@ void CChildView::OnHackHookdosbox()
 
         gNamePtr = r[0];
 
-        const uint8_t* name_ptr = (uint8_t*)0x000000000E50D5A4;
-        const uint8_t* pos_ptr = (uint8_t*)0x000000000E50FD84;
-        gPosPtr = r[0] + (pos_ptr - name_ptr);
+        //OBSOLETE:
+        //const uint8_t* name_ptr = (uint8_t*)0x000000000E50D5A4;
+        //const uint8_t* pos_ptr = (uint8_t*)0x000000000E50FD84;
+        //gPosPtr = r[0] + (pos_ptr - name_ptr);
+
+        uint8_t a1_b1 = (main_actor.x & 0x0ff); // x: bit 0 - 7
+        uint8_t a1_b2 = ((main_actor.x & 0x300) >> 8) | ((main_actor.y & 0x03f) << 2); // x: bit 8, 9 | y: bit 0 - 5
+        uint8_t a1_b3 = ((main_actor.y & 0x3c0) >> 6) | ((main_actor.z & 0x0f) << 4); // y: bit 6 - 9 | z: bit 0 - 3
+
+        uint8_t a2_b1 = (actor2.x & 0x0ff); // x: bit 0 - 7
+        uint8_t a2_b2 = ((actor2.x & 0x300) >> 8) | ((actor2.y & 0x03f) << 2); // x: bit 8, 9 | y: bit 0 - 5
+        uint8_t a2_b3 = ((actor2.y & 0x3c0) >> 6) | ((actor2.z & 0x0f) << 4); // y: bit 6 - 9 | z: bit 0 - 3
+
+        uint8_t a3_b1 = (actor3.x & 0x0ff); // x: bit 0 - 7
+        uint8_t a3_b2 = ((actor3.x & 0x300) >> 8) | ((actor3.y & 0x03f) << 2); // x: bit 8, 9 | y: bit 0 - 5
+        uint8_t a3_b3 = ((actor3.y & 0x3c0) >> 6) | ((actor3.z & 0x0f) << 4); // y: bit 6 - 9 | z: bit 0 - 3
+
+        char buf[32];
+        sprintf_s(buf, "%02x%02x%02x%02x%02x%02x%02x%02x%02x", a1_b1, a1_b2, a1_b3, a2_b1, a2_b2, a2_b3, a3_b1, a3_b2, a3_b3);
+        auto s = InitSearch(ghDosBox, buf, "data");
+        if (s.size() == 0)
+        {
+            goto exit;
+        }
+
+        gPosPtr = s[0];
     }
 
     // check if the actor name is correct

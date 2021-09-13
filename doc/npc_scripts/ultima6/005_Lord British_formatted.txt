@@ -1,0 +1,886 @@
+:0000
+    NPC_ID: npc id: 5, npc name: Lord British
+:000E
+    NPC_LOOK: the noble ruler of Britannia.
+*
+:002E
+    START CONVERSION
+:002F
+    SET_FLAG [N8(0xeb) ], [0x00 ]
+:0035
+    IF [N8(0xeb) N8(0x07) FLAG ]
+:003C
+    JUMP 0x071b
+:0041
+    ENDIF
+:0042
+    {"$P! 'Tis good to see thee again. Much hath happened since thou last departed our realm."}
+:009B
+    PAUSE
+:009C
+    DECLARE [0x07, 0xb2] = [N8(0x00) ]
+:00A3
+    DECLARE [0x08, 0xb2] = [N8(0x00) ]
+:00AA
+    DECLARE [0x09, 0xb2] = [N8(0x00) ]
+:00B1
+    {
+
+"But I must make sure 'tis truly thee."*
+
+"Only the true Avatar would know what was contained in the Compendium I sent."*
+
+}
+:012E
+    IF [0x07 B2 N8(0x00) > ]
+:0135
+    JUMP 0x0151
+:013A
+    ENDIF
+:013B
+    DECLARE [0x07, 0xb2] = [N8(0x01) N8(0x0a) RAND ]
+:0145
+    DECLARE [0x06, 0xb2] = [0x07 B2 ]
+:014C
+    JUMP 0x1548
+:0151
+    IF [0x08 B2 N8(0x00) > ]
+:0158
+    JUMP 0x0181
+:015D
+    ENDIF
+:015E
+    DECLARE [0x08, 0xb2] = [N8(0x01) N8(0x0a) RAND ]
+:0168
+    IF [0x08 B2 0x07 B2 == ]
+:016F
+    JUMP 0x015e
+:0174
+    ENDIF
+:0175
+    DECLARE [0x06, 0xb2] = [0x08 B2 ]
+:017C
+    JUMP 0x1548
+:0181
+    IF [0x09 B2 N8(0x00) > ]
+:0188
+    JUMP 0x01be
+:018D
+    ENDIF
+:018E
+    DECLARE [0x09, 0xb2] = [N8(0x01) N8(0x0a) RAND ]
+:0198
+    DECLARE [0x06, 0xb2] = [0x09 B2 ]
+:019F
+    IF [0x09 B2 0x07 B2 == ]
+:01A6
+    JUMP 0x018e
+:01AB
+    ENDIF
+:01AC
+    IF [0x09 B2 0x08 B2 == ]
+:01B3
+    JUMP 0x018e
+:01B8
+    ENDIF
+:01B9
+    JUMP 0x1548
+:01BE
+    {
+"Ah, 'tis thee indeed, $P. Take this key."
+*
+"It will unlock the gatehouse by the southern entrance to the castle."
+*
+"Then you can use the lever inside to raise the portcullis, and the crank will lower the drawbridge."
+*
+"The same key will also let you into the sewers under the castle."*}
+:02E0
+    NEW npc [N8(0x01) ], obj [N8(0x40) ], quality [N8(0x01) ], quantity [N8(0x01) ]
+:02ED
+    SET_FLAG [N8(0xeb) ], [N8(0x07) ]
+:02F4
+    {
+
+"Now let me tell thee what hath transpired since thy last visit."}
+:0337
+    PAUSE
+:0338
+    {
+
+"The vast underworld from which thou didst rescue me hath collapsed."}
+:037F
+    PAUSE
+:0380
+    {
+
+"Yet still there are forces of evil abroad in the land."}
+:03BA
+    PAUSE
+:03BB
+    {
+
+"Britannia is under attack by gargoyles such as those thou just fought."}
+:0405
+    PAUSE
+:0406
+    {
+
+"They have been coming up through the dungeons."}
+:0438
+    PAUSE
+:0439
+    {
+
+"Thus far they have mainly been attacking the @shrines of the eight @virtues."}
+:0489
+    PAUSE
+:048A
+    {
+
+"When the Shrine of Compassion didst fall, Sir @Geoffrey sent a party to free it."}
+:04DE
+    PAUSE
+:04DF
+    {
+
+"Do thou ask him of this mission. Perhaps thou canst prove of some assistance."}
+:0530
+    PAUSE
+:0531
+    {
+
+"Whilst thou art here, I have a room in the castle set aside for thy personal use."}
+:0586
+    PAUSE
+:0587
+    {
+
+"'Tis in the west wing of the castle, just south of mine own chambers."}
+:05D0
+    PAUSE
+:05D1
+    {
+
+"I have had my servants place some equipment there, in case thou shouldst have need of it."}
+:062E
+    PAUSE
+:062F
+    {
+
+"Of course, thou mayst feel free to borrow anything in my castle, if thou shouldst need it."}
+:068D
+    PAUSE
+:068E
+    {
+
+"Lastly, any time thou dost need @healing, do thou but ask me."}
+:06CF
+    PAUSE
+:06D0
+    {
+
+"If thou doth wish me to @repeat all this later, thou need but ask."}
+:0716
+    JUMP 0x07af
+:071B
+    IF [N8(0x40) N8(0x01) OBJINPARTY N16(0x8001) != ]
+:0726
+    JUMP 0x0785
+:072B
+    ENDIF
+:072C
+    {"I see thou hath misplaced thy key to the castle."
+*
+"Here is another."}
+:0773
+    NEW npc [N8(0x01) ], obj [N8(0x40) ], quality [N8(0x01) ], quantity [N8(0x01) ]
+:0780
+    JUMP 0x07af
+:0785
+    {"Good $T, $P. What wouldst thou speak of?"
+}
+:07B0
+    ASK
+    KEYWORDS name
+    ANSWER
+:07B7
+    {"I am Lord British, as thou knowest well."}
+:07E1
+    JUMP 0x07af
+    KEYWORDS rep
+    ANSWER
+:07EB
+    JUMP 0x033a
+    KEYWORDS job
+    ANSWER
+:07F5
+    {"Thanks to thee, I sit once more upon the throne of Britannia."}
+:0834
+    PAUSE
+:0835
+    {
+
+"Though 'tis a heavy burden in such @troubled times as these."}
+:0875
+    JUMP 0x07af
+    KEYWORDS heav,burd,trou,time
+    ANSWER
+:088F
+    {"The @gargoyles art indeed the greatest threat our realm has ever known."}
+:08D8
+    PAUSE
+:08D9
+    {
+
+"We are fortunate indeed that fate hath brought thee here in our hour of need."}
+:092A
+    JUMP 0x07af
+    KEYWORDS garg
+    ANSWER
+:0935
+    {"Perhaps thou canst drive these vile creatures back into the bowels of the earth from whence they came."}
+:099D
+    PAUSE
+:099E
+    {
+
+"All our efforts thus far have availed us naught."}
+:09D2
+    JUMP 0x07af
+    KEYWORDS shri
+    ANSWER
+:09DD
+    {"By now the gargoyles may have captured them all."}
+:0A0F
+    PAUSE
+:0A10
+    {
+
+"Thou must hurry if thou wouldst foil their evil schemes..."}
+:0A4E
+    JUMP 0x07af
+    KEYWORDS virt
+    ANSWER
+:0A59
+    {"Stay strong in thy commitment to the eight virtues."}
+:0A8E
+    PAUSE
+:0A8F
+    {
+
+"It is our belief in them that sets us apart from the cruel invaders who would destroy all that we hold dear."}
+:0AFF
+    JUMP 0x07af
+    KEYWORDS geof
+    ANSWER
+:0B0A
+    {"He is the Captain of the Guard."}
+:0B2B
+    JUMP 0x07af
+    KEYWORDS moon,gate,ston,blac,orb
+    ANSWER
+:0B49
+    {You show Lord British the black stone.}
+:0B6F
+    PAUSE
+:0B70
+    {
+
+"Hmmmm... I have such a stone, as thou may recall."}
+:0BA5
+    PAUSE
+:0BA6
+    {
+
+"I did not know that there were more such orbs."}
+:0BD8
+    PAUSE
+:0BD9
+    {
+
+"'Twill serve thee well in thy travels if thou dost learn to master its powers."}
+:0C2B
+    PAUSE
+:0C2C
+    {
+
+"To open a gate, use the stone, and carefully position it a few feet from thee."}
+:0C7E
+    PAUSE
+:0C7F
+    {
+
+"Thou wilt discover that the placement is the key."}
+:0CB4
+    PAUSE
+:0CB5
+    {
+
+"In the proper positions, }
+:0CD1
+    PAUSE
+:0CD2
+    {the stone canst conjure gates to take thee to numerous destinations."}
+:0D17
+    SET_FLAG [N8(0xeb) ], [N8(0x05) ]
+:0D1E
+    JUMP 0x07af
+    KEYWORDS mant,rune
+    ANSWER
+:0D2E
+    {"Ask the leaders of each town to tell thee of that. }
+:0D62
+    JUMP 0x07af
+    KEYWORDS comp
+    ANSWER
+:0D6D
+    {"Do thou ask @Tholden."}
+:0D84
+    JUMP 0x07af
+    KEYWORDS thol
+    ANSWER
+:0D8F
+    {"He is my @chancellor."}
+:0DA6
+    JUMP 0x07af
+    KEYWORDS chan
+    ANSWER
+:0DB1
+    {"Aye, Tholden is my chancellor."}
+:0DD1
+    JUMP 0x07af
+    KEYWORDS mous,sher
+    ANSWER
+:0DE1
+    IF [N8(0x09) INPARTY ]
+:0DE6
+    {"Please take good care of my little friend."}
+:0E12
+    JUMP 0x07af
+:0E17
+    ENDIF
+:0E18
+    {"Ah, thou hast heard of my little friend?"}
+:0E42
+    PAUSE
+:0E43
+    {
+
+"Her name is Sherry, and I'm quite proud of her."}
+:0E76
+    PAUSE
+:0E77
+    {
+
+"I'm certain she is the only talking mouse in all of Britannia."}
+:0EB9
+    PAUSE
+:0EBA
+    {
+
+"Thou art welcome to see her, if thou dost wish."}
+:0EED
+    PAUSE
+:0EEE
+    {
+
+"Thou canst find her wandering throughout the castle."}
+:0F26
+    PAUSE
+:0F27
+    {
+
+"She comes by my room every night, so I can tell her @stories."}
+:0F68
+    JUMP 0x07af
+    KEYWORDS wiza,oz,book
+    ANSWER
+:0F7B
+    {"I collect rare books."}
+:0F92
+    PAUSE
+:0F93
+    {
+
+"There's one in particular I've been hunting for many years."}
+:0FD2
+    PAUSE
+:0FD3
+    {
+
+"It's called 'The Wizard of Oz.' Ever heard of it?" }
+:1009
+    JUMP 0x1200
+    KEYWORDS bedt,stor
+    ANSWER
+:1019
+    {"My favorite story is '@Hubert the Lion.'"}
+:1043
+    JUMP 0x07af
+    KEYWORDS favo,hube,lion
+    ANSWER
+:1058
+    {"I've known it by heart, ever since I heard it as a child."}
+:1093
+    PAUSE
+:1094
+    {
+
+"Hubert the Lion was haughty and vain, and especially proud of his elegant mane."}
+:10E7
+    PAUSE
+:10E8
+    {
+
+"But conceit of this sort is not proper at all, and Hubert the Lion was due for a fall."}
+:1142
+    JUMP 0x07af
+    KEYWORDS mr,nose
+    ANSWER
+:1150
+    JUMP 0x146f
+    KEYWORDS heal
+    ANSWER
+:115B
+    JUMP 0x14cb
+    KEYWORDS than
+    ANSWER
+:1166
+    {"'Tis I who should thank thee, Avatar, for all thou hast done for Britannia."}
+:11B3
+    JUMP 0x07af
+    KEYWORDS bye
+    ANSWER
+:11BD
+    {"May fortune favor thee."
+}
+:11D7
+    BYE
+:11D8
+    KEYWORDS *
+    ANSWER
+:11DB
+    {"I cannot help thee with that."}
+:11FA
+    END_ANSWER
+:11FB
+    JUMP 0x07af
+:1200
+    ASKC [yn]
+    KEYWORDS n
+    ANSWER
+:1206
+    {"Well, if thou dost run across it in thy travels, }
+:1238
+    PAUSE
+:1239
+    {I would greatly appreciate if thou couldst bring it here."}
+:1273
+    PAUSE
+:1274
+    {
+
+"I hath promised a great reward to whosoever shalt bring me a copy."}
+:12BA
+    JUMP 0x07af
+    KEYWORDS y
+    ANSWER
+:12C2
+    IF [N8(0x97) N8(0x4b) OBJINPARTY N16(0x8001) == ]
+:12CD
+    JUMP 0x1206
+:12D2
+    ENDIF
+:12D3
+    DECLARE [0x00, 0xb2] = [N8(0x01) CANCARRY N8(0x4d) N8(0x01) WEIGHT / ]
+:12E1
+    IF [0x00 B2 N8(0x14) > ]
+:12E8
+    DECLARE [0x00, 0xb2] = [N8(0x14) ]
+:12EF
+    ENDIF
+:12F0
+    IF [0x00 B2 N8(0x05) < ]
+:12F7
+    {"Thou art carrying too much for me to reward thee properly..."}
+:1335
+    PAUSE
+:1336
+    {
+
+"Bring the book back later, when thou art less burdened."}
+:1371
+    JUMP 0x07af
+:1376
+    ENDIF
+:1377
+    {"Thou hath found a copy!"}
+:1390
+    PAUSE
+:1391
+    {
+"Long hath I anticipated this moment..."}
+:13BA
+    PAUSE
+:13BB
+    {
+
+"Not since my childhood have I read this wondrous story."}
+:13F6
+    PAUSE
+:13F7
+    {
+
+Gingerly, he takes the tome. "Here is your reward." He gives you some glowing gems.}
+:144C
+    DELETE npc [N8(0x97) N8(0x4b) OBJINPARTY ], obj [N8(0x97) ], quality [N8(0x4b) ], quantity [N8(0x01) ]
+:145C
+    NEW npc [N8(0x01) ], obj [N8(0x4d) ], quality [N8(0x00) ], quantity [0x00 B2 ]
+:1469
+    JUMP 0x07af
+    END_ANSWER
+:146F
+    {"Who told thee of that nickname!?"
+}
+:1492
+    ASK
+    KEYWORDS *
+    ANSWER
+:1496
+    {"Well, I'd rather thou didst not call me that."}
+:14C5
+    JUMP 0x07af
+    END_ANSWER
+:14CB
+    DECLARE [0x00, 0xb2] = [N8(0x00) ]
+:14D2
+    DECLARE [0x02, 0xb2] = [0x00 B2 N8(0x00) NPC ]
+:14DC
+    IF [0x02 B2 WOUNDED ]
+:14E1
+    HEAL [0x02 B2 ]
+:14E5
+    ENDIF
+:14E6
+    IF [0x02 B2 POISONED ]
+:14EB
+    CURE [0x02 B2 ]
+:14EF
+    ENDIF
+:14F0
+    DECLARE [0x00, 0xb2] = [0x00 B2 N8(0x01) + ]
+:14FA
+    IF [0x00 B2 0x17 B2 <= ]
+:1501
+    JUMP 0x14d2
+:1506
+    ENDIF
+:1507
+    {Lord British waves his hand, and your whole party is healed!}
+:1543
+    JUMP 0x07af
+:1548
+    IF [0x06 B2 N8(0x01) == ]
+:154F
+    JUMP 0x15ca
+:1554
+    ENDIF
+:1555
+    IF [0x06 B2 N8(0x02) == ]
+:155C
+    JUMP 0x1651
+:1561
+    ENDIF
+:1562
+    IF [0x06 B2 N8(0x03) == ]
+:1569
+    JUMP 0x16ff
+:156E
+    ENDIF
+:156F
+    IF [0x06 B2 N8(0x04) == ]
+:1576
+    JUMP 0x1797
+:157B
+    ENDIF
+:157C
+    IF [0x06 B2 N8(0x05) == ]
+:1583
+    JUMP 0x1852
+:1588
+    ENDIF
+:1589
+    IF [0x06 B2 N8(0x06) == ]
+:1590
+    JUMP 0x18f8
+:1595
+    ENDIF
+:1596
+    IF [0x06 B2 N8(0x07) == ]
+:159D
+    JUMP 0x1996
+:15A2
+    ENDIF
+:15A3
+    IF [0x06 B2 N8(0x08) == ]
+:15AA
+    JUMP 0x1a35
+:15AF
+    ENDIF
+:15B0
+    IF [0x06 B2 N8(0x09) == ]
+:15B7
+    JUMP 0x1ace
+:15BC
+    ENDIF
+:15BD
+    IF [0x06 B2 N8(0x0a) == ]
+:15C4
+    JUMP 0x1b81
+:15C9
+    ENDIF
+:15CA
+    {"What doth trolls lack?"
+}
+:15E3
+    ASK
+    KEYWORDS end
+    ANSWER
+:15E9
+    {"Thou art correct."
+
+}
+:15FE
+    JUMP 0x012e
+    KEYWORDS bye
+    ANSWER
+:1608
+    JUMP 0x1c1a
+    KEYWORDS *
+    ANSWER
+:1610
+    {"Nay, 'tis not the correct answer. Consult thy Compendium."}
+:164B
+    JUMP 0x15e2
+    END_ANSWER
+:1651
+    {"What part of the tangle vine doth put one to sleep?"
+}
+:1687
+    ASK
+    KEYWORDS cent,pod,frag
+    ANSWER
+:1697
+    {"Thou art correct."
+
+}
+:16AC
+    JUMP 0x012e
+    KEYWORDS bye
+    ANSWER
+:16B6
+    JUMP 0x1c1a
+    KEYWORDS *
+    ANSWER
+:16BE
+    {"Nay, 'tis not the correct answer. Consult thy Compendium."}
+:16F9
+    JUMP 0x1686
+    END_ANSWER
+:16FF
+    {"How wert the headlesses produced?"
+}
+:1723
+    ASK
+    KEYWORDS wiza,expe
+    ANSWER
+:172F
+    {"Thou art correct."
+
+}
+:1744
+    JUMP 0x012e
+    KEYWORDS bye
+    ANSWER
+:174E
+    JUMP 0x1c1a
+    KEYWORDS *
+    ANSWER
+:1756
+    {"Nay, 'tis not the correct answer. Consult thy Compendium."}
+:1791
+    JUMP 0x1722
+    END_ANSWER
+:1797
+    {"What valued item canst one find near the spawning grounds of Hydras?"
+}
+:17DE
+    ASK
+    KEYWORDS nigh,mush
+    ANSWER
+:17EA
+    {"Thou art correct."
+
+}
+:17FF
+    JUMP 0x012e
+    KEYWORDS bye
+    ANSWER
+:1809
+    JUMP 0x1c1a
+    KEYWORDS *
+    ANSWER
+:1811
+    {"Nay, 'tis not the correct answer. Consult thy Compendium."}
+:184C
+    JUMP 0x17dd
+    END_ANSWER
+:1852
+    {"How canst one fend off rotworms?"
+}
+:1875
+    ASK
+    KEYWORDS torc,fire,flam,burn,pass
+    ANSWER
+:1890
+    {"Thou art correct."
+
+}
+:18A5
+    JUMP 0x012e
+    KEYWORDS bye
+    ANSWER
+:18AF
+    JUMP 0x1c1a
+    KEYWORDS *
+    ANSWER
+:18B7
+    {"Nay, 'tis not the correct answer. Consult thy Compendium."}
+:18F2
+    JUMP 0x1874
+    END_ANSWER
+:18F8
+    {"How doth sea serpents attack?"
+}
+:1918
+    ASK
+    KEYWORDS fire,ball,swip,tail
+    ANSWER
+:192E
+    {"Thou art correct."
+
+}
+:1943
+    JUMP 0x012e
+    KEYWORDS bye
+    ANSWER
+:194D
+    JUMP 0x1c1a
+    KEYWORDS *
+    ANSWER
+:1955
+    {"Nay, 'tis not the correct answer. Consult thy Compendium."}
+:1990
+    JUMP 0x1917
+    END_ANSWER
+:1996
+    {"What creature art wisps oft mistaken for?"
+}
+:19C2
+    ASK
+    KEYWORDS fire,fly
+    ANSWER
+:19CD
+    {"Thou art correct."
+
+}
+:19E2
+    JUMP 0x012e
+    KEYWORDS bye
+    ANSWER
+:19EC
+    JUMP 0x1c1a
+    KEYWORDS *
+    ANSWER
+:19F4
+    {"Nay, 'tis not the correct answer. Consult thy Compendium."}
+:1A2F
+    JUMP 0x19c1
+    END_ANSWER
+:1A35
+    {"How doth giant squids crush their prey?"
+}
+:1A5F
+    ASK
+    KEYWORDS beak
+    ANSWER
+:1A66
+    {"Thou art correct."
+
+}
+:1A7B
+    JUMP 0x012e
+    KEYWORDS bye
+    ANSWER
+:1A85
+    JUMP 0x1c1a
+    KEYWORDS *
+    ANSWER
+:1A8D
+    {"Nay, 'tis not the correct answer. Consult thy Compendium."}
+:1AC8
+    JUMP 0x1a5e
+    END_ANSWER
+:1ACE
+    {"Where hath images of the silver serpent been seen?"
+}
+:1B03
+    ASK
+    KEYWORDS tomb,wall,anci,monu
+    ANSWER
+:1B19
+    {"Thou art correct."
+
+}
+:1B2E
+    JUMP 0x012e
+    KEYWORDS bye
+    ANSWER
+:1B38
+    JUMP 0x1c1a
+    KEYWORDS *
+    ANSWER
+:1B40
+    {"Nay, 'tis not the correct answer. Consult thy Compendium."}
+:1B7B
+    JUMP 0x1b02
+    END_ANSWER
+:1B81
+    {"What art reapers remnants of?"
+}
+:1BA1
+    ASK
+    KEYWORDS anci,ench,fore
+    ANSWER
+:1BB2
+    {"Thou art correct."
+
+}
+:1BC7
+    JUMP 0x012e
+    KEYWORDS bye
+    ANSWER
+:1BD1
+    JUMP 0x1c1a
+    KEYWORDS *
+    ANSWER
+:1BD9
+    {"Nay, 'tis not the correct answer. Consult thy Compendium."}
+:1C14
+    JUMP 0x1ba0
+    END_ANSWER
+:1C1A
+    {"Find thy Compendium, then come speak with me again."
+}
+:1C50
+    BYE

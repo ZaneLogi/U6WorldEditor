@@ -57,4 +57,7 @@ private:
     std::string m_npc_name;
     std::string m_npc_look;
 
+    std::map<int, int32_t> m_integer_variables;
+    std::map<int, std::string> m_string_variables;
+
 };

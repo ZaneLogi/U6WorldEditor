@@ -316,6 +316,13 @@ ScriptInterpreter::status ScriptInterpreter::run(const std::string& input, std::
                     assert(*m_current == U6OP_KEYWORDS);
                 }
                 break;
+            case U6OP_ENDANSWER:
+            {
+                // U6:Lord British has END_ANSWER after the keyword *, it is abnormal
+                int next_op = *(uint8_t*)m_current;
+                assert(next_op == U6OP_JUMP); // keep an eye on this
+                break;
+            }
             case U6OP_IF:
                 result = evaluate();
                 if (!result)
@@ -347,15 +354,31 @@ ScriptInterpreter::status ScriptInterpreter::run(const std::string& input, std::
                 }
                 break;
             case U6OP_DECL:
-                // TODO:
                 {
                 int index = *(uint8_t*)m_current++;
                 int type = *(uint8_t*)m_current++;
+                int next_op = *(uint8_t*)m_current++;
+                assert(next_op == U6OP_ASSIGN);
+                result = evaluate();
+
+                switch (type) {
+                case U6OP_VAR:
+                    m_integer_variables[index] = result;
+                    break;
+                case U6OP_SVAR:
+                    // TODO
+                    assert(false);
+                    m_string_variables[index] = "";
+                    break;
+                default:
+                    assert(false && "unknown var type!!!");
+                    break;
+                }
                 }
                 break;
             case U6OP_ASSIGN: // assign
-                // TODO:
                 {
+                assert(false && "Should not be here as this should be handled by U6OP_DECL!!!");
                 result = evaluate();
                 }
                 break;
@@ -441,7 +464,7 @@ int32_t ScriptInterpreter::evaluate()
 
         case U6OP_VAR:
             arg1 = rstk.top(); rstk.pop();
-            rstk.push(0); // TODO
+            rstk.push(m_integer_variables[arg1]);
             break;
         case U6OP_SVAR:
             arg1 = rstk.top(); rstk.pop();

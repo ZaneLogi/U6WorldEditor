@@ -54,6 +54,7 @@ const uint8_t*  gPosPtr = nullptr;
 const uint8_t*  gHpPtr = nullptr;
 const uint8_t*  gLvlPtr = nullptr;
 const uint8_t*  gStrPtr = nullptr;
+const uint8_t*  gPartyPtr = nullptr;
 
 BOOL EnablePrivilege(BOOL enable)
 {
@@ -1046,6 +1047,7 @@ void CChildView::OnHackHookdosbox()
     gHpPtr = nullptr;
     gLvlPtr = nullptr;
     gStrPtr = nullptr;
+    gPartyPtr = nullptr;
 
     auto dosbox_pid = FindProcessId("dosbox.exe");
     if (dosbox_pid == 0)
@@ -1192,6 +1194,31 @@ void CChildView::OnHackHookdosbox()
             else
             {
                 AfxMessageBox(_T("Can't find Strength list!!!"), MB_OK);
+            }
+        }
+
+        // find Party (TODO)
+        {
+            auto party = gMapManager.obj_manager.get_party();
+            auto count = party.size();
+
+            char buf[32];
+            std::string test;
+            for (auto a : party)
+            {
+                sprintf_s(buf, "%02x", a->id);
+                test += buf;
+            }
+            test += "00";
+
+            auto w = InitSearch(ghDosBox, test, "data");
+            if (w.size() == 1)
+            {
+                gPartyPtr = w[0];
+            }
+            else
+            {
+                AfxMessageBox(_T("Can't find party list!!!"), MB_OK);
             }
         }
 #endif

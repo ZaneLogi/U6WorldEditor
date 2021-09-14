@@ -128,6 +128,8 @@ public:
     void draw(DibSection& ds, uint16_t world_tile_x, uint16_t world_tile_y, uint8_t z);
 
     Actor get_actor(int index) const { return m_actors[index]; }
+    std::vector<Actor*> get_party() const { return m_party_members; }
+
     void set_actor_position(int index, const uint8_t* data);
     Obj*  get_obj(uint16_t xtile, uint16_t ytile, uint8_t z);
 

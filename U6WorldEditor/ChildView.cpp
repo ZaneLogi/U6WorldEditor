@@ -1081,11 +1081,27 @@ void CChildView::OnHackHookdosbox()
 
         gNamePtr = r[0];
 
-        //OBSOLETE:
-        //const uint8_t* name_ptr = (uint8_t*)0x000000000E50D5A4;
-        //const uint8_t* pos_ptr = (uint8_t*)0x000000000E50FD84;
-        //gPosPtr = r[0] + (pos_ptr - name_ptr);
+        auto game_type = gConfig.get_property("game_type");
+        if (game_type == "u6")
+        {
+            const uint8_t* name_ptr = (uint8_t*)0x000000000dd934c6;
+            const uint8_t* pos_ptr  = (uint8_t*)0x000000000dd96abb;
+            const uint8_t* hp_ptr   = (uint8_t*)0x000000000dd96975;
+            const uint8_t* lvl_ptr  = (uint8_t*)0x000000000ddb05c9;
+            const uint8_t* str_ptr  = (uint8_t*)0x000000000dd98edb;
+            gPosPtr = r[0] + (pos_ptr - name_ptr);
+            gHpPtr  = r[0] + (hp_ptr - name_ptr);
+            gLvlPtr = r[0] + (lvl_ptr - name_ptr);
+            gStrPtr = r[0] + (str_ptr - name_ptr);
+        }
+        else
+        {
+            const uint8_t* name_ptr = (uint8_t*)0x000000000E50D5A4;
+            const uint8_t* pos_ptr = (uint8_t*)0x000000000E50FD84;
+            gPosPtr = r[0] + (pos_ptr - name_ptr);
+        }
 
+#if 0 // codes below is using to get the offset of the data
         // find Position
         {
             uint8_t a1_b1 = (main_actor.x & 0x0ff); // x: bit 0 - 7
@@ -1178,6 +1194,7 @@ void CChildView::OnHackHookdosbox()
                 AfxMessageBox(_T("Can't find Strength list!!!"), MB_OK);
             }
         }
+#endif
     }
 
     // check if the actor name is correct

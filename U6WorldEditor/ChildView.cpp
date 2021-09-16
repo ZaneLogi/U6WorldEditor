@@ -272,25 +272,33 @@ void CChildView::Update()
             auto game_type = gConfig.get_property("game_type");
             if (game_type == "u6")
             {
-                uint8_t hp;
-                uint8_t level;
+                uint8_t hp[4];
+                uint8_t level[4];
                 SIZE_T bytes_read, bytes_written;
-                ReadProcessMemory(ghDosBox, gHpPtr, &hp, 1, &bytes_read);
-                ReadProcessMemory(ghDosBox, gLvlPtr, &level, 1, &bytes_read);
-                int max_hp = level * 30;
-                if (max_hp > 255)
-                    max_hp = 255;
-                if (hp < max_hp)
+                ReadProcessMemory(ghDosBox, gHpPtr, hp, sizeof(hp), &bytes_read);
+                ReadProcessMemory(ghDosBox, gLvlPtr, level, sizeof(level), &bytes_read);
+                bool need_update = false;
+                for (int i = 0; i < 4; i++)
                 {
-                    hp = (uint8_t)max_hp;
+                    int max_hp = level[i] * 30;
+                    if (max_hp > 255)
+                        max_hp = 255;
+                    if (hp[i] < max_hp)
+                    {
+                        need_update = true;
+                        hp[i] = max_hp;
+                    }
+                }
 
+                if (need_update)
+                {
                     BOOL b;
                     unsigned long oldProtect;
                     // need PROCESS_VM_OPERATION
-                    b = VirtualProtectEx(ghDosBox, (void*)gHpPtr, 1, PAGE_EXECUTE_READWRITE, &oldProtect);
+                    b = VirtualProtectEx(ghDosBox, (void*)gHpPtr, sizeof(hp), PAGE_EXECUTE_READWRITE, &oldProtect);
                     // need PROCESS_VM_WRITE
-                    b = WriteProcessMemory(ghDosBox, (void*)gHpPtr, &hp, 1, &bytes_written);
-                    b = VirtualProtectEx(ghDosBox, (void*)gHpPtr, 1, oldProtect, &oldProtect);
+                    b = WriteProcessMemory(ghDosBox, (void*)gHpPtr, hp, sizeof(hp) , &bytes_written);
+                    b = VirtualProtectEx(ghDosBox, (void*)gHpPtr, sizeof(hp), oldProtect, &oldProtect);
                 }
             }
         }
